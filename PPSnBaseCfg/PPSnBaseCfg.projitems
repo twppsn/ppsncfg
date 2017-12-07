@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>320054b5-c87e-4017-bba7-04b1c25415ce</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>PPSnBaseCfg</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)constants\Kgrp.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)constants\Mein.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)constants\Pers.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)constants\Plzd.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)constants\Waeh.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)mdm\constants\countries.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)mdm\contacts\Contacts.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)mdm\mdm.all.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)PPSn.all.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)sds\contract\Contract.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)sds\offer\Offer.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)sds\sds.all.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)System.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)Tests\PPSn.Test.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)ClientWpf\Panes\hello.lua" />
+    <None Include="$(MSBuildThisFileDirectory)ClientWpf\Panes\testEnvironment.lua" />
+    <None Include="$(MSBuildThisFileDirectory)mdm\constants\constants.lua" />
+    <None Include="$(MSBuildThisFileDirectory)mdm\constants\countries.lua" />
+    <None Include="$(MSBuildThisFileDirectory)mdm\constants\Wpf\countries.lua" />
+    <None Include="$(MSBuildThisFileDirectory)mdm\contacts\contactsLocal.lua" />
+    <None Include="$(MSBuildThisFileDirectory)mdm\contacts\contactsServer.lua" />
+    <None Include="$(MSBuildThisFileDirectory)mdm\contacts\contactTagging.lua" />
+    <None Include="$(MSBuildThisFileDirectory)mdm\contacts\Wpf\contacts.lua" />
+    <None Include="$(MSBuildThisFileDirectory)PPSn.template" />
+    <None Include="$(MSBuildThisFileDirectory)reports\.sources" />
+    <None Include="$(MSBuildThisFileDirectory)reports\libs\PpsData.lua" />
+    <None Include="$(MSBuildThisFileDirectory)reports\libs\PpsStuff.lua" />
+    <None Include="$(MSBuildThisFileDirectory)reports\Reports.md" />
+    <None Include="$(MSBuildThisFileDirectory)reports\server\Formular.tex" />
+    <None Include="$(MSBuildThisFileDirectory)reports\server\Test.tex" />
+    <None Include="$(MSBuildThisFileDirectory)reports\server\Vorlage.tex" />
+    <None Include="$(MSBuildThisFileDirectory)sds\contract\contractServer.lua" />
+    <None Include="$(MSBuildThisFileDirectory)sds\contract\Wpf\contract.lua" />
+    <None Include="$(MSBuildThisFileDirectory)sds\offer\offerServer.lua" />
+    <None Include="$(MSBuildThisFileDirectory)sds\offer\Wpf\offer.lua" />
+    <None Include="$(MSBuildThisFileDirectory)stuff\Debug.lua" />
+    <None Include="$(MSBuildThisFileDirectory)Tests\SQLTests.lua" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="$(MSBuildThisFileDirectory)ClientWpf\Default.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)ClientWpf\Green.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)ClientWpf\Panes\hello.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)ClientWpf\Panes\helloSub.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)ClientWpf\Resources\Colors.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)ClientWpf\Resources\Converter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)ClientWpf\Resources\Dimensions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)ClientWpf\Resources\Icons\DrawingImage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)ClientWpf\Resources\Styles\Button.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)ClientWpf\Resources\Styles\CheckBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)ClientWpf\Resources\Styles\ComboBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)ClientWpf\Resources\Styles\DatePicker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)ClientWpf\Resources\Styles\Expander.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)ClientWpf\Resources\Styles\Label.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)ClientWpf\Resources\Styles\ListBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)ClientWpf\Resources\Styles\ScrollViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)ClientWpf\Resources\Styles\SideBarMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)ClientWpf\Resources\Styles\TabControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)ClientWpf\Resources\Styles\TextBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)ClientWpf\Resources\Styles\ToolBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)ClientWpf\Resources\Styles\TreeView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)mdm\constants\countryTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)mdm\constants\Wpf\countries.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)mdm\contacts\contactTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)mdm\contacts\Wpf\contacts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)sds\contract\contractTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)sds\contract\Wpf\contract.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)sds\offer\offerTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)sds\offer\Wpf\offer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+</Project>
