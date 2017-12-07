@@ -9,162 +9,236 @@
     <Import_RootNamespace>PPSnBaseCfg</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="$(MSBuildThisFileDirectory)constants\Kgrp.xml" />
-    <Content Include="$(MSBuildThisFileDirectory)constants\Mein.xml" />
-    <Content Include="$(MSBuildThisFileDirectory)constants\Pers.xml" />
-    <Content Include="$(MSBuildThisFileDirectory)constants\Plzd.xml" />
-    <Content Include="$(MSBuildThisFileDirectory)constants\Waeh.xml" />
-    <Content Include="$(MSBuildThisFileDirectory)mdm\constants\countries.xml" />
-    <Content Include="$(MSBuildThisFileDirectory)mdm\contacts\Contacts.xml" />
-    <Content Include="$(MSBuildThisFileDirectory)mdm\mdm.all.xml" />
-    <Content Include="$(MSBuildThisFileDirectory)PPSn.all.xml" />
-    <Content Include="$(MSBuildThisFileDirectory)sds\contract\Contract.xml" />
-    <Content Include="$(MSBuildThisFileDirectory)sds\offer\Offer.xml" />
-    <Content Include="$(MSBuildThisFileDirectory)sds\sds.all.xml" />
-    <Content Include="$(MSBuildThisFileDirectory)System.xml" />
-    <Content Include="$(MSBuildThisFileDirectory)Tests\PPSn.Test.xml" />
+    <Content Include="$(MSBuildThisFileDirectory)cfg\constants\Kgrp.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)cfg\constants\Mein.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)cfg\constants\Pers.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)cfg\constants\Plzd.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)cfg\constants\Waeh.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)cfg\mdm\constants\countries.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)cfg\mdm\contacts\Contacts.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)cfg\mdm\mdm.all.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)cfg\PPSn.all.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)cfg\sds\contract\Contract.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)cfg\sds\offer\Offer.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)cfg\sds\sds.all.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)cfg\System.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="$(MSBuildThisFileDirectory)cfg\Tests\PPSn.Test.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="$(MSBuildThisFileDirectory)ClientWpf\Panes\hello.lua" />
-    <None Include="$(MSBuildThisFileDirectory)ClientWpf\Panes\testEnvironment.lua" />
-    <None Include="$(MSBuildThisFileDirectory)mdm\constants\constants.lua" />
-    <None Include="$(MSBuildThisFileDirectory)mdm\constants\countries.lua" />
-    <None Include="$(MSBuildThisFileDirectory)mdm\constants\Wpf\countries.lua" />
-    <None Include="$(MSBuildThisFileDirectory)mdm\contacts\contactsLocal.lua" />
-    <None Include="$(MSBuildThisFileDirectory)mdm\contacts\contactsServer.lua" />
-    <None Include="$(MSBuildThisFileDirectory)mdm\contacts\contactTagging.lua" />
-    <None Include="$(MSBuildThisFileDirectory)mdm\contacts\Wpf\contacts.lua" />
-    <None Include="$(MSBuildThisFileDirectory)PPSn.template" />
-    <None Include="$(MSBuildThisFileDirectory)reports\.sources" />
-    <None Include="$(MSBuildThisFileDirectory)reports\libs\PpsData.lua" />
-    <None Include="$(MSBuildThisFileDirectory)reports\libs\PpsStuff.lua" />
-    <None Include="$(MSBuildThisFileDirectory)reports\Reports.md" />
-    <None Include="$(MSBuildThisFileDirectory)reports\server\Formular.tex" />
-    <None Include="$(MSBuildThisFileDirectory)reports\server\Test.tex" />
-    <None Include="$(MSBuildThisFileDirectory)reports\server\Vorlage.tex" />
-    <None Include="$(MSBuildThisFileDirectory)sds\contract\contractServer.lua" />
-    <None Include="$(MSBuildThisFileDirectory)sds\contract\Wpf\contract.lua" />
-    <None Include="$(MSBuildThisFileDirectory)sds\offer\offerServer.lua" />
-    <None Include="$(MSBuildThisFileDirectory)sds\offer\Wpf\offer.lua" />
-    <None Include="$(MSBuildThisFileDirectory)stuff\Debug.lua" />
-    <None Include="$(MSBuildThisFileDirectory)Tests\SQLTests.lua" />
+    <None Include="$(MSBuildThisFileDirectory)cfg\ClientWpf\Panes\hello.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)cfg\ClientWpf\Panes\testEnvironment.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)cfg\mdm\constants\constants.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)cfg\mdm\constants\countries.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)cfg\mdm\constants\Wpf\countries.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)cfg\mdm\contacts\contactsLocal.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)cfg\mdm\contacts\contactsServer.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)cfg\mdm\contacts\contactTagging.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)cfg\mdm\contacts\Wpf\contacts.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)cfg\reports\.sources">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)cfg\reports\libs\PpsData.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)cfg\reports\libs\PpsStuff.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)cfg\reports\Reports.md">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)cfg\reports\server\Formular.tex">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)cfg\reports\server\Test.tex">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)cfg\reports\server\Vorlage.tex">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)cfg\sds\contract\contractServer.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)cfg\sds\contract\Wpf\contract.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)cfg\sds\offer\offerServer.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)cfg\sds\offer\Wpf\offer.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)cfg\stuff\Debug.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)cfg\Tests\SQLTests.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="$(MSBuildThisFileDirectory)ClientWpf\Default.xaml">
+    <None Include="$(MSBuildThisFileDirectory)cfg\ClientWpf\Default.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)ClientWpf\Green.xaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)cfg\ClientWpf\Green.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)ClientWpf\Panes\hello.xaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)cfg\ClientWpf\Panes\hello.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)ClientWpf\Panes\helloSub.xaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)cfg\ClientWpf\Panes\helloSub.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)ClientWpf\Resources\Colors.xaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)cfg\ClientWpf\Resources\Colors.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)ClientWpf\Resources\Converter.xaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)cfg\ClientWpf\Resources\Converter.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)ClientWpf\Resources\Dimensions.xaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)cfg\ClientWpf\Resources\Dimensions.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)ClientWpf\Resources\Icons\DrawingImage.xaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)cfg\ClientWpf\Resources\Icons\DrawingImage.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)ClientWpf\Resources\Styles\Button.xaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)cfg\ClientWpf\Resources\Styles\Button.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)ClientWpf\Resources\Styles\CheckBox.xaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)cfg\ClientWpf\Resources\Styles\CheckBox.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)ClientWpf\Resources\Styles\ComboBox.xaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)cfg\ClientWpf\Resources\Styles\ComboBox.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)ClientWpf\Resources\Styles\DatePicker.xaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)cfg\ClientWpf\Resources\Styles\DatePicker.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)ClientWpf\Resources\Styles\Expander.xaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)cfg\ClientWpf\Resources\Styles\Expander.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)ClientWpf\Resources\Styles\Label.xaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)cfg\ClientWpf\Resources\Styles\Label.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)ClientWpf\Resources\Styles\ListBox.xaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)cfg\ClientWpf\Resources\Styles\ListBox.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)ClientWpf\Resources\Styles\ScrollViewer.xaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)cfg\ClientWpf\Resources\Styles\ScrollViewer.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)ClientWpf\Resources\Styles\SideBarMenu.xaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)cfg\ClientWpf\Resources\Styles\SideBarMenu.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)ClientWpf\Resources\Styles\TabControl.xaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)cfg\ClientWpf\Resources\Styles\TabControl.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)ClientWpf\Resources\Styles\TextBox.xaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)cfg\ClientWpf\Resources\Styles\TextBox.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)ClientWpf\Resources\Styles\ToolBar.xaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)cfg\ClientWpf\Resources\Styles\ToolBar.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)ClientWpf\Resources\Styles\TreeView.xaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)cfg\ClientWpf\Resources\Styles\TreeView.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)mdm\constants\countryTemplate.xaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)cfg\mdm\constants\countryTemplate.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)mdm\constants\Wpf\countries.xaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)cfg\mdm\constants\Wpf\countries.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)mdm\contacts\contactTemplate.xaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)cfg\mdm\contacts\contactTemplate.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)mdm\contacts\Wpf\contacts.xaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)cfg\mdm\contacts\Wpf\contacts.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)sds\contract\contractTemplate.xaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)cfg\sds\contract\contractTemplate.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)sds\contract\Wpf\contract.xaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)cfg\sds\contract\Wpf\contract.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)sds\offer\offerTemplate.xaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)cfg\sds\offer\offerTemplate.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="$(MSBuildThisFileDirectory)sds\offer\Wpf\offer.xaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)cfg\sds\offer\Wpf\offer.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)cfg\" />
   </ItemGroup>
 </Project>
