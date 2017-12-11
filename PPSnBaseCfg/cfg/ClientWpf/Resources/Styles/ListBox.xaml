@@ -146,13 +146,13 @@
 
 						<ContentPresenter Grid.Column="0" />
 
-						<Button x:Name="appendButton" Grid.Column="1" MinWidth="32"	HorizontalAlignment="Left" VerticalAlignment="Center"
+						<Button x:Name="appendButton" Grid.Column="1" MinWidth="32"	HorizontalAlignment="Left" VerticalAlignment="Center" Margin="6,0"
 								Command="{x:Static uiC:PpsEditableListbox.AppendNewItemCommand}"
 								CommandParameter="{Binding}"
 								Style="{DynamicResource PPSnCircleButtonStyle}"
 								Tag="{StaticResource plusPathGeometry}"
 								Visibility="Hidden"/>
-						<Button x:Name="removeButton" Grid.Column="1" MinWidth="32"	HorizontalAlignment="Left" VerticalAlignment="Center"
+						<Button x:Name="removeButton" Grid.Column="1" MinWidth="32"	HorizontalAlignment="Left" VerticalAlignment="Center" Margin="6,0"
 								Command="{x:Static uiC:PpsEditableListbox.RemoveItemCommand}"
 								CommandParameter="{Binding}"
 								Style="{DynamicResource PPSnCircleButtonStyle}"
