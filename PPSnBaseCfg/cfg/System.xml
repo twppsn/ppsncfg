@@ -325,6 +325,6 @@
 			</pps:dataset>
 		</pps:register>
 
-		<pps:attachment name="attachments" nrLength="8" displayname="Attachments" />
+		<pps:attachment name="attachments" nrLength="8" forceNextNumber="true" displayname="Attachments" />
 	</pps:ppsn>
 </fragment>
