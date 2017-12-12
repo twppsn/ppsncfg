@@ -1,10 +1,5 @@
 ﻿const ContactType = 'crmContacts';
 
-local function GetNextNumber(lastNr, dataset) : string
-	local curNr = lastNr and lastNr:sub(2) or 0;
-	return "K" .. (curNr + 1):ToString("000000");
-end;
-
 function GetContactData(obj, ds)
 
 	local trans = Db.Main;
@@ -85,7 +80,7 @@ function mergeContactToSql(obj, data)
 end;
 
 -- overwrite NextNumber
-NextNumber = GetNextNumber;
+NextNumber = "K<8>";
 
 -- auto merge data
 OnAfterPush["sds.contacts"] = mergeContactToSql;

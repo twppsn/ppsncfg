@@ -1,9 +1,5 @@
 ﻿const ContractType = 'sdsContract';
 
-local function GetNextNumber(trans, lastNr, dataset) : string
-	return ((lastNr or 0) + 1):ToString("00000");
-end;
-
 function GetContractData(obj, ds)
 
 	local trans = Db.Main;
@@ -59,7 +55,7 @@ function mergeContractToSql(obj, data)
 	
 end;
 
-NextNumber = GetNextNumber;
+NextNumber = "C<8>";
 
 -- auto merge data
 OnAfterPush["sds.contract"] = mergeContractToSql;
