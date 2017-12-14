@@ -55,7 +55,7 @@ function mergeContractToSql(obj, data)
 	
 end;
 
-NextNumber = "C<8>";
+NextNumber = "C(8)";
 
 -- auto merge data
 OnAfterPush["sds.contract"] = mergeContractToSql;

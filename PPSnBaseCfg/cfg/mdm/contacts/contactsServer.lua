@@ -80,7 +80,7 @@ function mergeContactToSql(obj, data)
 end;
 
 -- overwrite NextNumber
-NextNumber = "K<8>";
+NextNumber = "K(8)";
 
 -- auto merge data
 OnAfterPush["sds.contacts"] = mergeContactToSql;
