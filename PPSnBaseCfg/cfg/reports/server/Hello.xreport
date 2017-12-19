@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Layout xmlns="urn:speedata.de:2009/publisher/en" xmlns:sd="urn:speedata:2009/publisher/functions/en">
+
+	<test xmlns="http://tecware-gnmb" />
+
+	<Trace grid="yes"/>
+
+	<Record element="root">
+		<PlaceObject>
+			<Textblock>
+				<Paragraph>
+					<Value>Hallo Welt</Value>
+				</Paragraph>
+			</Textblock>
+		</PlaceObject>
+	</Record>
+</Layout>
