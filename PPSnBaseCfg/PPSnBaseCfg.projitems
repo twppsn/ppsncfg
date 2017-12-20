@@ -83,9 +83,6 @@
     <None Include="$(MSBuildThisFileDirectory)cfg\reports\.sources">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="$(MSBuildThisFileDirectory)cfg\reports\Reports.md">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="$(MSBuildThisFileDirectory)cfg\reports\server\Hello.xreport">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
