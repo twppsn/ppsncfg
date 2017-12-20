@@ -239,6 +239,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)cfg\" />
+    <Page Include="$(MSBuildThisFileDirectory)cfg\ClientWpf\Resources\Styles\Progress.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 </Project>
