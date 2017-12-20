@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Layout xmlns="urn:speedata.de:2009/publisher/en" xmlns:sd="urn:speedata:2009/publisher/functions/en">
 
-	<test xmlns="http://tecware-gnmb" />
+	<data xmlns="http://tecware-gmbh.de/dev/des/2015/ppsn/reportData">
+		<list element="land" select="masterData.Land">
+			<column name="Id" />
+			<column name="Name" />
+			<column name="Iso" />
+		</list>
+	</data>
 
 	<Trace grid="yes"/>
 
-	<Record element="root">
+	<Record element="data">
 		<PlaceObject>
 			<Textblock>
 				<Paragraph>
