@@ -224,9 +224,11 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="$(MSBuildThisFileDirectory)cfg\ClientWpf\Resources\Styles\Progress.xaml">
+    <None Include="$(MSBuildThisFileDirectory)cfg\ClientWpf\Resources\Styles\Progress.xaml">
       <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
+      <Generator>
+      </Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>
