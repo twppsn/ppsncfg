@@ -1,8 +1,16 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:ui="clr-namespace:TecWare.PPSn.UI;assembly=PPSn.Desktop.UI">
 	
 	<ResourceDictionary.MergedDictionaries>
 		<ResourceDictionary Source="..\..\ClientWpf\Default.xaml" />
+		<ResourceDictionary>
+			<ui:LuaValueConverter x:Key="MimeIsImageConverter">
+				<![CDATA[
+					return clr.System.String.Compare(value, 0, "image/", 0, 6) == 0;
+				]]>
+			</ui:LuaValueConverter>
+		</ResourceDictionary>
 	</ResourceDictionary.MergedDictionaries>
 
 	<DataTemplate x:Key="crmContacts,,100">
@@ -62,10 +70,7 @@
 					<Style TargetType="{x:Type TextBlock}">
 						<Setter Property="Text" Value="Anhang:" />
 						<Style.Triggers>
-							<DataTrigger Binding="{Binding MimeType}" Value="image/jpeg">
-								<Setter Property="Text" Value="Bilddatei:"/>
-							</DataTrigger>
-							<DataTrigger Binding="{Binding MimeType}" Value="image/png">
+							<DataTrigger Binding="{Binding MimeType, Converter={StaticResource MimeIsImageConverter}}" Value="true">
 								<Setter Property="Text" Value="Bilddatei:"/>
 							</DataTrigger>
 						</Style.Triggers>
