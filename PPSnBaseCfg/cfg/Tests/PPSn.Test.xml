@@ -23,7 +23,7 @@
 					Environment.helloIndex = Environment.helloIndex  + 1;
 				end;
 				
-				Window:LoadPane{ pane = '/wpf/panes/hello.xaml', mode = clr.TecWare.PPSn.UI.PpsOpenPaneMode.NewPane, index = Environment.helloIndex }; 
+				Window:LoadPane{ pane = '/wpf/panes/hello.lua', mode = clr.TecWare.PPSn.UI.PpsOpenPaneMode.NewPane, index = Environment.helloIndex }; 
 
 				]]>
 				</pps:code>

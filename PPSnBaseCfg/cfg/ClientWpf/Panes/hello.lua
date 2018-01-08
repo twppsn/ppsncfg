@@ -43,3 +43,38 @@ blockGlobal = command(
 		runTask(waitTaskAsync, TestForegroundProgressState);
 	end
 );
+
+local ctrl = UI.Grid {
+	RowDefinitions = { 60, 60, 60, 60 },
+	ColumnDefinitions = { 200, "*" },
+
+	UI.Button {
+		Margin = "12",
+		Command = helloWorld,
+		"Hello"
+	},
+
+	UI.TextBlock {
+		["Grid.Column"] = 1,
+		"Hello pane with number ",
+		UI.Run {
+			Text = UI.Binding("Arguments.index")
+		},
+		UI.LineBreak {},
+		UI.Run {
+			Text = UI.Binding("bindTitle")
+		}
+	},
+	UI.ContentPresenter {
+		["Grid.Row"] = 2,
+		Content = UI.Binding("SubChild.Control")
+	}
+};
+
+setControl {
+	Title = UI.Binding("bindTitle"),
+	SubTitle = "Test",
+	ctrl
+};
+
+SubChild = self:requirePane 'helloSub.lua';
