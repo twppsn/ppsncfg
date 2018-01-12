@@ -28,7 +28,7 @@ function RegisterConstant(table)
 
 				local args = {
 					upsert = "dbo.ObjT",
-					on = { "Key", "UserId", "Class" },
+					on = { "ObjKId", "ObjRId", "Key", "Class", "UserId" },
 					{
 						ObjKId = objData.Id,
 						Key = "Name",
