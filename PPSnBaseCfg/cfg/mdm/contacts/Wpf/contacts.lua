@@ -29,7 +29,9 @@ pushContact = command(
 ]]
 		
 pushContact = command(
-    function (args) : void
+	function (args) : void
+		msgbox("Das Feld Name darf nicht leer sein." );
+			return;
 		UpdateSources();
 		if Data:IsDirty or Data:Object:IsDocumentChanged then
 			await(PushDataAsync());
