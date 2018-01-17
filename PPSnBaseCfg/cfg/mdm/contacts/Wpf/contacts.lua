@@ -30,9 +30,11 @@ pushContact = command(
 		
 pushContact = command(
 	function (args) : void
-		msgbox("Das Feld Name darf nicht leer sein." );
-			return;
 		UpdateSources();
+		if Data:Head:First:Name == nil or (Data:Head:First:Name:gsub("^%s*", "")) == ''  then
+			msgbox("Das Feld Name darf nicht leer sein."  );
+			return;
+		end
 		if Data:IsDirty or Data:Object:IsDocumentChanged then
 			await(PushDataAsync());
 		else
