@@ -196,6 +196,9 @@
 					<pps:column name="KtKtId" fieldName="sys.Fields.Long">
 						<pps:meta name="nullable">true</pps:meta>
 					</pps:column>
+					<pps:column name="Initials" fieldName="sys.Fields.Text">
+						<pps:meta name="nullable">true</pps:meta>
+					</pps:column>
 				</pps:table>
 
 				<pps:table name="SyncState" dataSource="sys">
