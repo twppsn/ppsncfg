@@ -187,6 +187,15 @@
 					<pps:column name="UserName" fieldName="sys.Fields.Text">
 						<pps:meta name="nullable">true</pps:meta>
 					</pps:column>
+					<pps:column name="displayName" fieldName="sys.Fields.Text">
+						<pps:meta name="nullable">true</pps:meta>
+					</pps:column>
+					<pps:column name="FullName" fieldName="sys.Fields.Text">
+						<pps:meta name="nullable">true</pps:meta>
+					</pps:column>
+					<pps:column name="KtKtId" fieldName="sys.Fields.Long">
+						<pps:meta name="nullable">true</pps:meta>
+					</pps:column>
 				</pps:table>
 
 				<pps:table name="SyncState" dataSource="sys">
@@ -318,7 +327,7 @@
 				</pps:table>
 
 				<pps:table name="User">
-					<pps:meta name="syncType">ChangeTracking: dbo.ObjK</pps:meta>
+					<pps:meta name="syncType">ChangeTracking: dbo.User</pps:meta>
 					<pps:column name="Id" fieldName="dbo.User.Id" isPrimary="true" />
 					<pps:column name="Login" fieldName="dbo.User.Login" />
 				</pps:table>
