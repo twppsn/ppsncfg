@@ -1,241 +1,250 @@
-﻿CREATE TABLE [dbo].[Ansp]
+﻿CREATE TABLE [dbo].[Ktkt]
 (
-	[Id] BIGINT NOT NULL CONSTRAINT pkAnspId PRIMARY KEY IDENTITY (1,1), 
-	[AdreId] BIGINT NOT NULL CONSTRAINT fkAnspAdreId REFERENCES dbo.Adre (Id),
-	[Name] NVARCHAR(100) NOT NULL, 
-	[Vorname] NVARCHAR(100) NULL,
-	[Titel] NVARCHAR(30) NULL, 
-	[Tel] VARCHAR(30) NULL, 
-	[Fax] VARCHAR(30) NULL, 
-	[Mobil] VARCHAR(30) NULL, 
-	[Mail] NVARCHAR(100) NULL, 
-	[Std] BIT NOT NULL CONSTRAINT dfAnspStd DEFAULT 0, 
-	[Geschl] CHAR NULL, 
-	[Funktion] NVARCHAR(50) NULL, 
-	[Brief] NVARCHAR(50) NULL, 
-	[Anmerk] NVARCHAR(2048) NULL,
+	[Id] BIGINT NOT NULL CONSTRAINT pkKtktId PRIMARY KEY IDENTITY (1,1),
+	[ObjkId] BIGINT NOT NULL CONSTRAINT fkKtktObjkId REFERENCES dbo.ObjK (Id), 
+	[ParentId] BIGINT NULL CONSTRAINT fkParentKtktId REFERENCES dbo.Ktkt (Id), 
+	[Name] NVARCHAR(100) NOT NULL,
+	[KurzName] NVARCHAR(25) NULL,
+	[StIdentNr] VARCHAR(25) NULL, 
+	[SteuerNr] VARCHAR(25) NULL, 
+	[UstIdNr] CHAR(16) NULL, 
+	[Inaktiv] SMALLDATETIME NULL,
+	[Iban] CHAR(34) NULL, 
+	[Bic] CHAR(11) NULL, 
+	[WaehId] BIGINT NULL CONSTRAINT fkKtktWaehId REFERENCES dbo.Waeh (Id),
+	[LandId] BIGINT NULL CONSTRAINT fkKtktLandId REFERENCES dbo.Land (Id),
 	[Postfach] NVARCHAR(20) NULL, 
 	[Zusatz] NVARCHAR(20) NULL, 
 	[Strasse] NVARCHAR(50) NULL, 
 	[Ort] NVARCHAR(50) NULL, 
 	[Region] NVARCHAR(50) NULL, 
 	[Plz] NVARCHAR(10) NULL, 
-	[Template] NVARCHAR(512) NULL, 
 	[Adresse] NVARCHAR(512) NULL, 
-	[Changed] BIT NULL, 
-
+	[VAdresse] NVARCHAR(512) NULL, 
+	[RAdresse] NVARCHAR(512) NULL,
+	[KoordL] FLOAT NULL,
+	[KoordB] FLOAT NULL, 
+	--[Facebook] NVARCHAR(256) NULL, 
+	--[Twitter] NVARCHAR(256) NULL, 
+	--[LinkedIn] NVARCHAR(256) NULL, 
+	--[Instagram] NVARCHAR(256) NULL,
 )
 GO
-ALTER TABLE [dbo].[Ansp] ENABLE CHANGE_TRACKING;
+ALTER TABLE [dbo].[Ktkt] ENABLE CHANGE_TRACKING;
+GO
+EXEC sp_addextendedproperty @name = N'MS_Description',
+    @value = N'FK zu Objk',
+    @level0type = N'SCHEMA',
+    @level0name = N'dbo',
+    @level1type = N'TABLE',
+    @level1name = N'Ktkt',
+    @level2type = N'COLUMN',
+    @level2name = N'ObjkId'
+GO
+EXEC sp_addextendedproperty @name = N'MS_Description',
+    @value = N'Name des Kontakts',
+    @level0type = N'SCHEMA',
+    @level0name = N'dbo',
+    @level1type = N'TABLE',
+    @level1name = N'Ktkt',
+    @level2type = N'COLUMN',
+    @level2name = N'Name'
+GO
+EXEC sp_addextendedproperty @name = N'MS_Description',
+    @value = N'Steuerliche Identifikationsnummer',
+    @level0type = N'SCHEMA',
+    @level0name = N'dbo',
+    @level1type = N'TABLE',
+    @level1name = N'Ktkt',
+    @level2type = N'COLUMN',
+    @level2name = 'StIdentNr'
+GO
+EXEC sp_addextendedproperty @name = N'MS_Description',
+    @value = N'Steuernummer',
+    @level0type = N'SCHEMA',
+    @level0name = N'dbo',
+    @level1type = N'TABLE',
+    @level1name = N'Ktkt',
+    @level2type = N'COLUMN',
+    @level2name = N'SteuerNr'
+GO
+EXEC sp_addextendedproperty @name = N'MS_Description',
+    @value = N'Mehrwertsteuer-Identifikationsnummer',
+    @level0type = N'SCHEMA',
+    @level0name = N'dbo',
+    @level1type = N'TABLE',
+    @level1name = N'Ktkt',
+    @level2type = N'COLUMN',
+    @level2name = 'UstIdNr'
+GO
+EXEC sp_addextendedproperty @name = N'MS_Description',
+    @value = N'Inaktiv seit',
+    @level0type = N'SCHEMA',
+    @level0name = N'dbo',
+    @level1type = N'TABLE',
+    @level1name = N'Ktkt',
+    @level2type = N'COLUMN',
+    @level2name = N'Inaktiv'
+GO
+EXEC sp_addextendedproperty @name = N'MS_Description',
+    @value = N'Iban-Nummer',
+    @level0type = N'SCHEMA',
+    @level0name = N'dbo',
+    @level1type = N'TABLE',
+    @level1name = N'Ktkt',
+    @level2type = N'COLUMN',
+    @level2name = N'Iban'
+GO
+EXEC sp_addextendedproperty @name = N'MS_Description',
+    @value = N'Bic-Nummer',
+    @level0type = N'SCHEMA',
+    @level0name = N'dbo',
+    @level1type = N'TABLE',
+    @level1name = N'Ktkt',
+    @level2type = N'COLUMN',
+    @level2name = N'Bic'
+GO
+EXEC sp_addextendedproperty @name = N'MS_Description',
+    @value = N'Kurzname des Kontakts',
+    @level0type = N'SCHEMA',
+    @level0name = N'dbo',
+    @level1type = N'TABLE',
+    @level1name = N'Ktkt',
+    @level2type = N'COLUMN',
+    @level2name = N'KurzName'
 GO
 EXEC sp_addextendedproperty @name = N'MS_Description',
     @value = N'PK',
     @level0type = N'SCHEMA',
     @level0name = N'dbo',
     @level1type = N'TABLE',
-    @level1name = N'Ansp',
+    @level1name = N'Ktkt',
     @level2type = N'COLUMN',
     @level2name = N'Id'
 GO
-
 EXEC sp_addextendedproperty @name = N'MS_Description',
-    @value = N'Name des Ansprechpartners',
+    @value = N'Adressse',
     @level0type = N'SCHEMA',
     @level0name = N'dbo',
     @level1type = N'TABLE',
-    @level1name = N'Ansp',
+    @level1name = N'KtKt',
     @level2type = N'COLUMN',
-    @level2name = N'Name'
-GO
-
-EXEC sp_addextendedproperty @name = N'MS_Description',
-    @value = N'akademischer Titel',
-    @level0type = N'SCHEMA',
-    @level0name = N'dbo',
-    @level1type = N'TABLE',
-    @level1name = N'Ansp',
-    @level2type = N'COLUMN',
-    @level2name = N'Titel'
+    @level2name = N'Adresse'
 GO
 EXEC sp_addextendedproperty @name = N'MS_Description',
-    @value = N'Telefonnummer',
+    @value = N'Versandadresse',
     @level0type = N'SCHEMA',
     @level0name = N'dbo',
     @level1type = N'TABLE',
-    @level1name = N'Ansp',
+    @level1name = N'KtKt',
     @level2type = N'COLUMN',
-    @level2name = N'Tel'
+    @level2name = N'VAdresse'
 GO
 EXEC sp_addextendedproperty @name = N'MS_Description',
-    @value = N'Faxnummer',
+    @value = N'FK zu Währung',
     @level0type = N'SCHEMA',
     @level0name = N'dbo',
     @level1type = N'TABLE',
-    @level1name = N'Ansp',
+    @level1name = N'KtKt',
     @level2type = N'COLUMN',
-    @level2name = N'Fax'
+    @level2name = 'WaehId'
 GO
 EXEC sp_addextendedproperty @name = N'MS_Description',
-    @value = N'Mobilnummer (Handy)',
+    @value = N'FK zu Land',
     @level0type = N'SCHEMA',
     @level0name = N'dbo',
     @level1type = N'TABLE',
-    @level1name = N'Ansp',
+    @level1name = N'KtKt',
     @level2type = N'COLUMN',
-    @level2name = N'Mobil'
+    @level2name = N'LandId'
 GO
 EXEC sp_addextendedproperty @name = N'MS_Description',
-    @value = N'Mailadresse',
+    @value = N'Rechnungsadresse',
     @level0type = N'SCHEMA',
     @level0name = N'dbo',
     @level1type = N'TABLE',
-    @level1name = N'Ansp',
+    @level1name = N'KtKt',
     @level2type = N'COLUMN',
-    @level2name = N'Mail'
-GO
-EXEC sp_addextendedproperty @name = N'MS_Description',
-    @value = N'Standardansprechpartner',
-    @level0type = N'SCHEMA',
-    @level0name = N'dbo',
-    @level1type = N'TABLE',
-    @level1name = N'Ansp',
-    @level2type = N'COLUMN',
-    @level2name = N'Std'
-GO
-EXEC sp_addextendedproperty @name = N'MS_Description',
-    @value = N'Geschlecht (m=männlich, w=weiblich)',
-    @level0type = N'SCHEMA',
-    @level0name = N'dbo',
-    @level1type = N'TABLE',
-    @level1name = N'Ansp',
-    @level2type = N'COLUMN',
-    @level2name = N'Geschl'
-GO
-EXEC sp_addextendedproperty @name = N'MS_Description',
-    @value = N'Funktion/Abteilung in der Firma',
-    @level0type = N'SCHEMA',
-    @level0name = N'dbo',
-    @level1type = N'TABLE',
-    @level1name = N'Ansp',
-    @level2type = N'COLUMN',
-    @level2name = N'Funktion'
-GO
-EXEC sp_addextendedproperty @name = N'MS_Description',
-    @value = N'Briefanrede (z.B. Sehr geehrter Herr, Liebe Frau)',
-    @level0type = N'SCHEMA',
-    @level0name = N'dbo',
-    @level1type = N'TABLE',
-    @level1name = N'Ansp',
-    @level2type = N'COLUMN',
-    @level2name = N'Brief'
-GO
-EXEC sp_addextendedproperty @name = N'MS_Description',
-    @value = N'Anmerkungen',
-    @level0type = N'SCHEMA',
-    @level0name = N'dbo',
-    @level1type = N'TABLE',
-    @level1name = N'Ansp',
-    @level2type = N'COLUMN',
-    @level2name = N'Anmerk'
-GO
-EXEC sp_addextendedproperty @name = N'MS_Description',
-    @value = N'FK zu Adre',
-    @level0type = N'SCHEMA',
-    @level0name = N'dbo',
-    @level1type = N'TABLE',
-    @level1name = N'Ansp',
-    @level2type = N'COLUMN',
-    @level2name = 'AdreId'
+    @level2name = N'RAdresse'
 GO
 EXEC sp_addextendedproperty @name = N'MS_Description',
     @value = N'Postfach',
     @level0type = N'SCHEMA',
     @level0name = N'dbo',
     @level1type = N'TABLE',
-    @level1name = N'Ansp',
+    @level1name = N'KtKt',
     @level2type = N'COLUMN',
     @level2name = N'Postfach'
 GO
 EXEC sp_addextendedproperty @name = N'MS_Description',
-    @value = N'Adress-Zusatz',
+    @value = N'Adresszusatz (z.B. Wohnungsnummer)',
     @level0type = N'SCHEMA',
     @level0name = N'dbo',
     @level1type = N'TABLE',
-    @level1name = N'Ansp',
+    @level1name = N'KtKt',
     @level2type = N'COLUMN',
     @level2name = N'Zusatz'
 GO
 EXEC sp_addextendedproperty @name = N'MS_Description',
-    @value = N'Straße mit Nr',
+    @value = N'Strasse',
     @level0type = N'SCHEMA',
     @level0name = N'dbo',
     @level1type = N'TABLE',
-    @level1name = N'Ansp',
+    @level1name = N'KtKt',
     @level2type = N'COLUMN',
     @level2name = N'Strasse'
 GO
 EXEC sp_addextendedproperty @name = N'MS_Description',
-    @value = N'Ort',
+    @value = N'Stadt',
     @level0type = N'SCHEMA',
     @level0name = N'dbo',
     @level1type = N'TABLE',
-    @level1name = N'Ansp',
+    @level1name = N'KtKt',
     @level2type = N'COLUMN',
     @level2name = N'Ort'
 GO
 EXEC sp_addextendedproperty @name = N'MS_Description',
-    @value = N'Region',
+    @value = N'Region (z.B. Bundesstaat)',
     @level0type = N'SCHEMA',
     @level0name = N'dbo',
     @level1type = N'TABLE',
-    @level1name = N'Ansp',
+    @level1name = N'KtKt',
     @level2type = N'COLUMN',
     @level2name = N'Region'
 GO
 EXEC sp_addextendedproperty @name = N'MS_Description',
-    @value = N'Plz',
+    @value = N'Postleitzahl',
     @level0type = N'SCHEMA',
     @level0name = N'dbo',
     @level1type = N'TABLE',
-    @level1name = N'Ansp',
+    @level1name = N'KtKt',
     @level2type = N'COLUMN',
     @level2name = N'Plz'
 GO
 EXEC sp_addextendedproperty @name = N'MS_Description',
-    @value = N'geändertes Template',
+    @value = N'Breitengrad Koordinate',
     @level0type = N'SCHEMA',
     @level0name = N'dbo',
     @level1type = N'TABLE',
-    @level1name = N'Ansp',
+    @level1name = N'KtKt',
     @level2type = N'COLUMN',
-    @level2name = N'Template'
+    @level2name = N'KoordB'
 GO
 EXEC sp_addextendedproperty @name = N'MS_Description',
-    @value = N'vollständige Adresse',
+    @value = N'Längengrad Koordinate',
     @level0type = N'SCHEMA',
     @level0name = N'dbo',
     @level1type = N'TABLE',
-    @level1name = N'Ansp',
+    @level1name = N'KtKt',
     @level2type = N'COLUMN',
-    @level2name = N'Adresse'
+    @level2name = N'KoordL'
 GO
 EXEC sp_addextendedproperty @name = N'MS_Description',
-    @value = N'geänderte Adresse',
+    @value = N'FK zu Ktkt (Parent -> übergeordnetes Unternehmen)',
     @level0type = N'SCHEMA',
     @level0name = N'dbo',
     @level1type = N'TABLE',
-    @level1name = N'Ansp',
+    @level1name = N'KtKt',
     @level2type = N'COLUMN',
-    @level2name = N'Changed'
+    @level2name = N'ParentId'
 GO
-
-CREATE INDEX [idxAnspAdreId] ON [dbo].[Ansp] ([AdreId])
-GO
-EXEC sp_addextendedproperty @name = N'MS_Description',
-    @value = N'Vorname',
-    @level0type = N'SCHEMA',
-    @level0name = N'dbo',
-    @level1type = N'TABLE',
-    @level1name = N'Ansp',
-    @level2type = N'COLUMN',
-    @level2name = N'Vorname'

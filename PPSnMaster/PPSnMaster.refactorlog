@@ -112,4 +112,46 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="RefCount" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="36ae5f2d-03c8-4b55-a174-291e80c680d4" ChangeDateTime="01/04/2018 07:48:13">
+    <Property Name="ElementName" Value="[dbo].[KtKt].[Waehr]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[KtKt]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="WaehId" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="0d9c2581-b6cd-48dd-9457-8a884d9fcb03" ChangeDateTime="01/04/2018 09:29:43">
+    <Property Name="ElementName" Value="[dbo].[Pers].[KK]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Pers]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="KKasse" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="c29a7633-1333-47e4-880d-6169d7e1df06" ChangeDateTime="01/04/2018 09:30:18">
+    <Property Name="ElementName" Value="[dbo].[Pers].[KKasse]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Pers]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Kasse" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="7aafa0d3-6f12-4ded-863f-4e9df115e299" ChangeDateTime="01/04/2018 09:47:58">
+    <Property Name="ElementName" Value="[dbo].[KtKt].[KoordLng]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[KtKt]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="KoordL" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="0acd1c37-308b-4de3-802b-3304823bad22" ChangeDateTime="01/04/2018 09:48:06">
+    <Property Name="ElementName" Value="[dbo].[KtKt].[KoordLat]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[KtKt]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="KoordB" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="2f9e2048-5e48-416e-a54b-ad8a65b91656" ChangeDateTime="01/04/2018 12:10:54">
+    <Property Name="ElementName" Value="[dbo].[User].[PersId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[User]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="KtktId" />
+  </Operation>
 </Operations>

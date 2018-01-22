@@ -3,7 +3,8 @@
 		xmlns:pps="http://tecware-gmbh.de/dev/des/2015/ppsn">
 
 	<luaengine>
-		<tests id="tests" filename="SQLTests.lua" />
+		<!--<tests id="tests" filename="SQLTests.lua" />-->
+		<tests id="contacts" filename="ContactsTests.lua" />
 	</luaengine>
 		
 	<pps:ppsn name="ppsn">

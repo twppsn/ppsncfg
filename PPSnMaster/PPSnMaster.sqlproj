@@ -81,10 +81,9 @@
     <Build Include="Tables\Schemas.sql" />
     <Build Include="Tables\dbo\ObjK.sql" />
     <Build Include="Tables\dbo\ObjR.sql" />
-    <Build Include="Tables\dbo\Adre.sql" />
-    <Build Include="Tables\dbo\Ansp.sql" />
+    <Build Include="Tables\dbo\Vika.sql" />
     <Build Include="Tables\dbo\User.sql" />
-    <Build Include="Tables\dbo\Kont.sql" />
+    <Build Include="Tables\dbo\Ktkt.sql" />
     <Build Include="Tables\dbo\Waeh.sql" />
     <Build Include="Tables\dbo\Land.sql" />
     <Build Include="Tables\dbo\Plzd.sql" />

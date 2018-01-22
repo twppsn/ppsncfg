@@ -10,7 +10,7 @@ function GetContactData(obj, ds)
 			trans:ExecuteSingleResult{
 				select = [[
 					dbo.ObjK
-						=dbo.Kont[Objk.Id = Kont.ObjkId]
+						=dbo.Ktkt[Objk.Id = Ktkt.ObjkId]
 				]],
 				columnList = ds:Head,
 				[1] = { Id = obj.Id, Typ = ContactType }
@@ -21,23 +21,50 @@ function GetContactData(obj, ds)
 			error("Kontakt nicht gefunden '{1},{0}:{2}":Format(obj.Id, obj.Nr, obj.Guid));
 		end;
 
-		-- Adressen --
-		ds:Adre:AddRange(
+		-- Kundendaten --
+		ds:Kund:AddRange(
 			trans:ExecuteSingleResult{
-				select = "dbo.Adre",
-				columnList = ds:Adre,
+				select = [[
+					dbo.Ktkt
+						=dbo.Kund[Ktkt.Id = Kund.KtktId]
+				]],
+				columnList = ds:Kund,
 				[1] = { ObjKId = obj.Id }
 			}
 		);
 
-		-- Ansprechpartner --
-		ds:Ansp:AddRange(
+		-- Lieferantendaten --
+		ds:Lief:AddRange(
 			trans:ExecuteSingleResult{
 				select = [[
-					dbo.Adre
-						=dbo.Ansp[Adre.Id = Ansp.AdreId]
+					dbo.Ktkt
+						=dbo.Lief[Ktkt.Id = Lief.KtktId]
 				]],
-				columnList = ds:Ansp,
+				columnList = ds:Lief,
+				[1] = { ObjKId = obj.Id }
+			}
+		);
+
+		-- Personaldaten --
+		ds:Pers:AddRange(
+			trans:ExecuteSingleResult{
+				select = [[
+					dbo.Ktkt
+						=dbo.Pers[Ktkt.Id = Pers.KtktId]
+				]],
+				columnList = ds:Pers,
+				[1] = { ObjKId = obj.Id }
+			}
+		);
+
+		-- Visitenkarte --
+		ds:Vika:AddRange(
+			trans:ExecuteSingleResult{
+				select = [[
+					dbo.Ktkt
+						=dbo.Vika[Ktkt.Id = Vika.KtktId]
+				]],
+				columnList = ds:Vika,
 				defaults = {},
 				[1] = { ObjKId = obj.Id }
 			}
@@ -51,31 +78,43 @@ function mergeContactToSql(obj, data)
 
 	trans = Db.Main;
 
-	-- write kont table
+	-- write ktkt table
 	trans:ExecuteNoneResult {
-		upsert ="dbo.Kont",
+		upsert ="dbo.Ktkt",
 		rows = data:Head
 	};
 
-	-- write adre
+	-- write kund
 	trans:ExecuteNoneResult {
-		upsert ="dbo.Adre",
-		rows = data:Adre
+		upsert ="dbo.Kund",
+		rows = data:Kund
 	};
 	
-	-- Default-Values can not be passed as argument.
-	--   Q&D: set ANSP.Std
+	-- write lief
+	trans:ExecuteNoneResult {
+		upsert ="dbo.Lief",
+		rows = data:Lief
+	};
 
-	foreach row in data:Ansp do
+	-- write pers
+	trans:ExecuteNoneResult {
+		upsert ="dbo.Pers",
+		rows = data:Pers
+	};
+
+	-- Default-Values can not be passed as argument.
+	--   Q&D: set Vika.Std
+
+	foreach row in data:Vika do
 		if row.Std == nil then
 			row.Std = false;
 		end;
 	end;
 
-	-- write ansp
+	-- write vika
 	trans:ExecuteNoneResult {
-		upsert ="dbo.Ansp",
-		rows = data:Ansp
+		upsert ="dbo.Vika",
+		rows = data:Vika
 	};
 end;
 

@@ -4,9 +4,12 @@
 	[Login] [sys].[sysname] NULL, 
 	[Security] NVARCHAR(MAX) NULL, 
 	[LoginVersion] BIGINT NOT NULL CONSTRAINT dfUserLoginVersion DEFAULT 0, 
+	[KtktId] BIGINT NULL CONSTRAINT fkUserKtktId REFERENCES dbo.Ktkt (Id), 
 )
 GO
 ALTER TABLE [dbo].[User] ENABLE CHANGE_TRACKING;
+GO
+CREATE INDEX [idxUserKtktId] ON [dbo].[User] ([KtktId])
 GO
 EXEC sp_addextendedproperty @name = N'MS_Description',
     @value = N'Security mask (tokens),für den Nutzer',
@@ -35,3 +38,11 @@ EXEC sp_addextendedproperty @name = N'MS_Description',
     @level2type = N'COLUMN',
     @level2name = N'LoginVersion'
 GO
+EXEC sp_addextendedproperty @name = N'MS_Description',
+    @value = N'FK zu Kontakt (Personal)',
+    @level0type = N'SCHEMA',
+    @level0name = N'dbo',
+    @level1type = N'TABLE',
+    @level1name = N'User',
+    @level2type = N'COLUMN',
+    @level2name = N'KtktId'
