@@ -47,7 +47,6 @@
 
 	</DataTemplate>
     <DataTemplate x:Key="attachments,,100">
-        <!--  crmContacts,dbo.contacts,100 -->
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="20" />
@@ -60,11 +59,33 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
 			<Image Grid.Column="0" Grid.RowSpan="2" VerticalAlignment="Center" ToolTip="Vorschaubild" Margin="4">
-				<Image.Source>
-					<Binding Path="DataLazy.PreviewImageLazy"
-							 Mode="OneWay"/>
-				</Image.Source>
+				<Image.Style>
+					<Style TargetType="{x:Type Image}">
+						<Style.Triggers>
+							<DataTrigger Binding="{Binding MimeType, Converter={StaticResource MimeIsImageConverter}}" Value="true">
+								<Setter Property="Source">
+									<Setter.Value>
+										<Binding Path="DataLazy.PreviewImageLazy" Mode="OneWay"/>
+									</Setter.Value>
+								</Setter>
+							</DataTrigger>
+						</Style.Triggers>
+					</Style>
+				</Image.Style>
 			</Image>
+			<Canvas Grid.Column="0" Grid.RowSpan="2" Width="24" Height="24">
+				<Path Data="{StaticResource fileOutlinePathGeometry}" Fill="{StaticResource PPSnActionButtonBrush}" Opacity=".75"/>
+				<Canvas.Style>
+					<Style TargetType="{x:Type Canvas}">
+						<Setter Property="Visibility" Value="Collapsed" />
+						<Style.Triggers>
+							<DataTrigger Binding="{Binding MimeType, Converter={StaticResource MimeIsImageConverter}}" Value="false">
+								<Setter Property="Visibility" Value="Visible"/>
+							</DataTrigger>
+						</Style.Triggers>
+					</Style>
+				</Canvas.Style>
+			</Canvas>
 			<TextBlock Grid.Column="1" FontStretch="Expanded" ToolTip="Mimetyp">
 				<TextBlock.Style>
 					<Style TargetType="{x:Type TextBlock}">

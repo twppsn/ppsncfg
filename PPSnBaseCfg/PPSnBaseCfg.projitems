@@ -53,6 +53,9 @@
     <None Include="$(MSBuildThisFileDirectory)cfg\ClientWpf\Panes\hello.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="$(MSBuildThisFileDirectory)cfg\ClientWpf\Panes\helloSub.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="$(MSBuildThisFileDirectory)cfg\ClientWpf\Panes\testEnvironment.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
