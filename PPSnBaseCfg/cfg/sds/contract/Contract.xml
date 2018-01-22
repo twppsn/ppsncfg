@@ -13,15 +13,17 @@
 			<pps:field name="sds.Auko.ObjkId"  inherited="sys.Fields.ObjectId" />
 			<pps:field name="sds.Auko.Datum" displayName="Datum" />
 			<pps:field name="sds.Auko.BestDatum" displayName="Bestelldatum" />
-			<pps:field name="sds.Auko.KontId" inherited="sys.Fields.MasterDataKey" displayName="Kontakt" >
-				<pps:attribute name="refTable">Kont</pps:attribute>
+			<pps:field name="sds.Auko.KundId" inherited="sys.Fields.MasterDataKey" displayName="Kontakt" >
+				<pps:attribute name="refTable">Ktkt</pps:attribute>
 			</pps:field>
 			<pps:field name="sds.Auko.Adresse" displayName="Adresse" />
 			<pps:field name="sds.Auko.VeAdre" displayName="Versandadresse" />
 			<pps:field name="sds.Auko.ReAdre" displayName="Rechnungsadresse" />
 			<pps:field name="sds.Auko.BestNr" displayName="Bestellnr." />
 			<pps:field name="sds.Auko.Zusatz" displayName="Bestellangaben" />
-			<pps:field name="sds.Auko.PersId" displayName="Sachbearbeiter" />
+			<pps:field name="sds.Auko.PersId" inherited="sys.Fields.MasterDataKey" displayName="Sachbearbeiter" >
+				<pps:attribute name="refTable">Ktkt</pps:attribute>
+			</pps:field>
 			<pps:field name="sds.Auko.Ansp" displayName="Ansprechpartner" />
 			<pps:field name="sds.Auko.KopfText" displayName="Kopftext" />
 			<pps:field name="sds.Auko.FussText" displayName="Fusstext" />
@@ -48,7 +50,7 @@
 					<pps:column name="Datum" fieldName="sds.Auko.Datum" />
 					<pps:column name="BestDatum" fieldName="sds.Auko.BestDatum" />
 					<pps:column name="BestNr" fieldName="sds.Auko.BestNr" />
-					<pps:column name="KontId" fieldName="sds.Auko.KontId" />
+					<pps:column name="KundId" fieldName="sds.Auko.KundId" />
 					<pps:column name="Adresse" fieldName="sds.Auko.Adresse" />
 					<pps:column name="VeAdre" fieldName="sds.Auko.VeAdre" />
 					<pps:column name="ReAdre" fieldName="sds.Auko.ReAdre" />

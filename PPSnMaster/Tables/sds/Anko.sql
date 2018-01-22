@@ -6,11 +6,11 @@
 	[BisDatum] DATE NULL, 
 	[AnfDatum] DATE NULL, 
 	[AnfNr] NVARCHAR(30) NULL, 
-	[KontId] BIGINT NULL CONSTRAINT fkAnkoKontId REFERENCES dbo.ObjK (Id), 
+	[KundId] BIGINT NULL CONSTRAINT fkAnkoKundId REFERENCES dbo.Ktkt (Id), 
 	[Adresse] NVARCHAR(1024) NULL, 
 	[Variante] CHAR(2) NULL, 
 	[Zusatz] NVARCHAR(128) NULL, 
-	[PersId] BIGINT NULL, 
+	[PersId] BIGINT NULL CONSTRAINT fkAnkoPersId REFERENCES dbo.Ktkt (Id), 
 	[Ansp] BIGINT NULL, 
 	[KopfText] NVARCHAR(MAX) NULL, 
 	[Fusstext] NVARCHAR(MAX) NULL, 
@@ -18,8 +18,14 @@
 )
 GO
 ALTER TABLE [sds].[Anko] ENABLE CHANGE_TRACKING;
-
 GO
+CREATE INDEX [idxAnkoObjkId] ON [sds].[Anko] ([ObjkId])
+GO
+CREATE INDEX [idxAnkoKundId] ON [sds].[Anko] ([KundId])
+GO
+CREATE INDEX [idxAnkoPersId] ON [sds].[Anko] ([PersId])
+GO
+
 EXEC sp_addextendedproperty @name = N'MS_Description',
     @value = N'PK, FK zu Objk',
     @level0type = N'SCHEMA',
@@ -66,13 +72,13 @@ EXEC sp_addextendedproperty @name = N'MS_Description',
     @level2name = N'AnfNr'
 GO
 EXEC sp_addextendedproperty @name = N'MS_Description',
-    @value = N'FK zu Kont',
+    @value = N'FK zu Ktkt',
     @level0type = N'SCHEMA',
     @level0name = N'sds',
     @level1type = N'TABLE',
     @level1name = N'Anko',
     @level2type = N'COLUMN',
-    @level2name = N'KontId'
+    @level2name = N'KundId'
 GO
 EXEC sp_addextendedproperty @name = N'MS_Description',
     @value = N'Adresse',
@@ -102,7 +108,7 @@ EXEC sp_addextendedproperty @name = N'MS_Description',
     @level2name = N'Zusatz'
 GO
 EXEC sp_addextendedproperty @name = N'MS_Description',
-    @value = N'Sachbearbeiter, FK zu Kont',
+    @value = N'Sachbearbeiter, FK zu Ktkt',
     @level0type = N'SCHEMA',
     @level0name = N'sds',
     @level1type = N'TABLE',
@@ -145,9 +151,4 @@ EXEC sp_addextendedproperty @name = N'MS_Description',
     @level1name = N'Anko',
     @level2type = N'COLUMN',
     @level2name = N'Anmerk'
-GO
-
-CREATE INDEX [idxAnkoObjkId] ON [sds].[Anko] ([ObjkId])
-GO
-CREATE INDEX [idxAnkoKontId] ON [sds].[Anko] ([KontId])
 GO

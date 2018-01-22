@@ -15,13 +15,15 @@
 			<pps:field name="sds.Anko.BisDatum" displayName="Gültig bis" />
 			<pps:field name="sds.Anko.AnfDatum" displayName="Anfragedatum" />
 			<pps:field name="sds.Anko.AnfNr" displayName="Anfrage-Nr." />
-			<pps:field name="sds.Anko.KontId" inherited="sys.Fields.MasterDataKey" displayName="Kontakt" >
-				<pps:attribute name="refTable">Kont</pps:attribute>
+			<pps:field name="sds.Anko.KundId" inherited="sys.Fields.MasterDataKey" displayName="Kontakt" >
+				<pps:attribute name="refTable">Ktkt</pps:attribute>
 			</pps:field>
 			<pps:field name="sds.Anko.Adresse" displayName="Adresse" />
 			<pps:field name="sds.Anko.Variante" displayName="Variante" />
 			<pps:field name="sds.Anko.Zusatz" displayName="Zusatz" />
-			<pps:field name="sds.Anko.PersId" displayName="Sachbearbeiter" />
+			<pps:field name="sds.Anko.PersId" inherited="sys.Fields.MasterDataKey" displayName="Sachbearbeiter" >
+				<pps:attribute name="refTable">Ktkt</pps:attribute>
+			</pps:field>
 			<pps:field name="sds.Anko.Ansp" displayName="Ansprechpartner" />
 			<pps:field name="sds.Anko.KopfText" displayName="Kopftext" />
 			<pps:field name="sds.Anko.FussText" displayName="Fusstext" />
@@ -49,7 +51,7 @@
 					<pps:column name="BisDatum" fieldName="sds.Anko.BisDatum" />
 					<pps:column name="AnfDatum" fieldName="sds.Anko.AnfDatum" />
 					<pps:column name="AnfNr" fieldName="sds.Anko.AnfNr" />
-					<pps:column name="KontId" fieldName="sds.Anko.KontId" />
+					<pps:column name="KundId" fieldName="sds.Anko.KundId" />
 					<pps:column name="Adresse" fieldName="sds.Anko.Adresse" />
 					<pps:column name="Variante" fieldName="sds.Anko.Variante" />
 					<pps:column name="Zusatz" fieldName="sds.Anko.Zusatz" />

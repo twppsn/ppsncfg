@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<fragment xmlns="http://tecware-gmbh.de/dev/des/2014"
+		xmlns:pps="http://tecware-gmbh.de/dev/des/2015/ppsn">
+
+	<luaengine>
+		<script id="mdmConstants" filename="constants.lua" />
+		<script id="mdmCurrenciesScript" filename="currencies.lua" />
+	</luaengine>
+
+	<pps:ppsn name="ppsn">
+		<pps:register source="main">
+			<!-- definition for countries -->
+			<pps:field name="dbo.Waeh.Id" />
+			<pps:field name="dbo.Waeh.Name" />
+			<pps:field name="dbo.Waeh.Symbol" />
+			<pps:field name="dbo.Waeh.Kurs" />
+			<pps:field name="dbo.Waeh.Iso" />
+			<pps:field name="dbo.Waeh.System" />
+			<pps:field name="dbo.Waeh.IsActive" />
+
+			<pps:view name="masterData.Waeh" displayName="Währungen">
+				<pps:source type="select">
+					<![CDATA[SELECT [Id], [Name], [Iso] FROM dbo.[Waeh] ]]>
+				</pps:source>
+			</pps:view>
+
+			<!-- Synchronization data -->
+			<pps:dataset name="masterdata">
+				<pps:table name="Waeh">
+					<pps:meta name="syncType">ChangeTracking: dbo.Waeh</pps:meta>
+					<pps:column name="Id" fieldName="dbo.Waeh.Id" isPrimary="true" />
+					<pps:column name="Name" fieldName="dbo.Waeh.Name"/>
+					<pps:column name="Symbol" fieldName="dbo.Waeh.Symbol"/>
+					<pps:column name="Kurs" fieldName="dbo.Waeh.Kurs"/>
+					<pps:column name="ISO" fieldName="dbo.Waeh.Iso"/>
+					<pps:column name="System" fieldName="dbo.Waeh.System"/>
+					<pps:column name="IsActive" fieldName="dbo.Waeh.IsActive" />
+				</pps:table>
+			</pps:dataset>
+
+			<!-- Editor data -->
+			<pps:dataset name="mdmCurrencies" serverScripts="mdmConstants mdmCurrenciesScript">
+				<pps:meta name="DefaultPaneUri" dataType="string">wpf/panes/currencies.xaml</pps:meta>
+
+				<pps:table name="Waeh">
+					<pps:meta name="SqlTable">dbo.Waeh</pps:meta>
+					<pps:column name="Id" fieldName="dbo.Waeh.Id" isPrimary="true" />
+					<pps:column name="Name" fieldName="dbo.Waeh.Name"/>
+					<pps:column name="Symbol" fieldName="dbo.Waeh.Symbol"/>
+					<pps:column name="Kurs" fieldName="dbo.Waeh.Kurs"/>
+					<pps:column name="ISO" fieldName="dbo.Waeh.Iso"/>
+					<pps:column name="System" fieldName="dbo.Waeh.System"/>
+					<pps:column name="IsActive" fieldName="dbo.Waeh.IsActive" />
+				</pps:table>
+			</pps:dataset>
+		</pps:register>
+
+		<pps:wpf name="wpf">
+			<pps:template id="currencies" file="currencyTemplate.xaml" />
+			<pps:wpfSource id="mdm.currencies" directory="Wpf" virtualPath="panes" />
+
+			<pps:action name="mdmCurrenciesEdit" displayName="Bearbeiten" displayImage="edit" priority="200">
+				<pps:condition><![CDATA[ return CurrentItem ~= nil and CurrentItem.Typ == "mdmCurrencies" ]]></pps:condition>
+				<pps:code><![CDATA[ Window:LoadMask{ object = GetObject(CurrentItem.Id) }; ]]></pps:code>
+			</pps:action>
+		</pps:wpf>
+
+		<pps:document name="mdmCurrencies" dataset="mdmCurrencies" displayname="Currencies" forceNextNumber="false" />
+	</pps:ppsn>
+</fragment>

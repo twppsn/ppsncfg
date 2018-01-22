@@ -18,10 +18,10 @@
     <Content Include="$(MSBuildThisFileDirectory)cfg\constants\Plzd.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="$(MSBuildThisFileDirectory)cfg\constants\Waeh.xml">
+    <Content Include="$(MSBuildThisFileDirectory)cfg\mdm\constants\countries.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="$(MSBuildThisFileDirectory)cfg\mdm\constants\countries.xml">
+    <Content Include="$(MSBuildThisFileDirectory)cfg\mdm\constants\currencies.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="$(MSBuildThisFileDirectory)cfg\mdm\contacts\Contacts.xml">
@@ -63,6 +63,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="$(MSBuildThisFileDirectory)cfg\mdm\constants\countries.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)cfg\mdm\constants\currencies.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="$(MSBuildThisFileDirectory)cfg\mdm\constants\Wpf\countries.lua">
@@ -233,5 +236,13 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)cfg\reports\server\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)cfg\mdm\constants\currencyTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>
+      </Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>

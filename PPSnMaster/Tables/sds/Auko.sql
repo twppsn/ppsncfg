@@ -4,13 +4,13 @@
 	[ObjkId] BIGINT NOT NULL CONSTRAINT fkAukoObjkId REFERENCES dbo.ObjK (Id), 
 	[Datum] DATE NULL, 
 	[BestDatum] DATE NULL, 
-	[KontId] BIGINT NULL CONSTRAINT fkAukoKontId REFERENCES dbo.ObjK (Id), 
+	[KundId] BIGINT NULL CONSTRAINT fkAukoKundId REFERENCES dbo.Ktkt (Id), 
 	[Adresse] NVARCHAR(1024) NULL, 
 	[VeAdre] NVARCHAR(1024) NULL, 
 	[ReAdre] NVARCHAR(1024) NULL, 
 	[BestNr] NVARCHAR(20) NULL, 
 	[Zusatz] NVARCHAR(128) NULL, 
-	[PersId] BIGINT NULL, 
+	[PersId] BIGINT NULL CONSTRAINT fkAukoKPersId REFERENCES dbo.Ktkt (Id),
 	[Ansp] BIGINT NULL, 
 	[KopfText] NVARCHAR(MAX) NULL, 
 	[FussText] NVARCHAR(MAX) NULL, 
@@ -18,8 +18,14 @@
 )
 GO
 ALTER TABLE [sds].[Auko] ENABLE CHANGE_TRACKING;
-
 GO
+CREATE INDEX [idxAukoObjkId] ON [sds].[Auko] ([ObjkId])
+GO
+CREATE INDEX [idxAukoKundId] ON [sds].[Auko] ([KundId])
+GO
+CREATE INDEX [idxAukoPersId] ON [sds].[Auko] ([PersId])
+GO
+
 EXEC sp_addextendedproperty @name = N'MS_Description',
     @value = N'FK zu Objk',
     @level0type = N'SCHEMA',
@@ -54,7 +60,7 @@ EXEC sp_addextendedproperty @name = N'MS_Description',
     @level1type = N'TABLE',
     @level1name = N'Auko',
     @level2type = N'COLUMN',
-    @level2name = N'KontId'
+    @level2name = N'KundId'
 GO
 EXEC sp_addextendedproperty @name = N'MS_Description',
     @value = N'Adresse des Kontakts',
@@ -145,9 +151,4 @@ EXEC sp_addextendedproperty @name = N'MS_Description',
     @level1name = N'Auko',
     @level2type = N'COLUMN',
     @level2name = N'Anmerk'
-GO
-
-CREATE INDEX [idxAukoObjkId] ON [sds].[Auko] ([ObjkId])
-GO
-CREATE INDEX [idxAukoKontId] ON [sds].[Auko] ([KontId])
 GO
