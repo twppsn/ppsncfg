@@ -188,7 +188,7 @@
 	</Grid>
 
 	<ui:PpsGenericWpfControl.Commands>
-		<ui:PpsUICommandButton Order="100,100" DisplayText="Veröffentlichen" Image="floppy_diskImage" Command="{Binding pushCountries}" />
+		<ui:PpsUICommandButton Order="100,100" DisplayText="Veröffentlichen" Image="upload" Command="{Binding pushCountries}" />
 	</ui:PpsGenericWpfControl.Commands>
 
 </ui:PpsGenericWpfControl>
