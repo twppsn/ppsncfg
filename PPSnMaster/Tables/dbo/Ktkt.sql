@@ -127,7 +127,7 @@ EXEC sp_addextendedproperty @name = N'MS_Description',
     @level0type = N'SCHEMA',
     @level0name = N'dbo',
     @level1type = N'TABLE',
-    @level1name = N'KtKt',
+    @level1name = N'Ktkt',
     @level2type = N'COLUMN',
     @level2name = N'Adresse'
 GO
@@ -136,7 +136,7 @@ EXEC sp_addextendedproperty @name = N'MS_Description',
     @level0type = N'SCHEMA',
     @level0name = N'dbo',
     @level1type = N'TABLE',
-    @level1name = N'KtKt',
+    @level1name = N'Ktkt',
     @level2type = N'COLUMN',
     @level2name = N'VAdresse'
 GO
@@ -145,7 +145,7 @@ EXEC sp_addextendedproperty @name = N'MS_Description',
     @level0type = N'SCHEMA',
     @level0name = N'dbo',
     @level1type = N'TABLE',
-    @level1name = N'KtKt',
+    @level1name = N'Ktkt',
     @level2type = N'COLUMN',
     @level2name = 'WaehId'
 GO
@@ -154,7 +154,7 @@ EXEC sp_addextendedproperty @name = N'MS_Description',
     @level0type = N'SCHEMA',
     @level0name = N'dbo',
     @level1type = N'TABLE',
-    @level1name = N'KtKt',
+    @level1name = N'Ktkt',
     @level2type = N'COLUMN',
     @level2name = N'LandId'
 GO
@@ -163,7 +163,7 @@ EXEC sp_addextendedproperty @name = N'MS_Description',
     @level0type = N'SCHEMA',
     @level0name = N'dbo',
     @level1type = N'TABLE',
-    @level1name = N'KtKt',
+    @level1name = N'Ktkt',
     @level2type = N'COLUMN',
     @level2name = N'RAdresse'
 GO
@@ -172,7 +172,7 @@ EXEC sp_addextendedproperty @name = N'MS_Description',
     @level0type = N'SCHEMA',
     @level0name = N'dbo',
     @level1type = N'TABLE',
-    @level1name = N'KtKt',
+    @level1name = N'Ktkt',
     @level2type = N'COLUMN',
     @level2name = N'Postfach'
 GO
@@ -181,7 +181,7 @@ EXEC sp_addextendedproperty @name = N'MS_Description',
     @level0type = N'SCHEMA',
     @level0name = N'dbo',
     @level1type = N'TABLE',
-    @level1name = N'KtKt',
+    @level1name = N'Ktkt',
     @level2type = N'COLUMN',
     @level2name = N'Zusatz'
 GO
@@ -190,7 +190,7 @@ EXEC sp_addextendedproperty @name = N'MS_Description',
     @level0type = N'SCHEMA',
     @level0name = N'dbo',
     @level1type = N'TABLE',
-    @level1name = N'KtKt',
+    @level1name = N'Ktkt',
     @level2type = N'COLUMN',
     @level2name = N'Strasse'
 GO
@@ -199,7 +199,7 @@ EXEC sp_addextendedproperty @name = N'MS_Description',
     @level0type = N'SCHEMA',
     @level0name = N'dbo',
     @level1type = N'TABLE',
-    @level1name = N'KtKt',
+    @level1name = N'Ktkt',
     @level2type = N'COLUMN',
     @level2name = N'Ort'
 GO
@@ -208,7 +208,7 @@ EXEC sp_addextendedproperty @name = N'MS_Description',
     @level0type = N'SCHEMA',
     @level0name = N'dbo',
     @level1type = N'TABLE',
-    @level1name = N'KtKt',
+    @level1name = N'Ktkt',
     @level2type = N'COLUMN',
     @level2name = N'Region'
 GO
@@ -217,7 +217,7 @@ EXEC sp_addextendedproperty @name = N'MS_Description',
     @level0type = N'SCHEMA',
     @level0name = N'dbo',
     @level1type = N'TABLE',
-    @level1name = N'KtKt',
+    @level1name = N'Ktkt',
     @level2type = N'COLUMN',
     @level2name = N'Plz'
 GO
@@ -226,7 +226,7 @@ EXEC sp_addextendedproperty @name = N'MS_Description',
     @level0type = N'SCHEMA',
     @level0name = N'dbo',
     @level1type = N'TABLE',
-    @level1name = N'KtKt',
+    @level1name = N'Ktkt',
     @level2type = N'COLUMN',
     @level2name = N'KoordB'
 GO
@@ -235,7 +235,7 @@ EXEC sp_addextendedproperty @name = N'MS_Description',
     @level0type = N'SCHEMA',
     @level0name = N'dbo',
     @level1type = N'TABLE',
-    @level1name = N'KtKt',
+    @level1name = N'Ktkt',
     @level2type = N'COLUMN',
     @level2name = N'KoordL'
 GO
@@ -244,7 +244,7 @@ EXEC sp_addextendedproperty @name = N'MS_Description',
     @level0type = N'SCHEMA',
     @level0name = N'dbo',
     @level1type = N'TABLE',
-    @level1name = N'KtKt',
+    @level1name = N'Ktkt',
     @level2type = N'COLUMN',
     @level2name = N'ParentId'
 GO
