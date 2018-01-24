@@ -3,7 +3,7 @@
 dbo.Geschlecht = {
 	
 	{
-	  Id = cast(char, "u"),
+	  Id = nil,
 		Name = "unbekannt"	
 	},
 	{
