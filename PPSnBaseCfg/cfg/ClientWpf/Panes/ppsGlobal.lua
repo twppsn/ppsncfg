@@ -1,4 +1,6 @@
-﻿Geschlecht = {
+﻿dbo = dbo or {};
+
+dbo.Geschlecht = {
 	
 	{
 	  Id = cast(char, "u"),
