@@ -50,7 +50,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="$(MSBuildThisFileDirectory)cfg\ClientWpf\Panes\global.lua">
+    <None Include="$(MSBuildThisFileDirectory)cfg\ClientWpf\Panes\ppsGlobal.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="$(MSBuildThisFileDirectory)cfg\ClientWpf\Panes\hello.lua">
