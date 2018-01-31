@@ -9,6 +9,8 @@
 	<sys:Double x:Key="PPSnPaneBorderSizeLeft">24</sys:Double>
 	<sys:Double x:Key="PPSnPaneBorderSizeTop">24</sys:Double>
 	<sys:Double x:Key="PPSnPaneBorderSizeRight">0</sys:Double>
+	<sys:Double x:Key="PPSnPaneToolBarHeight">36</sys:Double>
+
 	<sys:Double x:Key="PPSnCharmBarColumnWidth">48</sys:Double>
 
 	<GridLength x:Key="PaneLabelColumnWidth">110</GridLength>
