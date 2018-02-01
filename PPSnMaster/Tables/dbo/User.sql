@@ -4,7 +4,7 @@
 	[Login] [sys].[sysname] NULL, 
 	[Security] NVARCHAR(MAX) NULL, 
 	[LoginVersion] BIGINT NOT NULL CONSTRAINT dfUserLoginVersion DEFAULT 0, 
-	[KtktId] BIGINT NULL CONSTRAINT fkUserKtktId REFERENCES dbo.Ktkt (Id), 
+	[KtktId] BIGINT NULL CONSTRAINT fkUserKtktId REFERENCES dbo.Ktkt (Id) ON DELETE SET NULL, 
 )
 GO
 ALTER TABLE [dbo].[User] ENABLE CHANGE_TRACKING;
