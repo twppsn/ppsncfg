@@ -175,6 +175,7 @@
                             Template="{StaticResource PPSnDataFilterComboBoxToggleButtonTemplate}"
                             ClickMode="Press"
                             Focusable="False"
+                            IsChecked="{Binding Path=IsDropDownOpen, ElementName=PART_SearchFilterControl, Mode=TwoWay}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             Background="{TemplateBinding Background}"/>
@@ -184,7 +185,7 @@
                             HorizontalAlignment="Right"
                             Width="27"
                             Margin="0,2,18,2"
-                            Focusable="False">
+                            Focusable="False" Command="{x:Static uiC:PpsDataFilterBox.ClearSelectionCommand}">
                             <Button.Visibility>
                                 <MultiBinding>
                                     <MultiBinding.Converter>
@@ -206,6 +207,7 @@
                         </Button>
                         <!--this contentpresenter shows the actual value-->
 						<ContentPresenter
+                            x:Name="PART_Presenter"
 							IsHitTestVisible="False"
                             Margin="5,3,23,3"
                             HorizontalAlignment="Left"
@@ -218,7 +220,7 @@
 							   uiC:PpsPopupBehavior.ForceFocus="True"
 							   AllowsTransparency="True" PopupAnimation="Slide" MaxHeight="300">
 							<Border BorderBrush="{StaticResource PPSnControlFocusedBorderBrush}" BorderThickness="1" Background="{TemplateBinding Background}">
-								<uiC:PpsDataFilterBox
+								<uiC:PpsDataFilterBox x:Name="PART_SearchFilterControl"
                                     Style="{DynamicResource PpsSearchableListBox}" 
                                     ItemsSource="{Binding Path=ItemsSource, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}}"
                                     FilteredItemsSource="{Binding Path=FilteredItemsSource, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}}"
@@ -228,7 +230,8 @@
                                     ItemTemplate="{Binding Path=ItemTemplate, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}}"
                                     ItemContainerStyle="{Binding Path=ItemContainerStyle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}}"
                                     ListBoxStyle="{Binding Path=ListBoxStyle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}}"
-                                    IsNullable="{Binding Path=IsNullable, Mode=OneWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}}"/>
+                                    IsNullable="{Binding Path=IsNullable, Mode=OneWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}}"
+                                    IsDropDownOpen="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}}"/>
 							</Border>
 						</Popup>
 					</Grid>
