@@ -13,7 +13,7 @@
 		]]>
 	</ui:LuaValueConverter>
 
-	<SolidColorBrush x:Key="PPSnButtonStyleBackgroundBrush" Color="{StaticResource PPSnAccentColor}" Opacity="0.11"/>
+	<SolidColorBrush x:Key="PPSnButtonStyleBackgroundBrush" Color="{StaticResource PPSnAccentColor}" Opacity="0.1"/>
 
 	<Style x:Key="PPSnButtonStyle" TargetType="{x:Type Button}">
 		<Setter Property="Foreground" Value="{StaticResource PPSnWindowForegroundBrush}"/>
@@ -261,11 +261,13 @@
 		<Setter Property="Focusable" Value="False"/>
 		<Setter Property="Foreground" Value="{StaticResource PPSnActionButtonBrush}"/>
 		<Setter Property="Background" Value="Transparent"/>
+		<Setter Property="BorderBrush" Value="Transparent"/>
+		<Setter Property="BorderThickness" Value="0"/>
 		<Setter Property="Padding" Value="7"/>
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="{x:Type Button}">
-					<Border Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}">
+					<Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}">
 						<Viewbox>
 							<Canvas Width="24" Height="24">
 								<Path x:Name="imagePath" Data="{TemplateBinding Content}" Fill="{TemplateBinding Foreground}" Opacity=".65">
@@ -282,6 +284,7 @@
 					<ControlTemplate.Triggers>
 						<Trigger Property="IsMouseOver" Value="True">
 							<Setter Property="Opacity" TargetName="imagePath" Value="1"/>
+							<Setter Property="BorderBrush" TargetName="border" Value="{StaticResource PPSnWindowForegroundBrush}"/>
 						</Trigger>
 						<Trigger Property="IsEnabled" Value="False">
 							<Setter Property="Opacity" Value="0.25"/>

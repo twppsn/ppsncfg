@@ -1,0 +1,276 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:sys="clr-namespace:System;assembly=mscorlib"
+					xmlns:ui="clr-namespace:TecWare.PPSn.UI;assembly=PPSn.Desktop.UI"
+					xmlns:uiC="clr-namespace:TecWare.PPSn.Controls;assembly=PPSn.Desktop.UI" >
+
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="../Colors.xaml" />
+	</ResourceDictionary.MergedDictionaries>
+
+    <sys:Double x:Key="FixSearchBoxWidths">250</sys:Double>
+
+    <ControlTemplate x:Key="PPSnDataFilterBoxClearButtonTemplate" TargetType="{x:Type Button}">
+		<!--visual margin to dropDownArrow-->
+		<Border Background="Transparent" Padding="0,0,6,0">
+			<Viewbox x:Name="clearBox" Opacity=".75">
+				<Canvas Width="24" Height="24">
+					<Path Data="M6,7L 7,6L 12,11L 17,6L 18,7L 13,12L 18,17L 17,18L 12,13L 7,18L 6,17L 11,12L 6,7 Z"
+						  Fill="{StaticResource PPSnWindowForegroundBrush}"/>
+				</Canvas>
+			</Viewbox>
+		</Border>
+		<ControlTemplate.Triggers>
+			<Trigger Property="IsMouseOver" Value="True">
+				<Setter TargetName="clearBox" Property="Opacity" Value="1"/>
+			</Trigger>
+		</ControlTemplate.Triggers>
+	</ControlTemplate>
+
+    <ControlTemplate x:Key="PPSnDataFilterComboBoxToggleButtonTemplate" TargetType="{x:Type ToggleButton}">
+		<Grid>
+			<Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}"	BorderThickness="{TemplateBinding BorderThickness}"	Background="{TemplateBinding Background}" />
+			<Viewbox x:Name="arrowBox" HorizontalAlignment="Right" Width="20" Margin="0,0,1,0" Opacity=".5">
+				<Canvas Width="24" Height="24">
+					<Path x:Name="arrowPath" Data="M5,9 L6,8 L12,14 L18,8 L19,9 L12,16 L5,9Z" Fill="{StaticResource PPSnWindowForegroundBrush}"/>
+				</Canvas>
+			</Viewbox>
+		</Grid>
+		<ControlTemplate.Triggers>
+			<!-- not ComboBox, used for various controls-->
+			<DataTrigger Binding="{Binding Path=IsKeyboardFocusWithin, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type Control}}}">
+				<DataTrigger.Value>
+					<sys:Boolean>True</sys:Boolean>
+				</DataTrigger.Value>
+				<Setter Property="BorderBrush" TargetName="border" Value="{StaticResource PPSnControlFocusedBorderBrush}"/>
+				<Setter TargetName="arrowBox" Property="Opacity" Value=".75"/>
+			</DataTrigger>
+			<Trigger Property="uiC:PpsReadOnlyPaneBehavior.IsReadOnly">
+				<Trigger.Value>
+					<sys:Boolean>True</sys:Boolean>
+				</Trigger.Value>
+				<Setter TargetName="arrowBox" Property="Visibility" Value="Hidden"/>
+			</Trigger>
+			<Trigger Property="IsEnabled">
+				<Trigger.Value>
+					<sys:Boolean>False</sys:Boolean>
+				</Trigger.Value>
+				<Setter TargetName="arrowBox" Property="Opacity" Value=".25"/>
+			</Trigger>
+			<Trigger Property="Tag">
+				<Trigger.Value>
+					<sys:Int32>1</sys:Int32>
+				</Trigger.Value>
+				<Setter TargetName="arrowBox" Property="Width" Value="18"/>
+				<Setter TargetName="arrowBox" Property="Margin" Value="0,0,2,0"/>
+				<Setter TargetName="arrowPath" Property="Data" Value="{DynamicResource magnifyPathGeometry}"/>
+			</Trigger>
+		</ControlTemplate.Triggers>
+	</ControlTemplate>
+
+    <!-- TextBox which adds to a view and applies Filters -->
+
+	<Style TargetType="{x:Type uiC:PpsDataFilterBox}">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type uiC:PpsDataFilterBox}">
+					<Grid Background="White" HorizontalAlignment="Right" Margin="6" Width="{StaticResource FixSearchBoxWidths}">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition/>
+							<ColumnDefinition Width="20"/>
+						</Grid.ColumnDefinitions>
+						<TextBox x:Name="PART_SearchBox"
+                            Grid.Column="0"
+							BorderThickness="0"
+                            Background="Transparent"
+                            VerticalAlignment="Stretch"
+                            Height="Auto"
+							MaxLength="128"
+							Text="{Binding Path=FilterText, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, Delay=400}"/>
+						<Viewbox Grid.Column="1" Margin="0,0,2,0">
+							<Canvas Width="24" Height="24" Opacity=".65">
+								<Path Data="{DynamicResource magnifyPathGeometry}" Fill="{StaticResource PPSnWindowForegroundBrush}"/>
+							</Canvas>
+						</Viewbox>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style TargetType="{x:Type Control}" x:Key="PpsSearchableListBox">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type uiC:PpsDataFilterBox}">
+					<Grid>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="33"/>
+							<RowDefinition/>
+						</Grid.RowDefinitions>
+						<uiC:PpsDataFilterBox Grid.Row="0"
+							BorderThickness="0"  VerticalAlignment="Stretch" Height="Auto"
+							ItemsSource="{Binding Path=ItemsSource, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}}"
+                            FilteredItemsSource="{Binding Path=FilteredItemsSource, Mode=OneWayToSource, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}}"
+                            FilterText="{Binding Path=FilterText, Mode=OneWayToSource, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}}"/>
+						<ListBox 
+                            x:Name="PART_ItemsListBox"
+                            Grid.Row="1"
+                            Focusable="False"
+                            Background="Transparent"
+							IsSynchronizedWithCurrentItem="True"
+                            VirtualizingStackPanel.IsVirtualizing="True"
+                            VirtualizingStackPanel.VirtualizationMode="Recycling"
+                            ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+							Style="{Binding Path=ListBoxStyle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}}" 
+							ItemsSource="{Binding Path=FilteredItemsSource, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}}"
+							SelectedValue="{Binding Path=SelectedValue, Mode=TwoWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}}"
+							ItemTemplate="{Binding Path=ItemTemplate, Mode=OneWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}}"
+							ItemContainerStyle="{Binding Path=ItemContainerStyle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}}"
+							AlternationCount="2"/>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+		<Style.Triggers>
+			<DataTrigger Binding="{Binding Path=ItemTemplate}" Value="{x:Null}">
+				<Setter Property="uiC:PpsDataFilterBox.ItemTemplate">
+					<Setter.Value>
+						<DataTemplate>
+                            <uiC:PpsDataSelectorItemTextBlock
+                                VerticalAlignment="Center"
+                                TextWrapping="NoWrap"
+                                TextTrimming="CharacterEllipsis"
+                                SearchText="fir"
+                                BaseText="Herbert">
+                            </uiC:PpsDataSelectorItemTextBlock>
+				        </DataTemplate>
+					</Setter.Value>
+				</Setter>
+			</DataTrigger>
+			<DataTrigger Binding="{Binding Path=ItemContainerStyle}" Value="{x:Null}">
+				<Setter Property="uiC:PpsDataFilterBox.ItemContainerStyle" Value="{DynamicResource PPSnAlternatingListBoxItemStyle}"/>
+			</DataTrigger>
+			<DataTrigger Binding="{Binding Path=ListBoxStyle}" Value="{x:Null}">
+				<Setter Property="uiC:PpsDataFilterBox.ListBoxStyle" Value="{DynamicResource PPSnListBoxStyle}"/>
+			</DataTrigger>
+		</Style.Triggers>
+	</Style>
+
+	<Style TargetType="{x:Type Control}" x:Key="PpsSearchComboBox">
+	<Setter Property="Height" Value="23"/>
+		<Setter Property="VerticalAlignment" Value="Top"/>
+		<Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+		<Setter Property="BorderThickness" Value="1"/>
+		<Setter Property="BorderBrush" Value="{StaticResource PPSnControlNormalBorderBrush}"/>
+		<Setter Property="Background" Value="{StaticResource PPSnControlBackgroundBrush}"/>
+		<Setter Property="TextElement.Foreground" Value="{StaticResource PPSnWindowForegroundBrush}"/>
+		<Setter Property="SnapsToDevicePixels" Value="True"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type uiC:PpsDataFilterBox}">
+					<Grid>
+						<!--this button opens the popdown-->
+                        <ToggleButton 
+                            x:Name="ToggleDropDownButton"
+                            Template="{StaticResource PPSnDataFilterComboBoxToggleButtonTemplate}"
+                            ClickMode="Press"
+                            Focusable="False"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            Background="{TemplateBinding Background}"/>
+                        <!--this button clears the value-->
+                        <Button 
+                            Template="{StaticResource PPSnDataFilterBoxClearButtonTemplate}"
+                            HorizontalAlignment="Right"
+                            Width="27"
+                            Margin="0,2,18,2"
+                            Focusable="False">
+                            <Button.Visibility>
+                                <MultiBinding>
+                                    <MultiBinding.Converter>
+                                        <ui:LuaValueConverter>
+                                            <ui:LuaValueConverter.ConvertExpression>
+                                                <![CDATA[
+                                                    if (value[0] and (value[1] ~= nil)) then
+                                                        return clr.System.Windows.Visibility:Visible;
+                                                    end;
+                                                    return clr.System.Windows.Visibility:Collapsed;
+                                                ]]>
+                                            </ui:LuaValueConverter.ConvertExpression>
+                                        </ui:LuaValueConverter>
+                                    </MultiBinding.Converter>
+                                    <Binding RelativeSource="{RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}" Path="IsNullable" Mode="OneWay"/>
+                                    <Binding RelativeSource="{RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}" Path="SelectedValue" Mode="OneWay"/>
+                                </MultiBinding>
+                            </Button.Visibility>
+                        </Button>
+                        <!--this contentpresenter shows the actual value-->
+						<ContentPresenter
+							IsHitTestVisible="False"
+                            Margin="5,3,23,3"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Content="{Binding Path=SelectedValue, Mode=OneWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}}"
+							ContentTemplate="{Binding Path=SelectedValueTemplate, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}}"/>
+						<Popup x:Name="PART_DropDownPopup" Placement="Bottom" VerticalOffset="1" Focusable="False"
+							   IsOpen="{Binding ElementName=ToggleDropDownButton, Path=IsChecked}" StaysOpen="False"
+							   MinWidth="{Binding Path=ActualWidth, ElementName=ToggleDropDownButton}"  MinHeight="122"
+							   uiC:PpsPopupBehavior.ForceFocus="True"
+							   AllowsTransparency="True" PopupAnimation="Slide" MaxHeight="300">
+							<Border BorderBrush="{StaticResource PPSnControlFocusedBorderBrush}" BorderThickness="1" Background="{TemplateBinding Background}">
+								<uiC:PpsDataFilterBox
+                                    Style="{DynamicResource PpsSearchableListBox}" 
+                                    ItemsSource="{Binding Path=ItemsSource, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}}"
+                                    FilteredItemsSource="{Binding Path=FilteredItemsSource, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}}"
+                                    FilterText="{Binding Path=FilterText, Mode=TwoWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}}"
+                                    SelectedValue="{Binding Path=SelectedValue, Mode=TwoWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}}"
+                                    SelectedValueTemplate="{Binding Path=SelectedValueTemplate, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}}"
+                                    ItemTemplate="{Binding Path=ItemTemplate, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}}"
+                                    ItemContainerStyle="{Binding Path=ItemContainerStyle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}}"
+                                    ListBoxStyle="{Binding Path=ListBoxStyle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}}"
+                                    IsNullable="{Binding Path=IsNullable, Mode=OneWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}}"/>
+							</Border>
+						</Popup>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+		<Style.Triggers>
+			<DataTrigger Binding="{Binding Path=ItemTemplate}" Value="{x:Null}">
+				<Setter Property="uiC:PpsDataFilterBox.ItemTemplate">
+					<Setter.Value>
+                        <DataTemplate>
+                            <uiC:PpsDataSelectorItemTextBlock
+                                VerticalAlignment="Center"
+                                TextWrapping="NoWrap"
+                                TextTrimming="CharacterEllipsis"
+                                SearchText="{Binding Path=FilterText, Mode=OneWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}}"
+                                BaseText="{Binding Name}">
+                            </uiC:PpsDataSelectorItemTextBlock>
+                        </DataTemplate>
+					</Setter.Value>
+				</Setter>
+			</DataTrigger>
+			<DataTrigger Binding="{Binding Path=ItemContainerStyle}" Value="{x:Null}">
+				<Setter Property="uiC:PpsDataFilterBox.ItemContainerStyle" Value="{DynamicResource PPSnAlternatingListBoxItemStyle}"/>
+			</DataTrigger>
+			<DataTrigger Binding="{Binding Path=ListBoxStyle}" Value="{x:Null}">
+				<Setter Property="uiC:PpsDataFilterBox.ListBoxStyle" Value="{DynamicResource PPSnListBoxStyle}"/>
+			</DataTrigger>
+            <DataTrigger Binding="{Binding Path=SelectedValueTemplate}" Value="{x:Null}">
+				<Setter Property="uiC:PpsDataFilterBox.SelectedValueTemplate">
+					<Setter.Value>
+                        <DataTemplate>
+                            <TextBlock
+                                VerticalAlignment="Center"
+                                TextWrapping="NoWrap"
+                                TextTrimming="CharacterEllipsis"
+                                Text="{Binding Name}">
+                            </TextBlock>
+                        </DataTemplate>
+					</Setter.Value>
+				</Setter>
+			</DataTrigger>
+		</Style.Triggers>
+	</Style>
+</ResourceDictionary>
