@@ -163,7 +163,8 @@
                             IsChecked="{Binding Path=IsDropDownOpen, ElementName=PART_SearchFilterControl, Mode=TwoWay}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             BorderBrush="{TemplateBinding BorderBrush}"
-                            Background="{TemplateBinding Background}"/>
+                            Background="{TemplateBinding Background}"
+                            IsEnabled="{Binding Path=IsWriteable, ElementName=PART_SearchFilterControl, Mode=OneWay}"/>
                         <!--this button clears the value-->
                         <Button 
                             Template="{StaticResource PPSnDataFilterBoxClearButtonTemplate}"
