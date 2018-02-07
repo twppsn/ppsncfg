@@ -87,7 +87,7 @@
                             Height="Auto"
 							MaxLength="128"
 							Text="{Binding Path=FilterText, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, Delay=400}"/>
-						<Viewbox Grid.Column="1" Margin="0,0,2,0">
+						<Viewbox Grid.Column="1" Margin="0,0,2,0" Focusable="False">
 							<Canvas Width="24" Height="24" Opacity=".65">
 								<Path Data="{DynamicResource magnifyPathGeometry}" Fill="{StaticResource PPSnWindowForegroundBrush}"/>
 							</Canvas>
@@ -107,7 +107,7 @@
 							<RowDefinition Height="33"/>
 							<RowDefinition/>
 						</Grid.RowDefinitions>
-						<uiC:PpsDataFilterBox Grid.Row="0"
+						<uiC:PpsDataFilterBox Grid.Row="0" Focusable="False"
 							BorderThickness="0"  VerticalAlignment="Stretch" Height="Auto"
 							ItemsSource="{Binding Path=ItemsSource, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}}"
                             FilteredItemsSource="{Binding Path=FilteredItemsSource, Mode=OneWayToSource, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}}"
@@ -219,8 +219,8 @@
 							   MinWidth="{Binding Path=ActualWidth, ElementName=ToggleDropDownButton}"  MinHeight="122"
 							   uiC:PpsPopupBehavior.ForceFocus="True"
 							   AllowsTransparency="True" PopupAnimation="Slide" MaxHeight="300">
-							<Border BorderBrush="{StaticResource PPSnControlFocusedBorderBrush}" BorderThickness="1" Background="{TemplateBinding Background}">
-								<uiC:PpsDataFilterBox x:Name="PART_SearchFilterControl"
+							<Border BorderBrush="{StaticResource PPSnControlFocusedBorderBrush}" BorderThickness="1" Background="{TemplateBinding Background}" Focusable="False">
+								<uiC:PpsDataFilterBox x:Name="PART_SearchFilterControl" Focusable="False"
                                     Style="{DynamicResource PpsSearchableListBox}" 
                                     ItemsSource="{Binding Path=ItemsSource, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}}"
                                     FilteredItemsSource="{Binding Path=FilteredItemsSource, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}}"
@@ -244,6 +244,8 @@
 					<Setter.Value>
                         <DataTemplate>
                             <uiC:PpsDataSelectorItemTextBlock
+                                MinHeight="29"
+                                Focusable="False"
                                 VerticalAlignment="Center"
                                 TextWrapping="NoWrap"
                                 TextTrimming="CharacterEllipsis"
