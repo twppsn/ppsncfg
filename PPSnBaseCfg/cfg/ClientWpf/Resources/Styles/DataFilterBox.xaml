@@ -186,24 +186,15 @@
                             Width="27"
                             Margin="0,2,18,2"
                             Focusable="False" Command="{x:Static uiC:PpsDataFilterBox.ClearSelectionCommand}">
-                            <Button.Visibility>
-                                <MultiBinding>
-                                    <MultiBinding.Converter>
-                                        <ui:LuaValueConverter>
-                                            <ui:LuaValueConverter.ConvertExpression>
-                                                <![CDATA[
-                                                    if (value[0] and (value[1] ~= nil)) then
-                                                        return clr.System.Windows.Visibility:Visible;
-                                                    end;
-                                                    return clr.System.Windows.Visibility:Collapsed;
-                                                ]]>
-                                            </ui:LuaValueConverter.ConvertExpression>
-                                        </ui:LuaValueConverter>
-                                    </MultiBinding.Converter>
-                                    <Binding RelativeSource="{RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}" Path="IsNullable" Mode="OneWay"/>
-                                    <Binding RelativeSource="{RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}" Path="SelectedValue" Mode="OneWay"/>
-                                </MultiBinding>
-                            </Button.Visibility>
+                            <Button.Style>
+                                <Style TargetType="{x:Type Button}">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsEnabled" Value="False">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
                         </Button>
                         <!--this contentpresenter shows the actual value-->
 						<ContentPresenter
