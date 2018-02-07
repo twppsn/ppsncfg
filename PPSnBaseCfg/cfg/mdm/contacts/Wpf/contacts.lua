@@ -1,4 +1,11 @@
 ﻿
+-- Global Properties --
+Title = "Neuer Kontakt";
+
+
+
+
+
 --ViewAdre = getView(Data:Head:First:AdreHead);
 
 --[[
@@ -26,7 +33,6 @@ pushContact = command(
         -- PushDataAsync();
     end
 );
-]]
 		
 pushContact = command(
 	function (args) : void
@@ -98,4 +104,39 @@ testCommand = command(
     function (args) : void
   		msgbox("Test");
     end
-);
+);]]
+
+-- UI Creation --
+local ctrl = UI.Grid {
+	RowDefinitions = { "*", "*" },
+	ColumnDefinitions = { "*" },
+
+	--[[UI.ControlPanel = {
+		ColumnCount = 2,
+
+		UI.DataControl {
+			FieldName = "Name"
+		},
+		UI.DataControl {
+			FieldName = "KurzName"
+		},
+		UI.DataControl {
+			FieldName = "SteuerNr"
+		}
+	},]]
+
+	UI.Label {
+		Content = "Hallo Welt"
+	},
+
+	UI.TabControl {
+		["Grid.Row"] = 1
+	}
+};
+
+
+setControl {
+	Title = UI.Binding("Title"),
+	SubTitle = "Kontakt",
+	ctrl
+}

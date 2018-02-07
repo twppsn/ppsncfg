@@ -161,7 +161,7 @@
 
 			<!-- contacts mask -->
 			<pps:dataset name="contactsDataSet" clientScripts="contactsLocal.lua" serverScripts="ContactsScript" >
-				<pps:meta name="DefaultPaneUri" dataType="string">wpf/panes/contacts.xaml</pps:meta>
+				<pps:meta name="DefaultPaneUri" dataType="string">wpf/panes/contacts.lua</pps:meta>
 
 				<pps:autoTag name="Name" tableName="Head" columnName="Name" mode="First" />
 				<pps:autoTag name="LiefNr" tableName="Kund" columnName="LiefNr" mode="Number" />
