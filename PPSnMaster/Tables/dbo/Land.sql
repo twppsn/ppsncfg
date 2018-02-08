@@ -8,7 +8,7 @@
 	[Tld] VARCHAR(63) NULL, 
 	[Vorwahl] INT NULL, 
 	[Zone] NVARCHAR(50) NULL , 
-	[PostAdr] NVARCHAR(50) NULL,
+	[PostAdr] NVARCHAR(512) NULL,
 	[IsActive] BIT NOT NULL CONSTRAINT dfLandIsActive DEFAULT  1
 )
 GO
