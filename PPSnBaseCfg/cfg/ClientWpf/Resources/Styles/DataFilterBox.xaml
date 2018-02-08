@@ -220,15 +220,15 @@
 				<Setter Property="uiC:PpsDataFilterBox.ItemTemplate">
 					<Setter.Value>
                         <DataTemplate>
+                        <Grid MinHeight="29">
                             <uiC:PpsDataSelectorItemTextBlock
-                                MinHeight="29"
                                 Focusable="False"
                                 VerticalAlignment="Center"
                                 TextWrapping="NoWrap"
                                 TextTrimming="CharacterEllipsis"
                                 SearchText="{Binding Path=FilterText, Mode=OneWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}}"
                                 BaseText="{Binding Name}">
-                            </uiC:PpsDataSelectorItemTextBlock>
+                            </uiC:PpsDataSelectorItemTextBlock></Grid>
                         </DataTemplate>
 					</Setter.Value>
 				</Setter>
