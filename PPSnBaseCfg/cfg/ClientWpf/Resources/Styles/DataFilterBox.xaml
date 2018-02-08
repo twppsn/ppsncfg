@@ -86,7 +86,7 @@
                             VerticalAlignment="Stretch"
                             Height="Auto"
 							MaxLength="128"
-							Text="{Binding Path=FilterText, RelativeSource={RelativeSource TemplatedParent}, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged, Delay=400}"/>
+							Text="{Binding Path=FilterText, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Delay=400}"/>
 						<Viewbox Grid.Column="1" Margin="0,0,2,0" Focusable="False">
 							<Canvas Width="24" Height="24" Opacity=".65">
 								<Path Data="{DynamicResource magnifyPathGeometry}" Fill="{StaticResource PPSnWindowForegroundBrush}"/>
@@ -111,7 +111,7 @@
 							BorderThickness="0"  VerticalAlignment="Stretch" Height="Auto"
 							ItemsSource="{Binding Path=ItemsSource, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}}"
                             FilteredItemsSource="{Binding Path=FilteredItemsSource, Mode=OneWayToSource, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}}"
-                            FilterText="{Binding Path=FilterText, Mode=OneWayToSource, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}}"/>
+                            FilterText="{Binding Path=FilterText, Mode=TwoWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}}"/>
 						<ListBox 
                             x:Name="PART_ItemsListBox"
                             Grid.Row="1"
