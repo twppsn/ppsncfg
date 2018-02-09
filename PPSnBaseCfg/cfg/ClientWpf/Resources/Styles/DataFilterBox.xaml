@@ -219,17 +219,40 @@
 			<DataTrigger Binding="{Binding Path=ItemTemplate}" Value="{x:Null}">
 				<Setter Property="uiC:PpsDataFilterBox.ItemTemplate">
 					<Setter.Value>
-                        <DataTemplate>
-                        <Grid MinHeight="29">
-                            <uiC:PpsDataSelectorItemTextBlock
-                                Focusable="False"
-                                VerticalAlignment="Center"
-                                TextWrapping="NoWrap"
-                                TextTrimming="CharacterEllipsis"
-                                SearchText="{Binding Path=FilterText, Mode=OneWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}}"
-                                BaseText="{Binding Name}">
-                            </uiC:PpsDataSelectorItemTextBlock></Grid>
-                        </DataTemplate>
+						<DataTemplate>
+							<Grid x:Name="PART_SearchListItemGrid" MinHeight="29">
+								<uiC:PpsDataSelectorItemTextBlock
+									Focusable="False"
+									VerticalAlignment="Center"
+									TextWrapping="NoWrap"
+									TextTrimming="CharacterEllipsis"
+									SearchText="{Binding Path=FilterText, Mode=OneWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}}"
+									BaseText="{Binding Name}">
+								</uiC:PpsDataSelectorItemTextBlock>
+							</Grid>
+							<DataTemplate.Triggers>
+								<DataTrigger Value="True">
+									<DataTrigger.Binding>
+										<Binding RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType={x:Type Control}}" Path="ActualHeight">
+											<Binding.Converter>
+												<ui:LuaValueConverter>
+													<ui:LuaValueConverter.ConvertExpression>
+														<![CDATA[
+															return value < 30;
+														]]>
+													</ui:LuaValueConverter.ConvertExpression>
+												</ui:LuaValueConverter>
+											</Binding.Converter>
+										</Binding>
+									</DataTrigger.Binding>
+									<Setter TargetName="PART_SearchListItemGrid" Property="MinHeight" Value="10" />
+									<Setter
+										TargetName="PART_SearchListItemGrid"
+										Property="MaxHeight"
+										Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Control}}, Path=ActualHeigtht}" />
+								</DataTrigger>
+							</DataTemplate.Triggers>
+						</DataTemplate>
 					</Setter.Value>
 				</Setter>
 			</DataTrigger>
@@ -239,19 +262,8 @@
 			<DataTrigger Binding="{Binding Path=ListBoxStyle}" Value="{x:Null}">
 				<Setter Property="uiC:PpsDataFilterBox.ListBoxStyle" Value="{DynamicResource PPSnListBoxStyle}"/>
 			</DataTrigger>
-            <DataTrigger Binding="{Binding Path=SelectedValueTemplate}" Value="{x:Null}">
-				<Setter Property="uiC:PpsDataFilterBox.SelectedValueTemplate">
-					<Setter.Value>
-                        <DataTemplate>
-                            <TextBlock
-                                VerticalAlignment="Center"
-                                TextWrapping="NoWrap"
-                                TextTrimming="CharacterEllipsis"
-                                Text="{Binding Name}">
-                            </TextBlock>
-                        </DataTemplate>
-					</Setter.Value>
-				</Setter>
+			<DataTrigger Binding="{Binding Path=SelectedValueTemplate}" Value="{x:Null}">
+				<Setter Property="uiC:PpsDataFilterBox.SelectedValueTemplate" Value="{Binding RelativeSource={RelativeSource Self}, Path=ItemTemplate}"/>
 			</DataTrigger>
 		</Style.Triggers>
 	</Style>
