@@ -132,9 +132,9 @@
 			</Setter.Value>
 		</Setter>
 		<Style.Triggers>
-			<DataTrigger Binding="{Binding Path=ItemContainerStyle}" Value="{x:Null}">
+			<!--<DataTrigger Binding="{Binding Path=ItemContainerStyle}" Value="{x:Null}">
 				<Setter Property="uiC:PpsDataFilterBox.ItemContainerStyle" Value="{DynamicResource PPSnAlternatingListBoxItemStyle}"/>
-			</DataTrigger>
+			</DataTrigger>-->
 			<DataTrigger Binding="{Binding Path=ListBoxStyle}" Value="{x:Null}">
 				<Setter Property="uiC:PpsDataFilterBox.ListBoxStyle" Value="{DynamicResource PPSnListBoxStyle}"/>
 			</DataTrigger>
@@ -238,6 +238,9 @@
 												<ui:LuaValueConverter>
 													<ui:LuaValueConverter.ConvertExpression>
 														<![CDATA[
+															if (value == nil) then
+																return;
+															end;
 															return value < 30;
 														]]>
 													</ui:LuaValueConverter.ConvertExpression>
@@ -246,19 +249,15 @@
 										</Binding>
 									</DataTrigger.Binding>
 									<Setter TargetName="PART_SearchListItemGrid" Property="MinHeight" Value="10" />
-									<Setter
-										TargetName="PART_SearchListItemGrid"
-										Property="MaxHeight"
-										Value="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type Control}}, Path=ActualHeigtht}" />
 								</DataTrigger>
 							</DataTemplate.Triggers>
 						</DataTemplate>
 					</Setter.Value>
 				</Setter>
 			</DataTrigger>
-			<DataTrigger Binding="{Binding Path=ItemContainerStyle}" Value="{x:Null}">
+			<!--<DataTrigger Binding="{Binding Path=ItemContainerStyle}" Value="{x:Null}">
 				<Setter Property="uiC:PpsDataFilterBox.ItemContainerStyle" Value="{DynamicResource PPSnAlternatingListBoxItemStyle}"/>
-			</DataTrigger>
+			</DataTrigger>-->
 			<DataTrigger Binding="{Binding Path=ListBoxStyle}" Value="{x:Null}">
 				<Setter Property="uiC:PpsDataFilterBox.ListBoxStyle" Value="{DynamicResource PPSnListBoxStyle}"/>
 			</DataTrigger>
