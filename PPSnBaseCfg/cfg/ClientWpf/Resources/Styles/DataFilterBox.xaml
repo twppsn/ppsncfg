@@ -8,6 +8,32 @@
 		<ResourceDictionary Source="../Colors.xaml" />
 	</ResourceDictionary.MergedDictionaries>
 
+	<Style TargetType="ListBoxItem" x:Key="PpsDefaultTouchableItemContainerStyle">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type ListBoxItem}">
+					<Grid>
+						<Border x:Name="panelBorder" Padding="6,1" Background="{TemplateBinding Background}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" MinHeight="29">
+							<ContentPresenter />
+						</Border>
+						<Rectangle
+							x:Name="selectionRect"
+							Stroke="{StaticResource PPSnMarkerBrush}"
+							StrokeThickness="1"
+							Opacity="0"
+							IsHitTestVisible="False"
+							SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+					</Grid>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsSelected" Value="True">
+							<Setter Property="Opacity" TargetName="selectionRect" Value="1" />
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
     <sys:Double x:Key="FixSearchBoxWidths">250</sys:Double>
 
     <ControlTemplate x:Key="PPSnDataFilterBoxClearButtonTemplate" TargetType="{x:Type Button}">
@@ -132,9 +158,9 @@
 			</Setter.Value>
 		</Setter>
 		<Style.Triggers>
-			<!--<DataTrigger Binding="{Binding Path=ItemContainerStyle}" Value="{x:Null}">
-				<Setter Property="uiC:PpsDataFilterBox.ItemContainerStyle" Value="{DynamicResource PPSnAlternatingListBoxItemStyle}"/>
-			</DataTrigger>-->
+			<DataTrigger Binding="{Binding Path=ItemContainerStyle}" Value="{x:Null}">
+				<Setter Property="uiC:PpsDataFilterBox.ItemContainerStyle" Value="{StaticResource PpsDefaultTouchableItemContainerStyle}"/>
+			</DataTrigger>
 			<DataTrigger Binding="{Binding Path=ListBoxStyle}" Value="{x:Null}">
 				<Setter Property="uiC:PpsDataFilterBox.ListBoxStyle" Value="{DynamicResource PPSnListBoxStyle}"/>
 			</DataTrigger>
@@ -235,35 +261,7 @@
 				</Setter>
 			</DataTrigger>
 			<DataTrigger Binding="{Binding Path=ItemContainerStyle}" Value="{x:Null}">
-				<Setter Property="uiC:PpsDataFilterBox.ItemContainerStyle">
-					<Setter.Value>
-						<Style TargetType="ListBoxItem">
-							<Setter Property="Template">
-								<Setter.Value>
-									<ControlTemplate TargetType="{x:Type ListBoxItem}">
-										<Grid>
-											<Border x:Name="panelBorder" Padding="6,1" Background="{TemplateBinding Background}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" MinHeight="29">
-												<ContentPresenter />
-											</Border>
-											<Rectangle
-												x:Name="selectionRect"
-												Stroke="{StaticResource PPSnMarkerBrush}"
-												StrokeThickness="1"
-												Opacity="0"
-												IsHitTestVisible="False"
-								  				SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
-										</Grid>
-										 <ControlTemplate.Triggers>
-											<Trigger Property="IsSelected" Value="True">
-												<Setter Property="Opacity" TargetName="selectionRect" Value="1" />
-											</Trigger>
-										</ControlTemplate.Triggers>
-									</ControlTemplate>
-								</Setter.Value>
-							</Setter>
-						</Style>
-					</Setter.Value>
-				</Setter>
+				<Setter Property="uiC:PpsDataFilterBox.ItemContainerStyle" Value="{StaticResource PpsDefaultTouchableItemContainerStyle}"/>
 			</DataTrigger>
 			<DataTrigger Binding="{Binding Path=ListBoxStyle}" Value="{x:Null}">
 				<Setter Property="uiC:PpsDataFilterBox.ListBoxStyle" Value="{DynamicResource PPSnListBoxStyle}"/>
