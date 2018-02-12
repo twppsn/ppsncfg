@@ -220,7 +220,7 @@
 				<Setter Property="uiC:PpsDataFilterBox.ItemTemplate">
 					<Setter.Value>
 						<DataTemplate>
-							<Grid x:Name="PART_SearchListItemGrid" MinHeight="29">
+							<Grid x:Name="PART_SearchListItemGrid">
 								<uiC:PpsDataSelectorItemTextBlock
 									Focusable="False"
 									VerticalAlignment="Center"
@@ -230,34 +230,41 @@
 									BaseText="{Binding Name}">
 								</uiC:PpsDataSelectorItemTextBlock>
 							</Grid>
-							<DataTemplate.Triggers>
-								<DataTrigger Value="True">
-									<DataTrigger.Binding>
-										<Binding RelativeSource="{RelativeSource Mode=FindAncestor, AncestorType={x:Type Control}}" Path="ActualHeight">
-											<Binding.Converter>
-												<ui:LuaValueConverter>
-													<ui:LuaValueConverter.ConvertExpression>
-														<![CDATA[
-															if (value == nil) then
-																return;
-															end;
-															return value < 30;
-														]]>
-													</ui:LuaValueConverter.ConvertExpression>
-												</ui:LuaValueConverter>
-											</Binding.Converter>
-										</Binding>
-									</DataTrigger.Binding>
-									<Setter TargetName="PART_SearchListItemGrid" Property="MinHeight" Value="10" />
-								</DataTrigger>
-							</DataTemplate.Triggers>
 						</DataTemplate>
 					</Setter.Value>
 				</Setter>
 			</DataTrigger>
-			<!--<DataTrigger Binding="{Binding Path=ItemContainerStyle}" Value="{x:Null}">
-				<Setter Property="uiC:PpsDataFilterBox.ItemContainerStyle" Value="{DynamicResource PPSnAlternatingListBoxItemStyle}"/>
-			</DataTrigger>-->
+			<DataTrigger Binding="{Binding Path=ItemContainerStyle}" Value="{x:Null}">
+				<Setter Property="uiC:PpsDataFilterBox.ItemContainerStyle">
+					<Setter.Value>
+						<Style TargetType="ListBoxItem">
+							<Setter Property="Template">
+								<Setter.Value>
+									<ControlTemplate TargetType="{x:Type ListBoxItem}">
+										<Grid>
+											<Border x:Name="panelBorder" Padding="6,1" Background="{TemplateBinding Background}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" MinHeight="29">
+												<ContentPresenter />
+											</Border>
+											<Rectangle
+												x:Name="selectionRect"
+												Stroke="{StaticResource PPSnMarkerBrush}"
+												StrokeThickness="1"
+												Opacity="0"
+												IsHitTestVisible="False"
+								  				SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+										</Grid>
+										 <ControlTemplate.Triggers>
+											<Trigger Property="IsSelected" Value="True">
+												<Setter Property="Opacity" TargetName="selectionRect" Value="1" />
+											</Trigger>
+										</ControlTemplate.Triggers>
+									</ControlTemplate>
+								</Setter.Value>
+							</Setter>
+						</Style>
+					</Setter.Value>
+				</Setter>
+			</DataTrigger>
 			<DataTrigger Binding="{Binding Path=ListBoxStyle}" Value="{x:Null}">
 				<Setter Property="uiC:PpsDataFilterBox.ListBoxStyle" Value="{DynamicResource PPSnListBoxStyle}"/>
 			</DataTrigger>
