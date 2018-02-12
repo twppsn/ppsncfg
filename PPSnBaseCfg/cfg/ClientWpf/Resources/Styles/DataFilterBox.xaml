@@ -212,7 +212,7 @@
 						<ContentPresenter
                             x:Name="PART_Presenter"
 							IsHitTestVisible="False"
-                            Margin="5,3,23,3"
+                            Margin="5,3,50,3"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
                             Content="{Binding Path=SelectedValue, Mode=OneWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}}"
