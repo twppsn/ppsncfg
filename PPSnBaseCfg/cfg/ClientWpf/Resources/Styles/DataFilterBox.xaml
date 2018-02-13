@@ -125,6 +125,7 @@
 	</Style>
 
 	<Style TargetType="{x:Type Control}" x:Key="PpsSearchableListBox">
+	<Setter Property="Focusable" Value="False"/>
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="{x:Type uiC:PpsDataFilterBox}">
