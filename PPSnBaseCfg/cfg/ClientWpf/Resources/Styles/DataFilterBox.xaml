@@ -225,11 +225,18 @@
                             VerticalAlignment="Center"
                             Content="{Binding Path=SelectedValue, Mode=OneWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}}"
 							ContentTemplate="{Binding Path=SelectedValueTemplate, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}}"/>
-						<Popup x:Name="PART_DropDownPopup" Placement="Bottom" VerticalOffset="1" Focusable="False"
-							   IsOpen="{Binding ElementName=ToggleDropDownButton, Path=IsChecked}" StaysOpen="False"
-							   MinWidth="{Binding Path=ActualWidth, ElementName=ToggleDropDownButton}"  MinHeight="122"
-							   uiC:PpsPopupBehavior.ForceFocus="True"
-							   AllowsTransparency="True" PopupAnimation="Slide" MaxHeight="300">
+						<Popup x:Name="PART_DropDownPopup"
+						PlacementTarget="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}}"
+							Placement="Relative"
+							VerticalOffset="30"
+							Focusable="False"
+							IsOpen="{Binding ElementName=ToggleDropDownButton, Path=IsChecked}"
+							StaysOpen="False"
+							MinHeight="122"
+							uiC:PpsPopupBehavior.ForceFocus="True"
+							AllowsTransparency="True"
+							PopupAnimation="Slide"
+							MaxHeight="300">
 							<Border BorderBrush="{StaticResource PPSnControlFocusedBorderBrush}" BorderThickness="1" Background="{TemplateBinding Background}" Focusable="False">
 								<uiC:PpsDataFilterBox
 									x:Name="PART_SearchFilterControl" 
