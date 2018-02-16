@@ -233,8 +233,7 @@
 							MinHeight="122"
 							uiC:PpsPopupBehavior.ForceFocus="True"
 							AllowsTransparency="True"
-							PopupAnimation="Slide"
-							MaxHeight="300">
+							PopupAnimation="Slide">
 							<Border
 								MinWidth="{Binding Path=ActualWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}}"
 								BorderBrush="{StaticResource PPSnControlFocusedBorderBrush}"
