@@ -284,7 +284,13 @@
 				<Setter Property="uiC:PpsDataFilterBox.ListBoxStyle" Value="{DynamicResource PPSnListBoxStyle}"/>
 			</DataTrigger>
 			<DataTrigger Binding="{Binding Path=SelectedValueTemplate}" Value="{x:Null}">
-				<Setter Property="uiC:PpsDataFilterBox.SelectedValueTemplate" Value="{Binding RelativeSource={RelativeSource Self}, Path=ItemTemplate}"/>
+				<Setter Property="uiC:PpsDataFilterBox.SelectedValueTemplate">
+					<Setter.Value>
+						<DataTemplate>
+							<TextBlock Text="{Binding Name, Converter={StaticResource MlStringConverter}}"/>
+						</DataTemplate>
+					</Setter.Value>
+				</Setter>
 			</DataTrigger>
 		</Style.Triggers>
 	</Style>
