@@ -15,7 +15,7 @@
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="{x:Type ListBoxItem}">
-					<Grid>
+					<Grid Margin="0,0,20,0">
 						<Border x:Name="panelBorder" Padding="6,1" Background="{TemplateBinding Background}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" MinHeight="29">
 							<ContentPresenter />
 						</Border>
