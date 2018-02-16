@@ -181,6 +181,7 @@
 		<Setter Property="Background" Value="{StaticResource PPSnControlBackgroundBrush}"/>
 		<Setter Property="TextElement.Foreground" Value="{StaticResource PPSnWindowForegroundBrush}"/>
 		<Setter Property="SnapsToDevicePixels" Value="True"/>
+		<Setter Property="uiC:PpsDataFilterBox.IsReadOnly" Value="{Binding Path=(uiC:PpsReadOnlyPaneBehavior.IsReadOnly), Mode=OneWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type ContentControl}}}"/>
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="{x:Type uiC:PpsDataFilterBox}">
@@ -192,10 +193,10 @@
                             ClickMode="Press"
                             Focusable="False"
                             IsChecked="{Binding Path=IsDropDownOpen, ElementName=PART_SearchFilterControl, Mode=TwoWay}"
+							IsEnabled="{Binding Path=IsWriteable, Mode=OneWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             BorderBrush="{TemplateBinding BorderBrush}"
-                            Background="{TemplateBinding Background}"
-                            IsEnabled="{Binding Path=IsWriteable, ElementName=PART_SearchFilterControl, Mode=OneWay}"/>
+                            Background="{TemplateBinding Background}"/>
                         <!--this button clears the value-->
                         <Button 
                             Template="{StaticResource PPSnDataFilterBoxClearButtonTemplate}"
@@ -203,7 +204,7 @@
                             Width="27"
                             Margin="0,2,18,2"
                             Focusable="False" Command="{x:Static uiC:PpsDataFilterBox.ClearSelectionCommand}">
-                            <Button.Style>
+							<Button.Style>
                                 <Style TargetType="{x:Type Button}">
                                     <Style.Triggers>
                                         <Trigger Property="IsEnabled" Value="False">
@@ -223,11 +224,11 @@
                             Content="{Binding Path=SelectedValue, Mode=OneWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}}"
 							ContentTemplate="{Binding Path=SelectedValueTemplate, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}}"/>
 						<Popup x:Name="PART_DropDownPopup"
-						PlacementTarget="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}}"
+							PlacementTarget="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}}"
 							Placement="Relative"
 							VerticalOffset="30"
 							Focusable="False"
-							IsOpen="{Binding ElementName=ToggleDropDownButton, Path=IsChecked}"
+							IsOpen="{Binding Path=IsDropDownOpen, Mode=OneWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}}"
 							StaysOpen="False"
 							MinHeight="122"
 							uiC:PpsPopupBehavior.ForceFocus="True"
@@ -251,7 +252,9 @@
                                     ItemContainerStyle="{Binding Path=ItemContainerStyle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}}"
                                     ListBoxStyle="{Binding Path=ListBoxStyle, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}}"
                                     IsNullable="{Binding Path=IsNullable, Mode=OneWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}}"
-                                    IsDropDownOpen="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}}"/>
+                                    IsDropDownOpen="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}}"
+									IsReadOnly="{Binding Path=IsReadOnly, Mode=OneWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}}"
+									/>
 							</Border>
 						</Popup>
 					</Grid>
