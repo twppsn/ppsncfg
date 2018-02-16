@@ -234,8 +234,13 @@
 							AllowsTransparency="True"
 							PopupAnimation="Slide"
 							MaxHeight="300">
-							<Border BorderBrush="{StaticResource PPSnControlFocusedBorderBrush}" BorderThickness="1" Background="{TemplateBinding Background}" Focusable="False">
-								<uiC:PpsDataFilterBox
+							<Border
+								MinWidth="{Binding Path=ActualWidth, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}}"
+								BorderBrush="{StaticResource PPSnControlFocusedBorderBrush}"
+								BorderThickness="1"
+								Background="{TemplateBinding Background}"
+								Focusable="False">
+								<uiC:PpsDataFilterBox  
 									x:Name="PART_SearchFilterControl" 
 									Focusable="False"
                                     Style="{DynamicResource PpsSearchableListBox}" 
