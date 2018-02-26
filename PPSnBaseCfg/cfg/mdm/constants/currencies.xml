@@ -22,6 +22,9 @@
 				<pps:source type="select">
 					<![CDATA[SELECT [Id], [Name], [Iso] FROM dbo.[Waeh] ]]>
 				</pps:source>
+				
+				<pps:attribute name="description" dataType="string">Stammdatentablle der Währungen.</pps:attribute>
+				<pps:attribute name="bi.visible" dataType="bool">true</pps:attribute>
 			</pps:view>
 
 			<!-- Synchronization data -->
