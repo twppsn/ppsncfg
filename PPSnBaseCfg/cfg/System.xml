@@ -72,6 +72,7 @@
 			<pps:field name="sys.Fields.Long" dataType="long" />
 			<pps:field name="sys.Fields.Bit" dataType="bool" />
 			<pps:field name="sys.Fields.Blob" dataType="blob" />
+			<pps:field name="sys.Fields.DateTime" dataType="datetime" />
 
 			<pps:view name="wpf.sync">
 				<pps:source type="view">wpf/GetApplicationFilesSelector</pps:source>
@@ -256,6 +257,10 @@
 						<pps:meta name="nullable">true</pps:meta>
 					</pps:column>
 					<pps:column name="Document" fieldName="sys.Fields.Blob">
+						<pps:meta name="sourceColumn">#</pps:meta>
+						<pps:meta name="nullable">true</pps:meta>
+					</pps:column>
+					<pps:column name="DocumentLastWrite" fieldName="sys.Fields.DateTime">
 						<pps:meta name="sourceColumn">#</pps:meta>
 						<pps:meta name="nullable">true</pps:meta>
 					</pps:column>

@@ -28,19 +28,26 @@ function RegisterConstant(table)
 
 				local args = {
 					upsert = "dbo.ObjT",
-					columnList = { "ObjKId", "ObjRId", "Key", "Class", "UserId" },
+					columnList = { "ObjKId", "ObjRId", "Key", "Class", "Value", "UserId" },
 					on = { "ObjKId", "ObjRId", "Key", "Class", "UserId" },
-					{
+					[1]= {
 						ObjKId = objData.Id,
 						Key = "Name",
 						Class = 0,
 						Value = table.Name,
 						UserId = 0
+					},
+					[2]= {
+						ObjKId = objData.Id,
+						Key = "Class",
+						Class = 0,
+						Value = "Einstellungen",
+						UserId = 0
 					}
 				};
 
 				if table.Comment then
-					args[2] = {
+					args[3] = {
 						ObjKId = objData.Id,
 						Key = "Comment",
 						Class = 0,

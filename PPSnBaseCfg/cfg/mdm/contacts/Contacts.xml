@@ -55,7 +55,9 @@
 
 			<!-- customer fields -->
 			<pps:field name="dbo.Kund.Id" />
-			<pps:field name="dbo.Kund.KtktId" />
+			<pps:field name="dbo.Kund.KtktId">
+				<pps:attribute name="refTable">KtKt</pps:attribute>
+			</pps:field>
 			<pps:field name="dbo.Kund.LiefNr" displayName="eigene Lief.-Nr." />
 			<pps:field name="dbo.Kund.Inaktiv" displayName="Inaktiv" />
 			<pps:field name="dbo.Kund.Abc" displayName="ABC-Klass." />
@@ -65,7 +67,9 @@
 
 			<!-- supplier fields -->
 			<pps:field name="dbo.Lief.Id" />
-			<pps:field name="dbo.Lief.KtktId" />
+			<pps:field name="dbo.Lief.KtktId">
+				<pps:attribute name="refTable">KtKt</pps:attribute>
+			</pps:field>
 			<pps:field name="dbo.Lief.KundNr" displayName="eigene Kund.-Nr." />
 			<pps:field name="dbo.Lief.Inaktiv" displayName="Inaktiv" />
 			<pps:field name="dbo.Lief.Abc" displayName="ABC-Klass." />
@@ -75,7 +79,9 @@
 
 			<!-- employee fileds -->
 			<pps:field name="dbo.Pers.Id" />
-			<pps:field name="dbo.Pers.KtktId" />
+			<pps:field name="dbo.Pers.KtktId">
+				<pps:attribute name="refTable">KtKt</pps:attribute>
+			</pps:field>
 			<pps:field name="dbo.Pers.Tel" displayName="Telefon" />
 			<pps:field name="dbo.Pers.Fax" displayName="Fax" />
 			<pps:field name="dbo.Pers.Mobil" displayName="Mobil" />
@@ -145,7 +151,7 @@
 					<pps:column name="ObjkId" fieldName="dbo.Objk.Id" />
 					<pps:column name="Name" fieldName="dbo.Ktkt.Name" />
 				</pps:table>
-
+				
 				<pps:table name="Vika">
 					<pps:meta name="syncType">ChangeTracking: dbo.Vika</pps:meta>
 
@@ -161,6 +167,14 @@
 					<pps:column name="Geschl" fieldName="dbo.Vika.Geschl" />
 					<pps:column name="Funktion" fieldName="dbo.Vika.Funktion" />
 					<pps:column name="Brief" fieldName="dbo.Vika.Brief" />
+				</pps:table>
+			
+				<pps:table name="Pers">
+					<pps:meta name="syncType">ChangeTracking: dbo.Pers</pps:meta>
+					
+					<pps:column name="Id" fieldName="dbo.Pers.Id" isPrimary="true" />
+					<pps:relation name="KtktId" fieldName="dbo.Pers.KtktId" relationName="PersKtkt" parentTable="Ktkt" parentColumn="Id" parentType="Root" />
+					<pps:column name="Mail" fieldName="dbo.Pers.Mail" />
 				</pps:table>
 			</pps:dataset>
 
@@ -306,14 +320,14 @@
 				</pps:order>
 			</pps:view>
 
-			<pps:action name="contactNew" displayName="Neuer Kontakt" displayImage="filePlus" priority="100">
+			<!--<pps:action name="contactNew" displayName="Neuer Kontakt" displayImage="filePlus" priority="100">
 				<pps:condition><![CDATA[ return CurrentView == Views.crmContacts; ]]></pps:condition>
 				<pps:code><![CDATA[ Window:LoadMask{ createNew = 'crmContacts' }; ]]></pps:code>
 			</pps:action>
 			<pps:action name="contactOpen" displayName="Bearbeiten" displayImage="edit" priority="200">
 				<pps:condition><![CDATA[ return CurrentItem ~= nil and CurrentItem.Typ == "crmContacts" ]]></pps:condition>
 				<pps:code><![CDATA[ Window:LoadMask{ object = GetObject(CurrentItem.Id) }; ]]> </pps:code>
-			</pps:action>
+			</pps:action>-->
 		</pps:wpf>
 
 		<pps:document name="crmContacts" dataset="contactsDataSet" displayname="Contacts" forceNextNumber="true">

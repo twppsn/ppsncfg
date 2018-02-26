@@ -74,6 +74,9 @@
     <None Include="$(MSBuildThisFileDirectory)cfg\mdm\constants\Wpf\countries.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="$(MSBuildThisFileDirectory)cfg\mdm\constants\Wpf\currencies.lua">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Include="$(MSBuildThisFileDirectory)cfg\mdm\contacts\contactsLocal.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
