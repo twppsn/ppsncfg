@@ -28,6 +28,7 @@
     <NonTransactedFileStreamAccess>READ_ONLY</NonTransactedFileStreamAccess>
     <IsChangeTrackingOn>True</IsChangeTrackingOn>
     <ChangeTrackingRetentionPeriod>30</ChangeTrackingRetentionPeriod>
+    <DefaultFileStreamFilegroup>MainFileStream</DefaultFileStreamFilegroup>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\Release\</OutputPath>
@@ -103,6 +104,7 @@
     <Build Include="Tables\dbo\Lief.sql" />
     <Build Include="Tables\dbo\Kund.sql" />
     <Build Include="Stuff\ObjectRevisions.sql" />
+    <Build Include="Database\FileStreamGroup_1.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="PPSnMaster.refactorlog" />
