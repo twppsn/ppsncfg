@@ -128,18 +128,18 @@
 					<![CDATA[SELECT [Name],[Titel],[Tel],[Fax],[Mobil],[Mail],[Std],[Geschl],[Funktion],[Brief],[Postfach],[Zusatz],[Strasse],[Ort],[Region],[Plz],[Adresse] FROM [dbo].[Vika]]]>
 				</pps:source>
 
-				<pps:attribute name="description" dataType="string">Stammdatentablle der Visitenkarten.</pps:attribute>
-				<pps:attribute name="bi.visible" dataType="bool">true</pps:attribute>
+				<pps:attribute name="description">Stammdatentabelle der Visitenkarten.</pps:attribute>
+				<pps:attribute name="bi.visible">true</pps:attribute>
 			</pps:view>
 
 			<!--  Server Site view -->
-			<pps:view name="masterData.Ktkt" displayName="Kontakte">
+			<pps:view name="sds.Ktkt" displayName="Kontakte">
 				<pps:source type="select">
 					<![CDATA[SELECT [Id], [Name] FROM [dbo].[Ktkt]]]>
 				</pps:source>
 
-				<pps:attribute name="description" dataType="string">Stammdatentablle der Kontakte.</pps:attribute>
-				<pps:attribute name="bi.visible" dataType="bool">true</pps:attribute>
+				<pps:attribute name="description">Stammdatentabelle der Kontakte.</pps:attribute>
+				<pps:attribute name="bi.visible">true</pps:attribute>
 			</pps:view>
 
 			<!-- readonly data -->

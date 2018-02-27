@@ -26,8 +26,8 @@
 					<![CDATA[SELECT [Id], [Name], [Iso] FROM dbo.[Land] ]]>
 				</pps:source>
 				
-				<pps:attribute name="description" dataType="string">Stammdatentablle der Länder.</pps:attribute>
-				<pps:attribute name="bi.visible" dataType="bool">true</pps:attribute>
+				<pps:attribute name="description">Stammdatentabelle der Länder.</pps:attribute>
+				<pps:attribute name="bi.visible">true</pps:attribute>
 			</pps:view>
 			
 			<!-- Synchronization data -->
