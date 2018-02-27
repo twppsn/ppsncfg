@@ -120,6 +120,7 @@
   <ItemGroup>
     <None Include="Database\SystemUser.sql" />
     <PostDeploy Include="PostScript.sql" />
+    <None Include="Database\TwUsers.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Database\KonstData.sql" />
