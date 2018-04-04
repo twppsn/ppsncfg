@@ -170,4 +170,48 @@
         </Setter>
     </Style>
 
+    <!-- PpsCommandbarControl -->
+    <Style TargetType="{x:Type uiC:PpsCommandbarControl}" >
+		<Setter Property="ItemsPanel">
+			<Setter.Value>
+				<ItemsPanelTemplate>
+					<StackPanel Orientation="Horizontal"/>
+				</ItemsPanelTemplate>
+			</Setter.Value>
+		</Setter>
+		<Style.Resources>
+			<ui:PpsImageResourceKeyConverter x:Key="imageResourceKeyConverter"/>
+			<DataTemplate x:Key="PpsUICommandButtonCircleTemplate">
+				<Button Style="{DynamicResource PPSnCircleButtonStyle}" 
+						Command="{Binding Command}"
+						Content="{Binding DisplayText}" 
+						ToolTip="{Binding Description}"
+						Tag="{Binding Image, Mode=OneTime, Converter={StaticResource imageResourceKeyConverter}}" 
+						Margin="0,0,16,0"/>
+			</DataTemplate>
+			<DataTemplate x:Key="PpsUICommandbarSeparatorTemplate">
+				<Grid Width="16"/>
+			</DataTemplate>
+
+			<!-- Default Templates -->
+			<DataTemplate x:Key="PpsUICommandbarDefaultButtonCircleTemplate">
+				<Button Style="{DynamicResource PPSnCircleButtonStyle}" 
+						Command="{Binding Command}"
+                        Background="Red"
+						Content="{Binding DisplayText}" 
+						ToolTip="{Binding Description}"
+						Tag="{Binding Image, Mode=OneTime, Converter={StaticResource imageResourceKeyConverter}}" 
+						Margin="0,0,16,0"/>
+			</DataTemplate>
+			<DataTemplate x:Key="PpsUICommandbarDefaultButtonRectangleTemplate">
+				<Button Style="{DynamicResource PPSnButtonStyle}" 
+						Command="{Binding Command}"
+						Content="{Binding DisplayText}" 
+						ToolTip="{Binding Description}"
+						Tag="{Binding Image, Mode=OneTime, Converter={StaticResource imageResourceKeyConverter}}" 
+						Margin="0,0,16,0"/>
+			</DataTemplate>
+		</Style.Resources>
+	</Style>
+
 </ResourceDictionary>
