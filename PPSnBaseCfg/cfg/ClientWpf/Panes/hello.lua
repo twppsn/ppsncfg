@@ -17,14 +17,7 @@ local function waitTaskAsync(progressCreate)
 	end;
 	
 end;
-		
-helloWorld = command(
-	function (arg) : void
-        data.Name = "Test {0}":Format(clickCount);
-		bindTitle = "Hello World clicked {0} times.":Format(clickCount);
-		clickCount = clickCount + 1;
-	end
-);
+
 
 blockPane = command(
 	function (arg) : void
@@ -50,7 +43,11 @@ local ctrl = UI.Grid {
 
 	UI.Button {
 		Margin = "12",
-		Command = helloWorld,
+		Click = function (sender, e) : void
+			data.Name = "Test {0}":Format(clickCount);
+			bindTitle = "Hello World clicked {0} times.":Format(clickCount);
+			clickCount = clickCount + 1;
+		end,
 		"Hello"
 	},
 

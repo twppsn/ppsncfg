@@ -1,4 +1,4 @@
-﻿print("Hallo Test Code.")
+﻿ print("Test Code loaded.")
 
 function throwme()
 	error(clr.System.Exception("Test"));
@@ -17,4 +17,14 @@ function throwmemax()
 	end;
 
 	error(ex);
+end;
+
+function IncrementHelloIndex() : int 
+	if helloIndex == nil then
+		helloIndex = 1;
+	else
+		helloIndex = helloIndex  + 1;
+	end;
+
+	return helloIndex;
 end;
