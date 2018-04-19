@@ -2,7 +2,7 @@
 						 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 						 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
 						 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-						 xmlns:ui="clr-namespace:TecWare.PPSn.UI;assembly=PPSn.Desktop.UI"
+						 xmlns:ui="http://tecware-gmbh.de/ppsn/wpf/2015"
 						 mc:Ignorable="d" 
 						 Title="{Binding bindTitle}"
 						 d:DesignHeight="300" d:DesignWidth="300">
