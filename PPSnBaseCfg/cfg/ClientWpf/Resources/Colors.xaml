@@ -24,32 +24,32 @@
 
 	<SolidColorBrush x:Key="PPSnSeparatorBrush">
 		<SolidColorBrush.Color>
-			<ui:TransparencyResultColor BackColor="{StaticResource PPSnDesktopColor}" TransparentColor="{StaticResource PPSnAccentColor}" Transpareny=".15" />
+			<ui:TransparencyResultColor BackColor="{StaticResource PPSnDesktopColor}" TransparentColor="{StaticResource PPSnAccentColor}" Transparency=".15" />
 		</SolidColorBrush.Color>
 	</SolidColorBrush>
 
 	<SolidColorBrush x:Key="PPSnAlternation0Brush">
 		<SolidColorBrush.Color>
-			<ui:TransparencyResultColor BackColor="{StaticResource PPSnDesktopColor}" TransparentColor="{StaticResource PPSnAccentColor}" Transpareny="{StaticResource Alternation0Transpareny}" />
+			<ui:TransparencyResultColor BackColor="{StaticResource PPSnDesktopColor}" TransparentColor="{StaticResource PPSnAccentColor}" Transparency="{StaticResource Alternation0Transpareny}" />
 		</SolidColorBrush.Color>
 	</SolidColorBrush>
 	<SolidColorBrush x:Key="PPSnAlternation1Brush">
 		<SolidColorBrush.Color>
-			<ui:TransparencyResultColor BackColor="{StaticResource PPSnDesktopColor}" TransparentColor="{StaticResource PPSnAccentColor}" Transpareny="{StaticResource Alternation1Transpareny}" />
+			<ui:TransparencyResultColor BackColor="{StaticResource PPSnDesktopColor}" TransparentColor="{StaticResource PPSnAccentColor}" Transparency="{StaticResource Alternation1Transpareny}" />
 		</SolidColorBrush.Color>
 	</SolidColorBrush>
 
 	<SolidColorBrush x:Key="PPSnControlBackgroundBrush" Color="{StaticResource PPSnControlBackgroundColor}"/>
 	<SolidColorBrush x:Key="PPSnControlNormalBorderBrush">
 		<SolidColorBrush.Color>
-			<ui:TransparencyResultColor BackColor="{StaticResource PPSnDesktopColor}" TransparentColor="{StaticResource PPSnAccentColor}" Transpareny=".15" />
+			<ui:TransparencyResultColor BackColor="{StaticResource PPSnDesktopColor}" TransparentColor="{StaticResource PPSnAccentColor}" Transparency=".15" />
 		</SolidColorBrush.Color>
 	</SolidColorBrush>
 	<SolidColorBrush x:Key="PPSnControlFocusedBorderBrush" Color="{StaticResource PPSnMarkerColor}"/>
 
 	<SolidColorBrush x:Key="PPSnMouseOverBrush">
 		<SolidColorBrush.Color>
-			<ui:TransparencyResultColor BackColor="{StaticResource PPSnDesktopColor}" TransparentColor="{StaticResource PPSnAccentColor}" Transpareny=".15" />
+			<ui:TransparencyResultColor BackColor="{StaticResource PPSnDesktopColor}" TransparentColor="{StaticResource PPSnAccentColor}" Transparency=".15" />
 		</SolidColorBrush.Color>
 	</SolidColorBrush>
 
@@ -63,7 +63,7 @@
 
 	<SolidColorBrush x:Key="PPSnSideBarBackgroundBrush">
 		<SolidColorBrush.Color>
-			<ui:TransparencyResultColor BackColor="{StaticResource PPSnDesktopColor}" TransparentColor="{StaticResource PPSnAccentColor}" Transpareny="{StaticResource SideBarTranspareny}" />
+			<ui:TransparencyResultColor BackColor="{StaticResource PPSnDesktopColor}" TransparentColor="{StaticResource PPSnAccentColor}" Transparency="{StaticResource SideBarTranspareny}" />
 		</SolidColorBrush.Color>
 	</SolidColorBrush>
 
