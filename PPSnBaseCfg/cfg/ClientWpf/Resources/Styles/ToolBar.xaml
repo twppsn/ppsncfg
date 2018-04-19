@@ -108,14 +108,13 @@
 
 	<Style x:Key="PaneToolBarStyle" TargetType="{x:Type ToolBar}">
         <Style.Resources>
-			<ui:PpsImageResourceKeyConverter x:Key="imageResourceKeyConverter"/>
 			<uiC:PpsToolbarDataTemplateSelector x:Key="toolbarDataTemplateSelector"/>
 			<DataTemplate x:Key="{x:Type ui:PpsUICommandButton}">
                 <Button Style="{StaticResource ToolBarButtonStyle}" ToolTip="{Binding Description}" Command="{Binding Command}">
                     <StackPanel Orientation="Horizontal">
 						<Viewbox Width="22" Height="22" Margin="0,0,3,0" HorizontalAlignment="Center">
 							<Canvas Width="24" Height="24">
-								<Path Data="{Binding Image, Mode=OneTime, Converter={StaticResource imageResourceKeyConverter}}"
+								<Path Data="{Binding Image, Mode=OneTime, Converter={x:Static ui:PpsConverter.ImageToPathGeometry}}"
 									  Fill="{StaticResource PPSnActionButtonBrush}"/>
 							</Canvas>
 						</Viewbox>
@@ -130,7 +129,7 @@
 					<StackPanel Orientation="Horizontal">
 						<Viewbox Width="22" Height="22" Margin="0,0,3,0" HorizontalAlignment="Center">
 							<Canvas Width="24" Height="24">
-								<Path Data="{Binding Image, Mode=OneTime, Converter={StaticResource imageResourceKeyConverter}}"
+								<Path Data="{Binding Image, Mode=OneTime, Converter={x:Static ui:PpsConverter.ImageToPathGeometry}}"
 									  Fill="{StaticResource PPSnActionButtonBrush}"/>
 							</Canvas>
 						</Viewbox>
@@ -180,13 +179,12 @@
 			</Setter.Value>
 		</Setter>
 		<Style.Resources>
-			<ui:PpsImageResourceKeyConverter x:Key="imageResourceKeyConverter"/>
 			<DataTemplate x:Key="PpsUICommandButtonCircleTemplate">
 				<Button Style="{DynamicResource PPSnCircleButtonStyle}" 
 						Command="{Binding Command}"
 						Content="{Binding DisplayText}" 
 						ToolTip="{Binding Description}"
-						Tag="{Binding Image, Mode=OneTime, Converter={StaticResource imageResourceKeyConverter}}" 
+						Tag="{Binding Image, Mode=OneTime, Converter={x:Static ui:PpsConverter.ImageToPathGeometry}}" 
 						Margin="0,0,16,0"/>
 			</DataTemplate>
 			<DataTemplate x:Key="PpsUICommandbarSeparatorTemplate">
@@ -200,7 +198,7 @@
                         Background="Red"
 						Content="{Binding DisplayText}" 
 						ToolTip="{Binding Description}"
-						Tag="{Binding Image, Mode=OneTime, Converter={StaticResource imageResourceKeyConverter}}" 
+						Tag="{Binding Image, Mode=OneTime, Converter={x:Static ui:PpsConverter.ImageToPathGeometry}}" 
 						Margin="0,0,16,0"/>
 			</DataTemplate>
 			<DataTemplate x:Key="PpsUICommandbarDefaultButtonRectangleTemplate">
@@ -208,7 +206,7 @@
 						Command="{Binding Command}"
 						Content="{Binding DisplayText}" 
 						ToolTip="{Binding Description}"
-						Tag="{Binding Image, Mode=OneTime, Converter={StaticResource imageResourceKeyConverter}}" 
+						Tag="{Binding Image, Mode=OneTime, Converter={x:Static ui:PpsConverter.ImageToPathGeometry}}" 
 						Margin="0,0,16,0"/>
 			</DataTemplate>
 		</Style.Resources>

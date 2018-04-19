@@ -8,8 +8,6 @@
 		<ResourceDictionary Source="../Colors.xaml" />
 	</ResourceDictionary.MergedDictionaries>
 
-	<ui:PpsMultiLineStringConverter x:Key="MlStringConverter"/>
-
 	<Style TargetType="ListBoxItem" x:Key="PpsDefaultTouchableItemContainerStyle">
 		<Setter Property="Focusable" Value="False" />
 		<Setter Property="Template">
@@ -273,7 +271,7 @@
 									TextWrapping="NoWrap"
 									TextTrimming="CharacterEllipsis"
 									SearchText="{Binding Path=FilterText, Mode=OneWay, RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type uiC:PpsDataFilterBox}}}"
-									BaseText="{Binding Name, Converter={StaticResource MlStringConverter}}">
+									BaseText="{Binding Name, Converter={x:Static ui:PpsConverter.MultiToSingleLine}}">
 								</uiC:PpsDataSelectorItemTextBlock>
 							</Grid>
 						</DataTemplate>
