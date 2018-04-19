@@ -5,6 +5,15 @@ clickCount = 1;
 		
 bindTitle = "Hello {0}":Format(Arguments.index);
 
+local t = {
+	{ Id = 2, Text = "Hallo 2" },
+	{ Id = 3, Text = "Hallo 3" },
+	{ Id = 4, Text = "Hallo 4" },
+	{ Id = 5, Text = "Hallo 5" }
+};
+
+Liste = rawarray(t);
+
 local function waitTaskAsync(progressCreate)
 	
 	do (p = progressCreate())
@@ -65,6 +74,16 @@ local ctrl = UI.Grid {
 	UI.ContentPresenter {
 		["Grid.Row"] = 2,
 		Content = UI.Binding("SubChild.Control")
+	},
+	UI.ListBox {
+		["Grid.Row"] = 3,
+		ItemsSource = UI.Binding("Liste"),
+		ItemTemplate = UI.DataTemplate {
+			UI.TextBlock {
+				UI.Run { Text = UI.Binding("Id") },
+				UI.Run { Text = UI.Binding("Text") }
+			}
+		}
 	}
 };
 

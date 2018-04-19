@@ -1,9 +1,7 @@
 ﻿
 -- Global Properties --
-Title = "Neuer Kontakt";
 
-
-
+--[===[
 
 
 --ViewAdre = getView(Data:Head:First:AdreHead);
@@ -106,37 +104,158 @@ testCommand = command(
     end
 );]]
 
+-- todo: Deaktivieren auf Toolbar
+
 -- UI Creation --
-local ctrl = UI.Grid {
-	RowDefinitions = { "*", "*" },
-	ColumnDefinitions = { "*" },
+do
+	local scope =  UI.Scope(Data);
 
-	--[[UI.ControlPanel = {
-		ColumnCount = 2,
+	local ctrl = UI.SideBar() {
+		UI.SideBarPanelFilter {
+			Header = "Kopfdaten"
+		},
 
-		UI.DataControl {
-			FieldName = "Name"
+		Content = UI.StackSection {
+			UI.StackSectionItem {
+				Header = "Kopfdaten",
+
+				Content = UI.DataFields(Data.Head) {
+					ColumnCount = 2,
+					LabelWidth = 200.0,
+	
+					UI.DataField("Name") {},
+					UI.DataField("KurzName") {},
+					UI.DataField("WaehId") {}
+
+					-- Auswahl: Lieferant, Kunde, Spedition, Personal
+
+					--UI.DataFieldAddress() {}
+					--UI.DataFieldCoord("KoordL", "KoordB") {}
+				}
+			},
+			UI.StackSectionItem {
+				Header = "Indentifizierung",
+
+				Content = UI.DataFields(Data.Head) {
+					ColumnCount = 2,
+					LabelWidth = 200.0,
+				
+					UI.DataField("StIdentNr") {},
+					UI.DataField("SteuerNr") {},
+					UI.DataField("UstIdNr") {},
+
+					UI.DataField("Iban") {},
+					UI.DataField("Bic") {}
+				}
+			},
+			UI.StackSectionItem {
+				Header = "Lieferung",
+
+				Content = UI.DataFields(Data.Lief) {
+					ColumnCount = 2,
+					LabelWidth = 200.0,
+				
+					UI.DataField("KundNr") {},
+					UI.DataField("Abc") {}
+					--UI.DataField("RAdresse") {}
+
+					-- todo: ZaziId, VartId, PstgId
+				}
+			},
+			UI.StackSectionItem {
+				Header = "Versand",
+
+				Content = UI.DataFields(Data.Kund) {
+					ColumnCount = 2,
+					LabelWidth = 200.0,
+				
+					UI.DataField("LiefNr") {},
+					UI.DataField("Abc") {}
+					--UI.DataField("VAdresse") {}
+
+					-- todo: ZaziId, VartId, PstgId
+				}
+			},
+			UI.StackSectionItem {
+				Header = "Personal",
+
+				Content = UI.DataFields(Data.Pers) {
+					ColumnCount = 2,
+					LabelWidth = 200.0,
+				
+					UI.DataField("Geburt") {},
+					UI.DataField("Seit") {},
+					UI.DataField("Bis") {},
+					UI.DataField("Rfid") {},
+					UI.DataField("VersNr") {},
+					UI.DataField("FamStand") {},
+					UI.DataField("Stkl") {},
+					UI.DataField("Kasse") {},
+					UI.DataField("KindFrei") {},
+					UI.DataField("Staat") {}
+				}
+			}
 		},
-		UI.DataControl {
-			FieldName = "KurzName"
-		},
-		UI.DataControl {
-			FieldName = "SteuerNr"
+
+		UI.SideBarGroup {
+			Header = "Visitenkarten",
+			
+			ItemsSource = UI.Binding("Vika"),
+			ItemTemplate = UI:CreateDataTemplate(UI.SideBarPanel {
+				Header = UI.Binding("Name"),
+				Content = UI.DataFields(Data.Vika) {
+
+					UI.DataField("Name") {},
+					UI.DataField("Vorname") {},
+					UI.DataField("Titel") {},
+					UI.DataField("Tel") {},
+					UI.DataField("Fax") {},
+					UI.DataField("Mail") {},
+					UI.DataField("Mobil") {},
+					UI.DataField("Std") {},
+					UI.DataField("Geschl") {},
+					UI.DataField("Funktion") {},
+					UI.DataField("Brief") {},
+					UI.DataField("Postfach") {},
+					UI.DataField("Zusatz") {},
+					UI.DataField("Strasse") {},
+					UI.DataField("Ort") {},
+					UI.DataField("Region") {},
+					UI.DataField("Plz") {},
+					UI.DataField("Adresse") {},
+					UI.DataField("PictureId") {}
+				}
+			}),
+			Content = UI.ListBox {  -- todo: suche
+				ItemsSource = UI.Binding("Vika"),
+				Width = 200,
+				Height = 200
+			}
 		}
-	},]]
+	};
+	
+	scope(); -- finish scope
 
-	UI.Label {
-		Content = "Hallo Welt"
-	},
-
-	UI.TabControl {
-		["Grid.Row"] = 1
+	setControl {
+		Title = UI.Binding("Title"),
+		SubTitle = "Kontakt",
+		ctrl
 	}
-};
+end;
 
+--[[
+<pps:column name="WaehId" fieldName="dbo.Ktkt.WaehId" />
 
-setControl {
-	Title = UI.Binding("Title"),
-	SubTitle = "Kontakt",
-	ctrl
-}
+<pps:column name="LandId" fieldName="dbo.Ktkt.LandId" />
+<pps:column name="Postfach" fieldName="dbo.Ktkt.Postfach" />
+<pps:column name="Zusatz" fieldName="dbo.Ktkt.Zusatz" />
+<pps:column name="Strasse" fieldName="dbo.Ktkt.Strasse" />
+<pps:column name="Ort" fieldName="dbo.Ktkt.Ort" />
+<pps:column name="Region" fieldName="dbo.Ktkt.Region" />
+<pps:column name="Plz" fieldName="dbo.Ktkt.Plz" />
+<pps:column name="Adresse" fieldName="dbo.Ktkt.Adresse" />
+				
+<pps:column name="KoordL" fieldName="dbo.Ktkt.KoordL" />
+<pps:column name="KoordB" fieldName="dbo.Ktkt.KoordB" />
+
+]===]

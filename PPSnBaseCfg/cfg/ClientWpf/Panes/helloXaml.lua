@@ -13,6 +13,15 @@ __metatable = {
 
 bindTitle = "Hello {0}":Format(Arguments.index);
 
+local t = {
+	{ Id = 2, Text = "Hallo 2" },
+	{ Id = 3, Text = "Hallo 3" },
+	{ Id = 4, Text = "Hallo 4" },
+	{ Id = 5, Text = "Hallo 5" }
+};
+
+Liste = rawarray(t);
+
 function HelloClick(sender, e) : void
 	bindTitle = "Hello World clicked {0} times.":Format(clickCount);
 	clickCount = clickCount + 1;

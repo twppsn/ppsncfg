@@ -2,24 +2,76 @@
 						 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 						 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
 						 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-						 xmlns:ui="clr-namespace:TecWare.PPSn.UI;assembly=PPSn.Desktop.UI"
-						 xmlns:uiC="clr-namespace:TecWare.PPSn.Controls;assembly=PPSn.Desktop.UI"
+						 xmlns:ui="http://tecare-gmbh.de/ppsn/wpf/2015"
 						 mc:Ignorable="d" 
 						 d:DesignHeight="300" d:DesignWidth="800"
-						 SubTitle="Kontakt"
-						 Title="{Binding Data.Head.First.Name}">
+						 Title="Kontakt">
 	<x:Code>
-		<![CDATA[
-        self:require 'contacts.lua';
-		]]>
+		<x:Uri>contacts.lua</x:Uri>
 	</x:Code>
 
-	<ui:PpsGenericWpfControl.Resources>
-		<ResourceDictionary>
-			<ResourceDictionary.MergedDictionaries>
-				<ResourceDictionary Source="../../../ClientWpf/Default.xaml" />
-			</ResourceDictionary.MergedDictionaries>
+	<ui:PpsGenericWpfControl.SubTitle>
+		<MultiBinding Mode="OneWay" StringFormat="{}{0} - {1}">
+			<Binding Path="Data.Head.First.Nr" Mode="OneWay" />
+			<Binding Path="Data.Head.First.Name" Mode="OneWay" />
+		</MultiBinding>
+	</ui:PpsGenericWpfControl.SubTitle>
 
+	<ui:PpsSideBarControl><!-- todo: Select always one? -->
+		<ui:PpsSideBarControl.Content>
+			<ui:PpsDataFieldPanel ColumnCount="2" LabelWidth="200" DataContext="{Binding Data.Head.First}">
+				<ui:ParserService>
+					<ui:PpsDataTableResolver Name="Head" />
+				</ui:ParserService>
+				<ui:PpsDataField FieldName="Name" />
+				<ui:PpsDataField FieldName="KurzName" />
+				<ui:PpsDataField FieldName="WaehId" />
+			</ui:PpsDataFieldPanel>
+			<!--<ui:PpsStackSectionControl DataContext="{Binding Data.Head.First}">
+				<ui:ParserService>
+					<ui:PpsDataTableResolver Name="Head" />
+				</ui:ParserService>
+				<ui:PpsStackSectionItem Header="Kopfdaten">
+					<ui:PpsDataFieldPanel ColumnCount="2" LabelWidth="200">
+						<ui:PpsDataField FieldName="Name" />
+						<ui:PpsDataField FieldName="KurzName" />
+						<ui:PpsDataField FieldName="WaehId" />
+					</ui:PpsDataFieldPanel>
+				</ui:PpsStackSectionItem>
+				<ui:PpsStackSectionItem Header="Indentifizierung">
+
+				</ui:PpsStackSectionItem>
+				<ui:PpsStackSectionItem Header="Lieferung">
+
+				</ui:PpsStackSectionItem>
+			</ui:PpsStackSectionControl>-->
+		</ui:PpsSideBarControl.Content>
+
+		<ui:PpsSideBarPanelFilter Header="Kopfdaten" />
+		<ui:PpsSideBarGroup Header="Visitenkarten" ItemsSource="{Binding Data.Vika}">
+			<ui:ParserService>
+				<ui:PpsDataTableResolver Name="Vika" />
+			</ui:ParserService>
+			
+			<ui:PpsSideBarGroup.Content>
+				<ListBox ItemsSource="{Binding Data.Vika}" Width="200" Height="200" />
+			</ui:PpsSideBarGroup.Content>
+			
+			<ui:PpsSideBarGroup.ItemTemplate>
+				<DataTemplate>
+					<ui:PpsSideBarPanel Header="{ui:PpsDataFieldBinding Name}">
+						<ui:PpsDataFieldPanel ColumnCount="2" LabelWidth="200">
+							<ui:PpsDataField FieldName="Name" IsReadOnly="true" />
+							<ui:PpsDataField FieldName="Vorname" />
+						</ui:PpsDataFieldPanel>
+					</ui:PpsSideBarPanel>
+				</DataTemplate>
+			</ui:PpsSideBarGroup.ItemTemplate>
+		</ui:PpsSideBarGroup>
+	</ui:PpsSideBarControl>
+	
+	<!--<ui:PpsGenericWpfControl.Resources>
+		<ResourceDictionary>
 			<DataTemplate x:Key="Adre">
 				<Grid>
 					<Grid.ColumnDefinitions>
@@ -150,7 +202,7 @@
 
 		<Label x:Name="lblContactNr" Grid.Column="0" Grid.Row="0" Content="Kontakt-Nr.:" Height="23" VerticalAlignment="Top" />
 		<TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Data.Head.First.ObjkId.Nr}" />
-		<!--<TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Data.Head.First.Nr}" MaxLength="12" Width="100" HorizontalAlignment="Left" Height="23" VerticalAlignment="Top"/>-->
+		--><!--<TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Data.Head.First.Nr}" MaxLength="12" Width="100" HorizontalAlignment="Left" Height="23" VerticalAlignment="Top"/>--><!--
 		<Label Grid.Column="0" Grid.Row="1" Content="{Binding Data.Head.Name.displayName, Mode=OneTime}" ContentStringFormat="{}{0}:" Height="23" VerticalAlignment="Top"/>
 		<TextBox Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" Text="{Binding Data.Head.First.Name}" MaxLength="{Binding Data.Head.Name.MaxLength, Mode=OneTime}" AcceptsReturn="True" TextWrapping="Wrap" 
 				 Height="52" VerticalAlignment="Top"/>
@@ -251,7 +303,7 @@
 			</TabItem>
 		</TabControl>
 
-        <!--<Button Grid.Column="5" Grid.Row="0" Grid.RowSpan="5"  Command="{Binding Path=SetCharmCommand, RelativeSource={RelativeSource AncestorType={x:Type ui:PpsGenericWpfControl}}}" CommandParameter="{Binding}">
+        --><!--<Button Grid.Column="5" Grid.Row="0" Grid.RowSpan="5"  Command="{Binding Path=SetCharmCommand, RelativeSource={RelativeSource AncestorType={x:Type ui:PpsGenericWpfControl}}}" CommandParameter="{Binding}">
 		</Button>-->
 
 		<!--<uiC:PpsPictureControl Grid.Column="0" Grid.Row="0" Grid.RowSpan="4">
@@ -262,13 +314,12 @@
                     </Binding.Converter>
                 </Binding>
             </uiC:PpsPictureControl.PictureSource>
-        </uiC:PpsPictureControl>-->
+        </uiC:PpsPictureControl>--><!--
 
 
 	</Grid>
 
 	<ui:PpsGenericWpfControl.Commands>
 		<ui:PpsUICommandButton Order="100,100" DisplayText="Veröffentlichen" Image="upload" Command="{Binding pushContact}" />
-	</ui:PpsGenericWpfControl.Commands>
-
+	</ui:PpsGenericWpfControl.Commands>-->
 </ui:PpsGenericWpfControl>
