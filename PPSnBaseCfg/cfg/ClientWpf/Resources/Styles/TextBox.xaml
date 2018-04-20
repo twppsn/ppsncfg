@@ -68,12 +68,12 @@
 										  CanContentScroll="{Binding CanContentScroll, ElementName=PART_ContentHost}"
 										  Visibility="Visible"
 										  Padding="{TemplateBinding Padding}" Margin="2,0">
-								<TextBlock
+								<!--<TextBlock
 									Text="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorLevel=1, AncestorType={x:Type TextBox}},
-									Path=(uiC:PpsTemplateTextBoxBehavior.FormattedValue)}"
+									Path=(ui:PpsTemplateTextBoxBehavior.FormattedValue)}"
 									HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 									VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-									TextWrapping="{TemplateBinding TextWrapping}"/>
+									TextWrapping="{TemplateBinding TextWrapping}"/>-->
 							</ScrollViewer>
 						</Grid>
 					</Border>
