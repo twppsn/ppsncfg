@@ -19,23 +19,76 @@
 
 	<ui:PpsSideBarControl><!-- todo: Select always one? -->
 		<ui:PpsSideBarControl.Content>
-			<ui:PpsDataFieldPanel ColumnCount="2" LabelWidth="200" DataContext="{Binding Data.Head.First}">
+			<!--<ui:PpsDataFieldPanel ColumnCount="2" LabelWidth="200" DataContext="{Binding Data.Head.First}">
 				<ui:ParserService>
 					<ui:PpsDataTableResolver Name="Head" />
 				</ui:ParserService>
 				<ui:PpsDataField FieldName="Name" />
 				<ui:PpsDataField FieldName="KurzName" />
 				<ui:PpsDataField FieldName="WaehId" />
-			</ui:PpsDataFieldPanel>
-			<!--<ui:PpsStackSectionControl DataContext="{Binding Data.Head.First}">
+			</ui:PpsDataFieldPanel>-->
+			<ui:PpsStackSectionControl DataContext="{Binding Data.Head.First}">
 				<ui:ParserService>
 					<ui:PpsDataTableResolver Name="Head" />
 				</ui:ParserService>
+				<ui:PpsStackSectionControl.ExpanderTemplate>
+				<ControlTemplate TargetType="{x:Type ui:PpsStackSectionItem}">
+					<Grid>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto" />
+							<RowDefinition x:Name="ContentRow"/>
+						</Grid.RowDefinitions>
+						<Grid Grid.Row="0">
+							<ToggleButton
+								Style="{StaticResource PPSnSelectionToggleButtonStyle}"
+								IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}">
+								<Grid>
+									<Grid.RowDefinitions>
+										<RowDefinition/>
+										<RowDefinition/>
+									</Grid.RowDefinitions>
+									<ContentPresenter Grid.Row="0" HorizontalAlignment="Left" ContentSource="Header"/>
+									<ContentPresenter Grid.Row="1" HorizontalAlignment="Right" VerticalAlignment="Bottom" ContentSource="Subheader"/>
+								</Grid>
+							</ToggleButton>
+						</Grid>
+						<Border x:Name="Content"
+										Grid.Row="1"
+										BorderThickness="1,0,1,1"
+										CornerRadius="0,0,2,2">
+							<ContentPresenter Margin="4"/>
+						</Border>
+						<Grid.Style>
+							<Style TargetType="{x:Type Grid}">
+								<Setter Property="Visibility" Value="Visible"/>
+								<Style.Triggers>
+									<DataTrigger Binding="{Binding Content.IsEmpty, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Value="True">
+										<Setter Property="Visibility" Value="Collapsed"/>
+									</DataTrigger>
+								</Style.Triggers>
+							</Style>
+						</Grid.Style>
+					</Grid>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsExpanded" Value="False">
+							<Setter TargetName="ContentRow" Property="Height" Value="0" />
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</ui:PpsStackSectionControl.ExpanderTemplate>
 				<ui:PpsStackSectionItem Header="Kopfdaten">
 					<ui:PpsDataFieldPanel ColumnCount="2" LabelWidth="200">
 						<ui:PpsDataField FieldName="Name" />
 						<ui:PpsDataField FieldName="KurzName" />
 						<ui:PpsDataField FieldName="WaehId" />
+						<ui:PpsTextBox ui:PpsDataFieldPanel.GridLines="3" ui:PpsDataFieldPanel.Label="InputType = 0" InputType="0"/>
+						<ui:PpsTextBox  ui:PpsDataFieldPanel.Label="InputType = 1" InputType="1"/>
+						<ui:PpsTextBox AllowedLineCount="3" ui:PpsDataFieldPanel.GridLines="3" ui:PpsDataFieldPanel.Label="InputType = 2" InputType="2"/>
+						<ui:PpsTextBox  ui:PpsDataFieldPanel.Label="InputType = 3" InputType="3"/>
+						<ui:PpsTextBox  ui:PpsDataFieldPanel.Label="InputType = 4" InputType="4"/>
+						<ui:PpsTextBox  ui:PpsDataFieldPanel.Label="InputType = 5" InputType="5"/>
+						<ui:PpsTextBox  ui:PpsDataFieldPanel.Label="InputType = 6" InputType="6"/>
+						<ui:PpsTextBox  ui:PpsDataFieldPanel.Label="InputType = 7" InputType="7"/>
 					</ui:PpsDataFieldPanel>
 				</ui:PpsStackSectionItem>
 				<ui:PpsStackSectionItem Header="Indentifizierung">
@@ -44,7 +97,7 @@
 				<ui:PpsStackSectionItem Header="Lieferung">
 
 				</ui:PpsStackSectionItem>
-			</ui:PpsStackSectionControl>-->
+			</ui:PpsStackSectionControl>
 		</ui:PpsSideBarControl.Content>
 
 		<ui:PpsSideBarPanelFilter Header="Kopfdaten" />
