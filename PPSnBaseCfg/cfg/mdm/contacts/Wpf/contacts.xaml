@@ -76,7 +76,7 @@
 						<ui:PpsDataField FieldName="WaehId" />
 					</ui:PpsDataFieldPanel>
 				</ui:PpsStackSectionItem>
-				<ui:PpsStackSectionItem Header="Indentifizierung">
+				<ui:PpsStackSectionItem Header="Identifizierung">
 
 				</ui:PpsStackSectionItem>
 				<ui:PpsStackSectionItem Header="Lieferung">
@@ -86,6 +86,14 @@
 		</ui:PpsSideBarControl.Content>
 
 		<ui:PpsSideBarPanelFilter Header="Kopfdaten" />
+
+		<Separator />
+		<ui:PpsSideBarPanelFilter Header="Identifizierung" />
+
+		<Separator />
+		<ui:PpsSideBarPanelFilter Header="Lieferung" />
+
+		<Separator />
 		<ui:PpsSideBarGroup Header="Visitenkarten" ItemsSource="{Binding Data.Vika}">
 			<ui:ParserService>
 				<ui:PpsDataTableResolver Name="Vika" />
@@ -106,6 +114,8 @@
 				</DataTemplate>
 			</ui:PpsSideBarGroup.ItemTemplate>
 		</ui:PpsSideBarGroup>
+
+
 	</ui:PpsSideBarControl>
 
 	<!--<ui:PpsGenericWpfControl.Resources>
