@@ -16,3 +16,26 @@ dbo.Geschlecht = {
 	}
 	
 };
+
+-- ----------------------------------------------------------------------------
+--
+
+function FieldFactory:CreateObjkNr(context, properties)
+	local txt = self:CreateTextField(
+		self:CreateFieldInfo(
+			context,
+			"ObjkId.Nr",
+			clr.System.String,
+			properties.BindingPath or "ObjkId.Nr",
+			{
+				IsReadOnly = true,
+				Width = 10
+			}
+		)
+	);
+
+	txt.Focusable = false;
+	txt["PpsDataFieldPanel.Label"] = (properties.Label or "Nr") .. ":";
+
+	return txt;
+end;
