@@ -34,7 +34,7 @@ function FieldFactory:CreateObjkNr(context, properties)
 		)
 	);
 
-	txt.Focusable = false;
+	txt.IsTabStop = false;
 	txt["PpsDataFieldPanel.Label"] = (properties.Label or "Nr") .. ":";
 
 	return txt;
