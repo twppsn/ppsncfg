@@ -44,10 +44,10 @@
         </Setter>
     </Style>
 
-    <Style x:Key="ToolBarSplitButtonStyle" TargetType="{x:Type uiC:SplitButton}" BasedOn="{StaticResource ToolBarButtonStyle}">
+    <Style x:Key="ToolBarSplitButtonStyle" TargetType="{x:Type uiC:PpsSplitButton}" BasedOn="{StaticResource ToolBarButtonStyle}">
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="{x:Type uiC:SplitButton}">
+                <ControlTemplate TargetType="{x:Type uiC:PpsSplitButton}">
                     <Grid x:Name="layoutGrid">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"/>
@@ -123,7 +123,7 @@
                 </Button>
             </DataTemplate>
 			<DataTemplate x:Key="{x:Type ui:PpsUISplitCommandButton}">
-                <uiC:SplitButton Style="{StaticResource ToolBarSplitButtonStyle}" ToolTip="{Binding Description}" Command="{Binding Command}"
+                <uiC:PpsSplitButton Style="{StaticResource ToolBarSplitButtonStyle}" ToolTip="{Binding Description}" Command="{Binding Command}"
 								 Popup="{Binding Popup}"
 								 ContextMenu="{Binding ContextMenu}">
 					<StackPanel Orientation="Horizontal">
@@ -135,7 +135,7 @@
 						</Viewbox>
 						<TextBlock Text="{Binding DisplayText}" VerticalAlignment="Center" Foreground="{StaticResource PPSnWindowForegroundBrush}"/>
                     </StackPanel>
-                </uiC:SplitButton>
+                </uiC:PpsSplitButton>
             </DataTemplate>
 			<DataTemplate x:Key="Seperator">
                 <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Background="{StaticResource PPSnSeparatorBrush}" Margin="6" />
