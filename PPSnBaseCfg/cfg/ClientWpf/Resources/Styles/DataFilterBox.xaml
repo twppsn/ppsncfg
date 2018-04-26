@@ -288,7 +288,7 @@
 				<Setter Property="uiC:PpsDataFilterBox.SelectedValueTemplate">
 					<Setter.Value>
 						<DataTemplate>
-							<TextBlock Text="{Binding Name, Converter={StaticResource MlStringConverter}}"/>
+							<TextBlock Text="{Binding Name, Converter={x:Static ui:PpsConverter.MultiToSingleLine}}"/>
 						</DataTemplate>
 					</Setter.Value>
 				</Setter>
