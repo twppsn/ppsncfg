@@ -1,8 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:sys="clr-namespace:System;assembly=mscorlib"
-					xmlns:ui="clr-namespace:TecWare.PPSn.UI;assembly=PPSn.Desktop.UI"
-					xmlns:uiC="clr-namespace:TecWare.PPSn.Controls;assembly=PPSn.Desktop.UI" >
+					xmlns:ui="http://tecware-gmbh.de/ppsn/wpf/2015">
 
 	<ResourceDictionary.MergedDictionaries>
 		<ResourceDictionary Source="../Colors.xaml" />
@@ -46,7 +45,7 @@
 				<Setter Property="BorderBrush" TargetName="border" Value="{StaticResource PPSnControlFocusedBorderBrush}"/>
 				<Setter TargetName="arrowBox" Property="Opacity" Value=".75"/>
 			</DataTrigger>
-			<Trigger Property="uiC:PpsReadOnlyPaneBehavior.IsReadOnly">
+			<Trigger Property="ui:PpsReadOnlyPaneBehavior.IsReadOnly">
 				<Trigger.Value>
 					<sys:Boolean>True</sys:Boolean>
 				</Trigger.Value>
@@ -191,7 +190,7 @@
 							<Setter Property="Foreground" Value="{StaticResource PPSnWindowDisabledForegroundBrush}"/>
 						</Trigger>
 
-						<Trigger Property="uiC:PpsReadOnlyPaneBehavior.IsReadOnly">
+						<Trigger Property="ui:PpsReadOnlyPaneBehavior.IsReadOnly">
 							<Trigger.Value>
 								<sys:Boolean>True</sys:Boolean>
 							</Trigger.Value>
@@ -204,7 +203,7 @@
 
 						<MultiDataTrigger>
 							<MultiDataTrigger.Conditions>
-								<Condition Binding="{Binding Path=(uiC:PpsComboBoxBehavior.IsNullable), RelativeSource={RelativeSource Self}, Mode=OneWay}">
+								<Condition Binding="{Binding Path=(ui:PpsComboBoxBehavior.IsNullable), RelativeSource={RelativeSource Self}, Mode=OneWay}">
 									<Condition.Value>
 										<sys:Boolean>True</sys:Boolean>
 									</Condition.Value>
@@ -224,7 +223,7 @@
 										<sys:Boolean>True</sys:Boolean>
 									</Condition.Value>
 								</Condition>
-								<Condition Binding="{Binding Path=(uiC:PpsReadOnlyPaneBehavior.IsReadOnly), RelativeSource={RelativeSource Self}, Mode=OneWay}">
+								<Condition Binding="{Binding Path=(ui:PpsReadOnlyPaneBehavior.IsReadOnly), RelativeSource={RelativeSource Self}, Mode=OneWay}">
 									<Condition.Value>
 										<sys:Boolean>False</sys:Boolean>
 									</Condition.Value>
@@ -262,7 +261,7 @@
 			<TextBlock x:Name="emptyText" Grid.Column="0" Margin="6,3" VerticalAlignment="Center" Visibility="Hidden" Foreground="{StaticResource PPSnWindowForegroundBrush}"
 					   Text="{Binding Path=Tag, RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}, Mode=OneTime}"/>
 			<Button x:Name="clearButton" Grid.Column="1" Margin="0,1" Focusable="False" Template="{StaticResource PPSnComboBoxClearButtonTemplate}"
-					Command="{Binding Path=(uiC:PpsSelectionChangedBehavior.Command), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ComboBox}}, Mode=OneWay}">
+					Command="{Binding Path=(ui:PpsSelectionChangedBehavior.Command), RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ComboBox}}, Mode=OneWay}">
 			</Button>
 			<Viewbox x:Name="filterBox" Grid.Column="2" Margin="0,0,4,0" Opacity=".5" >
 				<Canvas Width="24" Height="24">
@@ -339,13 +338,13 @@
 	<sys:Double x:Key="FixSelectorWidth">340</sys:Double>
 
 	<DataTemplate x:Key="PpsDataSelectorDefaultItemTemplate">
-		<uiC:PpsDataSelectorItemTextBlock
+		<ui:PpsDataSelectorItemTextBlock
 			VerticalAlignment="Center"
 			TextWrapping="NoWrap"
 			TextTrimming="CharacterEllipsis"
 			BaseText="{Binding Name}"
-			SearchText="{Binding Path=FilterText, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=uiC:PpsDataSelector}}">
-		</uiC:PpsDataSelectorItemTextBlock>
+			SearchText="{Binding Path=FilterText, RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ui:PpsDataSelector}}">
+		</ui:PpsDataSelectorItemTextBlock>
 	</DataTemplate>
 
 	<DataTemplate x:Key="PpsDataSelectorDefaultSelectedValueTemplate">
@@ -356,7 +355,7 @@
 		</TextBlock>
 	</DataTemplate>
 
-	<Style TargetType="{x:Type uiC:PpsDataSelector}">
+	<Style TargetType="{x:Type ui:PpsDataSelector}">
 		<Setter Property="Height" Value="23"/>
 		<Setter Property="VerticalAlignment" Value="Top"/>
 		<Setter Property="SelectedValueTemplate" Value="{StaticResource PpsDataSelectorDefaultSelectedValueTemplate}"/>
@@ -369,7 +368,7 @@
 		<Setter Property="SnapsToDevicePixels" Value="True"/>
 		<Setter Property="Template">
 			<Setter.Value>
-				<ControlTemplate TargetType="{x:Type uiC:PpsDataSelector}">
+				<ControlTemplate TargetType="{x:Type ui:PpsDataSelector}">
 					<Grid>
 						<ToggleButton x:Name="ToggleDropDownButton"
 									  Template="{StaticResource PPSnComboBoxToggleButtonTemplate}"
@@ -385,14 +384,14 @@
 										  IsHitTestVisible="False" Margin="5,3,23,3" HorizontalAlignment="Left" VerticalAlignment="Center" />
 
 						<Button x:Name="ClearButton" Template="{StaticResource PPSnComboBoxClearButtonTemplate}"
-								Command="{x:Static uiC:PpsDataSelector.ClearSelectionCommand}"
+								Command="{x:Static ui:PpsDataSelector.ClearSelectionCommand}"
 								HorizontalAlignment="Right" Width="27" Margin="0,2,18,2" Focusable="False" Visibility="Hidden">
 						</Button>
 
 						<Popup x:Name="PART_DropDownPopup" Placement="Bottom" VerticalOffset="1" Focusable="False"
 							   IsOpen="{TemplateBinding IsDropDownOpen}" StaysOpen="False"
 							   MinWidth="{Binding Path=ActualWidth, ElementName=ToggleDropDownButton}" Width="{StaticResource FixSelectorWidth}" MinHeight="122"
-							   uiC:PpsPopupBehavior.ForceFocus="True"
+							   ui:PpsPopupBehavior.ForceFocus="True"
 							   AllowsTransparency="True" PopupAnimation="Slide" >
 							<Border BorderBrush="{StaticResource PPSnControlFocusedBorderBrush}" BorderThickness="1" Background="{TemplateBinding Background}">
 								<Grid>

@@ -5,8 +5,13 @@
              xmlns:local="clr-namespace:TecWare.PPSn.Configuration.ClientWpf.Panes"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-	<x:Code><![CDATA[  msgbox("Hallo Sub Pane"); ]]></x:Code>  
-	<Grid>
-		<TextBlock FontSize="20" Text="Sub Pane" />
-	</Grid>
+	<x:Code><![CDATA[  msgbox("Hallo Sub Pane"); 
+		function SetText(sender, e) : void
+			test2.Text = "Text geändert...";
+		end;
+		]]></x:Code>  
+	<StackPanel>
+		<TextBlock x:Name="test2" FontSize="20" Text="Sub Pane" />
+		<Button Content="SetText" Click="SetText" />
+	</StackPanel>
 </UserControl>

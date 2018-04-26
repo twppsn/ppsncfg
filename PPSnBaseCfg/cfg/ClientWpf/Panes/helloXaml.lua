@@ -26,3 +26,8 @@ function HelloClick(sender, e) : void
 	bindTitle = "Hello World clicked {0} times.":Format(clickCount);
 	clickCount = clickCount + 1;
 end;
+
+function ListBoxClicked(sender, e) : void
+	msgbox(ListControl or "null");
+	msgbox(ListControl.SelectedIndex);
+end;

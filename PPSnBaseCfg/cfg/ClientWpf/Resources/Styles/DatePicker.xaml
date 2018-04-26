@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:sys="clr-namespace:System;assembly=mscorlib"
-					xmlns:uiC="clr-namespace:TecWare.PPSn.Controls;assembly=PPSn.Desktop.UI" >
+					xmlns:ui="http://tecware-gmbh.de/ppsn/wpf/2015" >
 
 	<ResourceDictionary.MergedDictionaries>
 		<ResourceDictionary Source="../Colors.xaml" />
@@ -514,7 +514,7 @@
                         <Trigger Property="IsKeyboardFocusWithin" Value="True">
                             <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource PPSnControlFocusedBorderBrush}"/>
                         </Trigger>
-						<Trigger Property="uiC:PpsReadOnlyPaneBehavior.IsReadOnly">
+						<Trigger Property="ui:PpsReadOnlyPaneBehavior.IsReadOnly">
 							<Trigger.Value>
 								<sys:Boolean>True</sys:Boolean>
 							</Trigger.Value>
