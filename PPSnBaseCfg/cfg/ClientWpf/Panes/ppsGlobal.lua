@@ -39,3 +39,17 @@ function FieldFactory:CreateObjkNr(context, properties)
 
 	return txt;
 end;
+
+function FieldFactory:SimpleTableSelector(context, properties, fieldInfo)
+	local combo = self:CreateComboField(fieldInfo);
+
+	combo.ItemsSource = UI.Binding {
+		Path = properties.ItemsSource,
+		Mode = "OneWay",
+		Source = self:GetCode(context)
+	};
+	combo.SelectedValuePath = properties.SelectedValuePath or "Id"
+	combo.DisplayMemberPath = properties.DisplayMemberPath or "Name";
+
+	return combo;
+end;
