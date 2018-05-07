@@ -46,7 +46,7 @@
 		<pps:datawareHouse name="bi" />
 
 		<pps:register source="sys">
-			<pps:field name="sys.Fields.ObjectId" dataType="long">
+			<pps:field name="sys.Fields.ObjectId" dataType="long" displayName="Nr">
 				<pps:attribute name="clientDataType">ppsObject</pps:attribute>
 				<pps:attribute name="sourceColumn">dbo.ObjK.Id</pps:attribute>
 				<pps:attribute name="UseFieldFactory">CreateObjkNr</pps:attribute>
@@ -56,6 +56,10 @@
 			</pps:field>
 			<pps:field name="sys.Fields.MasterDataKey" dataType="long">
 				<pps:attribute name="clientDataType">ppsMasterData</pps:attribute>
+			</pps:field>
+
+			<pps:field name="sys.Fields.Address" dataType="text" displayName="Adresse">
+				<pps:attribute name="clientDataType">text</pps:attribute>
 			</pps:field>
 
 			<pps:field name="sys.Fields.Path" dataType="string" />

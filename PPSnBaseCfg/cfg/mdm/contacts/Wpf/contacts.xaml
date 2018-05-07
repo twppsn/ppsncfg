@@ -18,7 +18,11 @@
 		</MultiBinding>
 	</ui:PpsGenericWpfControl.SubTitle>
 
-	<ui:PpsSideBarControl>
+	<ui:PpsGenericWpfControl.Commands>
+		<ui:PpsUICommandButton  Order="100,100" Image="upload" DisplayText="Übertragen" Description="Kontakt veröffentlichen/aktualiseren" Command="PushCommand" />
+	</ui:PpsGenericWpfControl.Commands>
+
+	<ui:PpsSideBarControl x:Name="SideBarControl">
 		<ui:PpsSideBarControl.Content>
 			<ui:PpsStackSectionControl DataContext="{Binding Data.Head.First}">
 				<ui:ParserService>
@@ -31,6 +35,15 @@
 						<ui:PpsDataField FieldName="Name" />
 						<ui:PpsDataField FieldName="KurzName" />
 						<ui:PpsDataField FieldName="WaehId" />
+
+						<ui:PpsDataField FieldName="Iban" />
+						<ui:PpsDataField FieldName="Bic" />
+						<ui:PpsDataField FieldName="SteuerNr" />
+						<ui:PpsDataField FieldName="StIdentNr" />
+						<ui:PpsDataField FieldName="UstIdNr" />
+						
+						<ui:PpsDataField FieldName="Adresse" UseFieldFactory="CreateAddress" />
+						
 					</ui:PpsDataFieldPanel>
 				</ui:PpsStackSectionItem>
 				<!--<ui:PpsStackSectionItem Header="Identifizierung">
@@ -57,7 +70,37 @@
 			</ui:ParserService>
 
 			<ui:PpsSideBarGroup.Content>
-				<ListBox ItemsSource="{Binding Data.Vika}" Width="200" Height="200" />
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto" />
+						<RowDefinition />
+					</Grid.RowDefinitions>
+					<ui:PpsCommandBarControl Mode="Rectangle">
+						<ui:PpsUICommandButton Order="100,100" Image="filePlus" DisplayText="Neu" Description="Neue Visitenkarte" Command="VikaNewCommand" />
+						<ui:PpsUICommandButton Order="110,110" Image="edit" DisplayText="Ändern" Description="Visitenkarte bearbeiten" Command="VikaEditCommand" />
+						<ui:PpsUICommandButton Order="110,120" Image="delete" DisplayText="Löschen" Description="Visitenkarte löschen" Command="VikaRemoveCommand"/>
+					</ui:PpsCommandBarControl>
+					
+					<ui:PpsDataFilterList x:Name="VikaList" Grid.Row="1" ItemsSource="{Binding VikaView}" Margin="16">
+						<ui:PpsDataFilterList.ItemTemplate>
+							<DataTemplate>
+								<Grid Height="26">
+									<TextBlock VerticalAlignment="Center"
+								   TextBlock.FontSize="14"
+								   TextWrapping="NoWrap"
+								   TextTrimming="CharacterEllipsis">
+										<TextBlock.Text>
+											<MultiBinding Converter="{x:Static ui:PpsConverter.Name}">
+												<Binding Path="Name" />
+												<Binding Path="Vorname"/>
+											</MultiBinding>
+										</TextBlock.Text>
+									</TextBlock>
+								</Grid>
+							</DataTemplate>
+						</ui:PpsDataFilterList.ItemTemplate>
+					</ui:PpsDataFilterList>
+				</Grid>
 			</ui:PpsSideBarGroup.Content>
 
 			<ui:PpsSideBarGroup.ItemTemplate>

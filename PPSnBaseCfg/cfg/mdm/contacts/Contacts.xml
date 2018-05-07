@@ -37,9 +37,9 @@
 			<pps:field name="dbo.Ktkt.Ort" displayName="Ort" />
 			<pps:field name="dbo.Ktkt.Region" displayName="Region" />
 			<pps:field name="dbo.Ktkt.Plz" displayName="Postleitzahl" />
-			<pps:field name="dbo.Ktkt.Adresse" displayName="Adresse" />
-			<pps:field name="dbo.Ktkt.VAdresse" displayName="Versandadresse" />
-			<pps:field name="dbo.Ktkt.RAdresse" displayName="Rechnungsadresse" />
+			<pps:field name="dbo.Ktkt.Adresse" inherited="sys.Fields.Address" />
+			<pps:field name="dbo.Ktkt.VAdresse" inherited="sys.Fields.Address" displayName="Versandadresse" />
+			<pps:field name="dbo.Ktkt.RAdresse" inherited="sys.Fields.Address" displayName="Rechnungsadresse" />
 			<pps:field name="dbo.Ktkt.KoordL" displayName="Längengrad" >
 				<pps:attribute name="format" dataType="string">N6</pps:attribute>
 				<pps:attribute name="maxLength">9</pps:attribute>
@@ -121,7 +121,7 @@
 			<pps:field name="dbo.Vika.Ort" displayName="Ort" />
 			<pps:field name="dbo.Vika.Region" displayName="Region" />
 			<pps:field name="dbo.Vika.Plz" displayName="Postleitzahl" />
-			<pps:field name="dbo.Vika.Adresse" displayName="Adresse" />
+			<pps:field name="dbo.Vika.Adresse" inherited="sys.Fields.Address" />
 
 			<!--  Ansprechpartner -->
 			<pps:view name="sds.Vika" displayName="Visitenkarten">
