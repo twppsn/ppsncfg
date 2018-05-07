@@ -49,6 +49,7 @@
 			<pps:field name="sys.Fields.ObjectId" dataType="long">
 				<pps:attribute name="clientDataType">ppsObject</pps:attribute>
 				<pps:attribute name="sourceColumn">dbo.ObjK.Id</pps:attribute>
+				<pps:attribute name="UseFieldFactory">CreateObjkNr</pps:attribute>
 			</pps:field>
 			<pps:field name="sys.Fields.ObjectLinkId" dataType="long">
 				<pps:attribute name="clientDataType">ppsLinkObject</pps:attribute>
@@ -104,7 +105,9 @@
 		<pps:register source="main">
 
 			<!-- object fields -->
-			<pps:field name="dbo.ObjK.Id" inherited="sys.Fields.ObjectId" />
+			<pps:field name="dbo.ObjK.Id" inherited="sys.Fields.ObjectId">
+				<pps:attribute name="UseFieldFactory">CreateObjkNr</pps:attribute>
+			</pps:field>
 			<pps:field name="dbo.ObjK.Guid" />
 			<pps:field name="dbo.ObjK.Typ" />
 			<pps:field name="dbo.ObjK.MimeType" />

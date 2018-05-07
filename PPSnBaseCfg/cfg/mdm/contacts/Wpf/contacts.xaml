@@ -25,31 +25,32 @@
 					<ui:PpsDataTableResolver Name="Head" />
 				</ui:ParserService>
 
-				<ui:PpsStackSectionItem Header="Kopfdaten" SubHeader="Subheader Kopfdaten">
+				<ui:PpsStackSectionItem Header="Kopfdaten">
 					<ui:PpsDataFieldPanel ColumnCount="2" LabelWidth="200">
+						<ui:PpsDataField FieldName="ObjkId" />
 						<ui:PpsDataField FieldName="Name" />
 						<ui:PpsDataField FieldName="KurzName" />
 						<ui:PpsDataField FieldName="WaehId" />
 					</ui:PpsDataFieldPanel>
 				</ui:PpsStackSectionItem>
-				<ui:PpsStackSectionItem Header="Identifizierung">
+				<!--<ui:PpsStackSectionItem Header="Identifizierung">
 
 				</ui:PpsStackSectionItem>
 				<ui:PpsStackSectionItem Header="Lieferung" SubHeader="Subheader Lieferung">
 
-				</ui:PpsStackSectionItem>
+				</ui:PpsStackSectionItem>-->
 			</ui:PpsStackSectionControl>
 		</ui:PpsSideBarControl.Content>
 
 		<ui:PpsSideBarPanelFilter Header="Kopfdaten" />
 
 		<Separator />
-		<ui:PpsSideBarPanelFilter Header="Identifizierung" />
+		<!--<ui:PpsSideBarPanelFilter Header="Identifizierung" />
 
 		<Separator />
 		<ui:PpsSideBarPanelFilter Header="Lieferung" />
 
-		<Separator />
+		<Separator />-->
 		<ui:PpsSideBarGroup Header="Visitenkarten" ItemsSource="{Binding Data.Vika}">
 			<ui:ParserService>
 				<ui:PpsDataTableResolver Name="Vika" />
@@ -61,10 +62,31 @@
 
 			<ui:PpsSideBarGroup.ItemTemplate>
 				<DataTemplate>
-					<ui:PpsSideBarPanel Header="{ui:PpsDataFieldBinding Name}">
+					<ui:PpsSideBarPanel>
+						<ui:PpsSideBarPanel.Header>
+							<MultiBinding Converter="{x:Static ui:PpsConverter.Name}">
+								<ui:PpsDataFieldBinding FieldName="Name" />
+								<ui:PpsDataFieldBinding FieldName="Vorname" />
+							</MultiBinding>
+						</ui:PpsSideBarPanel.Header>
 						<ui:PpsDataFieldPanel ColumnCount="2" LabelWidth="200">
-							<ui:PpsDataField FieldName="Name" IsReadOnly="true" />
-							<ui:PpsDataField FieldName="Vorname" />
+							<!-- todo: Std -->
+							<ui:PpsNamedSeparator Content="Anrede" ui:PpsDataFieldPanel.GroupName="{ui:Constant int,1}" />
+							<ui:PpsDataField FieldName="Name" ui:PpsDataFieldPanel.GroupName="{ui:Constant int,1}" />
+							<ui:PpsDataField FieldName="Vorname" ui:PpsDataFieldPanel.GroupName="{ui:Constant int,1}" />
+							<ui:PpsDataField FieldName="Titel" ui:PpsDataFieldPanel.GroupName="{ui:Constant int,1}" />
+							<ui:PpsDataField FieldName="Brief" ui:PpsDataFieldPanel.GroupName="{ui:Constant int,1}" />
+							<ui:PpsDataField FieldName="Funktion" ui:PpsDataFieldPanel.GroupName="{ui:Constant int,1}" />
+							<!--<ui:PpsDataField FieldName="Geschl" />-->
+
+							<ui:PpsNamedSeparator Content="Kontaktdaten" ui:PpsDataFieldPanel.GroupName="{ui:Constant int,3}" />
+							<ui:PpsDataField FieldName="Tel" ui:PpsDataFieldPanel.GroupName="{ui:Constant int,3}" />
+							<ui:PpsDataField FieldName="Fax" ui:PpsDataFieldPanel.GroupName="{ui:Constant int,3}" />
+							<ui:PpsDataField FieldName="Mobil" ui:PpsDataFieldPanel.GroupName="{ui:Constant int,3}" />
+							<ui:PpsDataField FieldName="Mail" ui:PpsDataFieldPanel.GroupName="{ui:Constant int,3}" />
+
+							<ui:PpsNamedSeparator Content="Adresse" ui:PpsDataFieldPanel.GroupName="{ui:Constant int,4}" />
+							<ui:PpsDataField FieldName="Adresse" UseFieldFactory="CreateAddress" ui:PpsDataFieldPanel.GroupName="{ui:Constant int,4}" />
 						</ui:PpsDataFieldPanel>
 					</ui:PpsSideBarPanel>
 				</DataTemplate>

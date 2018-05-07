@@ -108,6 +108,7 @@
 			<pps:field name="dbo.Vika.Titel" displayName="Titel" />
 			<pps:field name="dbo.Vika.Tel" displayName="Telefon" />
 			<pps:field name="dbo.Vika.Fax" displayName="Fax" />
+			<!-- todo: Rename to Email -->
 			<pps:field name="dbo.Vika.Mail" displayName="E-Mail" />
 			<pps:field name="dbo.Vika.Mobil" displayName="Mobil" />
 			<pps:field name="dbo.Vika.Std" />
