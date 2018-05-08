@@ -13,7 +13,7 @@
 
 	<ui:PpsGenericWpfControl.SubTitle>
 		<MultiBinding Mode="OneWay" StringFormat="{}{0} - {1}">
-			<Binding Path="Data.Head.First.Nr" Mode="OneWay" />
+			<Binding Path="Data.Head.First.ObjkId.Nr" Mode="OneWay" />
 			<Binding Path="Data.Head.First.Name" Mode="OneWay" />
 		</MultiBinding>
 	</ui:PpsGenericWpfControl.SubTitle>
