@@ -43,7 +43,7 @@
 
 			<!-- Editor data -->
 			<pps:dataset name="mdmCurrencies" serverScripts="mdmConstants mdmCurrenciesScript">
-				<pps:meta name="DefaultPaneUri" dataType="string">wpf/panes/currencies.lua</pps:meta>
+				<pps:meta name="DefaultPaneUri" dataType="string">wpf/panes/currencies.xaml</pps:meta>
 
 				<pps:table name="Waeh">
 					<pps:meta name="SqlTable">dbo.Waeh</pps:meta>

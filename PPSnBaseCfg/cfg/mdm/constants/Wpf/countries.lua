@@ -2,7 +2,7 @@
 	Source = Data:Land,
 	SortDescriptions = { "+ISO3" }
 };
-
+--[[
 
 currentView = nil;
 IsDataGridVisible = false;
@@ -44,9 +44,9 @@ function ChangeView(constName) : void
 	if currentItem ~= nil then
 		listConst:ScrollIntoView(currentItem);
 	end;
-end;
+end;]]
 
-pushCountries = command(
+PushCountriesCommand = command(
     function (args) : void
 		UpdateSources();
 		if Data:IsDirty or Data:Object:IsDocumentChanged then

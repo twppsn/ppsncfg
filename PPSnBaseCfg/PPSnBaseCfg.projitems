@@ -74,10 +74,14 @@
     <None Include="$(MSBuildThisFileDirectory)cfg\mdm\constants\currencies.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="$(MSBuildThisFileDirectory)cfg\mdm\constants\Wpf\countries.lua">
+    <None Include="$(MSBuildThisFileDirectory)cfg\mdm\constants\Wpf\currencies.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="$(MSBuildThisFileDirectory)cfg\mdm\constants\Wpf\currencies.lua">
+    <None Include="$(MSBuildThisFileDirectory)cfg\mdm\constants\Wpf\countries.xaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)cfg\mdm\constants\Wpf\countries.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="$(MSBuildThisFileDirectory)cfg\mdm\contacts\contactsLocal.lua">
@@ -198,7 +202,7 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="$(MSBuildThisFileDirectory)cfg\mdm\constants\Wpf\countries.xaml">
+    <None Include="$(MSBuildThisFileDirectory)cfg\mdm\constants\Wpf\currencies.xaml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

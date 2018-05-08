@@ -1,20 +1,16 @@
-﻿
--- Global Properties --
-Title = "Einstellung";
-
--- UI Creation --
-local ctrl = UI.Grid {
-	RowDefinitions = { "*" },
-	ColumnDefinitions = { "*" },
-		
-	UI.Label {
-		Content = "Todo Währungseinstellungen"
-	}
+﻿local waehSource = createSource {
+	Source = Data:WAEH,
+	SortDescriptions = { "+Name" }
 };
 
 
-setControl {
-	Title = UI.Binding("Title"),
-	SubTitle = "Währungseinstellungen",
-	ctrl
-}
+PushCurrenciesCommand = command(
+    function (args) : void
+		UpdateSources();
+		if Data:IsDirty or Data:Object:IsDocumentChanged then
+			await(PushDataAsync());
+		else
+			msgbox("Es gibt keine Änderungen.", "Information");
+		end
+    end
+);

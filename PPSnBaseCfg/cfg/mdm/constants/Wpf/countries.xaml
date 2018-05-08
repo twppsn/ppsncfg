@@ -2,27 +2,19 @@
 						 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 						 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
 						 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-						 xmlns:ui="clr-namespace:TecWare.PPSn.UI;assembly=PPSn.Desktop.UI"
-						 xmlns:uiC="clr-namespace:TecWare.PPSn.Controls;assembly=PPSn.Desktop.UI"
+						 xmlns:ui="http://tecware-gmbh.de/ppsn/wpf/2015"
 						 xmlns:sys="clr-namespace:System;assembly=mscorlib"
 						 mc:Ignorable="d" 
 						 d:DesignHeight="300" d:DesignWidth="800"
-						 Title="Ländereinstellungen"
-						 SubTitle="Konstanten"
-						 HasSideBar="True"
->
+						 Title="Konstanten"
+						 SubTitle="Ländereinstellungen"
+						 HasSideBar="True">
 	<x:Code>
-		<![CDATA[
-        self:require 'countries.lua';
-		]]>
+		<x:Uri>countries.lua</x:Uri>
 	</x:Code>
 
 	<ui:PpsGenericWpfControl.Resources>
-		<ResourceDictionary>
-			<ResourceDictionary.MergedDictionaries>
-				<ResourceDictionary Source="../../../ClientWpf/Default.xaml" />
-			</ResourceDictionary.MergedDictionaries>
-
+		<!--<ResourceDictionary>
 			<DataTemplate x:Key="landItemTemplate">
 				<Grid Height="29">
 					<Grid.ColumnDefinitions>
@@ -114,23 +106,23 @@
 					</CheckBox>
 				</Grid>
 			</DataTemplate>
-		</ResourceDictionary>
+		</ResourceDictionary>-->
 	</ui:PpsGenericWpfControl.Resources>
 
-	<Grid>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="Auto"/>
-			<ColumnDefinition/>
-		</Grid.ColumnDefinitions>
+	<ui:PpsSideBarControl>
+		
+	</ui:PpsSideBarControl>
+	<!--<Grid>
+		
 		<uiC:SideBarMenu x:Name="sidebarMenu" Grid.Column="0" Margin="0,28,0,0" Width="{StaticResource PPSnSideBarIncreasedWidth}" Style="{StaticResource SideBarMenuStyle}">
 			<uiC:SideBarMenuRootItem DisplayText="Ländereinstellungen" Command="{Binding cmdChangeView}">
 				<uiC:SideBarMenuRootItem.CommandParameter>
 					<sys:String>land</sys:String>
 				</uiC:SideBarMenuRootItem.CommandParameter>
 			</uiC:SideBarMenuRootItem>
-		</uiC:SideBarMenu>
+		</uiC:SideBarMenu>-->
 
-		<Grid Grid.Column="1" MaxWidth="{StaticResource PPSnPaneMaxGridWidth}" TextBlock.Foreground="{StaticResource PPSnWindowForegroundBrush}">
+		<!--<Grid Grid.Column="1" MaxWidth="{StaticResource PPSnPaneMaxGridWidth}" TextBlock.Foreground="{StaticResource PPSnWindowForegroundBrush}">
 			<Grid.Margin>
 				<Thickness Left="{StaticResource PPSnPaneBorderSizeLeft}"
 						   Top="{StaticResource PPSnPaneBorderSizeTop}"
@@ -185,10 +177,10 @@
 				</ContentControl.Resources>
 			</ContentControl>
 		</Grid>
-	</Grid>
+	</Grid>-->
 
 	<ui:PpsGenericWpfControl.Commands>
-		<ui:PpsUICommandButton Order="100,100" DisplayText="Veröffentlichen" Image="upload" Command="{Binding pushCountries}" />
+		<ui:PpsUICommandButton Order="100,100" DisplayText="Veröffentlichen" Image="upload" Command="PushCountriesCommand" />
 	</ui:PpsGenericWpfControl.Commands>
 
 </ui:PpsGenericWpfControl>
