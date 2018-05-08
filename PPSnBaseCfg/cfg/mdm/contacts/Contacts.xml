@@ -184,6 +184,7 @@
 				<pps:meta name="DefaultPaneUri" dataType="string">wpf/panes/contacts.xaml</pps:meta>
 
 				<pps:autoTag name="Name" tableName="Head" columnName="Name" mode="First" />
+				<pps:autoTag name="KurzName" tableName="Head" columnName="KurzName" mode="First" />
 				<pps:autoTag name="LiefNr" tableName="Kund" columnName="LiefNr" mode="Number" />
 				<pps:autoTag name="KundNr" tableName="Lief" columnName="KundNr" mode="Number" />
 				<pps:autoTag name="Tel" tableName="Pers" columnName="Tel" mode="First" />

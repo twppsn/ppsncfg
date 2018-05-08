@@ -18,7 +18,12 @@ PushCommand = command(
 );
 
 local function SelectVika(row) : void
-	SideBarControl:SelectItem(row);
+	VikaView:MoveCurrentTo(row);
+end;
+SelectVika(nil);
+
+function SelectVikaItem(sender, e) : void
+	SelectVika(e.Parameter);
 end;
 
 VikaNewCommand = command(
@@ -32,16 +37,10 @@ VikaNewCommand = command(
 	end
 );
 
-VikaEditCommand = command(
-	function (args) : void
-		SelectVika(VikaList.SelectedValue);
-	end
-);
-
 VikaRemoveCommand = command(
 	function (args) : void
 		do (trans = UndoManager:BeginTransaction("Visitenkarte löschen"))
- 			VikaView:CurrentItem:Remove();
+			VikaView:CurrentItem:Remove();
 			trans:Commit();
 		end;
 	end
