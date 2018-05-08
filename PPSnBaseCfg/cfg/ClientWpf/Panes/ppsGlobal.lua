@@ -149,7 +149,8 @@ function FieldFactory:CreateAddress(properties)
 	table.insert(fields,
 		self:CreateTextField(properties, true) {
 			[self:GridLabel] = properties.displayName .. ":",
-			[self:GridLines] = 3
+			[self:GridLines] = 3,
+			["AllowedLineCount"] = 5
 		}
 	);
 
