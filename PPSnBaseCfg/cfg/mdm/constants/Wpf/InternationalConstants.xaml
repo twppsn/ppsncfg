@@ -7,21 +7,26 @@
 						 mc:Ignorable="d" 
 						 d:DesignHeight="300" d:DesignWidth="800"
 						 Title="Konstanten"
-						 SubTitle="Währungseinstellungen"
+						 SubTitle="Länder/Währungen"
 						 HasSideBar="True">
 	<x:Code>
-		<x:Uri>countries.lua</x:Uri>
+		<x:Uri>InternationalConstants.lua</x:Uri>
 	</x:Code>
 
 	<ui:PpsGenericWpfControl.Resources>
 	</ui:PpsGenericWpfControl.Resources>
 
-	<ui:PpsSideBarControl>
-		
+	<ui:PpsSideBarControl ContentTemplate="{StaticResource ConstantContentTemplate}"
+						  ItemsSource="{ui:CodeBinding InterConstants}">
+		<ui:PpsSideBarControl.ItemTemplate>
+			<DataTemplate>
+				<ui:PpsSideBarPanel Header="{Binding Name}" Content="{Binding}" />
+			</DataTemplate>
+		</ui:PpsSideBarControl.ItemTemplate>
 	</ui:PpsSideBarControl>
 
 	<ui:PpsGenericWpfControl.Commands>
-		<ui:PpsUICommandButton Order="100,100" DisplayText="Veröffentlichen" Image="upload" Command="PushCurrenciesCommand" />
+		<ui:PpsUICommandButton Order="100,100" DisplayText="Veröffentlichen" Image="upload" Command="PushCommand" />
 	</ui:PpsGenericWpfControl.Commands>
 
 </ui:PpsGenericWpfControl>

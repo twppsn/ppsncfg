@@ -1,0 +1,52 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:sys="clr-namespace:System;assembly=mscorlib"
+					xmlns:ui="http://tecware-gmbh.de/ppsn/wpf/2015">
+	
+	<DataTemplate x:Key="ConstantContentTemplate">
+		<Grid x:Name="TemplateGrid">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<RowDefinition />
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition />
+				<ColumnDefinition />
+			</Grid.ColumnDefinitions>
+			<Border Grid.Row="0" Grid.Column="0" BorderThickness="0,0,0,4" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" SnapsToDevicePixels="True">
+				<TextBlock Text="{Binding Name}" VerticalAlignment="Bottom" Margin="0,0,0,2" FontSize="14" FontWeight="SemiBold"/>
+			</Border>
+			<ui:PpsCommandBarControl Grid.Row="0" Grid.Column="1">
+				<ui:PpsUICommandButton Image="filePlus" DisplayText="Neu" Command="{Binding DataContenxt.AddCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=ui:PpsGenericWpfControl}}" />
+				<ui:PpsUICommandButton Image="delete" DisplayText="Löschen" Command="{Binding DataContenxt.DeleteCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=ui:PpsGenericWpfControl}}" />
+			</ui:PpsCommandBarControl>
+
+			<ui:PpsDataFilterList Grid.Row="1" Grid.Column="0" Margin="16" ItemsSource="{Binding View}" IsSynchronizedWithCurrentItem="True">
+			</ui:PpsDataFilterList>
+
+			<ContentPresenter Grid.Row="1" Grid.Column="1" Margin="16" Content="{Binding View.CurrentItem}" ContentTemplateSelector="{ui:CodeBinding ConstantsTemplateSelector}" />
+		</Grid>
+	</DataTemplate>
+
+	<Style x:Key="CheckBoxActiveStyle" TargetType="CheckBox">
+		<Setter Property="ui:PpsDataFieldPanel.Label" Value="Aktivieren:" />
+		<Setter Property="IsThreeState" Value="False" />
+		<Setter Property="Width" Value="Auto" />
+		<Setter Property="Content" Value="aktiv"/>
+		<Style.Triggers>
+			<DataTrigger Binding="{Binding Path=IsActive, Mode=OneWay}">
+				<DataTrigger.Value>
+					<sys:Boolean>false</sys:Boolean>
+				</DataTrigger.Value>
+				<Setter Property="Content" Value="nicht aktiv"/>
+			</DataTrigger>
+		</Style.Triggers>
+	</Style>
+
+	<DataTemplate x:Key="ConstantsDefaultTemplate">
+		<ui:PpsDataFieldPanel ColumnCount="1" LabelWidth="200">
+			<ui:PpsTextBox ui:PpsDataFieldPanel.Label="Name:" Text="{Binding Name, TargetNullValue={x:Static sys:String.Empty}}" MaxLength="{Binding Table.Name.MaxLength, Mode=OneWay}" IsNullable="False"/>
+			<CheckBox IsChecked="{Binding IsActive}" Style="{StaticResource CheckBoxActiveStyle}" />
+		</ui:PpsDataFieldPanel>
+	</DataTemplate>
+</ResourceDictionary>

@@ -170,3 +170,14 @@ function FieldFactory:SimpleTableSelector(properties)
 
 	return combo;
 end;
+
+ConstantsTemplateSelector = templateSelector(
+	function (item, container) : object
+		local parent = GetLogicalParent(container);
+		local def = parent.DataContext;
+		if not def then
+			return nil;
+		end;
+		return GetResource(def.Template or "ConstantsDefaultTemplate", container);
+	end
+);

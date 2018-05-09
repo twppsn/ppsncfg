@@ -4,7 +4,7 @@
 	
 	<luaengine>
 		<script id="mdmConstants" filename="constants.lua" />
-		<script id="mdmCountriesScript" filename="countries.lua" />
+		<script id="mdmInternationalScript" filename="InternationalConstants.lua" />
 	</luaengine>
 
 	<pps:ppsn name="ppsn">
@@ -21,6 +21,24 @@
 			<pps:field name="dbo.Land.PostAdr" />
 			<pps:field name="dbo.Land.IsActive" />
 
+			<!-- definition for countries -->
+			<pps:field name="dbo.Waeh.Id" />
+			<pps:field name="dbo.Waeh.Name" />
+			<pps:field name="dbo.Waeh.Symbol" />
+			<pps:field name="dbo.Waeh.Kurs" />
+			<pps:field name="dbo.Waeh.Iso" />
+			<pps:field name="dbo.Waeh.System" />
+			<pps:field name="dbo.Waeh.IsActive" />
+
+			<pps:view name="masterData.Waeh" displayName="Währungen">
+				<pps:source type="select">
+					<![CDATA[SELECT [Id], [Name], [Iso] FROM dbo.[Waeh] ]]>
+				</pps:source>
+				
+				<pps:attribute name="description">Stammdatentabelle der Währungen.</pps:attribute>
+				<pps:attribute name="bi.visible">true</pps:attribute>
+			</pps:view>
+			
 			<pps:view name="masterData.Land" displayName="Länder">
 				<pps:source type="select">
 					<![CDATA[SELECT [Id], [Name], [Iso] FROM dbo.[Land] ]]>
@@ -45,11 +63,21 @@
 					<pps:column name="PostAdr" fieldName="dbo.Land.PostAdr"/>
 					<pps:column name="IsActive" fieldName="dbo.Land.IsActive" />
 				</pps:table>
+				<pps:table name="Waeh">
+					<pps:meta name="syncType">ChangeTracking: dbo.Waeh</pps:meta>
+					<pps:column name="Id" fieldName="dbo.Waeh.Id" isPrimary="true" />
+					<pps:column name="Name" fieldName="dbo.Waeh.Name"/>
+					<pps:column name="Symbol" fieldName="dbo.Waeh.Symbol"/>
+					<pps:column name="Kurs" fieldName="dbo.Waeh.Kurs"/>
+					<pps:column name="ISO" fieldName="dbo.Waeh.Iso"/>
+					<pps:column name="System" fieldName="dbo.Waeh.System"/>
+					<pps:column name="IsActive" fieldName="dbo.Waeh.IsActive" />
+				</pps:table>
 			</pps:dataset>
 		
 			<!-- Editor data -->
-			<pps:dataset name="mdmCountries" serverScripts="mdmConstants mdmCountriesScript">
-				<pps:meta name="DefaultPaneUri" dataType="string">wpf/panes/countries.xaml</pps:meta>
+			<pps:dataset name="mdmInternational" serverScripts="mdmConstants mdmInternationalScript">
+				<pps:meta name="DefaultPaneUri" dataType="string">wpf/panes/InternationalConstants.xaml</pps:meta>
 				
 				<pps:table name="Land">
 					<pps:meta name="SqlTable">dbo.Land</pps:meta>
@@ -64,19 +92,30 @@
 					<pps:column name="PostAdr" fieldName="dbo.Land.PostAdr"/>
 					<pps:column name="IsActive" fieldName="dbo.Land.IsActive" />
 				</pps:table>
+			
+				<pps:table name="Waeh">
+					<pps:meta name="SqlTable">dbo.Waeh</pps:meta>
+					<pps:column name="Id" fieldName="dbo.Waeh.Id" isPrimary="true" />
+					<pps:column name="Name" fieldName="dbo.Waeh.Name"/>
+					<pps:column name="Symbol" fieldName="dbo.Waeh.Symbol"/>
+					<pps:column name="Kurs" fieldName="dbo.Waeh.Kurs"/>
+					<pps:column name="ISO" fieldName="dbo.Waeh.Iso"/>
+					<pps:column name="System" fieldName="dbo.Waeh.System"/>
+					<pps:column name="IsActive" fieldName="dbo.Waeh.IsActive" />
+				</pps:table>
 			</pps:dataset>
 		</pps:register>
 		
 		<pps:wpf name="wpf">
-			<pps:template id="countries" file="countryTemplate.xaml" />
-			<pps:wpfSource id="mdm.countries" directory="Wpf" virtualPath="panes" />
+			<pps:template id="currencies" file="InternationalConstantsTemplate.xaml" />
+			<pps:wpfSource id="mdm.international" directory="Wpf" virtualPath="panes" />
 
-			<pps:action name="mdmCountriesEdit" displayName="Bearbeiten" displayImage="edit" priority="200">
-				<pps:condition><![CDATA[ return CurrentItem ~= nil and CurrentItem.Typ == "mdmCountries" ]]></pps:condition>
+			<pps:action name="mdmInternatinalEdit" displayName="Bearbeiten" displayImage="edit" priority="200">
+				<pps:condition><![CDATA[ return CurrentItem ~= nil and CurrentItem.Typ == "mdmInternational" ]]></pps:condition>
 				<pps:code><![CDATA[ Window:LoadMask{ object = GetObject(CurrentItem.Id) }; ]]></pps:code>
 			</pps:action>
 		</pps:wpf>
 
-		<pps:document name="mdmCountries" dataset="mdmCountries" displayname="Countries" forceNextNumber="false" />
+		<pps:document name="mdmInternational" dataset="mdmInternational" displayname="International" forceNextNumber="false" />
 	</pps:ppsn>
 </fragment>

@@ -19,6 +19,8 @@
 		<ResourceDictionary Source="Resources/Styles/ComboBox.xaml" />
 		<ResourceDictionary Source="Resources/Styles/CheckBox.xaml" />
 		<ResourceDictionary Source="Resources/Styles/Progress.xaml" />
+
+		<ResourceDictionary Source="Resources/Styles/Constants.xaml" />
 	</ResourceDictionary.MergedDictionaries>
 
 </ResourceDictionary>
