@@ -145,9 +145,11 @@
 			<pps:field name="dbo.ObjR.CreateUserId" />
 
 			<pps:field name="dbo.User.Id" />
+			<pps:field name="dbo.User.KtktId" />
 			<pps:field name="dbo.User.Login" dataType="string" displayName="Nutzer">
 				<pps:attribute name="maxLength">32</pps:attribute>
 			</pps:field>
+			<pps:field name="dbo.User.Security" displayName="Sicherheit" />
 
 			<!-- objects -->
 			<pps:view name="dbo.objects">
