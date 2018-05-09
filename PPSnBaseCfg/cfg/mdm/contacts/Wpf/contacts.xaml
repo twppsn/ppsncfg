@@ -81,7 +81,7 @@
 					</ui:PpsCommandBarControl>
 					<ui:PpsDataFilterList x:Name="VikaList" Grid.Row="1" Margin="16" 
 										  ItemsSource="{Binding VikaView}"
-										  IsSynchronizedWithCurrentItem="True"
+										  IsSynchronizedWithCurrentItem="False"
 										  Visibility="{Binding VikaView.CurrentItem,Converter={x:Static ui:PpsConverter.Visibility},ConverterParameter={x:Static ui:PpsConverter.VisibilityOnNullParameter}}">
 						<ui:PpsDataFilterList.CommandBindings>
 							<CommandBinding Command="{x:Static ui:PpsControlCommands.SelectCommand}" Executed="SelectVikaItem" />
