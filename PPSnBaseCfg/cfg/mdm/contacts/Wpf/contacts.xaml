@@ -75,13 +75,13 @@
 						<RowDefinition Height="Auto" />
 						<RowDefinition />
 					</Grid.RowDefinitions>
-					<ui:PpsCommandBarControl Mode="Rectangle">
+					<ui:PpsCommandBarControl Mode="Circle">
 						<ui:PpsUICommandButton Order="100,100" Image="filePlus" DisplayText="Neu" Description="Neue Visitenkarte" Command="VikaNewCommand" />
 						<ui:PpsUICommandButton Order="110,120" Image="delete" DisplayText="Löschen" Description="Visitenkarte löschen" Command="VikaRemoveCommand"/>
 					</ui:PpsCommandBarControl>
-					<ui:PpsDataFilterList x:Name="VikaList" Grid.Row="1" Margin="16" 
-										  ItemsSource="{Binding VikaView}"
-										  IsSynchronizedWithCurrentItem="False"
+					<ui:PpsDataFilterList Grid.Row="1" Margin="16" 
+										  ItemsSource="{Binding VikaListView}"
+										  IsSynchronizedWithCurrentItem="True"
 										  Visibility="{Binding VikaView.CurrentItem,Converter={x:Static ui:PpsConverter.Visibility},ConverterParameter={x:Static ui:PpsConverter.VisibilityOnNullParameter}}">
 						<ui:PpsDataFilterList.CommandBindings>
 							<CommandBinding Command="{x:Static ui:PpsControlCommands.SelectCommand}" Executed="SelectVikaItem" />

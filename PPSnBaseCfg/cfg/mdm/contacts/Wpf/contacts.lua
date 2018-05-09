@@ -1,6 +1,13 @@
 ﻿
 -- Global Properties --
 VikaView = getView(Data:Head:First:VikaHead);
+
+local vikaSource = createSource {
+	Source = Data:Head:First:VikaHead,
+	SortDescriptions = { "+Name" }
+};
+
+VikaListView  = vikaSource:View;
 	
 PushCommand = command(
 	function (args) : void
@@ -42,13 +49,13 @@ VikaRemoveCommand = command(
 		do (trans = UndoManager:BeginTransaction("Visitenkarte löschen"))
 			if VikaView:CurrentItem then
 				VikaView:CurrentItem:Remove();
-			elseif VikaList:SelectedItem then
-				VikaList:SelectedItem:Remove();
+			elseif VikaListView:CurrentItem then
+				VikaListView:CurrentItem:Remove();
 			end;
 			trans:Commit();
 		end;
 	end,
 	function (args) : bool
-		return VikaView:CurrentItem or VikaList:SelectedItem;
+		return VikaView:CurrentItem or VikaListView:CurrentItem;
 	end
 );
