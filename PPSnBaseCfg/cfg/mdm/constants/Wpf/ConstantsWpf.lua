@@ -10,13 +10,13 @@ end;
 
 AddCommand = command(
 	function (args) : void
-		msgbox("add");
 		local def = GetCurrentDefinition(args:Target);
 		if def then
 			do (trans = UndoManager:BeginTransaction("Neu " .. def.Name))
-				local row = def.View:Add { Name = "Neuer Eintrag" };
+				local row = def.View:Add { Name = "Neuer Eintrag", IsActive = true };
 				def.View:CommitNew();
 				trans:Commit();
+				def.View:MoveCurrentTo(row);
 			end;
 		end;
 	end,
@@ -42,7 +42,6 @@ DeleteCommand = command(
 
 PushCommand = command(
     function (args) : void
-
 		UpdateSources();
 		if Data:IsDirty or Data:Object:IsDocumentChanged then
 			await(PushDataAsync());

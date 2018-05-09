@@ -17,18 +17,18 @@
 				<TextBlock Text="{Binding Name}" VerticalAlignment="Bottom" Margin="0,0,0,2" FontSize="14" FontWeight="SemiBold"/>
 			</Border>
 			<ui:PpsCommandBarControl Grid.Row="0" Grid.Column="1">
-				<ui:PpsUICommandButton Image="filePlus" DisplayText="Neu" Command="{Binding DataContenxt.AddCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=ui:PpsGenericWpfControl}}" />
-				<ui:PpsUICommandButton Image="delete" DisplayText="Löschen" Command="{Binding DataContenxt.DeleteCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=ui:PpsGenericWpfControl}}" />
+				<ui:PpsUICommandButton Image="filePlus" DisplayText="Neu" Command="{Binding DataContext.AddCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=ui:PpsGenericWpfControl}}" />
+				<ui:PpsUICommandButton Image="delete" DisplayText="Löschen" Command="{Binding DataContext.DeleteCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=ui:PpsGenericWpfControl}}" />
 			</ui:PpsCommandBarControl>
 
-			<ui:PpsDataFilterList Grid.Row="1" Grid.Column="0" Margin="16" ItemsSource="{Binding View}" IsSynchronizedWithCurrentItem="True">
-			</ui:PpsDataFilterList>
+			<ui:PpsDataFilterList Grid.Row="1" Grid.Column="0" Margin="16" ItemsSource="{Binding View}" IsSynchronizedWithCurrentItem="True" Visibility="{Binding Converter={x:Static ui:PpsConverter.Visibility}}" />
 
-			<ContentPresenter Grid.Row="1" Grid.Column="1" Margin="16" Content="{Binding View.CurrentItem}" ContentTemplateSelector="{ui:CodeBinding ConstantsTemplateSelector}" />
+			<ContentPresenter Grid.Row="1" Grid.Column="1" Margin="16" Content="{Binding View.CurrentItem}" ContentTemplateSelector="{ui:CodeBinding ConstantsTemplateSelector}" Visibility="{Binding Converter={x:Static ui:PpsConverter.Visibility}}" />
 		</Grid>
 	</DataTemplate>
 
-	<Style x:Key="CheckBoxActiveStyle" TargetType="CheckBox">
+	<!-- used in constants -->
+	<Style x:Key="CheckBoxActiveStyle" BasedOn="{StaticResource PPSnCheckBoxStyle}" TargetType="CheckBox">
 		<Setter Property="ui:PpsDataFieldPanel.Label" Value="Aktivieren:" />
 		<Setter Property="IsThreeState" Value="False" />
 		<Setter Property="Width" Value="Auto" />

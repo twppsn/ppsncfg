@@ -14,10 +14,44 @@
 	</x:Code>
 
 	<ui:PpsGenericWpfControl.Resources>
+		<DataTemplate x:Key="LandTemplate">
+			<ui:PpsDataFieldPanel ColumnCount="1" LabelWidth="200">
+				<ui:ParserService>
+					<ui:PpsDataTableResolver Name="Land" />
+				</ui:ParserService>
+
+				<ui:PpsDataField FieldName="ISO" />
+				<ui:PpsDataField FieldName="Name" />
+				<ui:PpsDataField FieldName="EnglishName" />
+				<ui:PpsDataField FieldName="ISO3" />
+				<ui:PpsDataField FieldName="Tld" />
+				<ui:PpsDataField FieldName="Vorwahl" />
+				<ui:PpsDataField FieldName="EuroZone" />
+				<ui:PpsDataField FieldName="PostAdr" GridLines="3" />
+
+				<CheckBox IsChecked="{Binding IsActive}" Style="{StaticResource CheckBoxActiveStyle}" />
+			</ui:PpsDataFieldPanel>
+		</DataTemplate>
+		<DataTemplate x:Key="WaehTemplate">
+			<ui:PpsDataFieldPanel ColumnCount="1" LabelWidth="200">
+				<ui:ParserService>
+					<ui:PpsDataTableResolver Name="Waeh" />
+				</ui:ParserService>
+
+				<ui:PpsDataField FieldName="Name" />
+				<ui:PpsDataField FieldName="Symbol" />
+				<ui:PpsDataField FieldName="Kurs" />
+				<ui:PpsDataField FieldName="ISO" />
+				<!--<ui:PpsDataField FieldName="System" />-->
+
+				<CheckBox IsChecked="{Binding IsActive}" Style="{StaticResource CheckBoxActiveStyle}" />
+			</ui:PpsDataFieldPanel>
+		</DataTemplate>
 	</ui:PpsGenericWpfControl.Resources>
 
 	<ui:PpsSideBarControl ContentTemplate="{StaticResource ConstantContentTemplate}"
-						  ItemsSource="{ui:CodeBinding InterConstants}">
+						  ItemsSource="{ui:CodeBinding InterConstants}"
+						  AllowToggleSelection="False">
 		<ui:PpsSideBarControl.ItemTemplate>
 			<DataTemplate>
 				<ui:PpsSideBarPanel Header="{Binding Name}" Content="{Binding}" />

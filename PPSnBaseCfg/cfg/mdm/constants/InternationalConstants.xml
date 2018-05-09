@@ -11,22 +11,24 @@
 		<pps:register source="main">
 			<!-- definition for countries -->
 			<pps:field name="dbo.Land.Id" />
-			<pps:field name="dbo.Land.Iso" />
-			<pps:field name="dbo.Land.Name" />
-			<pps:field name="dbo.Land.EnglishName" />
-			<pps:field name="dbo.Land.Iso3" />
-			<pps:field name="dbo.Land.Tld" />
-			<pps:field name="dbo.Land.Vorwahl" />
-			<pps:field name="dbo.Land.Zone" />
-			<pps:field name="dbo.Land.PostAdr" />
+			<pps:field name="dbo.Land.Iso" displayName="Iso" />
+			<pps:field name="dbo.Land.Name" displayName="Name" />
+			<pps:field name="dbo.Land.EnglishName" displayName="Englisch" />
+			<pps:field name="dbo.Land.Iso3" displayName="Iso3" />
+			<pps:field name="dbo.Land.Tld" displayName="TopLevelDomain" />
+			<pps:field name="dbo.Land.Vorwahl" displayName="Vorwahl" />
+			<pps:field name="dbo.Land.Zone" displayName="Zone" />
+			<pps:field name="dbo.Land.PostAdr" displayName="Postformat">
+				<pps:attribute name="inputType">MultiLine</pps:attribute>
+			</pps:field>
 			<pps:field name="dbo.Land.IsActive" />
 
 			<!-- definition for countries -->
 			<pps:field name="dbo.Waeh.Id" />
-			<pps:field name="dbo.Waeh.Name" />
-			<pps:field name="dbo.Waeh.Symbol" />
-			<pps:field name="dbo.Waeh.Kurs" />
-			<pps:field name="dbo.Waeh.Iso" />
+			<pps:field name="dbo.Waeh.Name" displayName="Name" />
+			<pps:field name="dbo.Waeh.Symbol" displayName="Symbol" />
+			<pps:field name="dbo.Waeh.Kurs" displayName="Kurs" />
+			<pps:field name="dbo.Waeh.Iso" displayName="Iso" />
 			<pps:field name="dbo.Waeh.System" />
 			<pps:field name="dbo.Waeh.IsActive" />
 
