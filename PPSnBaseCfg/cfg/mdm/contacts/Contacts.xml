@@ -150,10 +150,18 @@
 			<pps:dataset name="masterdata">
 				<pps:table name="Ktkt">
 					<pps:meta name="syncType">ChangeTracking: dbo.Ktkt</pps:meta>
-
 					<pps:column name="Id" fieldName="dbo.Ktkt.Id" isPrimary="true" />
 					<pps:column name="ObjkId" fieldName="dbo.Objk.Id" />
 					<pps:column name="Name" fieldName="dbo.Ktkt.Name" />
+
+					<pps:relation name="LandId" fieldName="dbo.Ktkt.LandId" relationName="KtktLand" parentTable="Land" parentColumn="Id" parentType="Root" />
+					<pps:column name="Region" fieldName="dbo.Ktkt.Region" />
+					<pps:column name="Strasse" fieldName="dbo.Ktkt.Strasse" />
+					<pps:column name="Zusatz" fieldName="dbo.Ktkt.Zusatz" />
+					<pps:column name="Postfach" fieldName="dbo.Ktkt.Postfach" />
+					<pps:column name="Plz" fieldName="dbo.Ktkt.Plz" />
+					<pps:column name="Ort" fieldName="dbo.Ktkt.Ort" />
+					<!--<pps:column name="Adresse" fieldName="dbo.Ktkt.Adresse" />-->
 				</pps:table>
 				
 				<pps:table name="Vika">
