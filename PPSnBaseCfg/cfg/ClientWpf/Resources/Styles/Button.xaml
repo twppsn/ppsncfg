@@ -325,11 +325,6 @@
 		<Setter Property="HorizontalAlignment" Value="Right"/>
 		<Setter Property="VerticalAlignment" Value="Top"/>
 		<Setter Property="Content" Value="{StaticResource windowClosePathGeometry}"/>
-		<Setter Property="CommandParameter">
-			<Setter.Value>
-				<sys:Int32>-1</sys:Int32>
-			</Setter.Value>
-		</Setter>
 	</Style>
 
 	
