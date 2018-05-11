@@ -161,7 +161,7 @@
 					<pps:column name="Postfach" fieldName="dbo.Ktkt.Postfach" />
 					<pps:column name="Plz" fieldName="dbo.Ktkt.Plz" />
 					<pps:column name="Ort" fieldName="dbo.Ktkt.Ort" />
-					<!--<pps:column name="Adresse" fieldName="dbo.Ktkt.Adresse" />-->
+					<pps:column name="Adresse" fieldName="dbo.Ktkt.Adresse" />
 				</pps:table>
 				
 				<pps:table name="Vika">
