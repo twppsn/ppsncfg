@@ -163,10 +163,12 @@ function FieldFactory:SimpleTableSelector(properties)
 	combo.ItemsSource = UI.Binding {
 		Path = properties.ItemsSource,
 		Mode = "OneWay",
-		Source = self:GetCode(context)
+		Source = self:GetCode(properties)
 	};
 	combo.SelectedValuePath = properties.SelectedValuePath or "Id"
 	combo.DisplayMemberPath = properties.DisplayMemberPath or "Name";
+
+	combo[self:GridLabel] = properties.displayName .. ":";
 
 	return combo;
 end;
