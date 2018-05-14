@@ -79,7 +79,7 @@
                         <ContentPresenter x:Name="NormalText" TextElement.Foreground="{TemplateBinding Foreground}" Margin="0,-2,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" SnapsToDevicePixels="True"/>
                     </Grid>
 					<ControlTemplate.Triggers>
-						<DataTrigger Binding="{Binding Path=Tag, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Calendar}}, Mode=OneWay}">
+						<DataTrigger Binding="{Binding Path=Tag, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Calendar}}}">
 							<DataTrigger.Value>
 								<sys:Boolean>true</sys:Boolean>
 							</DataTrigger.Value>
@@ -145,7 +145,7 @@
                         <ContentPresenter x:Name="NormalText" TextElement.Foreground="{TemplateBinding Foreground}" Margin="0,-2,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" SnapsToDevicePixels="True"/>
                     </Grid>
 					<ControlTemplate.Triggers>
-						<DataTrigger Binding="{Binding Path=Tag, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Calendar}}, Mode=OneWay}">
+						<DataTrigger Binding="{Binding Path=Tag, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Calendar}}}">
 							<DataTrigger.Value>
 								<sys:Boolean>true</sys:Boolean>
 							</DataTrigger.Value>
@@ -169,7 +169,7 @@
                                     <Style TargetType="{x:Type TextBlock}">
                                         <Setter Property="FontSize" Value="9.5"/>
 										<Style.Triggers>
-											<DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Calendar}}, Mode=OneWay}">
+											<DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Calendar}}}">
 												<DataTrigger.Value>
 													<sys:Boolean>true</sys:Boolean>
 												</DataTrigger.Value>
@@ -245,7 +245,7 @@
                                             </Grid>
                                         </Grid>
 										<ControlTemplate.Triggers>
-											<DataTrigger Binding="{Binding Path=Tag, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Calendar}}, Mode=OneWay}">
+											<DataTrigger Binding="{Binding Path=Tag, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Calendar}}}">
 												<DataTrigger.Value>
 													<sys:Boolean>true</sys:Boolean>
 												</DataTrigger.Value>
@@ -280,7 +280,7 @@
                                             </Grid>
                                         </Grid>
 										<ControlTemplate.Triggers>
-											<DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Calendar}}, Mode=OneWay}">
+											<DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Calendar}}}">
 												<DataTrigger.Value>
 													<sys:Boolean>true</sys:Boolean>
 												</DataTrigger.Value>
@@ -306,10 +306,10 @@
                                 </Grid.RowDefinitions>
                                 <!-- Start: Header button content -->
                                 <Button x:Name="PART_HeaderButton" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="5" HorizontalAlignment="Left" Margin="4,0" 
-											FontSize="10.5"
-											Focusable="False" 
-											Foreground="{TemplateBinding Foreground}"
-											Template="{StaticResource HeaderButtonTemplate}"/>
+										FontSize="10.5"
+										Focusable="False" 
+										Foreground="{TemplateBinding Foreground}"
+										Template="{StaticResource HeaderButtonTemplate}"/>
                                 <!-- End: Header button content -->
 
                                 <!-- Start: Previous button content -->
@@ -374,7 +374,7 @@
                             <Setter Property="Visibility" TargetName="PART_MonthView" Value="Hidden"/>
                             <Setter Property="Visibility" TargetName="PART_YearView" Value="Visible"/>
                         </DataTrigger>
-						<DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Calendar}}, Mode=OneWay}">
+						<DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Calendar}}}">
 							<DataTrigger.Value>
 								<sys:Boolean>true</sys:Boolean>
 							</DataTrigger.Value>
@@ -394,7 +394,15 @@
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="CalendarDayButtonStyle" Value="{StaticResource PpsCalendarDayButtonStyle}"/>
         <Setter Property="CalendarButtonStyle" Value="{StaticResource PpsCalendarButtonStyle}"/>
-        <Setter Property="Template">
+		<Setter Property="Width" Value="340"/>
+		<Setter Property="Height" Value="338"/>
+		<Setter Property="Tag">
+			<Setter.Value>
+				<sys:Boolean>true</sys:Boolean>
+			</Setter.Value>
+		</Setter>
+
+		<Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Calendar}">
                     <Grid x:Name="PART_Root">
@@ -406,17 +414,17 @@
 									  Style="{StaticResource PpsCalendarItemStyle}"/>
                     </Grid>
 					<ControlTemplate.Triggers>
-						<DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DatePicker}}, Mode=OneWay}">
+						<DataTrigger Binding="{Binding Tag, RelativeSource={RelativeSource AncestorType={x:Type DatePicker}}}">
 							<DataTrigger.Value>
-								<sys:Boolean>true</sys:Boolean>
+								<sys:Boolean>false</sys:Boolean>
 							</DataTrigger.Value>
 							<Setter Property="Tag">
 								<Setter.Value>
-									<sys:Boolean>true</sys:Boolean>
+									<sys:Boolean>false</sys:Boolean>
 								</Setter.Value>
 							</Setter>
-							<Setter Property="Width" Value="340"/>
-							<Setter Property="Height" Value="338"/>
+							<Setter Property="Width" Value="Auto"/>
+							<Setter Property="Height" Value="Auto"/>
 						</DataTrigger>
 					</ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -457,7 +465,7 @@
     <Style x:Key="PpsDatePickerStyle" TargetType="{x:Type DatePicker}">
         <Setter Property="Foreground" Value="{StaticResource PPSnWindowForegroundBrush}"/>
         <Setter Property="Background" Value="{StaticResource PPSnControlBackgroundBrush}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource PPSnControlNormalBorderBrush}"/>
+		<Setter Property="BorderBrush" Value="{StaticResource PPSnControlNormalBorderBrush}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Padding" Value="0"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
@@ -482,19 +490,21 @@
                                 <ColumnDefinition Width="*"/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-							<Button x:Name="PART_Button" Grid.Column="1" Foreground="{TemplateBinding Foreground}" Focusable="False" Width="20">
+							<Button x:Name="PART_Button" Grid.Column="1" Foreground="{TemplateBinding Foreground}" Focusable="False" Width="20" Opacity=".5">
 								<Button.Style>
 									<Style TargetType="{x:Type Button}">
-										<Setter Property="Background" Value="Transparent"/>
+										<Setter Property="Background" Value="Transparent" />
 										<Setter Property="Template">
 											<Setter.Value>
 												<ControlTemplate TargetType="{x:Type Button}">
-													<Border x:Name="buttonBorder" BorderThickness="0" Background="{StaticResource PPSnControlBackgroundBrush}">
-														<Path x:Name="arrow" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Opacity=".75"
-														  Stroke="{StaticResource PPSnWindowForegroundBrush}"
-														  StrokeThickness="1"
-														  StrokeDashCap="Round"
-														  Data="M 0,0 L5.5,5.5 11,0" />
+													<Border Background="{TemplateBinding Background}">
+														<Viewbox>
+															<Canvas Width="24" Height="24">
+																<Path Data="M5,9 L6,8 12,14 18,8 19,9 12,16 5,9Z "
+																	  Fill="{TemplateBinding Foreground}"
+																	  SnapsToDevicePixels="False" />
+															</Canvas>
+														</Viewbox>
 													</Border>
 												</ControlTemplate>
 											</Setter.Value>
@@ -512,8 +522,9 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsKeyboardFocusWithin" Value="True">
-                            <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource PPSnControlFocusedBorderBrush}"/>
-                        </Trigger>
+							<Setter TargetName="border" Property="BorderBrush" Value="{StaticResource PPSnControlFocusedBorderBrush}"/>
+							<Setter TargetName="PART_Button" Property="Opacity" Value=".65" />
+						</Trigger>
 						<Trigger Property="ui:PpsReadOnlyPaneBehavior.IsReadOnly">
 							<Trigger.Value>
 								<sys:Boolean>True</sys:Boolean>
