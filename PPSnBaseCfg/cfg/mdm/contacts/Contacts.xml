@@ -328,9 +328,6 @@
 				<pps:order name="nr" displayName="LiefNummer">
 					<![CDATA[ +LIEFNR ]]>
 				</pps:order>
-				<pps:order name="test" displayName="Test">
-					<![CDATA[ +Name ]]>
-				</pps:order>
 				<pps:order name="inaktiv" displayName="Inaktivierungsdatum">
 					<![CDATA[ +Inaktiv ]]>
 				</pps:order>
