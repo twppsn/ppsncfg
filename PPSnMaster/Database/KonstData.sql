@@ -10,10 +10,21 @@ WHEN NOT MATCHED BY TARGET THEN
 
 -- Land
 MERGE INTO dbo.Land AS Target
-USING (VALUES ('Deutschland','Germany','DE','DEU','.de',49,'EU'), ('Österreich','Austria','AT','AUT','.at',43,'EU'), ('Schweiz','Schwitzerland','CH','CHE','.ch',41,null), ('Frankreich','France','FR','FRA','.fr',33,'EU'), 
-('Russland','Russia','RU','RUS','.ru',7,null), ('Ungarn','Hungary','HU','HUN','.hu',null,null), ('Spanien','Spain','ES','ESP','.es',null,'EU'), ('Tschechien','Czech Republic','CZ','CZE','.cz',null,'EU'), ('Slowakei','Slovakia','SK','SVK','.sk',null,'EU'), 
-('Italien','Italy','IT','ITL','.it',null,'EU'), ('Finnland','Finland','FI','FIN','.fi',null,'EU'))
-       AS Source (NameDE, NameEN, Iso, Iso3, Tld, Vorwahl, Zone)
+USING (VALUES ('Deutschland','Germany','DE','DEU','.de',49,'EU','%%Name%%
+%%Zusatz::{}{0}\n%%%%Strasse%% 
+%%PLZ%% %%Ort%%
+%%LandId.Name%% %%Region::{}({0})%%'),
+('Österreich','Austria','AT','AUT','.at',43,'EU',null), 
+('Schweiz','Schwitzerland','CH','CHE','.ch',41,null,null), 
+('Frankreich','France','FR','FRA','.fr',33,'EU',null), 
+('Russland','Russia','RU','RUS','.ru',7,null,null), 
+('Ungarn','Hungary','HU','HUN','.hu',null,null,null), 
+('Spanien','Spain','ES','ESP','.es',null,'EU',null), 
+('Tschechien','Czech Republic','CZ','CZE','.cz',null,'EU',null), 
+('Slowakei','Slovakia','SK','SVK','.sk',null,'EU',null), 
+('Italien','Italy','IT','ITL','.it',null,'EU',null), 
+('Finnland','Finland','FI','FIN','.fi',null,'EU',null))
+       AS Source (NameDE, NameEN, Iso, Iso3, Tld, Vorwahl, Zone, PostAdr)
 ON Target.Name = Source.NameDE
 WHEN MATCHED THEN
     UPDATE SET Target.Name = Source.NameDE, Target.EnglishName = Source.NameEN, Target.Iso = Source.Iso, Target.Iso3 = Source.Iso3, Target.Tld = Source.Tld, Target.Vorwahl = Source.Vorwahl, Target.Zone = Source.Zone

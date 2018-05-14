@@ -21,7 +21,8 @@
 				<ui:PpsUICommandButton Image="delete" DisplayText="Löschen" Command="{Binding DataContext.DeleteCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=ui:PpsGenericWpfControl}}" />
 			</ui:PpsCommandBarControl>
 
-			<ui:PpsDataFilterList Grid.Row="1" Grid.Column="0" Margin="16" ItemsSource="{Binding View}" IsSynchronizedWithCurrentItem="True" Visibility="{Binding Converter={x:Static ui:PpsConverter.Visibility}}" />
+			<!--<ListBox Grid.Row="1" Grid.Column="0" Margin="16" ItemsSource="{Binding Source.View}" IsSynchronizedWithCurrentItem="True" Visibility="{Binding Converter={x:Static ui:PpsConverter.Visibility}}" />-->
+			<ui:PpsDataFilterList Grid.Row="1" Grid.Column="0" Margin="16" ItemsSource="{Binding Source.View}" IsSynchronizedWithCurrentItem="True" Visibility="{Binding Converter={x:Static ui:PpsConverter.Visibility}}" />
 
 			<ContentPresenter Grid.Row="1" Grid.Column="1" Margin="16" Content="{Binding View.CurrentItem}" ContentTemplateSelector="{ui:CodeBinding ConstantsTemplateSelector}" Visibility="{Binding Converter={x:Static ui:PpsConverter.Visibility}}" />
 		</Grid>
