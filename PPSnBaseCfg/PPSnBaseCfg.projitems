@@ -18,10 +18,7 @@
     <Content Include="$(MSBuildThisFileDirectory)cfg\constants\Plzd.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="$(MSBuildThisFileDirectory)cfg\mdm\constants\countries.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="$(MSBuildThisFileDirectory)cfg\mdm\constants\currencies.xml">
+    <Content Include="$(MSBuildThisFileDirectory)cfg\mdm\constants\InternationalConstants.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="$(MSBuildThisFileDirectory)cfg\mdm\contacts\Contacts.xml">
@@ -68,16 +65,13 @@
     <None Include="$(MSBuildThisFileDirectory)cfg\mdm\constants\constants.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="$(MSBuildThisFileDirectory)cfg\mdm\constants\countries.lua">
+    <None Include="$(MSBuildThisFileDirectory)cfg\mdm\constants\InternationalConstants.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="$(MSBuildThisFileDirectory)cfg\mdm\constants\currencies.lua">
+    <None Include="$(MSBuildThisFileDirectory)cfg\mdm\constants\Wpf\ConstantsWpf.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="$(MSBuildThisFileDirectory)cfg\mdm\constants\Wpf\countries.lua">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="$(MSBuildThisFileDirectory)cfg\mdm\constants\Wpf\currencies.lua">
+    <None Include="$(MSBuildThisFileDirectory)cfg\mdm\constants\Wpf\InternationalConstants.lua">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="$(MSBuildThisFileDirectory)cfg\mdm\contacts\contactsLocal.lua">
@@ -194,11 +188,7 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Include="$(MSBuildThisFileDirectory)cfg\mdm\constants\countryTemplate.xaml">
-      <SubType>Designer</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="$(MSBuildThisFileDirectory)cfg\mdm\constants\Wpf\countries.xaml">
+    <None Include="$(MSBuildThisFileDirectory)cfg\mdm\constants\Wpf\InternationalConstants.xaml">
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
@@ -239,7 +229,15 @@
     <Folder Include="$(MSBuildThisFileDirectory)cfg\reports\server\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="$(MSBuildThisFileDirectory)cfg\mdm\constants\currencyTemplate.xaml">
+    <None Include="$(MSBuildThisFileDirectory)cfg\mdm\constants\InternationalConstantsTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>
+      </Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)cfg\ClientWpf\Resources\Styles\Constants.xaml">
       <SubType>Designer</SubType>
       <Generator>
       </Generator>

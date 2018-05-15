@@ -16,6 +16,9 @@
         <ResourceDictionary Source="Resources/Styles/SideBarMenu.xaml" />
         <ResourceDictionary Source="Resources/Icons/DrawingImage.xaml" />
         <ResourceDictionary Source="Resources/Styles/Label.xaml" />
+
+		<ResourceDictionary Source="Resources/Styles/Constants.xaml" />
+
 		<ResourceDictionary Source="Resources/Styles/ComboBox.xaml" />
 		<ResourceDictionary Source="Resources/Styles/CheckBox.xaml" />
 		<ResourceDictionary Source="Resources/Styles/Progress.xaml" />

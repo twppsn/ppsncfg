@@ -2,6 +2,7 @@
 (
 	[Id] BIGINT NOT NULL CONSTRAINT pkPersId PRIMARY KEY IDENTITY (1,1), 
 	[KtktId] BIGINT NOT NULL CONSTRAINT fkPersKtktId REFERENCES dbo.Ktkt (Id) ON DELETE CASCADE,
+	[Kurz] CHAR(10) NULL,
 	[Tel] VARCHAR(30) NULL, 
 	[Fax] VARCHAR(30) NULL, 
 	[Mobil] VARCHAR(30) NULL, 
@@ -167,3 +168,11 @@ EXEC sp_addextendedproperty @name = N'MS_Description',
     @level2type = N'COLUMN',
     @level2name = N'Staat'
 GO
+EXEC sp_addextendedproperty @name = N'MS_Description',
+    @value = N'Kurzbezeichnung',
+    @level0type = N'SCHEMA',
+    @level0name = N'dbo',
+    @level1type = N'TABLE',
+    @level1name = N'Pers',
+    @level2type = N'COLUMN',
+    @level2name = N'Kurz'

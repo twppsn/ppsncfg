@@ -46,15 +46,20 @@
 		<pps:datawareHouse name="bi" />
 
 		<pps:register source="sys">
-			<pps:field name="sys.Fields.ObjectId" dataType="long">
+			<pps:field name="sys.Fields.ObjectId" dataType="long" displayName="Nr">
 				<pps:attribute name="clientDataType">ppsObject</pps:attribute>
 				<pps:attribute name="sourceColumn">dbo.ObjK.Id</pps:attribute>
+				<pps:attribute name="UseFieldFactory">CreateObjkNr</pps:attribute>
 			</pps:field>
 			<pps:field name="sys.Fields.ObjectLinkId" dataType="long">
 				<pps:attribute name="clientDataType">ppsLinkObject</pps:attribute>
 			</pps:field>
 			<pps:field name="sys.Fields.MasterDataKey" dataType="long">
 				<pps:attribute name="clientDataType">ppsMasterData</pps:attribute>
+			</pps:field>
+
+			<pps:field name="sys.Fields.Address" dataType="text" displayName="Adresse">
+				<pps:attribute name="clientDataType">text</pps:attribute>
 			</pps:field>
 
 			<pps:field name="sys.Fields.Path" dataType="string" />
@@ -104,7 +109,9 @@
 		<pps:register source="main">
 
 			<!-- object fields -->
-			<pps:field name="dbo.ObjK.Id" inherited="sys.Fields.ObjectId" />
+			<pps:field name="dbo.ObjK.Id" inherited="sys.Fields.ObjectId">
+				<pps:attribute name="UseFieldFactory">CreateObjkNr</pps:attribute>
+			</pps:field>
 			<pps:field name="dbo.ObjK.Guid" />
 			<pps:field name="dbo.ObjK.Typ" />
 			<pps:field name="dbo.ObjK.MimeType" />
@@ -138,9 +145,11 @@
 			<pps:field name="dbo.ObjR.CreateUserId" />
 
 			<pps:field name="dbo.User.Id" />
+			<pps:field name="dbo.User.KtktId" />
 			<pps:field name="dbo.User.Login" dataType="string" displayName="Nutzer">
 				<pps:attribute name="maxLength">32</pps:attribute>
 			</pps:field>
+			<pps:field name="dbo.User.Security" displayName="Sicherheit" />
 
 			<!-- objects -->
 			<pps:view name="dbo.objects">

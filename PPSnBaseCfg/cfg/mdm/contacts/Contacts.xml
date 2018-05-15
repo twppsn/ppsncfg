@@ -2,8 +2,7 @@
 <fragment xmlns="http://tecware-gmbh.de/dev/des/2014"
 		xmlns:pps="http://tecware-gmbh.de/dev/des/2015/ppsn">
 	
-	<?des-merge ../../mdm/constants/countries.xml?>
-	<?des-merge ../../mdm/constants/currencies.xml?>
+	<?des-merge ../../mdm/constants/InternationalConstants.xml?>
 	
 	<luaengine>
 		<script id="ContactsScript" filename="contactsServer.lua" />
@@ -37,9 +36,9 @@
 			<pps:field name="dbo.Ktkt.Ort" displayName="Ort" />
 			<pps:field name="dbo.Ktkt.Region" displayName="Region" />
 			<pps:field name="dbo.Ktkt.Plz" displayName="Postleitzahl" />
-			<pps:field name="dbo.Ktkt.Adresse" displayName="Adresse" />
-			<pps:field name="dbo.Ktkt.VAdresse" displayName="Versandadresse" />
-			<pps:field name="dbo.Ktkt.RAdresse" displayName="Rechnungsadresse" />
+			<pps:field name="dbo.Ktkt.Adresse" inherited="sys.Fields.Address" />
+			<pps:field name="dbo.Ktkt.VAdresse" inherited="sys.Fields.Address" displayName="Versandadresse" />
+			<pps:field name="dbo.Ktkt.RAdresse" inherited="sys.Fields.Address" displayName="Rechnungsadresse" />
 			<pps:field name="dbo.Ktkt.KoordL" displayName="Längengrad" >
 				<pps:attribute name="format" dataType="string">N6</pps:attribute>
 				<pps:attribute name="maxLength">9</pps:attribute>
@@ -82,6 +81,10 @@
 			<pps:field name="dbo.Pers.KtktId">
 				<pps:attribute name="refTable">KtKt</pps:attribute>
 			</pps:field>
+			<pps:field name="dbo.Pers.Kurz" displayName="Kurz">
+				<!-- override to 2 -->
+				<pps:attribute name="maxLength">2</pps:attribute>
+			</pps:field>
 			<pps:field name="dbo.Pers.Tel" displayName="Telefon" />
 			<pps:field name="dbo.Pers.Fax" displayName="Fax" />
 			<pps:field name="dbo.Pers.Mobil" displayName="Mobil" />
@@ -108,6 +111,7 @@
 			<pps:field name="dbo.Vika.Titel" displayName="Titel" />
 			<pps:field name="dbo.Vika.Tel" displayName="Telefon" />
 			<pps:field name="dbo.Vika.Fax" displayName="Fax" />
+			<!-- todo: Rename to Email -->
 			<pps:field name="dbo.Vika.Mail" displayName="E-Mail" />
 			<pps:field name="dbo.Vika.Mobil" displayName="Mobil" />
 			<pps:field name="dbo.Vika.Std" />
@@ -120,7 +124,7 @@
 			<pps:field name="dbo.Vika.Ort" displayName="Ort" />
 			<pps:field name="dbo.Vika.Region" displayName="Region" />
 			<pps:field name="dbo.Vika.Plz" displayName="Postleitzahl" />
-			<pps:field name="dbo.Vika.Adresse" displayName="Adresse" />
+			<pps:field name="dbo.Vika.Adresse" inherited="sys.Fields.Address" />
 
 			<!--  Ansprechpartner -->
 			<pps:view name="sds.Vika" displayName="Visitenkarten">
@@ -146,10 +150,18 @@
 			<pps:dataset name="masterdata">
 				<pps:table name="Ktkt">
 					<pps:meta name="syncType">ChangeTracking: dbo.Ktkt</pps:meta>
-
 					<pps:column name="Id" fieldName="dbo.Ktkt.Id" isPrimary="true" />
 					<pps:column name="ObjkId" fieldName="dbo.Objk.Id" />
 					<pps:column name="Name" fieldName="dbo.Ktkt.Name" />
+
+					<pps:relation name="LandId" fieldName="dbo.Ktkt.LandId" relationName="KtktLand" parentTable="Land" parentColumn="Id" parentType="Root" />
+					<pps:column name="Region" fieldName="dbo.Ktkt.Region" />
+					<pps:column name="Strasse" fieldName="dbo.Ktkt.Strasse" />
+					<pps:column name="Zusatz" fieldName="dbo.Ktkt.Zusatz" />
+					<pps:column name="Postfach" fieldName="dbo.Ktkt.Postfach" />
+					<pps:column name="Plz" fieldName="dbo.Ktkt.Plz" />
+					<pps:column name="Ort" fieldName="dbo.Ktkt.Ort" />
+					<pps:column name="Adresse" fieldName="dbo.Ktkt.Adresse" />
 				</pps:table>
 				
 				<pps:table name="Vika">
@@ -174,6 +186,7 @@
 					
 					<pps:column name="Id" fieldName="dbo.Pers.Id" isPrimary="true" />
 					<pps:relation name="KtktId" fieldName="dbo.Pers.KtktId" relationName="PersKtkt" parentTable="Ktkt" parentColumn="Id" parentType="Root" />
+					<pps:column name="Kurz" fieldName="dbo.Pers.Kurz" />
 					<pps:column name="Mail" fieldName="dbo.Pers.Mail" />
 				</pps:table>
 			</pps:dataset>
@@ -183,6 +196,7 @@
 				<pps:meta name="DefaultPaneUri" dataType="string">wpf/panes/contacts.xaml</pps:meta>
 
 				<pps:autoTag name="Name" tableName="Head" columnName="Name" mode="First" />
+				<pps:autoTag name="KurzName" tableName="Head" columnName="KurzName" mode="First" />
 				<pps:autoTag name="LiefNr" tableName="Kund" columnName="LiefNr" mode="Number" />
 				<pps:autoTag name="KundNr" tableName="Lief" columnName="KundNr" mode="Number" />
 				<pps:autoTag name="Tel" tableName="Pers" columnName="Tel" mode="First" />
@@ -243,6 +257,7 @@
 				<pps:table name="Pers">
 					<pps:column name="Id" fieldName="dbo.Pers.Id" isPrimary="true" />
 					<pps:relation name="KtktId" fieldName="dbo.Pers.KtktId" relationName="PersHead" parentTable="Head" parentColumn="Id" parentType="Root" />
+					<pps:column name="Kurz" fieldName="dbo.Pers.Kurz" />
 					<pps:column name="Tel" fieldName="dbo.Pers.Tel" />
 					<pps:column name="Fax" fieldName="dbo.Pers.Fax" />
 					<pps:column name="Mobil" fieldName="dbo.Pers.Mobil" />
@@ -257,6 +272,13 @@
 					<pps:column name="Kasse" fieldName="dbo.Pers.Kasse" />
 					<pps:column name="KindFrei" fieldName="dbo.Pers.KindFrei" />
 					<pps:column name="Staat" fieldName="dbo.Pers.Staat" />
+				</pps:table>
+
+				<pps:table name="User">
+					<pps:column name="Id" fieldName="dbo.User.Id" isPrimary="true" />
+					<pps:relation name="KtktId" fieldName="dbo.Pers.KtktId" relationName="UserHead" parentTable="Head" parentColumn="Id" parentType="Root" />
+					<pps:column name="Login" fieldName="dbo.User.Login" />
+					<pps:column name="Security" fieldName="dbo.User.Security" />
 				</pps:table>
 
 				<pps:table name="Vika">
@@ -305,9 +327,6 @@
 				</pps:order>
 				<pps:order name="nr" displayName="LiefNummer">
 					<![CDATA[ +LIEFNR ]]>
-				</pps:order>
-				<pps:order name="test" displayName="Test">
-					<![CDATA[ +Name ]]>
 				</pps:order>
 				<pps:order name="inaktiv" displayName="Inaktivierungsdatum">
 					<![CDATA[ +Inaktiv ]]>

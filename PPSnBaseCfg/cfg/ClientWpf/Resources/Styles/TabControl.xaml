@@ -10,17 +10,19 @@
         <Setter Property="Foreground" Value="{StaticResource PPSnWindowForegroundBrush}"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="IsTabStop" Value="False"/>
-		<Setter Property="Height" Value="46"/>
-		<Setter Property="Margin" Value="0,0,18,16"/>
+		<Setter Property="Height" Value="Auto"/>
+		<Setter Property="Margin" Value="0,0,18,8"/>
 		<Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabItem}">
-                    <Border x:Name="panel" BorderBrush="{StaticResource PPSnSeparatorBrush}" Background="Transparent"
-							BorderThickness="0,0,0,4" Margin="{TemplateBinding Margin}" SnapsToDevicePixels="True">
-                        <TextBlock Foreground="{StaticResource PPSnWindowForegroundBrush}" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,0,2,2">
-							<ContentPresenter ContentSource="Header"/>
-                        </TextBlock>
-                    </Border>
+					<Border Background="Transparent" Margin="{TemplateBinding Margin}" Padding="0,0,0,8">
+						<Border x:Name="panel" BorderBrush="{StaticResource PPSnSeparatorBrush}"
+								BorderThickness="0,0,0,4" SnapsToDevicePixels="True">
+							<TextBlock Foreground="{StaticResource PPSnWindowForegroundBrush}" FontSize="14" HorizontalAlignment="Left" Margin="0,0,1,1">
+								<ContentPresenter ContentSource="Header"/>
+							</TextBlock>
+						</Border>
+					</Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsSelected" Value="True">
                             <Setter TargetName="panel" Property="BorderBrush" Value="{StaticResource PPSnMarkerBrush}" />
@@ -59,7 +61,7 @@
 							<RowDefinition Height="Auto"/>
 							<RowDefinition Height="*"/>
 						</Grid.RowDefinitions>
-						<TabPanel x:Name="headerPanel" IsItemsHost="true" Grid.Row="0" KeyboardNavigation.TabIndex="1" Panel.ZIndex="1"/>
+						<TabPanel x:Name="headerPanel" IsItemsHost="true" Grid.Row="0" KeyboardNavigation.TabIndex="1" Panel.ZIndex="1" />
 						<Border x:Name="contentPanel" Grid.Row="1" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
 								Background="{TemplateBinding Background}"
 								KeyboardNavigation.DirectionalNavigation="Contained" KeyboardNavigation.TabIndex="2" KeyboardNavigation.TabNavigation="Local">
