@@ -48,7 +48,6 @@
 		<pps:register source="sys">
 			<pps:field name="sys.Fields.ObjectId" dataType="long" displayName="Nr">
 				<pps:attribute name="clientDataType">ppsObject</pps:attribute>
-				<pps:attribute name="sourceColumn">dbo.ObjK.Id</pps:attribute>
 				<pps:attribute name="UseFieldFactory">CreateObjkNr</pps:attribute>
 			</pps:field>
 			<pps:field name="sys.Fields.ObjectLinkId" dataType="long">
