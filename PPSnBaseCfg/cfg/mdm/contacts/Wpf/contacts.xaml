@@ -7,7 +7,7 @@
 						 mc:Ignorable="d" 
 						 HasSideBar="True"
 						 d:DesignHeight="300" d:DesignWidth="800"
-						 Title="Kontakt">
+						 Title="Kontakt" HasSideBar="True">
 	<x:Code>
 		<x:Uri>contacts.lua</x:Uri>
 	</x:Code>
