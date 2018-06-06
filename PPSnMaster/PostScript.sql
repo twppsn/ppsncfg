@@ -2,5 +2,5 @@
 :r .\Database\SystemUser.sql
 
 -- Konstanten
-:r .\Database\KonstData.sql
+--:r .\Database\KonstData.sql
 
