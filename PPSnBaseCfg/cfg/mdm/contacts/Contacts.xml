@@ -155,6 +155,7 @@
 					<pps:column name="Name" fieldName="dbo.Ktkt.Name" />
 
 					<pps:relation name="LandId" fieldName="dbo.Ktkt.LandId" relationName="KtktLand" parentTable="Land" parentColumn="Id" parentType="Root" />
+					<pps:relation name="ObjectsRow" fieldName="dbo.Ktkt.ObjkId" relationName="ObjectsRow" parentTable="Objects" parentColumn="Id" parentType="Root" />
 					<pps:column name="Region" fieldName="dbo.Ktkt.Region" />
 					<pps:column name="Strasse" fieldName="dbo.Ktkt.Strasse" />
 					<pps:column name="Zusatz" fieldName="dbo.Ktkt.Zusatz" />

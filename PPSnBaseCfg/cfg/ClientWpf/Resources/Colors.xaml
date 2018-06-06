@@ -47,19 +47,21 @@
 	</SolidColorBrush>
 	<SolidColorBrush x:Key="PPSnControlFocusedBorderBrush" Color="{StaticResource PPSnMarkerColor}"/>
 
-	<SolidColorBrush x:Key="PPSnMouseOverBrush">
+	<!--<SolidColorBrush x:Key="PPSnMouseOverBrush">
 		<SolidColorBrush.Color>
 			<ui:TransparencyResultColor BackColor="{StaticResource PPSnDesktopColor}" TransparentColor="{StaticResource PPSnAccentColor}" Transparency=".15" />
 		</SolidColorBrush.Color>
-	</SolidColorBrush>
+	</SolidColorBrush>-->
+	<SolidColorBrush x:Key="PPSnMouseOverBrush" Color="{StaticResource PPSnBlackColor}" Opacity=".1"/>
 
-	<SolidColorBrush x:Key="PPSnButtonPressedBrush" Color="{ui:AlphaBlendColor Source={StaticResource PPSnDesktopColor}, Destination={StaticResource PPSnBlackColor}, SourcePart=0.45}" />
+	<!--<SolidColorBrush x:Key="PPSnButtonPressedBrush" Color="{ui:AlphaBlendColor Source={StaticResource PPSnDesktopColor}, Destination={StaticResource PPSnBlackColor}, SourcePart=0.45}" />-->
+	<SolidColorBrush x:Key="PPSnButtonPressedBrush"  Color="{StaticResource PPSnBlackColor}" Opacity=".22"/>
 
 	<SolidColorBrush x:Key="PPSnImageBrush" Color="{StaticResource PPSnAccentColor}" Opacity=".80"/>
 
-	<SolidColorBrush x:Key="PPSnPopUpBackgroundBrush" Color="{ui:AlphaBlendColor Source={StaticResource PPSnDesktopColor}, Destination={StaticResource PPSnBlackColor}, SourcePart=0.75}" />
+	<SolidColorBrush x:Key="PPSnPopUpBackgroundBrush" Color="{ui:AlphaBlendColor Source={StaticResource PPSnDesktopColor}, Destination={StaticResource PPSnBlackColor}, SourcePart=0.8}" />
 
-	<SolidColorBrush x:Key="PPSnPopUpBorderBrush" Color="{ui:AlphaBlendColor Source={StaticResource PPSnDesktopColor}, Destination={StaticResource PPSnBlackColor}, SourcePart=0.35}" />
+	<SolidColorBrush x:Key="PPSnPopUpBorderBrush" Color="{ui:AlphaBlendColor Source={StaticResource PPSnDesktopColor}, Destination={StaticResource PPSnBlackColor}, SourcePart=0.5}" />
 
 	<SolidColorBrush x:Key="PPSnWindowFooterBrush" Color="{StaticResource PPSnWindowFooterColor}" />
 
