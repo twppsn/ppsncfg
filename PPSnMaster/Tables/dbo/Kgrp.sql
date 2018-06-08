@@ -7,7 +7,7 @@
 GO
 ALTER TABLE [dbo].[Kgrp] ENABLE CHANGE_TRACKING;
 GO
-GRANT SELECT, INSERT, UPDATE, DELETE ON [dbo].[Kgrp] TO public;
+GRANT SELECT, INSERT, UPDATE, DELETE, VIEW CHANGE TRACKING ON [dbo].[Kgrp] TO public;
 GO
 EXEC sp_addextendedproperty @name = N'MS_Description',
     @value = N'Primary Key',

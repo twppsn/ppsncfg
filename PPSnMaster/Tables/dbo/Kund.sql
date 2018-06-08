@@ -12,7 +12,7 @@
 GO
 ALTER TABLE [dbo].[Kund] ENABLE CHANGE_TRACKING;
 GO
-GRANT SELECT, INSERT, UPDATE, DELETE ON [dbo].[Kund] TO public;
+GRANT SELECT, INSERT, UPDATE, DELETE, VIEW CHANGE TRACKING ON [dbo].[Kund] TO public;
 GO
 EXEC sp_addextendedproperty @name = N'MS_Description',
     @value = N'FK zu Kontakt',

@@ -12,7 +12,7 @@
 GO
 ALTER TABLE [dbo].[Lief] ENABLE CHANGE_TRACKING;
 GO
-GRANT SELECT, INSERT, UPDATE, DELETE ON [dbo].[Lief] TO public;
+GRANT SELECT, INSERT, UPDATE, DELETE, VIEW CHANGE TRACKING ON [dbo].[Lief] TO public;
 GO
 EXEC sp_addextendedproperty @name = N'MS_Description',
     @value = N'ext. Kundennummer',
