@@ -5,7 +5,6 @@
 						 xmlns:ui="http://tecware-gmbh.de/ppsn/wpf/2015"
 						 xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
 						 mc:Ignorable="d" 
-						 HasSideBar="True"
 						 d:DesignHeight="300" d:DesignWidth="800"
 						 Title="Kontakt" HasSideBar="True">
 	<x:Code>
