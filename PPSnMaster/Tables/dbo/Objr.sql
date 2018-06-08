@@ -12,6 +12,8 @@
 	[CreateUserId] BIGINT NOT NULL CONSTRAINT fkObjrUserId REFERENCES dbo.[User] (Id)
 )
 GO
+GRANT SELECT, INSERT, UPDATE, DELETE ON [dbo].[ObjR] TO public;
+GO
 EXEC sp_addextendedproperty @name = N'MS_Description',
     @value = N'Document data (inline)',
     @level0type = N'SCHEMA',

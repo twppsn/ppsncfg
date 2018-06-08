@@ -13,6 +13,8 @@
 GO
 ALTER TABLE [dbo].[ObjK] ENABLE CHANGE_TRACKING;
 GO
+GRANT SELECT, INSERT, UPDATE, DELETE ON [dbo].[ObjK] TO public;
+GO
 EXEC sp_addextendedproperty @name = N'MS_Description',
     @value = N'PK',
     @level0type = N'SCHEMA',

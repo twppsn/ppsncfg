@@ -14,6 +14,8 @@
 GO
 ALTER TABLE [dbo].[Land] ENABLE CHANGE_TRACKING;
 GO
+GRANT SELECT, INSERT, UPDATE, DELETE ON [dbo].[Land] TO public;
+GO
 EXEC sp_addextendedproperty @name = N'MS_Description',
     @value = N'Primary key, FK zu Knst',
     @level0type = N'SCHEMA',

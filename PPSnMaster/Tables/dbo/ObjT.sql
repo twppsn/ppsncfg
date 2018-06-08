@@ -12,6 +12,8 @@
 GO
 ALTER TABLE [dbo].[ObjT] ENABLE CHANGE_TRACKING;
 GO
+GRANT SELECT, INSERT, UPDATE, DELETE ON [dbo].[ObjT] TO public;
+GO
 CREATE INDEX [idxObjtObjkId] ON [dbo].[ObjT] ([ObjKId])
 GO
 CREATE INDEX [idxObjtObjrId] ON [dbo].[ObjT] ([ObjRId])

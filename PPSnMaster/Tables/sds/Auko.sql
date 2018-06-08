@@ -19,6 +19,8 @@
 GO
 ALTER TABLE [sds].[Auko] ENABLE CHANGE_TRACKING;
 GO
+GRANT SELECT, INSERT, UPDATE, DELETE ON [sds].[Auko] TO public;
+GO
 CREATE INDEX [idxAukoObjkId] ON [sds].[Auko] ([ObjkId])
 GO
 CREATE INDEX [idxAukoKundId] ON [sds].[Auko] ([KundId])

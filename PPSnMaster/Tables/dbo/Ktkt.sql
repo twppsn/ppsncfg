@@ -32,6 +32,8 @@
 GO
 ALTER TABLE [dbo].[Ktkt] ENABLE CHANGE_TRACKING;
 GO
+GRANT SELECT, INSERT, UPDATE, DELETE ON [dbo].[Ktkt] TO public;
+GO
 EXEC sp_addextendedproperty @name = N'MS_Description',
     @value = N'FK zu Objk',
     @level0type = N'SCHEMA',
