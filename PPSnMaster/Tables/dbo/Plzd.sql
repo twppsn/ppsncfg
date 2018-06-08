@@ -14,6 +14,8 @@
 GO
 ALTER TABLE [dbo].[Plzd] ENABLE CHANGE_TRACKING;
 GO
+GRANT SELECT, INSERT, UPDATE, DELETE ON [dbo].[Plzd] TO public;
+GO
 EXEC sp_addextendedproperty @name = N'MS_Description',
     @value = N'Primary key',
     @level0type = N'SCHEMA',

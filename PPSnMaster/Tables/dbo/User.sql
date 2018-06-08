@@ -9,6 +9,8 @@
 GO
 ALTER TABLE [dbo].[User] ENABLE CHANGE_TRACKING;
 GO
+GRANT SELECT, INSERT, UPDATE, DELETE ON [dbo].[User] TO public;
+GO
 CREATE INDEX [idxUserKtktId] ON [dbo].[User] ([KtktId])
 GO
 EXEC sp_addextendedproperty @name = N'MS_Description',

@@ -9,6 +9,8 @@
 )
 
 GO
+GRANT SELECT, INSERT, UPDATE, DELETE ON [dbo].[ObjF] TO public;
+GO
 EXEC sp_addextendedproperty @name = N'MS_Description',
     @value = N'PK',
     @level0type = N'SCHEMA',

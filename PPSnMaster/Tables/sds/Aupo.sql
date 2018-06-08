@@ -11,7 +11,9 @@
 	[Termin] DATE NULL, 
 	[Menge] DECIMAL(15, 4) NULL
 )
+GO
 
+GRANT SELECT, INSERT, UPDATE, DELETE ON [sds].[Aupo] TO public;
 GO
 EXEC sp_addextendedproperty @name = N'MS_Description',
     @value = N'FK zu Objk',

@@ -10,6 +10,8 @@
 GO
 ALTER TABLE [dbo].[ObjL] ENABLE CHANGE_TRACKING;
 GO
+GRANT SELECT, INSERT, UPDATE, DELETE ON [dbo].[ObjL] TO public;
+GO
 CREATE INDEX [idxObjlParentObjkId] ON [dbo].[ObjL] ([ParentObjKId])
 GO
 CREATE INDEX [idxObjlParentObjrId] ON [dbo].[ObjL] ([ParentObjRId])

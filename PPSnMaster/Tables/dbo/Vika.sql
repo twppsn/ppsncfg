@@ -25,6 +25,8 @@
 GO
 ALTER TABLE [dbo].[Vika] ENABLE CHANGE_TRACKING;
 GO
+GRANT SELECT, INSERT, UPDATE, DELETE ON [dbo].[Vika] TO public;
+GO
 CREATE INDEX [idxVikaKtktId] ON [dbo].[Vika] ([KtktId])
 GO
 EXEC sp_addextendedproperty @name = N'MS_Description',
