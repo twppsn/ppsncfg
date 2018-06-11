@@ -14,6 +14,7 @@
 
 		<mime ext=".dll" mime="application/octet" />
 		<mime ext=".pdb" mime="application/octet" />
+		<mime ext=".xdataset" mime="text/dataset" packed="false" />
 	</http>
 
 	<luaengine script="LuaDebug">
