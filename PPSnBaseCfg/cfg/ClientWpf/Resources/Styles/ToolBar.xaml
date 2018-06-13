@@ -57,7 +57,7 @@
 								Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
                             <ContentPresenter/>
                         </Border>
-                        <Button x:Name="PART_Dropdown" Grid.Column="1" Width="21" Focusable="False" 
+						<Button x:Name="PART_SplitButton" Grid.Column="1" Width="21" Focusable="False" 
 								BorderThickness="0,1,1,1" BorderBrush="{TemplateBinding BorderBrush}" SnapsToDevicePixels="True"
 								Foreground="{StaticResource PPSnWindowForegroundBrush}" Background="{TemplateBinding Background}">
                             <Button.Style>
@@ -83,18 +83,18 @@
                         <Trigger Property="IsMouseOver" Value="true">
 							<Setter Property="Background" TargetName="layoutGrid" Value="{StaticResource PPSnMouseOverBrush}"/>
 							<Setter Property="BorderBrush" Value="{StaticResource PPSnWindowForegroundBrush}"/>
-							<Setter Property="BorderBrush" TargetName="PART_Dropdown" Value="{StaticResource PPSnWindowForegroundBrush}"/>
+							<Setter Property="BorderBrush" TargetName="PART_SplitButton" Value="{StaticResource PPSnWindowForegroundBrush}"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
 							<Setter Property="Background" TargetName="border" Value="{StaticResource PPSnButtonPressedBrush}"/>
                         </Trigger>
-                        <Trigger Property="IsPressed" SourceName="PART_Dropdown" Value="True">
-                            <Setter Property="Background" TargetName="PART_Dropdown" Value="{StaticResource PPSnButtonPressedBrush}"/>
+						<Trigger Property="IsPressed" SourceName="PART_SplitButton" Value="True">
+							<Setter Property="Background" TargetName="PART_SplitButton" Value="{StaticResource PPSnButtonPressedBrush}"/>
                         </Trigger>
                         <Trigger Property="IsOpen" Value="True">
 							<Setter Property="Background" TargetName="layoutGrid" Value="{StaticResource PPSnMouseOverBrush}"/>
 							<Setter Property="BorderBrush" Value="{StaticResource PPSnWindowForegroundBrush}"/>
-							<Setter Property="BorderBrush" TargetName="PART_Dropdown" Value="{StaticResource PPSnWindowForegroundBrush}"/>
+							<Setter Property="BorderBrush" TargetName="PART_SplitButton" Value="{StaticResource PPSnWindowForegroundBrush}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Opacity" Value="0.35"/>
