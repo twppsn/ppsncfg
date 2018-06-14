@@ -37,7 +37,7 @@ VikaNewCommand = command(
 	function (args) : void
 		local row;
 		do (trans = UndoManager:BeginTransaction("Neue Visitenkarte"))
-			row = VikaView:Add { Name = "Neuer Name" };
+			row = VikaView:Add {};
  			trans:Commit();
 		end;
 		SelectVika(row);
