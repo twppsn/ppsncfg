@@ -29,9 +29,14 @@ DeleteCommand = command(
 	function (args) : void
 		local def = GetCurrentDefinition(args:Target);
 		if def and def.View:CurrentItem then
-			do (trans = UndoManager:BeginTransaction("Lösche " .. def.Name))
-				def.View:CurrentItem:Remove();
-				trans:Commit();
+			local item = def.View:CurrentItem;
+			if item.Id > 0 then
+				msgbox("Der Datensatz wurde schon übertragen und kann nicht mehr gelöscht werden.");
+			else
+				do (trans = UndoManager:BeginTransaction("Lösche " .. item.Name))
+					item:Remove();
+					trans:Commit();
+				end;
 			end;
 		end;
 	end,
