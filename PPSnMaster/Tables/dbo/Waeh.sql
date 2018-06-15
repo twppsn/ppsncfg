@@ -5,7 +5,7 @@
 	[Symbol] NCHAR(5) NULL, 
 	[Kurs] DECIMAL(18, 4) NULL, 
 	[Iso] CHAR(3) NOT NULL,
-	[System] BIT NOT NULL,
+	[System] BIT NOT NULL CONSTRAINT dfWaehSystem DEFAULT 0,
 	[IsActive] BIT NOT NULL CONSTRAINT dfWaehIsActive DEFAULT  1
 )
 GO
