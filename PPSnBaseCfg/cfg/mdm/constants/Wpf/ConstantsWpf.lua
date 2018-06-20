@@ -13,7 +13,7 @@ AddCommand = command(
 		local def = GetCurrentDefinition(args:Target);
 		if def then
 			do (trans = UndoManager:BeginTransaction("Neu " .. def.Name))
-				local row = def.View:Add { Name = "Neuer Eintrag", IsActive = true };
+				local row = def.View:Add { IsActive = true };
 				def.View:CommitNew();
 				trans:Commit();
 				def.View:MoveCurrentTo(row);

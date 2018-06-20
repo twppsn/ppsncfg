@@ -29,7 +29,7 @@
 			<pps:field name="dbo.Waeh.Symbol" displayName="Symbol" />
 			<pps:field name="dbo.Waeh.Kurs" displayName="Kurs" />
 			<pps:field name="dbo.Waeh.Iso" displayName="Iso" />
-			<pps:field name="dbo.Waeh.System" />
+			<!--<pps:field name="dbo.Waeh.System" displayName="Systemwährung" />-->
 			<pps:field name="dbo.Waeh.IsActive" />
 
 			<pps:view name="masterData.Waeh" displayName="Währungen">
@@ -72,7 +72,7 @@
 					<pps:column name="Symbol" fieldName="dbo.Waeh.Symbol"/>
 					<pps:column name="Kurs" fieldName="dbo.Waeh.Kurs"/>
 					<pps:column name="ISO" fieldName="dbo.Waeh.Iso"/>
-					<pps:column name="System" fieldName="dbo.Waeh.System"/>
+					<!--<pps:column name="System" fieldName="dbo.Waeh.System"/>-->
 					<pps:column name="IsActive" fieldName="dbo.Waeh.IsActive" />
 				</pps:table>
 			</pps:dataset>
@@ -102,7 +102,7 @@
 					<pps:column name="Symbol" fieldName="dbo.Waeh.Symbol"/>
 					<pps:column name="Kurs" fieldName="dbo.Waeh.Kurs"/>
 					<pps:column name="ISO" fieldName="dbo.Waeh.Iso"/>
-					<pps:column name="System" fieldName="dbo.Waeh.System"/>
+					<!--<pps:column name="System" fieldName="dbo.Waeh.System"/>-->
 					<pps:column name="IsActive" fieldName="dbo.Waeh.IsActive" />
 				</pps:table>
 			</pps:dataset>
