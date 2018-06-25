@@ -19,7 +19,7 @@
 	</ui:PpsGenericWpfControl.SubTitle>
 
 	<ui:PpsGenericWpfControl.Commands>
-		<ui:PpsUICommandButton  Order="100,100" Image="upload" DisplayText="Übertragen" Description="Kontakt veröffentlichen/aktualiseren" Command="PushCommand" />
+		<ui:PpsUICommandButton Order="100,100" Image="upload" DisplayText="Übertragen" Description="Kontakt veröffentlichen/aktualiseren" Command="PushCommand" />
 	</ui:PpsGenericWpfControl.Commands>
 
 	<ui:PpsSideBarControl x:Name="SideBarControl">
