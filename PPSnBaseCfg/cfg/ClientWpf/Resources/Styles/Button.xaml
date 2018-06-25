@@ -124,33 +124,6 @@
 
 	<Style TargetType="{x:Type Button}" BasedOn="{StaticResource PPSnButtonStyle}" />
 
-	<Style x:Key="PPSnSelectionToggleButtonStyle" TargetType="{x:Type ToggleButton}">
-		<Setter Property="Background" Value="Transparent" />
-		<Setter Property="Foreground" Value="{StaticResource PPSnWindowForegroundBrush}" />
-		<Setter Property="BorderThickness" Value="0,0,0,4" />
-		<Setter Property="BorderBrush" Value="{StaticResource PPSnSeparatorBrush}" />
-		<Setter Property="FocusVisualStyle" Value="{x:Null}" />
-		<Setter Property="Focusable" Value="False" />
-		<Setter Property="IsTabStop" Value="False" />
-		<Setter Property="Template">
-			<Setter.Value>
-				<ControlTemplate TargetType="{x:Type ToggleButton}">
-					<Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" SnapsToDevicePixels="true">
-						<ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Bottom" Margin="0,0,2,2"/>
-					</Border>
-					<ControlTemplate.Triggers>
-						<Trigger Property="IsChecked" Value="True">
-							<Setter TargetName="border" Property="BorderBrush" Value="{StaticResource PPSnMarkerBrush}"/>
-						</Trigger>
-						<Trigger Property="IsMouseOver" Value="True">
-							<Setter TargetName="border" Property="Background" Value="{StaticResource PPSnMouseOverBrush}" />
-						</Trigger>
-					</ControlTemplate.Triggers>
-				</ControlTemplate>
-			</Setter.Value>
-		</Setter>
-	</Style>
-
 	<Style x:Key="PPSnShrinkButtonStyle" TargetType="{x:Type ToggleButton}">
         <Setter Property="Focusable" Value="False"/>
         <Setter Property="Foreground" Value="{StaticResource PPSnWindowForegroundBrush}"/>
