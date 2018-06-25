@@ -11,11 +11,10 @@
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="BorderBrush" Value="Transparent" />
-        <Setter Property="Padding" Value="6,0"/>
+        <Setter Property="Padding" Value="3,0,6,0"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="FontSize" Value="14"/>
         <Setter Property="Focusable" Value="False" />
-        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -29,7 +28,7 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="true">
 							<Setter Property="Background" Value="{StaticResource PPSnMouseOverBrush}"/>
-							<Setter Property="BorderBrush" Value="{StaticResource PPSnWindowForegroundBrush}"/>
+							<Setter Property="BorderBrush" Value="{StaticResource PPSnControlFocusedBorderBrush}"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
                             <Setter Property="Background" TargetName="border" Value="{StaticResource PPSnButtonPressedBrush}"/>
@@ -52,7 +51,7 @@
                             <ColumnDefinition Width="Auto"/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-						<Border x:Name="border" Padding="6,0,4,0" BorderThickness="{TemplateBinding BorderThickness}"
+						<Border x:Name="border" Padding="3,0,4,0" BorderThickness="{TemplateBinding BorderThickness}"
 								BorderBrush="{TemplateBinding BorderBrush}"
 								Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
                             <ContentPresenter/>
@@ -82,8 +81,8 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="true">
 							<Setter Property="Background" TargetName="layoutGrid" Value="{StaticResource PPSnMouseOverBrush}"/>
-							<Setter Property="BorderBrush" Value="{StaticResource PPSnWindowForegroundBrush}"/>
-							<Setter Property="BorderBrush" TargetName="PART_SplitButton" Value="{StaticResource PPSnWindowForegroundBrush}"/>
+							<Setter Property="BorderBrush" Value="{StaticResource PPSnControlFocusedBorderBrush}"/>
+							<Setter Property="BorderBrush" TargetName="PART_SplitButton" Value="{StaticResource PPSnControlFocusedBorderBrush}"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
 							<Setter Property="Background" TargetName="border" Value="{StaticResource PPSnButtonPressedBrush}"/>
@@ -93,8 +92,8 @@
                         </Trigger>
                         <Trigger Property="IsOpen" Value="True">
 							<Setter Property="Background" TargetName="layoutGrid" Value="{StaticResource PPSnMouseOverBrush}"/>
-							<Setter Property="BorderBrush" Value="{StaticResource PPSnWindowForegroundBrush}"/>
-							<Setter Property="BorderBrush" TargetName="PART_SplitButton" Value="{StaticResource PPSnWindowForegroundBrush}"/>
+							<Setter Property="BorderBrush" Value="{StaticResource PPSnControlFocusedBorderBrush}"/>
+							<Setter Property="BorderBrush" TargetName="PART_SplitButton" Value="{StaticResource PPSnControlFocusedBorderBrush}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Opacity" Value="0.35"/>
@@ -105,109 +104,61 @@
         </Setter>
     </Style>
 
-	<Style x:Key="PaneToolBarStyle" TargetType="{x:Type ToolBar}">
+	<Style x:Key="PpsPaneToolBarStyle" TargetType="{x:Type ToolBar}">
         <Style.Resources>
 			<ui:PpsToolbarDataTemplateSelector x:Key="toolbarDataTemplateSelector"/>
 			<DataTemplate x:Key="{x:Type ui:PpsUICommandButton}">
                 <Button Style="{StaticResource ToolBarButtonStyle}" ToolTip="{Binding Description}" Command="{Binding Command}">
                     <StackPanel Orientation="Horizontal">
-						<Viewbox Width="22" Height="22" Margin="0,0,3,0" HorizontalAlignment="Center">
-							<Canvas Width="24" Height="24">
-								<Path Data="{Binding Image, Mode=OneTime, Converter={x:Static ui:PpsConverter.ImageToPathGeometry}}"
-									  Fill="{StaticResource PPSnActionButtonBrush}"/>
-							</Canvas>
-						</Viewbox>
-						<TextBlock Text="{Binding DisplayText}" VerticalAlignment="Center" Foreground="{StaticResource PPSnWindowForegroundBrush}"/>
+						<ui:PpsGeometryImage GeometryName="{Binding Image}"
+											 GeometryCircled="False"
+											 Width="24"
+											 Height="24"
+											 Margin="0,0,3,0" />
+						<TextBlock Text="{Binding DisplayText}" VerticalAlignment="Center" Foreground="{StaticResource PPSnWindowForegroundBrush}" />
                     </StackPanel>
                 </Button>
             </DataTemplate>
 			<DataTemplate x:Key="{x:Type ui:PpsUISplitCommandButton}">
                 <ui:PpsSplitButton Style="{StaticResource ToolBarSplitButtonStyle}" ToolTip="{Binding Description}" Command="{Binding Command}"
-								 Popup="{Binding Popup}"
-								 ContextMenu="{Binding ContextMenu}">
+								   Popup="{Binding Popup}"
+								   ContextMenu="{Binding ContextMenu}">
 					<StackPanel Orientation="Horizontal">
-						<Viewbox Width="22" Height="22" Margin="0,0,3,0" HorizontalAlignment="Center">
-							<Canvas Width="24" Height="24">
-								<Path Data="{Binding Image, Mode=OneTime, Converter={x:Static ui:PpsConverter.ImageToPathGeometry}}"
-									  Fill="{StaticResource PPSnActionButtonBrush}"/>
-							</Canvas>
-						</Viewbox>
+						<ui:PpsGeometryImage GeometryName="{Binding Image}"
+											 GeometryCircled="False"
+											 Width="24"
+											 Height="24"
+											 Margin="0,0,3,0" />
 						<TextBlock Text="{Binding DisplayText}" VerticalAlignment="Center" Foreground="{StaticResource PPSnWindowForegroundBrush}"/>
                     </StackPanel>
                 </ui:PpsSplitButton>
             </DataTemplate>
 			<DataTemplate x:Key="Seperator">
-                <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Background="{StaticResource PPSnSeparatorBrush}" Margin="6" />
+                <Separator Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" Background="{StaticResource PPSnSeparatorBrush}" Margin="6,9" />
             </DataTemplate>
 		</Style.Resources>
 		
 		<Setter Property="ItemTemplateSelector" Value="{StaticResource toolbarDataTemplateSelector}"/>
 		<Setter Property="Background" Value="Transparent"/>
         <Setter Property="SnapsToDevicePixels" Value="True"/>
-		<Setter Property="Margin">
-			<Setter.Value>
-				<Thickness Left="{StaticResource PPSnPaneBorderSizeLeft}" 
-						   Top="0"
-						   Right="{StaticResource PPSnPaneBorderSizeRight}"
-						   Bottom="0" />
-			</Setter.Value>
-		</Setter>
 		<Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToolBar}">
-                    <Border x:Name="border" BorderBrush="{StaticResource PPSnSeparatorBrush}" BorderThickness="0,0,0,1" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
-                        <ToolBarPanel x:Name="toolBarPanel" Background="{TemplateBinding Background}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" Margin="0,0,0,2" IsItemsHost="true" />
+                    <Border x:Name="border" BorderBrush="{StaticResource PPSnSeparatorBrush}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+						<ToolBarPanel IsItemsHost="true" 
+									  Background="{TemplateBinding Background}" 
+									  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+							<ToolBarPanel.Margin>
+								<Thickness Left="{StaticResource PPSnPaneBorderSizeLeft}" 
+										   Top="0"
+										   Right="{StaticResource PPSnPaneBorderSizeRight}"
+										   Bottom="0" />
+							</ToolBarPanel.Margin>
+						</ToolBarPanel>
                     </Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="HasItems" Value="False">
-                            <Setter TargetName="border" Property="BorderBrush" Value="Transparent" />
-                        </Trigger>
-                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
 
-    <!-- PpsCommandbarControl
-    <Style TargetType="{x:Type uiC:PpsCommandbarControl}" >
-		<Setter Property="ItemsPanel">
-			<Setter.Value>
-				<ItemsPanelTemplate>
-					<StackPanel Orientation="Horizontal"/>
-				</ItemsPanelTemplate>
-			</Setter.Value>
-		</Setter>
-		<Style.Resources>
-			<DataTemplate x:Key="PpsUICommandButtonCircleTemplate">
-				<Button Style="{DynamicResource PPSnCircleButtonStyle}" 
-						Command="{Binding Command}"
-						Content="{Binding DisplayText}" 
-						ToolTip="{Binding Description}"
-						Tag="{Binding Image, Mode=OneTime, Converter={x:Static ui:PpsConverter.ImageToPathGeometry}}" 
-						Margin="0,0,16,0"/>
-			</DataTemplate>
-			<DataTemplate x:Key="PpsUICommandbarSeparatorTemplate">
-				<Grid Width="16"/>
-			</DataTemplate>
-
-			!- Default Templates -
-			<DataTemplate x:Key="PpsUICommandbarDefaultButtonCircleTemplate">
-				<Button Style="{DynamicResource PPSnCircleButtonStyle}" 
-						Command="{Binding Command}"
-                        Background="Red"
-						Content="{Binding DisplayText}" 
-						ToolTip="{Binding Description}"
-						Tag="{Binding Image, Mode=OneTime, Converter={x:Static ui:PpsConverter.ImageToPathGeometry}}" 
-						Margin="0,0,16,0"/>
-			</DataTemplate>
-			<DataTemplate x:Key="PpsUICommandbarDefaultButtonRectangleTemplate">
-				<Button Style="{DynamicResource PPSnButtonStyle}" 
-						Command="{Binding Command}"
-						Content="{Binding DisplayText}" 
-						ToolTip="{Binding Description}"
-						Tag="{Binding Image, Mode=OneTime, Converter={x:Static ui:PpsConverter.ImageToPathGeometry}}" 
-						Margin="0,0,16,0"/>
-			</DataTemplate>
-		</Style.Resources>
-	</Style> -->
 </ResourceDictionary>
