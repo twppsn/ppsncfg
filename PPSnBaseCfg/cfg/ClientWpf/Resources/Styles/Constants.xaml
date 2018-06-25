@@ -14,11 +14,11 @@
 				<ColumnDefinition Width="{DynamicResource PaneSpaceColumnWidth}"/>
 				<ColumnDefinition />
 			</Grid.ColumnDefinitions>
-			<Border BorderThickness="0,0,0,4" BorderBrush="{DynamicResource PPSnMarkerBrush}" HorizontalAlignment="Left" Height="28" SnapsToDevicePixels="True">
+			<Border BorderThickness="0,0,0,4" BorderBrush="{DynamicResource PPSnMarkerBrush}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" SnapsToDevicePixels="True">
 				<TextBlock Text="{Binding Name,Mode=OneWay}"
 						   Foreground="{DynamicResource PPSnWindowForegroundBrush}"
 						   VerticalAlignment="Bottom" 
-						   Margin="0,0,0,2"
+						   Margin="0,0,0,1"
 						   FontSize="14"
 						   FontWeight="SemiBold"/>
 			</Border>
