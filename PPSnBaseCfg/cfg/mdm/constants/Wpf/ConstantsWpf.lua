@@ -13,7 +13,7 @@ AddCommand = command(
 		local def = GetCurrentDefinition(args:Target);
 		if def then
 			do (trans = UndoManager:BeginTransaction("Neu " .. def.Name))
-				local row = def.View:Add { Name = "Neuer Eintrag", IsActive = true };
+				local row = def.View:Add { IsActive = true };
 				def.View:CommitNew();
 				trans:Commit();
 				def.View:MoveCurrentTo(row);
@@ -29,9 +29,14 @@ DeleteCommand = command(
 	function (args) : void
 		local def = GetCurrentDefinition(args:Target);
 		if def and def.View:CurrentItem then
-			do (trans = UndoManager:BeginTransaction("Lösche " .. def.Name))
-				def.View:CurrentItem:Remove();
-				trans:Commit();
+			local item = def.View:CurrentItem;
+			if item.Id > 0 then
+				msgbox("Der Datensatz wurde schon übertragen und kann nicht mehr gelöscht werden.");
+			else
+				do (trans = UndoManager:BeginTransaction("Lösche " .. item.Name))
+					item:Remove();
+					trans:Commit();
+				end;
 			end;
 		end;
 	end,
@@ -44,7 +49,9 @@ PushCommand = command(
     function (args) : void
 		UpdateSources();
 		if Data:IsDirty or Data:Object:IsDocumentChanged then
-			await(PushDataAsync());
+			do (ui = disableUI("Veröffentlichung läuft..."))
+				await(PushDataAsync());
+			end;
 		else
 			msgbox("Es gibt keine Änderungen.", "Information");
 		end
