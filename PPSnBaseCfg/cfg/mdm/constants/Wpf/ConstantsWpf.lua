@@ -49,7 +49,9 @@ PushCommand = command(
     function (args) : void
 		UpdateSources();
 		if Data:IsDirty or Data:Object:IsDocumentChanged then
-			await(PushDataAsync());
+			do (ui = disableUI("Veröffentlichung läuft..."))
+				await(PushDataAsync());
+			end;
 		else
 			msgbox("Es gibt keine Änderungen.", "Information");
 		end
