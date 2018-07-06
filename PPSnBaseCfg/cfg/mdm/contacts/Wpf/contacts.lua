@@ -1,18 +1,9 @@
 ﻿
 -- Global Properties --
-VikaView = getView(Data:Head:First:VikaHead);
-
-local vikaSource = createSource {
-	Source = Data:Head:First:VikaHead,
-	SortDescriptions = { "+Name" }
-};
-
-VikaListView  = vikaSource:View;
-	
 PushCommand = command(
 	function (args) : void
 		UpdateSources();
-		if Data:Head:First:Name == nil or (Data:Head:First:Name:gsub("^%s*", "")) == ''  then
+		if HeadRow:Name == nil or (HeadRow:Name:gsub("^%s*", "")) == ''  then
 			msgbox("Das Feld Name darf nicht leer sein."  );
 			return;
 		end
@@ -27,17 +18,38 @@ PushCommand = command(
 local function SelectVika(row) : void
 	VikaView:MoveCurrentTo(row);
 end;
-SelectVika(nil);
 
 function SelectVikaItem(sender, e) : void
 	SelectVika(e.Parameter);
+end;
+
+local function createViews()
+	HeadRow = Data:Head:First;
+
+	VikaSource = createSource {
+		Source = HeadRow:VikaHead,
+		SortDescriptions = { "+Name" }
+	};
+	VikaView = VikaSource:View;
+
+	VikaListSource = createSource {
+		Source = HeadRow:VikaHead,
+		SortDescriptions = { "+Name" }
+	};
+	VikaListView = VikaListSource:View;
+
+	SelectVika(nil);
+end;
+
+function OnDataChanged() : void
+	createViews();
 end;
 
 VikaNewCommand = command(
 	function (args) : void
 		local row;
 		do (trans = UndoManager:BeginTransaction("Neue Visitenkarte"))
-			row = VikaView:Add {};
+			row = HeadRow:VikaHead:Add{};
  			trans:Commit();
 		end;
 		SelectVika(row);
