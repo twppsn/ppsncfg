@@ -14,7 +14,7 @@ PushCommand = command(
 		UpdateSources();
 		-- Pflichtfelder Ktkt
 		if Data:Head:First:Name == nil or (Data:Head:First:Name:gsub("^%s*", "")) == ''  then
-			msgbox("Das Feld Name darf nicht leer sein.");
+			msgbox("Das Feld 'Name' darf nicht leer sein.");
 			return;
 		end
 		-- Pflichtfelder Vika
