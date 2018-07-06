@@ -3,10 +3,18 @@
 PushCommand = command(
 	function (args) : void
 		UpdateSources();
+		-- Pflichtfelder Ktkt
 		if HeadRow:Name == nil or (HeadRow:Name:gsub("^%s*", "")) == ''  then
-			msgbox("Das Feld Name darf nicht leer sein."  );
+			msgbox("Das Feld 'Name' darf nicht leer sein.");
 			return;
 		end
+		-- Pflichtfelder Vika
+		foreach row in Data:Vika do
+			if row.Name == nil then
+				msgbox("Das Feld 'Name' in der Visitenkarte darf nicht leer sein.");
+				return;
+			end;
+		end;
 		if Data:IsDirty or Data:Object:IsDocumentChanged then
 			await(PushDataAsync());
 		else
