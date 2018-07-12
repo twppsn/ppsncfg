@@ -15,7 +15,7 @@
 	[Funktion] NVARCHAR(50) NULL, 
 	[Brief] NVARCHAR(50) NULL, 
 	[Postfach] NVARCHAR(20) NULL, 
-	[Zusatz] NVARCHAR(20) NULL, 
+	[Zusatz] NVARCHAR(100) NULL, 
 	[Strasse] NVARCHAR(50) NULL, 
 	[Ort] NVARCHAR(50) NULL, 
 	[Region] NVARCHAR(50) NULL, 

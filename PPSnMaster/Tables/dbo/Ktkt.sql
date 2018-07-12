@@ -14,7 +14,7 @@
 	[WaehId] BIGINT NULL CONSTRAINT fkKtktWaehId REFERENCES dbo.Waeh (Id),
 	[LandId] BIGINT NULL CONSTRAINT fkKtktLandId REFERENCES dbo.Land (Id),
 	[Postfach] NVARCHAR(20) NULL, 
-	[Zusatz] NVARCHAR(20) NULL, 
+	[Zusatz] NVARCHAR(100) NULL, 
 	[Strasse] NVARCHAR(50) NULL, 
 	[Ort] NVARCHAR(50) NULL, 
 	[Region] NVARCHAR(50) NULL, 
