@@ -5,7 +5,7 @@ pushContract = command(
 		if Data:IsDirty or Data:Object:IsDocumentChanged then
 			await(PushDataAsync());
 		else
-			msgbox("Es gibt keine Änderungen.", "Information");
+			msgbox(text = "Es gibt keine Änderungen.", caption = "Information", image = clr.System.Windows.MessageBoxImage.Information);
 		end
     end
 );

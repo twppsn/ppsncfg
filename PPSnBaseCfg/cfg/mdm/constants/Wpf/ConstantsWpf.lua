@@ -53,7 +53,7 @@ PushCommand = command(
 				await(PushDataAsync());
 			end;
 		else
-			msgbox("Es gibt keine Änderungen.", "Information");
+			msgbox(text = "Es gibt keine Änderungen.", caption = "Information", image = clr.System.Windows.MessageBoxImage.Information);
 		end
     end
 );
