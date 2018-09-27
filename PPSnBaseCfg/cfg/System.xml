@@ -35,7 +35,12 @@
 			<pps:action name="close" displayName="Schließen" priority="-1000" displayImage="closeOctagon">
 				<pps:code><![CDATA[ Window:Close() ]]></pps:code>
 			</pps:action>
-			
+
+			<pps:action name="pdfOpen" displayName="Öffnen"  priority="100">
+				<pps:condition><![CDATA[return CurrentItem ~= nil and CurrentItem.MimeType == "application/pdf"]]></pps:condition>
+				<pps:code><![CDATA[ Window:OpenPane { paneType = "pdf", Object = GetObject(CurrentItem.Id) } ]]></pps:code>
+			</pps:action>
+
 			<pps:environment id="ppsData" priority="100">
 				<pps:code>
 					<![CDATA[ self:require 'wpf/panes/ppsGlobal.lua'; ]]>
