@@ -114,7 +114,7 @@
 
 			<pps:action name="mdmInternatinalEdit" displayName="Bearbeiten" displayImage="edit" priority="200">
 				<pps:condition><![CDATA[ return CurrentItem ~= nil and CurrentItem.Typ == "mdmInternational" ]]></pps:condition>
-				<pps:code><![CDATA[ Window:LoadMask{ object = GetObject(CurrentItem.Id) }; ]]></pps:code>
+				<pps:code><![CDATA[ Window:LoadPane{ PaneType = "mask", Object = GetObject(CurrentItem.Id) }; ]]></pps:code>
 			</pps:action>
 		</pps:wpf>
 

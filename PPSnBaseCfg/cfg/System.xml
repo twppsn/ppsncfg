@@ -38,7 +38,7 @@
 
 			<pps:action name="pdfOpen" displayName="Öffnen"  priority="100">
 				<pps:condition><![CDATA[return CurrentItem ~= nil and CurrentItem.MimeType == "application/pdf"]]></pps:condition>
-				<pps:code><![CDATA[ Window:OpenPane { paneType = "pdf", Object = GetObject(CurrentItem.Id) } ]]></pps:code>
+				<pps:code><![CDATA[ Window:LoadPane { PaneType = "pdf", Object = GetObject(CurrentItem.Id) } ]]></pps:code>
 			</pps:action>
 
 			<pps:environment id="ppsData" priority="100">

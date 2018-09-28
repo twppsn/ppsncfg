@@ -96,11 +96,11 @@
 
 			<pps:action name="offerNew" displayName="Neues Angebot" displayImage="filePlus" priority="100">
 				<pps:condition><![CDATA[ return CurrentView == Views.sdsOffer; ]]></pps:condition>
-				<pps:code><![CDATA[ Window:LoadMask{ createNew = 'sdsOffer' }; ]]></pps:code>
+				<pps:code><![CDATA[ Window:LoadPane { PaneType = "mask", createNew = 'sdsOffer' }; ]]></pps:code>
 			</pps:action>
 			<pps:action name="offerOpen" displayName="Bearbeiten" displayImage="edit" priority="200">
 				<pps:condition><![CDATA[ return CurrentItem ~= nil and CurrentItem.Typ == "sdsOffer" ]]></pps:condition>
-				<pps:code><![CDATA[ Window:LoadMask{ object = GetObject(CurrentItem.Id) }; ]]> </pps:code>
+				<pps:code><![CDATA[ Window:LoadPane { PaneType = "mask", Object = GetObject(CurrentItem.Id) }; ]]> </pps:code>
 			</pps:action>
 		</pps:wpf>
 

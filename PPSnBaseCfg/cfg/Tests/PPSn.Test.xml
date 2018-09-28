@@ -17,14 +17,14 @@
 			<pps:action name="helloLua" displayName="HalloLua" priority="1000">
 				<pps:code>
 					<![CDATA[
-				Window:LoadPane{ pane = '/wpf/panes/hello.lua', mode = clr.TecWare.PPSn.UI.PpsOpenPaneMode.NewPane, index = IncrementHelloIndex() }; 
+				Window:LoadGenericPane { Pane = '/wpf/panes/hello.lua', Mode = clr.TecWare.PPSn.UI.PpsOpenPaneMode.NewPane, index = IncrementHelloIndex() }; 
 				]]>
 				</pps:code>
 			</pps:action>
 			<pps:action name="helloXaml" displayName="HalloXaml" priority="1010">
 				<pps:code>
 					<![CDATA[
-				Window:LoadPane{ pane = '/wpf/panes/helloXaml.xaml', mode = clr.TecWare.PPSn.UI.PpsOpenPaneMode.NewPane, index = IncrementHelloIndex() }; 
+				Window:LoadGenericPane { Pane = '/wpf/panes/helloXaml.xaml', Mode = clr.TecWare.PPSn.UI.PpsOpenPaneMode.NewPane, index = IncrementHelloIndex() }; 
 				]]>
 				</pps:code>
 			</pps:action>
