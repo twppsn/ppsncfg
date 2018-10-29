@@ -13,8 +13,7 @@
 	<Color x:Key="PPSnControlBackgroundColor">#18543A</Color>
 	<Color x:Key="PPSnActionButtonColor">#47F7AB</Color>
 	<Color x:Key="PPSnWindowFooterColor">#637C36</Color>
-	<Color x:Key="PPSnBlackColor">#000</Color>
-
+	<Color x:Key="PPSnBlackColor">#FFFFFF</Color>
 	<sys:Single x:Key="Alternation0Transpareny">0.175</sys:Single>
 	<sys:Single x:Key="Alternation1Transpareny">0.098</sys:Single>
 	<sys:Single x:Key="SideBarTranspareny">0.08</sys:Single>
