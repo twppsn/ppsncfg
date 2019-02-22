@@ -16,7 +16,7 @@ CREATE TRIGGER dbo.UserInsert ON dbo.[User] AFTER INSERT
 AS
 BEGIN
 	UPDATE dbo.[User] 
-		SET Identicon = dbo.GetIdenticonFromHash(dbo.GetStringHashCode(i.[Login])) 
+		SET Identicon = dbo.GetIdenticonFromHash(dbo.GetStringHashCode(i.[Login]))
 		FROM inserted i
 			INNER JOIN dbo.[User] u ON (i.Id = u.Id);
 END;
