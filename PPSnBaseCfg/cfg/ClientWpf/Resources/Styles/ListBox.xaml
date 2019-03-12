@@ -7,7 +7,7 @@
 		<ResourceDictionary Source="../Colors.xaml" />
 	</ResourceDictionary.MergedDictionaries>
 
-    <Style x:Key="PPSnListBoxStyle" TargetType="{x:Type ListBox}">
+    <!--<Style x:Key="PPSnListBoxStyle" TargetType="{x:Type ListBox}">
 		<Setter Property="Foreground" Value="{StaticResource PPSnWindowForegroundBrush}"/>
 		<Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
@@ -35,9 +35,72 @@
 				</ControlTemplate>
             </Setter.Value> 
         </Setter>
-    </Style>
+    </Style>-->
+
+	<Style x:Key="PPSnListBoxStyle" TargetType="{x:Type ListBox}">
+		<Setter Property="Foreground" Value="{StaticResource PPSnWindowForegroundBrush}"/>
+		<Setter Property="Background" Value="{StaticResource PPSnControlBackgroundBrush}"/>
+		<Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+		<Setter Property="BorderThickness" Value="0"/>
+		<Setter Property="BorderBrush" Value="{StaticResource PPSnControlNormalBorderBrush}"/>
+		<Setter Property="SnapsToDevicePixels" Value="True"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type ListBox}">
+					<Border x:Name="border" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}"
+							Background="{TemplateBinding Background}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+						<ScrollViewer x:Name="scrollviewer" Focusable="false" Padding="{TemplateBinding Padding}" Style="{StaticResource PPSnScrollViewerStyle}" >
+							<ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+						</ScrollViewer>
+					</Border>
+					<ControlTemplate.Triggers>
+						<Trigger Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled">
+							<Setter TargetName="scrollviewer" Property="VerticalScrollBarVisibility" Value="Disabled"/>
+						</Trigger>
+						<Trigger Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled">
+							<Setter TargetName="scrollviewer" Property="HorizontalScrollBarVisibility" Value="Disabled"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
 
 	<Style x:Key="PPSnAlternatingListBoxItemStyle" TargetType="{x:Type ListBoxItem}">
+		<Setter Property="Background" Value="Transparent" />
+		<Setter Property="Foreground" Value="{StaticResource PPSnWindowForegroundBrush}" />
+		<Setter Property="FocusVisualStyle" Value="{x:Null}" />
+		<Setter Property="SnapsToDevicePixels" Value="True"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type ListBoxItem}">
+					<Grid>
+						<Grid.RowDefinitions>
+							<RowDefinition />
+							<RowDefinition Height="2" />
+						</Grid.RowDefinitions>
+						<Border x:Name="border" Background="{TemplateBinding Background}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+							<ContentPresenter Margin="6,1"/>
+						</Border>
+						<Rectangle x:Name="focusRect" Stroke="{StaticResource PPSnMarkerBrush}" StrokeThickness="1"
+								   RenderOptions.EdgeMode="Aliased" Opacity="0" />
+						<Rectangle Grid.Row="1" Margin="6,0" StrokeThickness="0" Fill="{StaticResource PPSnWindowBackgroundBrush}" />
+					</Grid>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsSelected" Value="True">
+							<Setter Property="Background" Value="{StaticResource PPSnSelectionBarBrush}" />
+						</Trigger>
+						<Trigger Property="IsFocused" Value="True">
+							<Setter TargetName="focusRect" Property="Opacity" Value="1" />
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+
+	<!--<Style x:Key="PPSnAlternatingListBoxItemStyle" TargetType="{x:Type ListBoxItem}">
 		<Setter Property="Background" Value="{StaticResource PPSnAlternation0Brush}"/>
 		<Setter Property="Foreground" Value="{StaticResource PPSnWindowForegroundBrush}"/>
 		<Setter Property="Margin" Value="0,0,0,1"/>
@@ -64,7 +127,7 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-    </Style>
+    </Style>-->
 
 	<Style x:Key="PPSnNoFocusListBoxItemStyle" TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource PPSnAlternatingListBoxItemStyle}">
 		<Setter Property="Focusable" Value="False" />
