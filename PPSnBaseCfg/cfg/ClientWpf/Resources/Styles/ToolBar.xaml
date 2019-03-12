@@ -108,7 +108,7 @@
         <Style.Resources>
 			<ui:PpsToolbarDataTemplateSelector x:Key="toolbarDataTemplateSelector"/>
 			<DataTemplate x:Key="{x:Type ui:PpsUICommandButton}">
-                <Button Style="{StaticResource ToolBarButtonStyle}" ToolTip="{Binding Description}" Command="{Binding Command}">
+                <Button Style="{StaticResource ToolBarButtonStyle}" ToolTip="{Binding Description}" Command="{Binding Command}" CommandTarget="{Binding CommandTarget}" CommandParameter="{Binding ConverterParameter}">
                     <StackPanel Orientation="Horizontal">
 						<ui:PpsGeometryImage GeometryName="{Binding Image}"
 											 GeometryCircled="False"
@@ -120,7 +120,7 @@
                 </Button>
             </DataTemplate>
 			<DataTemplate x:Key="{x:Type ui:PpsUISplitCommandButton}">
-                <ui:PpsSplitButton Style="{StaticResource ToolBarSplitButtonStyle}" ToolTip="{Binding Description}" Command="{Binding Command}"
+				<ui:PpsSplitButton Style="{StaticResource ToolBarSplitButtonStyle}" ToolTip="{Binding Description}" Command="{Binding Command}" CommandTarget="{Binding CommandTarget}" CommandParameter="{Binding ConverterParameter}"
 								   Popup="{Binding Popup}"
 								   ContextMenu="{Binding ContextMenu}">
 					<StackPanel Orientation="Horizontal">
