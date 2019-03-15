@@ -61,11 +61,12 @@
 				<ColumnDefinition Width="100"/>
 				<ColumnDefinition Width="150"/>
 			</Grid.ColumnDefinitions>
-			<Canvas Grid.Column="0" Grid.RowSpan="2" Width="24" Height="24">
+			<Canvas Grid.RowSpan="2" HorizontalAlignment="Left" Width="24" Height="24">
 				<Path Data="{StaticResource contactsPathGeometry}" Fill="{StaticResource PPSnActionButtonBrush}" Opacity=".75"/>
 			</Canvas>
-			<TextBlock Grid.Column="1" Text="Kontakt" VerticalAlignment="Bottom"/>
-			<TextBlock Text="{Binding Nr}" Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" ToolTip="Kontaktnummer" />
+			<TextBlock Grid.Column="1" Text="Kontakt" VerticalAlignment="Bottom" />
+			<TextBlock Text="{Binding Nr}" Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" FontWeight="SemiBold" ToolTip="Kontaktnummer" />
+
 			<TextBlock Text="{Binding Name}" Grid.Column="3" Grid.RowSpan="2" VerticalAlignment="Center" FontWeight="Bold" ToolTip="Name"/>
 			<TextBlock Text="{Binding Adresse}" Grid.Column="4" Grid.RowSpan="2" FontStretch="Expanded" ToolTip="Adresse"/>
 			<TextBlock Text="{Binding LiefNr}" Grid.Column="5" ToolTip="Debitorennummer"/>
