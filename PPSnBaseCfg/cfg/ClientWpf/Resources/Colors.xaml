@@ -25,7 +25,7 @@
 	<SolidColorBrush x:Key="PPSnWindowForegroundBrush" Color="{StaticResource PPSnAccentColor}" />
 	<SolidColorBrush x:Key="PPSnMarkerBrush" Color="{StaticResource PPSnMarkerColor}" />
 	<SolidColorBrush x:Key="PPSnActionButtonBrush" Color="{StaticResource PPSnActionButtonColor}" />
-	<SolidColorBrush x:Key="PPSnWindowDisabledForegroundBrush" Color="{StaticResource PPSnAccentColor}" Opacity="0.35" />
+	<SolidColorBrush x:Key="PPSnWindowDisabledForegroundBrush" Color="{StaticResource PPSnAccentColor}" Opacity="0.3" />
 
 	<SolidColorBrush x:Key="PPSnAlternation0Brush">
 		<SolidColorBrush.Color>
