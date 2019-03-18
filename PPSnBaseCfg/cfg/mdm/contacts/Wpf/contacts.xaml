@@ -75,10 +75,10 @@
 						<RowDefinition Height="Auto" />
 						<RowDefinition />
 					</Grid.RowDefinitions>
-					<ui:PpsCommandBarControl Mode="Circle">
+					<ui:PpsCommandBar Mode="Circle">
 						<ui:PpsUICommandButton Order="100,100" Image="filePlus" DisplayText="Neu" Description="Neue Visitenkarte" Command="VikaNewCommand" />
 						<ui:PpsUICommandButton Order="110,120" Image="delete" DisplayText="Löschen" Description="Visitenkarte löschen" Command="VikaRemoveCommand"/>
-					</ui:PpsCommandBarControl>
+					</ui:PpsCommandBar>
 					<ui:PpsDataFilterList Grid.Row="1" Margin="16" 
 										  ItemsSource="{Binding VikaListView}"
 										  IsSynchronizedWithCurrentItem="True"

@@ -22,10 +22,10 @@
 						   FontSize="14"
 						   FontWeight="SemiBold"/>
 			</Border>
-			<ui:PpsCommandBarControl Grid.Column="2">
+			<ui:PpsCommandBar Grid.Column="2">
 				<ui:PpsUICommandButton Image="filePlus" DisplayText="Neu" Command="{Binding DataContext.AddCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=ui:PpsGenericWpfControl}}" />
 				<ui:PpsUICommandButton Image="delete" DisplayText="Löschen" Command="{Binding DataContext.DeleteCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=ui:PpsGenericWpfControl}}" />
-			</ui:PpsCommandBarControl>
+			</ui:PpsCommandBar>
 			<ui:PpsDataFilterList Grid.Row="1"
 								  ItemsSource="{Binding Source.View}"
 								  IsSynchronizedWithCurrentItem="True"
