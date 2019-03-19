@@ -6,7 +6,6 @@
 		<ResourceDictionary Source="Resources/Colors.xaml" />
         <ResourceDictionary Source="Resources/Dimensions.xaml" />
         <ResourceDictionary Source="Resources/Styles/Button.xaml" />
-        <ResourceDictionary Source="Resources/Styles/ToolBar.xaml" />
         <ResourceDictionary Source="Resources/Styles/TabControl.xaml" />
         <ResourceDictionary Source="Resources/Styles/TreeView.xaml" />
         <ResourceDictionary Source="Resources/Styles/ListBox.xaml" />
