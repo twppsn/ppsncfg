@@ -4,7 +4,8 @@
 						 xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
 						 xmlns:ui="http://tecware-gmbh.de/ppsn/wpf/2015"
 						 mc:Ignorable="d" 
-						 Title="{Binding bindTitle}"
+						 Title="Hello"
+						 SubTitle="{Binding bindTitle}"
 						 d:DesignHeight="300" d:DesignWidth="300">
 	<x:Code>
 		<x:Uri>helloXaml.lua</x:Uri>
@@ -44,10 +45,10 @@
 	</Grid>
 
 	<ui:PpsGenericWpfControl.Commands>
-        <ui:PpsUICommandButton Order="100,100" DisplayText="command A" Image="floppy_diskImage" />
-        <ui:PpsUICommandButton Order="100,110" DisplayText="command B" Image="floppy_diskImage" />
+		<ui:PpsUICommandButton Order="100,100" DisplayText="command A" Image="filePlus" />
+        <ui:PpsUICommandButton Order="100,110" DisplayText="command B" />
         <ui:PpsUICommandButton Order="100,120" DisplayText="command C" />
-        <ui:PpsUICommandButton Order="200,100" DisplayText="command D" Image="floppy_diskImage" />
-        <ui:PpsUICommandButton Order="200,110" DisplayText="command E" Image="floppy_diskImage" />
+        <ui:PpsUICommandButton Order="200,100" DisplayText="command D" />
+        <ui:PpsUICommandButton Order="200,110" DisplayText="command E" />
     </ui:PpsGenericWpfControl.Commands>
 </ui:PpsGenericWpfControl>

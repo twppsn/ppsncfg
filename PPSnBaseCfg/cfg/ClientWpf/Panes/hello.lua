@@ -88,8 +88,8 @@ local ctrl = UI.Grid {
 };
 
 setControl {
-	Title = UI.Binding("bindTitle"),
-	SubTitle = "Test",
+	Title = "Hello",
+	SubTitle = UI.Binding("bindTitle"),
 	ctrl
 };
 
