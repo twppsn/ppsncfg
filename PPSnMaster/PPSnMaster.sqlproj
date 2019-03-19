@@ -105,6 +105,11 @@
     <Build Include="Tables\dbo\Kund.sql" />
     <Build Include="Stuff\ObjectRevisions.sql" />
     <Build Include="Database\FileStreamGroup_1.sql" />
+    <Build Include="Tables\dbo\TypD.sql" />
+    <Build Include="Tables\dbo\TypT.sql" />
+    <Build Include="Tables\dbo\TypA.sql" />
+    <Build Include="Tables\dbo\ObjA.sql" />
+    <None Include="Tables\dbo\AccessDeny.txt" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="PPSnMaster.refactorlog" />
