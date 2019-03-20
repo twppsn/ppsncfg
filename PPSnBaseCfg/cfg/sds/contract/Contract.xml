@@ -95,11 +95,11 @@
 			</pps:view>
 
 			<pps:action name="contractNew" displayName="Neuer Auftrag" displayImage="filePlus"  priority="100">
-				<pps:condition><![CDATA[ return CurrentView == Views.sdsContract; ]]></pps:condition>
+				<pps:condition><![CDATA[ return CurrentView == Views.sdsContract and ListCommand; ]]></pps:condition>
 				<pps:code><![CDATA[ Window:LoadPane { PaneType = "mask", createNew = 'sdsContract' }; ]]></pps:code>
 			</pps:action>
 			<pps:action name="contractOpen" displayName="Bearbeiten" displayImage="edit" priority="200">
-				<pps:condition><![CDATA[ return CurrentItem ~= nil and CurrentItem.Typ == "sdsContract" ]]></pps:condition>
+				<pps:condition><![CDATA[ return CurrentItem ~= nil and CurrentItem.Typ == "sdsContract" and ItemCommand ]]></pps:condition>
 				<pps:code><![CDATA[ Window:LoadPane { PaneType = "mask", Object = GetObject(CurrentItem.Id) }; ]]> </pps:code>
 			</pps:action>
 		</pps:wpf>
