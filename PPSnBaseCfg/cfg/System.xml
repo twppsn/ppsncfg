@@ -33,7 +33,7 @@
 			<pps:theme id="blue" file="ClientWpf/default.xaml"/>
 			<pps:theme id="green" file="ClientWpf/green.xaml"/>
 
-			<pps:action name="pdfOpen" displayName="Öffnen"  priority="100">
+			<pps:action name="pdfOpen" displayName="Öffnen" description="Öffnet eine PDF-Datei"  priority="100">
 				<pps:condition><![CDATA[return CurrentItem ~= nil and CurrentItem.MimeType == "application/pdf" and ItemCommand]]></pps:condition>
 				<pps:code><![CDATA[ await(GetObject(CurrentItem.Id):OpenPaneAsync()); ]]></pps:code>
 			</pps:action>

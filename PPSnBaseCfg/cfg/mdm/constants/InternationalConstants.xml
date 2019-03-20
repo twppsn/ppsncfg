@@ -112,8 +112,8 @@
 			<pps:template id="currencies" file="InternationalConstantsTemplate.xaml" />
 			<pps:wpfSource id="mdm.international" directory="Wpf" virtualPath="panes" />
 
-			<pps:action name="mdmInternatinalEdit" displayName="Bearbeiten" displayImage="edit" priority="200">
-				<pps:condition><![CDATA[ return CurrentItem ~= nil and CurrentItem.Typ == "mdmInternational" ]]></pps:condition>
+			<pps:action name="mdmInternatinalEdit" displayName="Bearbeiten" displayImage="edit" description="Ändern der Einstellungen" priority="200">
+				<pps:condition><![CDATA[ return CurrentItem ~= nil and CurrentItem.Typ == "mdmInternational" and ItemCommand; ]]></pps:condition>
 				<pps:code><![CDATA[ Window:LoadPane{ PaneType = "mask", Object = GetObject(CurrentItem.Id) }; ]]></pps:code>
 			</pps:action>
 		</pps:wpf>
