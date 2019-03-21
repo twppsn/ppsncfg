@@ -34,7 +34,7 @@
 						<ui:PpsDataField FieldName="ObjkId" />
 						<ui:PpsDataField FieldName="Name" />
 						<ui:PpsDataField FieldName="KurzName" />
-						<ui:PpsDataField FieldName="WaehId" />
+						<!--<ui:PpsDataField FieldName="WaehId" />-->
 
 						<ui:PpsDataField FieldName="Iban" />
 						<ui:PpsDataField FieldName="Bic" />
@@ -112,7 +112,6 @@
 					<ui:PpsDataFieldPanel Grid.Row="1" ColumnCount="2"
 										  DataContext="{Binding VikaView.CurrentItem,Mode=OneWay}" 
 										  Visibility="{Binding Converter={x:Static ui:PpsConverter.Visibility},ConverterParameter={x:Static ui:PpsConverter.VisibilityNotNullParameter}}">
-
 						<!-- todo: Std -->
 						<ui:PpsNamedSeparator Content="Anrede" ui:PpsDataFieldPanel.GroupName="{ui:Constant int,1}" />
 						<ui:PpsDataField FieldName="Name" ui:PpsDataFieldPanel.GroupName="{ui:Constant int,1}" />
@@ -147,5 +146,6 @@
 				</DataTemplate>
 			</ui:PpsSideBarGroup.ItemTemplate>
 		</ui:PpsSideBarGroup>
+
 	</ui:PpsSideBarControl>
 </ui:PpsGenericWpfControl>
