@@ -16,6 +16,7 @@
 		<mime ext=".dll" mime="application/octet" />
 		<mime ext=".pdb" mime="application/octet" />
 		<mime ext=".xdataset" mime="text/dataset" packed="false" />
+		<mime ext=".url" mime="application/internet-shortcut" />
 	</http>
 
 	<luaengine script="LuaDebug">
