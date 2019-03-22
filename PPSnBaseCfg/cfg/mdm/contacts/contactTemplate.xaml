@@ -13,39 +13,6 @@
 		</ResourceDictionary>
 	</ResourceDictionary.MergedDictionaries>
 
-	<!--<DataTemplate x:Key="crmContacts,,100">
-		--><!--  crmContacts,dbo.contacts,100 --><!--
-		<Grid>
-			<Grid.RowDefinitions>
-				<RowDefinition Height="20" />
-				<RowDefinition Height="20" />
-			</Grid.RowDefinitions>
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="100"/>
-				<ColumnDefinition Width="100" />
-				<ColumnDefinition Width="100" />
-				<ColumnDefinition Width="300" />
-				<ColumnDefinition Width="300" />
-				<ColumnDefinition Width="100"/>
-				<ColumnDefinition Width="150"/>
-			</Grid.ColumnDefinitions>
-			<Canvas Grid.Column="0" Grid.RowSpan="2" Width="24" Height="24">
-				<Path Data="{StaticResource contactsPathGeometry}" Fill="{StaticResource PPSnActionButtonBrush}" Opacity=".75"/>
-			</Canvas>
-			<TextBlock Grid.Column="1" Text="Kontakt:"/>
-			<TextBlock Text="{Binding Nr}" Grid.Column="2" Grid.RowSpan="2" VerticalAlignment="Center" ToolTip="Kontaktnummer" />
-			--><!--<TextBlock Text="{Binding STATUS}" Grid.Column="2" Grid.RowSpan="2" VerticalAlignment="Center" Tooip="Status"/>--><!--
-			<TextBlock Text="{Binding Name}" Grid.Column="3" Grid.RowSpan="2" VerticalAlignment="Center" FontWeight="Bold" ToolTip="Name"/>
-			<TextBlock Text="{Binding Adresse}" Grid.Column="4" Grid.RowSpan="2" FontStretch="Expanded" ToolTip="Adresse"/>
-			<TextBlock Text="{Binding LiefNr}" Grid.Column="5" ToolTip="Debitorennummer"/>
-			<TextBlock Text="{Binding KundNr}" Grid.Column="5" Grid.Row="2" ToolTip="Kreditorennummer" />
-			<TextBlock Text="{Binding Inaktiv,StringFormat='d',ConverterCulture='de-DE'}" Grid.Column="6" ToolTip="InAktiv"/>
-			--><!--<TextBlock Text="{Binding TEL}" Grid.Column="6" Grid.Row="2" FontSize="11" ToolTip="Telefonnummer" />
-			<TextBlock Text="{Binding PERS}" Grid.Column="7" Grid.RowSpan="2" VerticalAlignment="Center" ToolTip="Sachbearbeiter" />--><!--
-		</Grid>
-	</DataTemplate>-->
-
-
 	<DataTemplate x:Key="crmContacts,,100">
 		<Grid>
 			<Grid.RowDefinitions>
@@ -55,85 +22,56 @@
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition Width="32"/>
 				<ColumnDefinition Width="100" />
-				<ColumnDefinition Width="100" />
-				<ColumnDefinition Width="300" />
-				<ColumnDefinition Width="300" />
+				<ColumnDefinition Width="200" />
 				<ColumnDefinition Width="100"/>
-				<ColumnDefinition Width="150"/>
+				<ColumnDefinition Width="300" />
+				<ColumnDefinition />
 			</Grid.ColumnDefinitions>
 			<Canvas Grid.RowSpan="2" HorizontalAlignment="Left" Width="24" Height="24">
-				<Path Data="{StaticResource contactsPathGeometry}" Fill="{StaticResource PPSnActionButtonBrush}" Opacity=".75"/>
+				<Path Data="{StaticResource contactsPathGeometry}" Fill="{StaticResource PPSnImageBrush}" Opacity=".75"/>
 			</Canvas>
 			<TextBlock Grid.Column="1" Text="Kontakt" VerticalAlignment="Bottom" />
-			<TextBlock Text="{Binding Nr}" Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" FontWeight="SemiBold" ToolTip="Kontaktnummer" />
-
-			<TextBlock Text="{Binding Name}" Grid.Column="3" Grid.RowSpan="2" VerticalAlignment="Center" FontWeight="Bold" ToolTip="Name"/>
-			<TextBlock Text="{Binding Adresse}" Grid.Column="4" Grid.RowSpan="2" FontStretch="Expanded" ToolTip="Adresse"/>
-			<TextBlock Text="{Binding LiefNr}" Grid.Column="5" ToolTip="Debitorennummer"/>
-			<TextBlock Text="{Binding KundNr}" Grid.Column="5" Grid.Row="2" ToolTip="Kreditorennummer" />
-			<TextBlock Text="{Binding Inaktiv,StringFormat='d',ConverterCulture='de-DE'}" Grid.Column="6" ToolTip="InAktiv"/>
+			<TextBlock Text="{Binding Nr,Mode=OneWay}" Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" FontWeight="SemiBold" ToolTip="Kontaktnummer" />
+			<TextBlock Text="{Binding Name,Mode=OneWay}" Grid.Column="2" Grid.RowSpan="2" VerticalAlignment="Center" FontSize="14" ToolTip="Name"/>
+			<TextBlock Text="{Binding LiefNr,Mode=OneWay}" Grid.Column="3" VerticalAlignment="Bottom" ToolTip="Debitorennummer"/>
+			<TextBlock Text="{Binding KundNr,Mode=OneWay}" Grid.Column="3" VerticalAlignment="Top" Grid.Row="2" ToolTip="Kreditorennummer" />
+			<TextBlock Text="{Binding Adresse,Mode=OneWay}" Grid.Column="4" Grid.RowSpan="2" Margin="16,0,0,0" ToolTip="Adresse"/>
+			<TextBlock Text="{Binding Inaktiv,StringFormat='d',ConverterCulture='de-DE',Mode=OneWay}" Grid.Column="5"
+					   Margin="16,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Bottom" ToolTip="InAktiv seit"/>
 		</Grid>
 	</DataTemplate>
 
-
 	<DataTemplate x:Key="attachments,,100">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="20" />
-                <RowDefinition Height="20" />
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="100" />
-                <ColumnDefinition Width="100" />
-                <ColumnDefinition Width="100" />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-			<Image Grid.Column="0" Grid.RowSpan="2" VerticalAlignment="Center" ToolTip="Vorschaubild" Margin="4">
-				<Image.Style>
-					<Style TargetType="{x:Type Image}">
-						<Style.Triggers>
-							<DataTrigger Binding="{Binding MimeType, Converter={StaticResource MimeIsImageConverter}}" Value="true">
-								<Setter Property="Source">
-									<Setter.Value>
-										<Binding Path="DataLazy.PreviewImageLazy" Mode="OneWay"/>
-									</Setter.Value>
-								</Setter>
-							</DataTrigger>
-						</Style.Triggers>
-					</Style>
-				</Image.Style>
-			</Image>
-			<Canvas Grid.Column="0" Grid.RowSpan="2" Width="24" Height="24">
-				<Path Data="{StaticResource fileOutlinePathGeometry}" Fill="{StaticResource PPSnActionButtonBrush}" Opacity=".75"/>
-				<Canvas.Style>
-					<Style TargetType="{x:Type Canvas}">
-						<Setter Property="Visibility" Value="Collapsed" />
-						<Style.Triggers>
-							<DataTrigger Binding="{Binding MimeType, Converter={StaticResource MimeIsImageConverter}}" Value="false">
-								<Setter Property="Visibility" Value="Visible"/>
-							</DataTrigger>
-						</Style.Triggers>
-					</Style>
-				</Canvas.Style>
+		<Grid>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="20" />
+				<RowDefinition Height="20" />
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="32" />
+				<ColumnDefinition Width="100" />
+				<ColumnDefinition Width="200" />
+				<ColumnDefinition />
+			</Grid.ColumnDefinitions>
+			<Canvas Grid.RowSpan="2" HorizontalAlignment="Left" Width="24" Height="24">
+				<Path x:Name="imagePath" Data="{StaticResource fileOutlinePathGeometry}" Fill="{StaticResource PPSnImageBrush}" Opacity=".75" />
 			</Canvas>
-			<TextBlock Grid.Column="1" FontStretch="Expanded" ToolTip="Mimetyp">
-				<TextBlock.Style>
-					<Style TargetType="{x:Type TextBlock}">
-						<Setter Property="Text" Value="Anhang:" />
-						<Style.Triggers>
-							<DataTrigger Binding="{Binding MimeType, Converter={StaticResource MimeIsImageConverter}}" Value="true">
-								<Setter Property="Text" Value="Bilddatei:"/>
-							</DataTrigger>
-						</Style.Triggers>
-					</Style>
-				</TextBlock.Style>
-			</TextBlock>			
-			<TextBlock Text="{Binding Nr}" Grid.Column="2" VerticalAlignment="Center" ToolTip="Nummer"/>
-			<TextBlock Text="{Binding Name}" Grid.Column="3" VerticalAlignment="Center" FontWeight="Bold" ToolTip="Name"/>
-			
-			<!-- Sha256 should not be loaded - otherwise all attachments are loaded <TextBlock Text="{Binding Data.Sha256}" Grid.Column="2" ToolTip="Debitorennummer"/>-->
-        </Grid>
-
-    </DataTemplate>
+			<TextBlock x:Name="description" Grid.Column="1" Text="Anhang" VerticalAlignment="Bottom" />
+			<TextBlock Text="{Binding Nr,Mode=OneWay}" Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" FontWeight="SemiBold" />
+			<TextBlock Text="{Binding Name,Mode=OneWay}" Grid.Column="2" Grid.RowSpan="2" VerticalAlignment="Center" FontSize="14" />
+			<Image x:Name="thumbnail" Grid.Column="3" Grid.RowSpan="2" Width="100" Margin="16,4,0,4" HorizontalAlignment="Left" />
+		</Grid>
+		<DataTemplate.Triggers>
+			<DataTrigger Binding="{Binding MimeType, Converter={StaticResource MimeIsImageConverter}}" Value="true">
+				<Setter TargetName="imagePath" Property="Data" Value="{StaticResource imagePathGeometry}" />
+				<Setter TargetName="description" Property="Text" Value="Bilddatei" />
+				<Setter TargetName="thumbnail" Property="Source">
+					<Setter.Value>
+						<Binding Path="DataLazy.PreviewImageLazy" Mode="OneWay" />
+					</Setter.Value>
+				</Setter>
+			</DataTrigger>
+		</DataTemplate.Triggers>
+	</DataTemplate>
 
 </ResourceDictionary>

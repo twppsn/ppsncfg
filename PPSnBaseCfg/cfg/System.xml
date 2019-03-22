@@ -34,8 +34,8 @@
 			<pps:theme id="blue" file="ClientWpf/default.xaml"/>
 			<pps:theme id="green" file="ClientWpf/green.xaml"/>
 
-			<pps:action name="pdfOpen" displayName="Öffnen" description="Öffnet eine PDF-Datei"  priority="100">
-				<pps:condition><![CDATA[return CurrentItem ~= nil and CurrentItem.MimeType == "application/pdf" and ItemCommand]]></pps:condition>
+			<pps:action name="open" displayName="Öffnen" description="Öffnet das aktuelle Datenobjekt" displayImage="openFolderOutline" priority="100">
+				<pps:condition><![CDATA[return CurrentItem ~= nil and CurrentItem.Typ ~= nil and CurrentItem.Typ ~= 'bmsProject' and ItemCommand]]></pps:condition>
 				<pps:code><![CDATA[ await(GetObject(CurrentItem.Id):OpenPaneAsync()); ]]></pps:code>
 			</pps:action>
 
@@ -202,8 +202,10 @@
 				</pps:table>
 
 				<pps:table name="OfflineCache" dataSource="sys">
-					<pps:meta name="syncType">TimeStamp: wpf.sync, LastWriteTime</pps:meta>
-					<pps:column name="Path" isPrimary="true" isIdentity="false" fieldName="sys.Fields.Path" />
+					<pps:meta name="syncType">Full: wpf.sync</pps:meta>
+					<pps:meta name="useAsKey">Path</pps:meta>
+					<pps:column name="_rowId" fieldName="sys.Fields.PrimaryKey" isPrimary="true" />
+					<pps:column name="Path" fieldName="sys.Fields.Path" />
 					<pps:column name="ContentType" fieldName="sys.Fields.ContentType">
 						<pps:meta name="sourceColumn">#</pps:meta>
 						<pps:meta name="nullable">true</pps:meta>
@@ -233,6 +235,10 @@
 						<pps:meta name="nullable">true</pps:meta>
 					</pps:column>
 					<pps:column name="LocalPath" fieldName="sys.Fields.Path">
+						<pps:meta name="sourceColumn">#</pps:meta>
+						<pps:meta name="nullable">true</pps:meta>
+					</pps:column>
+					<pps:column name="DebugPath" fieldName="sys.Fields.Path">
 						<pps:meta name="sourceColumn">#</pps:meta>
 						<pps:meta name="nullable">true</pps:meta>
 					</pps:column>

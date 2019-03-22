@@ -11,15 +11,15 @@
 		</x:Code>
 		<Grid>
 			<Grid.RowDefinitions>
-				<RowDefinition Height="18" />
+				<RowDefinition Height="20" />
 				<RowDefinition Height="20" />
 			</Grid.RowDefinitions>
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="100"/>
-				<ColumnDefinition Width="150" />
+				<ColumnDefinition Width="32"/>
+				<ColumnDefinition Width="200" />
 			</Grid.ColumnDefinitions>
-			<Canvas Grid.Column="0" Grid.RowSpan="2" Width="24" Height="24">
-				<Path Data="{StaticResource settingsPathGeometry}" Fill="{StaticResource PPSnActionButtonBrush}" Opacity=".75"/>
+			<Canvas Grid.RowSpan="2" HorizontalAlignment="Left" Width="24" Height="24">
+				<Path Data="{StaticResource settingsPathGeometry}" Fill="{StaticResource PPSnImageBrush}" Opacity=".75"/>
 			</Canvas>
 			<TextBlock Grid.Column="1" Text="Einstellungen" VerticalAlignment="Bottom"/>
 			<TextBlock Grid.Column="1" Grid.Row="1" Text="Länder/Währungen" FontWeight="Bold" VerticalAlignment="Top"/>
