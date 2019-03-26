@@ -6,6 +6,7 @@
 						 xmlns:diag="clr-namespace:System.Diagnostics;assembly=WindowsBase"
 						 mc:Ignorable="d" 
 						 d:DesignHeight="300" d:DesignWidth="800"
+						 Image="contacts"
 						 Title="Kontakt" HasSideBar="True">
 	<x:Code>
 		<x:Uri>contacts.lua</x:Uri>
