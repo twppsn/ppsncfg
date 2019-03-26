@@ -40,7 +40,7 @@
 
 	<SolidColorBrush x:Key="PPSnSeparatorBrush">
 		<SolidColorBrush.Color>
-			<ui:TransparencyResultColor BackColor="{StaticResource PPSnDesktopColor}" TransparentColor="{StaticResource PPSnAccentColor}" Transparency=".16" />
+			<ui:TransparencyResultColor BackColor="{StaticResource PPSnDesktopColor}" TransparentColor="{StaticResource PPSnAccentColor}" Transparency=".12" />
 		</SolidColorBrush.Color>
 	</SolidColorBrush>
 
