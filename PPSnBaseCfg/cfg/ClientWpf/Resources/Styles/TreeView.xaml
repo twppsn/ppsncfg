@@ -39,13 +39,12 @@
 		<Setter Property="Background" Value="Transparent" />
 		<Setter Property="Foreground" Value="{StaticResource PPSnWindowForegroundBrush}" />
 		<Setter Property="FocusVisualStyle" Value="{x:Null}" />
-		<Setter Property="Margin" Value="0,0,0,2" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="{x:Type uiC:PpsTreeListViewItem}">
 					<StackPanel>
-						<Grid>
-							<Border Name="panelBorder" Background="{TemplateBinding Background}" Padding="1,1,6,1" SnapsToDevicePixels="True">
+						<Grid Margin="0,0,0,2">
+							<Border Name="panelBorder" Background="{TemplateBinding Background}" Padding="0,1,6,1" SnapsToDevicePixels="True">
 								<Grid>
 									<Grid.ColumnDefinitions>
 										<ColumnDefinition Width="Auto" />
