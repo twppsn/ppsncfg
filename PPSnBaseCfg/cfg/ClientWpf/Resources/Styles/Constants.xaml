@@ -6,6 +6,7 @@
 	<DataTemplate x:Key="ConstantContentTemplate">
 		<Grid x:Name="TemplateGrid">
 			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
 				<RowDefinition />
 			</Grid.RowDefinitions>
 			<Grid.ColumnDefinitions>
@@ -21,7 +22,8 @@
 						   FontSize="14"
 						   FontWeight="SemiBold"/>
 			</Border>
-			<ui:PpsDataListBox ItemsSource="{Binding Source.View}"
+			<ui:PpsDataListBox Grid.Row="1" 
+							   ItemsSource="{Binding Source.View}"
 							   IsSynchronizedWithCurrentItem="True"
 							   Visibility="{Binding Converter={x:Static ui:PpsConverter.Visibility}}">
 				<ui:PpsDataListBox.ListCommands>
@@ -31,7 +33,7 @@
 					<ui:PpsUICommandButton Order="500;100" Image="delete" DisplayText="Löschen" Command="{Binding DataContext.DeleteCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=ui:PpsGenericWpfControl}}" />
 				</ui:PpsDataListBox.ItemCommands>
 			</ui:PpsDataListBox>
-			<ContentPresenter Grid.Column="2"
+			<ContentPresenter Grid.Row="1" Grid.Column="2"
 							  Margin="0,29,0,0"
 							  Content="{Binding View.CurrentItem}"
 							  ContentTemplateSelector="{ui:CodeBinding ConstantsTemplateSelector}"
