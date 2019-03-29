@@ -4,9 +4,9 @@
 function RegisterConstant(table)
 
 	-- check table arguments
-	assert(table.Guid, "Guid is empty.");
-	assert(table.Nr, "Nr is empty.");
-	assert(table.Name, "Name is empty.");
+	assert(table.Guid ~= nil, "Guid is empty.");
+	assert(table.Nr ~= nil, "Nr is empty.");
+	assert(table.Name ~= nil, "Name is empty.");
 
 	RegisterInitializationAction(
 		20000, "RegisterConstant",

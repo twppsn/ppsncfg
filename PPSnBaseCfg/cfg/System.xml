@@ -342,5 +342,6 @@
 		</pps:register>
 
 		<pps:attachment name="attachments" nextNumber="ANH-{8}" forceNextNumber="true" displayname="Attachments" />
+		<pps:helpkey name="helpkey" forceNextNumber="false" displayname="Help" />
 	</pps:ppsn>
 </fragment>
