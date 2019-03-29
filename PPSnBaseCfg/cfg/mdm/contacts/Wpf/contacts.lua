@@ -64,6 +64,12 @@ VikaNewCommand = command(
 	end
 );
 
+SelectVikaCommand = command(
+	function (args) : void
+		SelectVika(VikaListView:CurrentItem);
+	end
+);
+
 VikaRemoveCommand = command(
 	function (args) : void
 		do (trans = UndoManager:BeginTransaction("Visitenkarte löschen"))

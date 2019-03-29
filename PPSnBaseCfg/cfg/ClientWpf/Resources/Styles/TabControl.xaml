@@ -10,34 +10,30 @@
         <Setter Property="Foreground" Value="{StaticResource PPSnWindowForegroundBrush}"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="IsTabStop" Value="False"/>
-		<Setter Property="Height" Value="Auto"/>
-		<Setter Property="Margin" Value="0,0,18,8"/>
+		<Setter Property="Margin" Value="0,0,32,0"/>
 		<Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TabItem}">
-					<Border Background="Transparent" Margin="{TemplateBinding Margin}" Padding="0,0,0,8">
-						<Border x:Name="panel" BorderBrush="{StaticResource PPSnSeparatorBrush}"
-								BorderThickness="0,0,0,4" SnapsToDevicePixels="True">
-							<TextBlock Foreground="{StaticResource PPSnWindowForegroundBrush}" FontSize="14" HorizontalAlignment="Left" Margin="0,0,1,1">
-								<ContentPresenter ContentSource="Header"/>
-							</TextBlock>
-						</Border>
+					<Border x:Name="panel" BorderBrush="Transparent" Margin="{TemplateBinding Margin}" BorderThickness="0,0,0,4" Padding="1,2,1,2" SnapsToDevicePixels="True" RenderOptions.EdgeMode="Aliased">
+						<TextBlock Foreground="{StaticResource PPSnWindowForegroundBrush}" FontSize="14">
+							<ContentPresenter ContentSource="Header" />
+						</TextBlock>
 					</Border>
-                    <ControlTemplate.Triggers>
-                        <Trigger Property="IsSelected" Value="True">
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsSelected" Value="True">
                             <Setter TargetName="panel" Property="BorderBrush" Value="{StaticResource PPSnMarkerBrush}" />
                         </Trigger>
-                        <Trigger Property="IsEnabled" Value="False">
+						<MultiTrigger>
+							<MultiTrigger.Conditions>
+								<Condition Property="IsMouseOver" Value="True"/>
+								<Condition Property="IsSelected" Value="False"/>
+							</MultiTrigger.Conditions>
+							<Setter TargetName="panel" Property="Background" Value="{StaticResource PPSnMouseOverBrush}"/>
+						</MultiTrigger>
+						<Trigger Property="IsEnabled" Value="False">
                             <Setter TargetName="panel" Property="Opacity" Value="0.45" />
                             <Setter Property="Foreground" Value="{StaticResource PPSnWindowDisabledForegroundBrush}" />
                         </Trigger>
-                        <MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="IsMouseOver" Value="True"/>
-                                <Condition Property="IsSelected" Value="False"/>
-                            </MultiTrigger.Conditions>
-							<Setter TargetName="panel" Property="Background" Value="{StaticResource PPSnMouseOverBrush}"/>
-                        </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -45,14 +41,15 @@
     </Style>
 
 	<Style x:Key="PPSnPaneTabControlStyle" TargetType="{x:Type TabControl}">
-		<Setter Property="Padding" Value="0"/>
-		<Setter Property="Focusable" Value="False"/>
-		<Setter Property="HorizontalContentAlignment" Value="Center"/>
-		<Setter Property="VerticalContentAlignment" Value="Center"/>
-		<Setter Property="Background" Value="Transparent"/>
-		<Setter Property="BorderBrush" Value="Transparent"/>
-		<Setter Property="BorderThickness" Value="0"/>
-		<Setter Property="ItemContainerStyle" Value="{StaticResource PPSnPaneTabItemStyle}"/>
+		<Setter Property="ItemContainerStyle" Value="{StaticResource PPSnPaneTabItemStyle}" />
+		<Setter Property="Focusable" Value="False" />
+		<Setter Property="HorizontalContentAlignment" Value="Center" />
+		<Setter Property="VerticalContentAlignment" Value="Center" />
+		<Setter Property="Background" Value="Transparent" />
+		<Setter Property="Padding" Value="0,16,0,0" />
+		<Setter Property="BorderBrush" Value="Transparent" />
+		<Setter Property="BorderThickness" Value="0,0,0,0" />
+		<Setter Property="SnapsToDevicePixels" Value="True" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="{x:Type TabControl}">
@@ -61,12 +58,31 @@
 							<RowDefinition Height="Auto"/>
 							<RowDefinition Height="*"/>
 						</Grid.RowDefinitions>
-						<TabPanel x:Name="headerPanel" IsItemsHost="true" Grid.Row="0" KeyboardNavigation.TabIndex="1" Panel.ZIndex="1" />
-						<Border x:Name="contentPanel" Grid.Row="1" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
+						<Rectangle Height="1"
+								   StrokeThickness="0"
+								   Fill="{StaticResource PPSnSeparatorBrush}"
+								   SnapsToDevicePixels="True"
+								   RenderOptions.EdgeMode="Aliased"
+								   VerticalAlignment="Bottom" />
+						<TabPanel x:Name="headerPanel"
+								  IsItemsHost="true"
+								  Margin="24,0,0,0"
+								  SnapsToDevicePixels="True"
+								  RenderOptions.EdgeMode="Aliased"
+								  KeyboardNavigation.TabIndex="1"
+								  Panel.ZIndex="1" />
+						<Border x:Name="contentPanel"
+								Grid.Row="1"
+								BorderThickness="{TemplateBinding BorderThickness}"
+								BorderBrush="{TemplateBinding BorderBrush}"
 								Background="{TemplateBinding Background}"
-								KeyboardNavigation.DirectionalNavigation="Contained" KeyboardNavigation.TabIndex="2" KeyboardNavigation.TabNavigation="Local">
-							<ContentPresenter x:Name="PART_SelectedContentHost" ContentSource="SelectedContent" Margin="{TemplateBinding Padding}"
-											  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+								KeyboardNavigation.DirectionalNavigation="Contained"
+								KeyboardNavigation.TabIndex="2"
+								KeyboardNavigation.TabNavigation="Local">
+							<ContentPresenter x:Name="PART_SelectedContentHost"
+											  ContentSource="SelectedContent"
+											  Margin="{TemplateBinding Padding}"
+											  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
 						</Border>
 					</Grid>
 				</ControlTemplate>
