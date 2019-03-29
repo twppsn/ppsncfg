@@ -12,7 +12,6 @@
         <ResourceDictionary Source="Resources/Styles/ScrollViewer.xaml" />
         <ResourceDictionary Source="Resources/Styles/Expander.xaml" />
         <ResourceDictionary Source="Resources/Styles/DatePicker.xaml" />
-        <ResourceDictionary Source="Resources/Icons/DrawingImage.xaml" />
         <ResourceDictionary Source="Resources/Styles/Label.xaml" />
 
 		<ResourceDictionary Source="Resources/Styles/Constants.xaml" />
