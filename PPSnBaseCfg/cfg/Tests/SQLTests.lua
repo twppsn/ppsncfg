@@ -1,3 +1,15 @@
+
+
+UseNode('/ppsn');
+local trans = Db.Main;
+
+-- Test Upsert mit table arguments
+function Upsert01()
+
+	local row = trans:ExecuteSingleRow { upsert = "tst.MERG", [1] = { Id = -2, Value = "Test2" } };
+end;
+
+--[==[
 local function PrintTable(table, prologue)
     if table == nil then error("Table was null"); end;
     local tableenum = table.GetEnumerator();
@@ -598,4 +610,4 @@ local function UpdateMultiRowSingleInputTest()
     AssertAreEqual(ret["IsDocumentText"], not old1["IsDocumentText"], "The Database was not updated correctly. (expected: '" .. not old1["IsDocumentText"] .. "', read: '" .. ret["IsDocumentText"] .. "', value before: '" .. old1["IsDocumentText"].. "'")
 
     Db.Main:ExecuteNoneResult({ sql = "UPDATE [dbo].[ObjR] SET [IsDocumentText] = '" .. old1["IsDocumentText"] .. "' WHERE [Id] = " .. old1["Id"]});
-end;
+end;]==]

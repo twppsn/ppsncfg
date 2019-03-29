@@ -76,28 +76,25 @@
 						<RowDefinition Height="Auto" />
 						<RowDefinition />
 					</Grid.RowDefinitions>
-					<ui:PpsCommandBar Mode="Circle">
-						<ui:PpsUICommandButton Order="100,100" Image="filePlus" DisplayText="Neu" Description="Neue Visitenkarte" Command="VikaNewCommand" />
-						<ui:PpsUICommandButton Order="110,120" Image="delete" DisplayText="Löschen" Description="Visitenkarte löschen" Command="VikaRemoveCommand"/>
-					</ui:PpsCommandBar>
-					<ui:PpsDataFilterList Grid.Row="1" Margin="16" 
+					<ui:PpsDataListBox Grid.Row="1" Margin="16" 
 										  ItemsSource="{Binding VikaListView}"
 										  IsSynchronizedWithCurrentItem="True"
 										  Visibility="{Binding VikaView.CurrentItem,Converter={x:Static ui:PpsConverter.Visibility},ConverterParameter={x:Static ui:PpsConverter.VisibilityOnNullParameter}}">
-						<ui:PpsDataFilterList.CommandBindings>
-							<CommandBinding Command="{x:Static ui:PpsControlCommands.SelectCommand}" Executed="SelectVikaItem" />
-						</ui:PpsDataFilterList.CommandBindings>
-						<ui:PpsDataFilterList.ItemTemplate>
+						<ui:PpsDataListBox.ListCommands>
+							<ui:PpsUICommandButton Order="100,100" Image="filePlus" DisplayText="Neu" Description="Neue Visitenkarte" Command="VikaNewCommand" />
+
+						</ui:PpsDataListBox.ListCommands>
+						<ui:PpsDataListBox.ItemCommands>
+							<ui:PpsUICommandButton Order="110,120" Image="open" DisplayText="Ändern" Description="Visitenkarte ändern" Command="SelectVikaCommand"/>
+							<ui:PpsUICommandButton Order="510,120" Image="delete" DisplayText="Löschen" Description="Visitenkarte löschen" Command="VikaRemoveCommand"/>
+						</ui:PpsDataListBox.ItemCommands>
+						<ui:PpsDataListBox.ItemTemplate>
 							<DataTemplate>
 								<Grid Height="26">
-									<Grid.InputBindings>
-										<MouseBinding MouseAction="LeftDoubleClick"  Command="{x:Static ui:PpsControlCommands.SelectCommand}" CommandParameter="{Binding}" />
-										<KeyBinding Key="Return" Command="{x:Static ui:PpsControlCommands.SelectCommand}" CommandParameter="{Binding}" />
-									</Grid.InputBindings>
 									<TextBlock VerticalAlignment="Center"
-								   TextBlock.FontSize="14"
-								   TextWrapping="NoWrap"
-								   TextTrimming="CharacterEllipsis">
+									   TextBlock.FontSize="14"
+									   TextWrapping="NoWrap"
+									   TextTrimming="CharacterEllipsis">
 										<TextBlock.Text>
 											<MultiBinding Converter="{x:Static ui:PpsConverter.Name}">
 												<Binding Path="Name" />
@@ -107,8 +104,8 @@
 									</TextBlock>
 								</Grid>
 							</DataTemplate>
-						</ui:PpsDataFilterList.ItemTemplate>
-					</ui:PpsDataFilterList>
+						</ui:PpsDataListBox.ItemTemplate>
+					</ui:PpsDataListBox>
 					
 					<ui:PpsDataFieldPanel Grid.Row="1" ColumnCount="2"
 										  DataContext="{Binding VikaView.CurrentItem,Mode=OneWay}" 
