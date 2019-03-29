@@ -76,7 +76,7 @@ end;
 
 function mergeContactToSql(obj, data)
 
-	trans = Db.Main;
+	local trans = Db.Main;
 
 	-- write ktkt table
 	trans:ExecuteNoneResult {
@@ -85,26 +85,31 @@ function mergeContactToSql(obj, data)
 	};
 
 	-- write kund
-	trans:ExecuteNoneResult {
-		upsert ="dbo.Kund",
-		rows = data:Kund
-	};
+	if data:Kund.Count > 0 then -- todo: delete
+		trans:ExecuteNoneResult {
+			upsert ="dbo.Kund",
+			rows = data:Kund
+		};
+	end;
 	
 	-- write lief
-	trans:ExecuteNoneResult {
-		upsert ="dbo.Lief",
-		rows = data:Lief
-	};
+	if data:Lief.Count > 0 then -- todo: delete
+		trans:ExecuteNoneResult {
+			upsert ="dbo.Lief",
+			rows = data:Lief
+		};
+	end;
 
 	-- write pers
-	trans:ExecuteNoneResult {
-		upsert ="dbo.Pers",
-		rows = data:Pers
-	};
+	if data:Pers.Count > 0 then -- todo: delete in upsert
+		trans:ExecuteNoneResult {
+			upsert ="dbo.Pers",
+			rows = data:Pers
+		};
+	end;
 
 	-- Default-Values can not be passed as argument.
 	--   Q&D: set Vika.Std
-
 	foreach row in data:Vika do
 		if row.Std == nil then
 			row.Std = false;
@@ -112,10 +117,12 @@ function mergeContactToSql(obj, data)
 	end;
 
 	-- write vika
-	trans:ExecuteNoneResult {
-		upsert ="dbo.Vika",
-		rows = data:Vika
-	};
+	if data:Vika.Count > 0 then -- todo: delete in upsert
+		trans:ExecuteNoneResult {
+			upsert ="dbo.Vika",
+			rows = data:Vika
+		};
+	end;
 end;
 
 -- overwrite NextNumber
