@@ -40,7 +40,7 @@
 
 	<SolidColorBrush x:Key="PPSnSeparatorBrush">
 		<SolidColorBrush.Color>
-			<ui:TransparencyResultColor BackColor="{StaticResource PPSnDesktopColor}" TransparentColor="{StaticResource PPSnAccentColor}" Transparency=".13" />
+			<ui:TransparencyResultColor BackColor="{StaticResource PPSnDesktopColor}" TransparentColor="{StaticResource PPSnAccentColor}" Transparency=".10" />
 		</SolidColorBrush.Color>
 	</SolidColorBrush>
 
@@ -56,7 +56,7 @@
 
 	<SolidColorBrush x:Key="PPSnControlNormalBorderBrush">
 		<SolidColorBrush.Color>
-			<ui:TransparencyResultColor BackColor="{StaticResource PPSnDesktopColor}" TransparentColor="{StaticResource PPSnAccentColor}" Transparency=".30" />
+			<ui:TransparencyResultColor BackColor="{StaticResource PPSnDesktopColor}" TransparentColor="{StaticResource PPSnAccentColor}" Transparency=".25" />
 		</SolidColorBrush.Color>
 	</SolidColorBrush>
 
@@ -67,9 +67,9 @@
 		</SolidColorBrush.Color>
 	</SolidColorBrush>
 
-	<SolidColorBrush x:Key="PPSnMouseOverBrush" Color="{StaticResource PPSnBlackColor}" Opacity=".1"/>
+	<SolidColorBrush x:Key="PPSnMouseOverBrush" Color="{StaticResource PPSnBlackColor}" Opacity=".10"/>
 
-	<SolidColorBrush x:Key="PPSnButtonPressedBrush"  Color="{StaticResource PPSnBlackColor}" Opacity=".22"/>
+	<SolidColorBrush x:Key="PPSnButtonPressedBrush"  Color="{StaticResource PPSnBlackColor}" Opacity=".25"/>
 
 	<SolidColorBrush x:Key="PPSnImageBrush" Color="{StaticResource PPSnAccentColor}" Opacity=".80"/>
 	
@@ -79,7 +79,7 @@
 
 	<SolidColorBrush x:Key="PPSnSideBarBackgroundBrush">
 		<SolidColorBrush.Color>
-			<ui:TransparencyResultColor BackColor="{StaticResource PPSnDesktopColor}" TransparentColor="{StaticResource PPSnAccentColor}" Transparency="0.04" />
+			<ui:TransparencyResultColor BackColor="{StaticResource PPSnDesktopColor}" TransparentColor="{StaticResource PPSnAccentColor}" Transparency="0.032" />
 		</SolidColorBrush.Color>
 	</SolidColorBrush>
 
