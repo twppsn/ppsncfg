@@ -7,7 +7,9 @@ go
 -- Poduktionsplanungssystem
 CREATE SCHEMA pps;
 go
-
+-- Test tabellen
+CREATE SCHEMA tst;
+GO
 
 -- MasterData -> view space
 CREATE SCHEMA masterData;
