@@ -31,6 +31,7 @@
 				<CheckBox IsChecked="{Binding IsActive}" Style="{StaticResource CheckBoxActiveStyle}" />
 			</ui:PpsDataFieldPanel>
 		</DataTemplate>
+		
 		<DataTemplate x:Key="WaehTemplate">
 			<ui:PpsDataFieldPanel ColumnCount="1">
 				<ui:ParserService>
@@ -46,11 +47,20 @@
 				<CheckBox IsChecked="{Binding IsActive}" Style="{StaticResource CheckBoxActiveStyle}" />
 			</ui:PpsDataFieldPanel>
 		</DataTemplate>
+
+		<DataTemplate x:Key="WaehListBoxItemTemplate">
+			<Grid Height="37" TextBlock.FontSize="19">
+				<TextBlock Text="{Binding Name}" VerticalAlignment="Center" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" />
+			</Grid>
+		</DataTemplate>
+
+
 	</ui:PpsGenericWpfControl.Resources>
 
 	<ui:PpsSideBarControl ContentTemplate="{StaticResource ConstantContentTemplate}"
 						  ItemsSource="{ui:CodeBinding InterConstants}"
-						  AllowToggleSelection="False">
+						  AllowToggleSelection="False"
+						  Padding="32,0,6,16">
 		<ui:PpsSideBarControl.ItemTemplate>
 			<DataTemplate>
 				<ui:PpsSideBarPanel Header="{Binding Name}" Content="{Binding}" />

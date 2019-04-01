@@ -183,3 +183,10 @@ ConstantsTemplateSelector = templateSelector(
 		return GetResource(def.Template or "ConstantsDefaultTemplate", container);
 	end
 );
+
+ConstantsListBoxItemTemplateSelector = templateSelector(
+	function (item, container) : object
+		-- ?? wo und wie definieren?
+		return GetResource("ConstantsListBoxItemDefaultTemplate", container);
+	end
+);
