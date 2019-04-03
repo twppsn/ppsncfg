@@ -133,4 +133,7 @@
       <DatabaseVariableLiteralValue>master</DatabaseVariableLiteralValue>
     </ArtifactReference>
   </ItemGroup>
+  <ItemGroup>
+    <PreDeploy Include="PreScript.sql" />
+  </ItemGroup>
 </Project>
