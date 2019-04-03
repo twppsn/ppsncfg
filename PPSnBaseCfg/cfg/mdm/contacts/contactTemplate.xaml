@@ -74,4 +74,23 @@
 		</DataTemplate.Triggers>
 	</DataTemplate>
 
+	<DataTemplate x:Key="helpkey,,100">
+		<Grid>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="20" />
+				<RowDefinition Height="20" />
+			</Grid.RowDefinitions>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="32" />
+				<ColumnDefinition Width="200" />
+			</Grid.ColumnDefinitions>
+			<Canvas Grid.RowSpan="2" HorizontalAlignment="Left" Width="24" Height="24">
+				<Path Data="{StaticResource helpPathGeometry}" Fill="{StaticResource PPSnImageBrush}" Opacity=".75"/>
+			</Canvas>
+			<TextBlock Grid.Column="1" Text="MarkDown" VerticalAlignment="Bottom" />
+			<TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Nr}" FontWeight="Bold" VerticalAlignment="Top" />
+		</Grid>
+	</DataTemplate>
+
+
 </ResourceDictionary>
