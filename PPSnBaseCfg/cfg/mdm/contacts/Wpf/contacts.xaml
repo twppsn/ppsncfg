@@ -35,7 +35,7 @@
 					<ui:ParserService>
 						<ui:PpsDataTableResolver Name="Head" />
 					</ui:ParserService>
-					<ui:PpsStackSectionItem Header="Basisdaten" SubHeader="Basisdaten SubHeader Basisdaten ABC">
+					<ui:PpsStackSectionItem Header="Basisdaten">
 						<ui:PpsDataFieldPanel ColumnCount="2">
 							<ui:PpsDataField FieldName="ObjkId" />
 							<ui:PpsDataField FieldName="Name" />
