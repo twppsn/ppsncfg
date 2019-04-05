@@ -23,7 +23,7 @@
 		<ui:PpsUICommandButton Order="100,100" Image="upload" DisplayText="Übertragen" Description="Kontakt veröffentlichen/aktualiseren" Command="PushCommand" />
 	</ui:PpsGenericWpfControl.Commands>
 
-	<ui:PpsSideBarControl x:Name="SideBarControl" Padding="32,0,6,16">
+	<ui:PpsSideBarControl x:Name="SideBarControl" AllowToggleSelection="False" Padding="32,0,6,16">
 		<ui:PpsSideBarControl.Content>
 			<Grid>
 				<Grid.RowDefinitions>
