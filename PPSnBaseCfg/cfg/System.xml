@@ -11,6 +11,7 @@
 		<access id="root" scheme="ntlm basic none">$(webBinding)/</access>
 		<access id="favIcon" scheme="none">$(webBinding)/favicon.ico</access>
 		<access id="ppsnInfo" scheme="none">$(webBinding)/ppsn/info.xml</access>
+		<access id="ppsnApp" scheme="none">$(webBinding)/ppsn/app/</access>
 		<access id="ppsnWpf" scheme="ntlm basic none">$(webBinding)/ppsn/wpf/</access>
 
 		<mime ext=".dll" mime="application/octet" />
