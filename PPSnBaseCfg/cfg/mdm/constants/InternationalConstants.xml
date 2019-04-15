@@ -38,7 +38,7 @@
 				</pps:source>
 				
 				<pps:attribute name="description">Stammdatentabelle der Währungen.</pps:attribute>
-				<pps:attribute name="bi.visible">true</pps:attribute>
+				<pps:attribute name="bi.visible">false</pps:attribute>
 			</pps:view>
 			
 			<pps:view name="masterData.Land" displayName="Länder">
@@ -47,7 +47,7 @@
 				</pps:source>
 				
 				<pps:attribute name="description">Stammdatentabelle der Länder.</pps:attribute>
-				<pps:attribute name="bi.visible">true</pps:attribute>
+				<pps:attribute name="bi.visible">false</pps:attribute>
 			</pps:view>
 			
 			<!-- Synchronization data -->
