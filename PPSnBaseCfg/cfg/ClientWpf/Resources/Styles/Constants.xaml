@@ -2,10 +2,11 @@
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:sys="clr-namespace:System;assembly=mscorlib"
 					xmlns:ui="http://tecware-gmbh.de/ppsn/wpf/2015">
-	
+
 	<DataTemplate x:Key="ConstantContentTemplate">
 		<Grid x:Name="TemplateGrid">
 			<Grid.RowDefinitions>
+				<RowDefinition Height="28" />
 				<RowDefinition />
 			</Grid.RowDefinitions>
 			<Grid.ColumnDefinitions>
@@ -13,26 +14,29 @@
 				<ColumnDefinition Width="{DynamicResource PaneSpaceColumnWidth}"/>
 				<ColumnDefinition />
 			</Grid.ColumnDefinitions>
-			<Border BorderThickness="0,0,0,4" BorderBrush="{DynamicResource PPSnMarkerBrush}" HorizontalAlignment="Left" VerticalAlignment="Top" Height="28" SnapsToDevicePixels="True">
-				<TextBlock Text="{Binding Name,Mode=OneWay}"
-						   Foreground="{DynamicResource PPSnWindowForegroundBrush}"
-						   VerticalAlignment="Bottom" 
-						   Margin="0,0,0,1"
-						   FontSize="14"
-						   FontWeight="SemiBold"/>
-			</Border>
-			<ui:PpsDataListBox ItemsSource="{Binding Source.View}"
+			<TextBlock Text="{Binding Name,Mode=OneWay}"
+					   Foreground="{DynamicResource PPSnWindowForegroundBrush}"
+					   VerticalAlignment="Center"
+					   FontSize="13" />
+			<ui:PpsDataListBox Grid.Row="1" 
+							   ItemsSource="{Binding Source.View}"
+							   ItemTemplateSelector="{ui:CodeBinding ConstantsListBoxItemTemplateSelector}"
 							   IsSynchronizedWithCurrentItem="True"
-							   Visibility="{Binding Converter={x:Static ui:PpsConverter.Visibility}}">
+							   Visibility="{Binding Converter={x:Static ui:PpsConverter.Visibility}}"
+							   ScrollViewer.HorizontalScrollBarVisibility="Disabled">
 				<ui:PpsDataListBox.ListCommands>
-					<ui:PpsUICommandButton Order="100;100" Image="filePlus" DisplayText="Neu" Command="{Binding DataContext.AddCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=ui:PpsGenericWpfControl}}" />
+					<ui:PpsUICommandButton Order="100;100" Image="plus" DisplayText="Neu" Command="{Binding DataContext.AddCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=ui:PpsGenericWpfControl}}" />
 				</ui:PpsDataListBox.ListCommands>
 				<ui:PpsDataListBox.ItemCommands>
 					<ui:PpsUICommandButton Order="500;100" Image="delete" DisplayText="Löschen" Command="{Binding DataContext.DeleteCommand,RelativeSource={RelativeSource Mode=FindAncestor,AncestorType=ui:PpsGenericWpfControl}}" />
 				</ui:PpsDataListBox.ItemCommands>
 			</ui:PpsDataListBox>
-			<ContentPresenter Grid.Column="2"
-							  Margin="0,29,0,0"
+
+			<Rectangle Grid.Column="1" Grid.Row="1" Width="1" StrokeThickness="0" Fill="{DynamicResource PPSnSeparatorBrush}"
+					   SnapsToDevicePixels="True" RenderOptions.EdgeMode="Aliased" HorizontalAlignment="Center" Margin="0,6,0,0" />
+
+			<ContentPresenter Grid.Row="1" Grid.Column="2"
+							  Margin="0,42,0,0"
 							  Content="{Binding View.CurrentItem}"
 							  ContentTemplateSelector="{ui:CodeBinding ConstantsTemplateSelector}"
 							  Visibility="{Binding Converter={x:Static ui:PpsConverter.Visibility}}" />
@@ -61,4 +65,11 @@
 			<CheckBox IsChecked="{Binding IsActive}" Style="{StaticResource CheckBoxActiveStyle}" />
 		</ui:PpsDataFieldPanel>
 	</DataTemplate>
+
+	<DataTemplate x:Key="ConstantsListBoxItemDefaultTemplate">
+		<Grid Height="27" TextBlock.FontSize="14">
+			<TextBlock Text="{Binding Name}" VerticalAlignment="Center" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis" />
+		</Grid>
+	</DataTemplate>
+
 </ResourceDictionary>

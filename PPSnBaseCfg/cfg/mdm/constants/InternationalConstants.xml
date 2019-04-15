@@ -38,7 +38,7 @@
 				</pps:source>
 				
 				<pps:attribute name="description">Stammdatentabelle der Währungen.</pps:attribute>
-				<pps:attribute name="bi.visible">true</pps:attribute>
+				<pps:attribute name="bi.visible">false</pps:attribute>
 			</pps:view>
 			
 			<pps:view name="masterData.Land" displayName="Länder">
@@ -47,7 +47,7 @@
 				</pps:source>
 				
 				<pps:attribute name="description">Stammdatentabelle der Länder.</pps:attribute>
-				<pps:attribute name="bi.visible">true</pps:attribute>
+				<pps:attribute name="bi.visible">false</pps:attribute>
 			</pps:view>
 			
 			<!-- Synchronization data -->
@@ -112,10 +112,10 @@
 			<pps:template id="currencies" file="InternationalConstantsTemplate.xaml" />
 			<pps:wpfSource id="mdm.international" directory="Wpf" virtualPath="panes" />
 
-			<pps:action name="mdmInternatinalEdit" displayName="Bearbeiten" displayImage="edit" description="Ändern der Einstellungen" priority="200">
+			<!--<pps:action name="mdmInternatinalEdit" displayName="Bearbeiten" displayImage="edit" description="Ändern der Einstellungen" priority="200">
 				<pps:condition><![CDATA[ return CurrentItem ~= nil and CurrentItem.Typ == "mdmInternational" and ItemCommand; ]]></pps:condition>
 				<pps:code><![CDATA[ Window:LoadPane{ PaneType = "mask", Object = GetObject(CurrentItem.Id) }; ]]></pps:code>
-			</pps:action>
+			</pps:action>-->
 		</pps:wpf>
 
 		<pps:document name="mdmInternational" dataset="mdmInternational" displayname="International" forceNextNumber="false" />

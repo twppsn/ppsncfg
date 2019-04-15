@@ -87,7 +87,7 @@ OnAfterPush["mdmConstant"] = function (obj, data)
 	for i = 0, #data.Tables - 1, 1 do
 		local dt = data.Tables[i];
 		local sqlTable = dt.SqlTable;
-		if sqlTable then
+		if sqlTable and dt.Count > 0 then
 			Db.Main:ExecuteNoneResult {
 				upsert = sqlTable,
 				rows = dt

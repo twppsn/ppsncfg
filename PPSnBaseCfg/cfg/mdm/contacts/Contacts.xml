@@ -133,7 +133,7 @@
 				</pps:source>
 
 				<pps:attribute name="description">Stammdatentabelle der Visitenkarten.</pps:attribute>
-				<pps:attribute name="bi.visible">true</pps:attribute>
+				<pps:attribute name="bi.visible">false</pps:attribute>
 			</pps:view>
 
 			<!--  Server Site view -->
@@ -143,7 +143,7 @@
 				</pps:source>
 
 				<pps:attribute name="description">Stammdatentabelle der Kontakte.</pps:attribute>
-				<pps:attribute name="bi.visible">true</pps:attribute>
+				<pps:attribute name="bi.visible">false</pps:attribute>
 			</pps:view>
 
 			<!-- readonly data -->

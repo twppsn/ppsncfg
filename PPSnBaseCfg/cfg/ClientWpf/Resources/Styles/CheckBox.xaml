@@ -31,9 +31,11 @@
 								BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
 								Background="{TemplateBinding Background}" 
 								HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
-							<Path x:Name="optionMark" Opacity="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="15" Height="15"
-								  Data="M0,70 L50,120 140,30"
-								  Stroke="{StaticResource PPSnWindowForegroundBrush}" StrokeThickness="1.5" StrokeStartLineCap="Flat" StrokeEndLineCap="Flat" Stretch="Uniform"/>
+							<Viewbox x:Name="optionMark" Opacity="0">
+								<Canvas Width="24" Height="24">
+									<Path x:Name="symbol" Data="M21,7L9,19L3.5,13.5L4.91,12.09L9,16.17L19.59,5.59L21,7Z" Fill="{TemplateBinding Foreground}" />
+								</Canvas>
+							</Viewbox>
 						</Border>
 						<ContentPresenter x:Name="contentPresenter" Grid.Column="1" Focusable="False" RecognizesAccessKey="True"
 										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
@@ -45,13 +47,13 @@
 						</Trigger>
 
 						<Trigger Property="IsEnabled" Value="false">
-							<Setter Property="BorderBrush" TargetName="checkBoxBorder" Value="{StaticResource PPSnWindowDisabledForegroundBrush}"/>
-							<Setter Property="Stroke" TargetName="optionMark" Value="{StaticResource PPSnWindowDisabledForegroundBrush}"/>
 							<Setter Property="Foreground" Value="{StaticResource PPSnWindowDisabledForegroundBrush}"/>
+							<Setter TargetName="checkBoxBorder" Property="BorderBrush" Value="{StaticResource PPSnWindowDisabledForegroundBrush}"/>
+							<Setter TargetName="checkBoxBorder" Property="Background" Value="Transparent"/>
 						</Trigger>
 
 						<Trigger Property="IsPressed" Value="true">
-							<Setter Property="Background" TargetName="checkBoxBorder" Value="{StaticResource PPSnButtonPressedBrush}"/>
+							<Setter TargetName="checkBoxBorder" Property="Background" Value="{StaticResource PPSnButtonPressedBrush}"/>
 						</Trigger>
 
 						<Trigger Property="IsChecked" Value="true">

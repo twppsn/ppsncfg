@@ -23,37 +23,43 @@
 		<ui:PpsUICommandButton Order="100,100" Image="upload" DisplayText="Übertragen" Description="Kontakt veröffentlichen/aktualiseren" Command="PushCommand" />
 	</ui:PpsGenericWpfControl.Commands>
 
-	<ui:PpsSideBarControl x:Name="SideBarControl">
+	<ui:PpsSideBarControl x:Name="SideBarControl" AllowToggleSelection="False" Padding="32,0,6,16">
 		<ui:PpsSideBarControl.Content>
-			<ui:PpsStackSectionControl DataContext="{Binding Data.Head.First}" ExpanderStyle="AllOpen">
-				<ui:ParserService>
-					<ui:PpsDataTableResolver Name="Head" />
-				</ui:ParserService>
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto" MinHeight="28" />
+					<RowDefinition />
+				</Grid.RowDefinitions>
+				<TextBlock Text="KOPFDATEN" Foreground="{StaticResource PPSnWindowForegroundBrush}" VerticalAlignment="Center" FontSize="13" />
+				<ui:PpsStackSectionControl Grid.Row="1" DataContext="{Binding Data.Head.First}" ExpanderStyle="AllOpen" Focusable="False" Margin="0,21,0,0">
+					<ui:ParserService>
+						<ui:PpsDataTableResolver Name="Head" />
+					</ui:ParserService>
+					<ui:PpsStackSectionItem Header="Basisdaten">
+						<ui:PpsDataFieldPanel ColumnCount="2">
+							<ui:PpsDataField FieldName="ObjkId" />
+							<ui:PpsDataField FieldName="Name" />
+							<ui:PpsDataField FieldName="KurzName" />
+							<!--<ui:PpsDataField FieldName="WaehId" />-->
 
-				<ui:PpsStackSectionItem Header="Kopfdaten">
-					<ui:PpsDataFieldPanel ColumnCount="2">
-						<ui:PpsDataField FieldName="ObjkId" />
-						<ui:PpsDataField FieldName="Name" />
-						<ui:PpsDataField FieldName="KurzName" />
-						<!--<ui:PpsDataField FieldName="WaehId" />-->
+							<ui:PpsDataField FieldName="Iban" />
+							<ui:PpsDataField FieldName="Bic" />
+							<ui:PpsDataField FieldName="SteuerNr" />
+							<ui:PpsDataField FieldName="StIdentNr" />
+							<ui:PpsDataField FieldName="UstIdNr" />
 
-						<ui:PpsDataField FieldName="Iban" />
-						<ui:PpsDataField FieldName="Bic" />
-						<ui:PpsDataField FieldName="SteuerNr" />
-						<ui:PpsDataField FieldName="StIdentNr" />
-						<ui:PpsDataField FieldName="UstIdNr" />
-						
-						<ui:PpsDataField FieldName="Adresse" UseFieldFactory="CreateAddress" />
-						
-					</ui:PpsDataFieldPanel>
-				</ui:PpsStackSectionItem>
-				<!--<ui:PpsStackSectionItem Header="Identifizierung">
+							<ui:PpsDataField FieldName="Adresse" UseFieldFactory="CreateAddress" />
+
+						</ui:PpsDataFieldPanel>
+					</ui:PpsStackSectionItem>
+					<!--<ui:PpsStackSectionItem Header="Identifizierung">
 
 				</ui:PpsStackSectionItem>
 				<ui:PpsStackSectionItem Header="Lieferung" SubHeader="Subheader Lieferung">
 
 				</ui:PpsStackSectionItem>-->
-			</ui:PpsStackSectionControl>
+				</ui:PpsStackSectionControl>
+			</Grid>
 		</ui:PpsSideBarControl.Content>
 
 		<ui:PpsSideBarPanelFilter Header="Kopfdaten" />
@@ -69,32 +75,30 @@
 			<ui:ParserService>
 				<ui:PpsDataTableResolver Name="Vika" />
 			</ui:ParserService>
-
 			<ui:PpsSideBarGroup.Content>
 				<Grid>
 					<Grid.RowDefinitions>
-						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" MinHeight="28" />
 						<RowDefinition />
 					</Grid.RowDefinitions>
-					<ui:PpsDataListBox Grid.Row="1" Margin="16" 
-										  ItemsSource="{Binding VikaListView}"
-										  IsSynchronizedWithCurrentItem="True"
-										  Visibility="{Binding VikaView.CurrentItem,Converter={x:Static ui:PpsConverter.Visibility},ConverterParameter={x:Static ui:PpsConverter.VisibilityOnNullParameter}}">
-						<ui:PpsDataListBox.ListCommands>
-							<ui:PpsUICommandButton Order="100,100" Image="filePlus" DisplayText="Neu" Description="Neue Visitenkarte" Command="VikaNewCommand" />
 
+					<TextBlock Text="VISITENKARTEN" Foreground="{StaticResource PPSnWindowForegroundBrush}" VerticalAlignment="Center" FontSize="13" Visibility="{Binding Visibility, ElementName=listCards}" />
+					<ui:PpsDataListBox x:Name="listCards"
+									   Grid.Row="1"
+									   ItemsSource="{Binding VikaListView}"
+									   IsSynchronizedWithCurrentItem="True"
+									   Visibility="{Binding VikaView.CurrentItem,Converter={x:Static ui:PpsConverter.Visibility},ConverterParameter={x:Static ui:PpsConverter.VisibilityOnNullParameter}}">
+						<ui:PpsDataListBox.ListCommands>
+							<ui:PpsUICommandButton Order="100,100" Image="plus" DisplayText="Neu" Description="Neue Visitenkarte" Command="VikaNewCommand" />
 						</ui:PpsDataListBox.ListCommands>
 						<ui:PpsDataListBox.ItemCommands>
-							<ui:PpsUICommandButton Order="110,120" Image="open" DisplayText="Ändern" Description="Visitenkarte ändern" Command="SelectVikaCommand"/>
+							<ui:PpsUICommandButton Order="110,120" Image="openFolderOutline" DisplayText="Öffnen" Description="Visitenkarte bearbeiten" Command="SelectVikaCommand"/>
 							<ui:PpsUICommandButton Order="510,120" Image="delete" DisplayText="Löschen" Description="Visitenkarte löschen" Command="VikaRemoveCommand"/>
 						</ui:PpsDataListBox.ItemCommands>
 						<ui:PpsDataListBox.ItemTemplate>
 							<DataTemplate>
-								<Grid Height="26">
-									<TextBlock VerticalAlignment="Center"
-									   TextBlock.FontSize="14"
-									   TextWrapping="NoWrap"
-									   TextTrimming="CharacterEllipsis">
+								<Grid Height="27" TextBlock.FontSize="14">
+									<TextBlock VerticalAlignment="Center" TextWrapping="NoWrap" TextTrimming="CharacterEllipsis">
 										<TextBlock.Text>
 											<MultiBinding Converter="{x:Static ui:PpsConverter.Name}">
 												<Binding Path="Name" />
@@ -106,8 +110,9 @@
 							</DataTemplate>
 						</ui:PpsDataListBox.ItemTemplate>
 					</ui:PpsDataListBox>
-					
-					<ui:PpsDataFieldPanel Grid.Row="1" ColumnCount="2"
+
+					<TextBlock Text="VISITENKARTE" Foreground="{StaticResource PPSnWindowForegroundBrush}" VerticalAlignment="Center" FontSize="13" Visibility="{Binding Visibility, ElementName=panelCard}" />
+					<ui:PpsDataFieldPanel x:Name="panelCard" Grid.Row="1" ColumnCount="2" Margin="0,24,0,0"
 										  DataContext="{Binding VikaView.CurrentItem,Mode=OneWay}" 
 										  Visibility="{Binding Converter={x:Static ui:PpsConverter.Visibility},ConverterParameter={x:Static ui:PpsConverter.VisibilityNotNullParameter}}">
 						<!-- todo: Std -->
