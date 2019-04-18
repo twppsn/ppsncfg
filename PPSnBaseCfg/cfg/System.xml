@@ -25,6 +25,9 @@
 	</luaengine>
 
 	<pps:ppsn name="ppsn">
+		<files name="appSource" directory="Client\Apps" allowListing="true" base="app/">
+			<mimeDef filter="*.msi">application/octet</mimeDef>
+		</files>
 		<pps:sysDataSource name="sys" />
 
 		<pps:reports system="$(reportSystem)" base="reports" storeSuccessLogs="true" zipLogFiles="false" />

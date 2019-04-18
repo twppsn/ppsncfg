@@ -214,6 +214,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)cfg\Client\Apps\" />
     <Folder Include="$(MSBuildThisFileDirectory)cfg\reports\server\" />
   </ItemGroup>
   <ItemGroup>
