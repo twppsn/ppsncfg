@@ -9,6 +9,9 @@
     <Import_RootNamespace>PPSnBaseCfg</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)cfg\Client\Apps\Info.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="$(MSBuildThisFileDirectory)cfg\constants\Kgrp.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -214,7 +217,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)cfg\Client\Apps\" />
     <Folder Include="$(MSBuildThisFileDirectory)cfg\reports\server\" />
   </ItemGroup>
   <ItemGroup>
