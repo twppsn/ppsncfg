@@ -5,7 +5,8 @@
 	[Security] NVARCHAR(MAX) NULL, 
 	[LoginVersion] BIGINT NOT NULL CONSTRAINT dfUserLoginVersion DEFAULT 0, 
 	[KtktId] BIGINT NULL CONSTRAINT fkUserKtktId REFERENCES dbo.Ktkt (Id) ON DELETE SET NULL, 
-    [Identicon] INT NOT NULL DEFAULT 0, 
+	[Identicon] INT NOT NULL CONSTRAINT dfUserIdenticon DEFAULT 0, 
+	[Cfg] NVARCHAR(MAX) NOT NULL CONSTRAINT dfUserCfg DEFAULT '{}', 
 )
 GO
 ALTER TABLE [dbo].[User] ENABLE CHANGE_TRACKING;
@@ -59,3 +60,39 @@ EXEC sp_addextendedproperty @name = N'MS_Description',
     @level1name = N'User',
     @level2type = N'COLUMN',
     @level2name = N'KtktId'
+GO
+EXEC sp_addextendedproperty @name = N'MS_Description',
+    @value = N'Repräsentation des Nutzers, 5x5 + Farbe',
+    @level0type = N'SCHEMA',
+    @level0name = N'dbo',
+    @level1type = N'TABLE',
+    @level1name = N'User',
+    @level2type = N'COLUMN',
+    @level2name = N'Identicon'
+GO
+EXEC sp_addextendedproperty @name = N'MS_Description',
+    @value = N'Lson mit nutzerspezifischen Einstellungen',
+    @level0type = N'SCHEMA',
+    @level0name = N'dbo',
+    @level1type = N'TABLE',
+    @level1name = N'User',
+    @level2type = N'COLUMN',
+    @level2name = N'Cfg'
+GO
+EXEC sp_addextendedproperty @name = N'MS_Description',
+    @value = N'Primärschlussel des Nutzers',
+    @level0type = N'SCHEMA',
+    @level0name = N'dbo',
+    @level1type = N'TABLE',
+    @level1name = N'User',
+    @level2type = N'COLUMN',
+    @level2name = N'Id'
+GO
+EXEC sp_addextendedproperty @name = N'MS_Description',
+    @value = N'Anmeldenamen eines Nutzers',
+    @level0type = N'SCHEMA',
+    @level0name = N'dbo',
+    @level1type = N'TABLE',
+    @level1name = N'User',
+    @level2type = NULL,
+    @level2name = NULL
