@@ -42,13 +42,20 @@ local function copyConfig()
 			--print("MSBuild: " .. msbuild.FullName);
 			local cmd = "\"" .. msbuild.FullName .. "\" /target:CopyConfig \"" .. projectFile.FullName .. "\"";
 			--print(cmd);
-			local s, msg, exitCode = os.execute(cmd);
-			if s then
+			do (f = IO.popen(cmd, "r+"))
+				while true do
+					local l = f:read();
+					if l ~= nil then
+						print(l);
+					else
+						break;
+					end;
+				end;
+				
+				local exitCode = f:close();
 				if exitCode ~= 0 then
 					error("MSBuild failed: " .. exitCode);
 				end;
-			else
-				error("MSBuild nicht ausgeführt: " .. msg);
 			end;
 		else
 			error("MSBuild nicht gefunden.");
