@@ -22,7 +22,7 @@
 		<mime ext=".url" mime="application/internet-shortcut" />
 	</http>
 
-	<luaengine script="LuaDebug">
+	<luaengine script="LuaDebug" security="desSys">
 		<script id="LuaDebug" filename="stuff\Debug.lua" />
 	</luaengine>
 
