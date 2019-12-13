@@ -1,0 +1,7 @@
+﻿CREATE TABLE [dbo].[Bic]
+(
+	[Id] CHAR(11) NOT NULL CONSTRAINT pkBicId PRIMARY KEY,
+	[LandId] BIGINT NOT NULL CONSTRAINT fkLandLandId REFERENCES dbo.Land ([Id]),
+	[Adr] NVARCHAR(512) NULL,
+	[BankCode] CHAR(20) NULL
+)
