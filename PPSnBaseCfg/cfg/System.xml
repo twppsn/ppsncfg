@@ -24,9 +24,10 @@
 
 	<luaengine script="LuaDebug" security="desSys">
 		<script id="LuaDebug" filename="stuff\Debug.lua" />
+		<script id="pps.system" filename="System.lua" />
 	</luaengine>
 
-	<pps:ppsn name="ppsn">
+	<pps:ppsn name="ppsn" script="pps.system">
 		<files name="appSource" directory="Client\Apps" allowListing="true" base="app/">
 			<mimeDef filter="*.msi">application/octet</mimeDef>
 		</files>
@@ -163,6 +164,10 @@
 			<!-- objects -->
 			<pps:view name="dbo.objects">
 				<pps:source type="view">dbo.objects</pps:source>
+			</pps:view>
+
+			<pps:view name="dbo.indexHealth">
+				<pps:source type="file">system\IndexHealth.sql</pps:source>
 			</pps:view>
 
 			<pps:dataset name="masterdata">
