@@ -1,4 +1,5 @@
 ﻿const Path typeof System.IO.Path;
+const Path typeof System.IO.Path;
 
 System = System or {};
 
@@ -12,11 +13,11 @@ local indexExecuteMeta = {
 				if t.type == "reorg" then
 					log:WriteLine("Reorg Index: {0} / {1} ({2:N3})":Format(t.object, t.index, t.frag));
 
-					Db.Main:ExecuteNoneResult { sql = "ALTER INDEX {1} ON {0} REORGANIZE":Format(t.object, t.index) };
+					t.db:ExecuteNoneResult { sql = "ALTER INDEX {1} ON {0} REORGANIZE":Format(t.object, t.index) };
 				elseif t.type == "rebuild" then
 					log:WriteLine("Rebuild Index: {0} / {1} ({2:N3})":Format(t.object, t.index, t.frag));
 
-					Db.Main:ExecuteNoneResult { sql = "ALTER INDEX {1} ON {0} REBUILD":Format(t.object, t.index) };
+					t.db:ExecuteNoneResult { sql = "ALTER INDEX {1} ON {0} REBUILD":Format(t.object, t.index) };
 				end;
 			end;
 		end;
@@ -24,28 +25,26 @@ local indexExecuteMeta = {
 	end
 };
 
-local function getIndexBatch() : table
+local function getIndexBatch(db) : table
 	local r = {};
 
-	foreach row in (Db.Main:CreateSelector("dbo.IndexHealth")) do
+	foreach row in (db:CreateSelector("dbo.IndexHealth")) do
 		if row.AvgFrag >= 5.0 and row.AvgFrag < 30.0 then
-			table.insert(r, { object = row.Schema .. "." .. row.ObjName, index = row.IdxName, frag = row.AvgFrag, type = "reorg", __metatable = indexExecuteMeta });
+			table.insert(r, { db = db, object = row.Schema .. "." .. row.ObjName, index = row.IdxName, frag = row.AvgFrag, type = "reorg", __metatable = indexExecuteMeta });
 		elseif row.AvgFrag >= 30.0 then
-			table.insert(r, { object = row.Schema .. "." .. row.ObjName, index = row.IdxName, frag = row.AvgFrag, type = "rebuild", __metatable = indexExecuteMeta });
+			table.insert(r, { db = db, object = row.Schema .. "." .. row.ObjName, index = row.IdxName, frag = row.AvgFrag, type = "rebuild", __metatable = indexExecuteMeta });
 		end;
 	end;
 
 	return r;
 end; -- getIndexBatch
 
-local function executeBackup()
+local function executeBackup(db)
 
 	do (log = Log:CreateScope(stopTime = true))
 	do
-		local main = Db.Main;
-		
-		local r = GetFirstRow(main:ExecuteSingleResult {
-			__notrans = true,
+		local r = GetFirstRow(db:ExecuteSingleResult {
+			--__notrans = true,
 			sql = "select DB_NAME() as name"
 		});
 		
@@ -58,15 +57,16 @@ local function executeBackup()
 		backupFile = Path:Combine(backupFile, databaseName .. ".bak");
 
 		-- Index rebuild/reorg
-		for i,v in ipairs(getIndexBatch()) do
+		log:WriteLine("Validate Indices...");
+		for i,v in ipairs(getIndexBatch(db)) do
 			v.execute(log);
 		end;
 
 		-- Execute Backup
 		log:WriteLine("Starte Backup...");
-		main:Commit();
+		db:Commit();
 
-		local cmd = main:Prepare {
+		local cmd = db:Prepare {
 			__notrans = true,
 			sql = [==[
 				BACKUP DATABASE []==] .. databaseName ..  [==[] 
@@ -74,10 +74,10 @@ local function executeBackup()
 					NAME = N'Vollständige Datenbank Sicherung', SKIP, NOREWIND, NOUNLOAD, STATS = 10, CHECKSUM
 			]==]
 		};
-		cmd.Command.ExecuteNonQuery(); -- fixme
+		cmd.Command.ExecuteNonQuery(); -- fixme: transaktion wird wieder gesetzt, dadurch kann kein Backup ausgeführt werden.
 
-		r = GetFirstRow(Db.Main:ExecuteSingleResult {
-			__notrans = true,
+		r = GetFirstRow(db:ExecuteSingleResult {
+			--__notrans = true,
 			sql = [[select position from msdb..backupset where database_name=N']] .. databaseName .. [[' and backup_set_id = (select max(backup_set_id) from msdb..backupset where database_name = N']] .. databaseName .. [[')]]
 		});
 
@@ -87,8 +87,10 @@ local function executeBackup()
 			return;
 		end;
 
-		main:Commit(); -- fixme
-		cmd = main:Prepare {
+		db:Commit(); -- fixme
+
+		log:WriteLine("Verify Backup...");
+		cmd = db:Prepare {
 			__notrans = true,
 			sql = [==[
 				RESTORE VERIFYONLY FROM  DISK = N']==] .. backupFile .. [==[' WITH  FILE = ]==] .. r.position .. [==[,  NOUNLOAD,  NOREWIND
@@ -104,5 +106,14 @@ local function executeBackup()
 	end;
 end; -- executeBackup
 
+System.BackupDatabases = System.BackupDatabases or {};
+System.BackupDatabases["Main"] = true;
+
 System.IndexBatch = getIndexBatch;
-System.ExecuteBackup = executeBackup;
+System.ExecuteBackup = function ()
+	for k,v in mpairs(System.BackupDatabases) do
+		if v then
+			executeBackup(Db.GetDatabase(k));
+		end;
+	end;
+end;
