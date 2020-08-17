@@ -9,3 +9,4 @@
 		INNER JOIN sys.indexes AS i ON (f.object_id = i.object_id AND f.index_id = i.index_id)
 		INNER JOIN sys.objects AS o ON (i.object_id = o.object_id)
 		INNER JOIN sys.schemas s on (o.schema_id = s.schema_id)
+	WHERE o.[type] = 'U'
