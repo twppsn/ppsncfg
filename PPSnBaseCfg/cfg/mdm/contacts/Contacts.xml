@@ -40,11 +40,11 @@
 			<pps:field name="dbo.Ktkt.VAdresse" inherited="sys.Fields.Address" displayName="Versandadresse" />
 			<pps:field name="dbo.Ktkt.RAdresse" inherited="sys.Fields.Address" displayName="Rechnungsadresse" />
 			<pps:field name="dbo.Ktkt.KoordL" displayName="Längengrad" >
-				<pps:attribute name="format" dataType="string">N6</pps:attribute>
+				<pps:attribute name="v.format" dataType="string">N6</pps:attribute>
 				<pps:attribute name="maxLength">9</pps:attribute>
 			</pps:field>
 			<pps:field name="dbo.Ktkt.KoordB" displayName="Breitengrad" >
-				<pps:attribute name="format" dataType="string">N6</pps:attribute>
+				<pps:attribute name="v.format" dataType="string">N6</pps:attribute>
 				<pps:attribute name="maxLength">9</pps:attribute>
 			</pps:field>
 			<!--<pps:field name="dbo.Ktkt.Facebook" displayName="Facebook" />
