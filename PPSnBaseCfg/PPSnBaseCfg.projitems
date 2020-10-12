@@ -135,4 +135,8 @@
       </Generator>
     </Content>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)cfg\System.lua" />
+    <Content Include="$(MSBuildThisFileDirectory)cfg\system\IndexHealth.sql" />
+  </ItemGroup>
 </Project>
