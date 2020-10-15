@@ -85,13 +85,11 @@
 			<pps:field name="sys.Fields.Text" dataType="string" />
 			<pps:field name="sys.Fields.Int" dataType="int" />
 			<pps:field name="sys.Fields.Long" dataType="long" />
+			<pps:field name="sys.Fields.Double" dataType="double" />
+			<pps:field name="sys.Fields.Decimal" dataType="decimal" />
 			<pps:field name="sys.Fields.Bit" dataType="bool" />
 			<pps:field name="sys.Fields.Blob" dataType="blob" />
 			<pps:field name="sys.Fields.DateTime" dataType="datetime" />
-
-			<pps:view name="sys.clientFiles">
-				<pps:source type="view">GetApplicationFilesSelector</pps:source>
-			</pps:view>
 
 			<pps:field name="wpf.clientFiles.Type" inherited="sys.Fields.Text" />
 			<pps:field name="wpf.clientFiles.Name" inherited="sys.Fields.Text" />
@@ -100,7 +98,25 @@
 			<pps:field name="wpf.clientFiles.DisplayName" inherited="sys.Fields.Text" />
 			<pps:field name="wpf.clientFiles.Icon" inherited="sys.Fields.Text" />
 			<pps:field name="wpf.clientFiles.Source" inherited="sys.Fields.Text" />
-			<pps:field name="wpf.clientFiles.LastWriteTime" dataType="datetime" />
+			<pps:field name="wpf.clientFiles.LastWriteTime" inherited="sys.Fields.DateTime" />
+
+			<pps:view name="sys.clientFiles">
+				<pps:source type="view">GetApplicationFilesSelector</pps:source>
+			</pps:view>
+
+			<pps:field name="wpf.clientFiles.ClientId" inherited="sys.Fields.Text" />
+			<pps:field name="wpf.clientFiles.Version" inherited="sys.Fields.Text" />
+			<pps:field name="wpf.clientFiles.LastTimeSeen" inherited="sys.Fields.DateTime" />
+			<pps:field name="wpf.clientFiles.Latitude" inherited="sys.Fields.Double" />
+			<pps:field name="wpf.clientFiles.Longtitude" inherited="sys.Fields.Double" />
+			<pps:field name="wpf.clientFiles.GpsTimeStamp" inherited="sys.Fields.DateTime" />
+			<pps:field name="wpf.clientFiles.Wifi" inherited="sys.Fields.Text" />
+			<pps:field name="wpf.clientFiles.Address" inherited="sys.Fields.Text" />
+			<pps:field name="wpf.clientFiles.Pending" inherited="sys.Fields.Text" />
+			
+			<pps:view name="sys.clients">
+				<pps:source type="view">CreateSeenClientsSelector</pps:source>
+			</pps:view>
 
 			<pps:field name="bi.reports.Type" dataType="string" displayName="Type" />
 			<pps:field name="bi.reports.ReportId" dataType="string" displayName="Report" />
