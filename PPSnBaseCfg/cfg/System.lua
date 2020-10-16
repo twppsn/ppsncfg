@@ -1,4 +1,7 @@
-﻿const Path typeof System.IO.Path;
+﻿const DateTime typeof System.DateTime;
+const DayOfWeek typeof System.DayOfWeek;
+
+const Path typeof System.IO.Path;
 const Path typeof System.IO.Path;
 
 System = System or {};
@@ -61,20 +64,72 @@ local function executeBackup(db)
 		for i,v in ipairs(getIndexBatch(db)) do
 			v.execute(log);
 		end;
-
-		-- Execute Backup
-		log:WriteLine("Starte Backup...");
 		db:Commit();
+		
+		local nativeConnection = db.DbConnection;
+		local now : DateTime = DateTime.Now;
+		local isSamstag : bool = now.DayOfWeek == DayOfWeek.Saturday;
 
-		local cmd = db:Prepare {
-			__notrans = true,
-			sql = [==[
-				BACKUP DATABASE []==] .. databaseName ..  [==[] 
-					TO DISK = N']==] .. backupFile .. [==[' WITH NOFORMAT, INIT,  
-					NAME = N'Vollständige Datenbank Sicherung', SKIP, NOREWIND, NOUNLOAD, STATS = 10, CHECKSUM
-			]==]
-		};
-		cmd.Command.ExecuteNonQuery(); -- fixme: transaktion wird wieder gesetzt, dadurch kann kein Backup ausgeführt werden.
+		do (dayCommand = nativeConnection:CreateCommand())
+			dayCommand.CommandText = [[select top 1 datediff(day, backup_finish_date, getdate()) from msdb..backupset where database_name = ']] .. databaseName .. [[' and [type] = 'D' order by backup_set_id desc]];
+
+			do (r = dayCommand:ExecuteReader())
+				if not r:Read() or r:GetInt32() > 8 then
+					isSamstag = true; -- no differentielle backup exists
+				end;
+			end;
+		end;
+		
+		-- Execute Backup
+		if isSamstag then
+			log:WriteLine("Starte Backup (Samstag)...");
+		else
+			log:WriteLine("Starte Backup...");
+		end;
+		
+		-- Prüfe die Datenbank
+		if isSamstag then
+			log:WriteLine("Prüfe die Datenbankdatei...");
+			
+			do (checkCommand = nativeConnection:CreateCommand())
+				checkCommand.CommandText = [[dbcc checkdb (']] .. databaseName .. [[') with extended_logical_checks, no_infomsgs]];
+				checkCommand:ExecuteNonQuery();
+			end;
+		end;
+
+		-- todo: prüfe auf vollständige Sicherung!
+		-- todo: ggf. Log vorher sichern?
+
+		if isSamstag then -- Vollständige Sicherung am Samstag
+
+			do (backupCommand = nativeConnection:CreateCommand())
+				backupCommand.CommandText = [==[
+					BACKUP DATABASE []==] .. databaseName ..  [==[] 
+						TO DISK = N']==] .. backupFile .. [==['
+						WITH NOFORMAT, INIT, NAME = N']==] .. "Vollständige Sicherung vom " .. now:ToString("G") .. [==[', SKIP, NOREWIND, NOUNLOAD, STATS = 10, CHECKSUM
+				]==];
+				backupCommand:ExecuteNonQuery();
+
+				backupCommand.CommandText = [==[
+					BACKUP LOG []==] .. databaseName ..  [==[]
+						TO DISK = N']==] .. backupFile .. [==[
+						WITH NOINIT, NAME = N'Datenbank Log Sicherung'
+				]==];
+				backupCommand:ExecuteNonQuery();
+			end;
+
+		else -- Differentielle Sicherung
+
+			do (backupCommand = nativeConnection:CreateCommand())
+				backupCommand.CommandText = [==[
+					BACKUP DATABASE []==] .. databaseName ..  [==[] 
+						TO DISK = N']==] .. backupFile .. [==['
+						WITH DIFFERENTIAL, NOINIT, NAME = N']==] .. "Differentielle Sicherung vom " .. now:ToString("G") .. [==[', SKIP, NOREWIND, NOUNLOAD, STATS = 10, CHECKSUM
+				]==];
+				backupCommand:ExecuteNonQuery();
+			end;
+
+		end;
 
 		r = GetFirstRow(db:ExecuteSingleResult {
 			--__notrans = true,
@@ -87,16 +142,17 @@ local function executeBackup(db)
 			return;
 		end;
 
-		db:Commit(); -- fixme
+		db:Commit();
 
 		log:WriteLine("Verify Backup...");
-		cmd = db:Prepare {
-			__notrans = true,
-			sql = [==[
-				RESTORE VERIFYONLY FROM  DISK = N']==] .. backupFile .. [==[' WITH  FILE = ]==] .. r.position .. [==[,  NOUNLOAD,  NOREWIND
-			]==]
-		};
-		cmd.Command.ExecuteNonQuery(); -- fixme
+			
+		do (restoreCommand = nativeConnection:CreateCommand())
+			restoreCommand.CommandText = [==[
+				RESTORE VERIFYONLY FROM  DISK = N']==] .. backupFile .. [==['
+					WITH  FILE = ]==] .. r.position .. [==[, NOUNLOAD,  NOREWIND
+			]==];
+			restoreCommand:ExecuteNonQuery();
+		end;
 	end(
 		function (e)
 			log:WriteException(e);
