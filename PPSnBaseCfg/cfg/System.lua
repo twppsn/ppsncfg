@@ -28,15 +28,22 @@ local indexExecuteMeta = {
 	end
 };
 
-local function getIndexBatch(db) : table
+local function getIndexBatch(db, databaseName, log) : table
 	local r = {};
 
-	foreach row in (db:CreateSelector("dbo.IndexHealth")) do
-		if row.AvgFrag >= 5.0 and row.AvgFrag < 30.0 then
-			table.insert(r, { db = db, object = row.Schema .. "." .. row.ObjName, index = row.IdxName, frag = row.AvgFrag, type = "reorg", __metatable = indexExecuteMeta });
-		elseif row.AvgFrag >= 30.0 then
-			table.insert(r, { db = db, object = row.Schema .. "." .. row.ObjName, index = row.IdxName, frag = row.AvgFrag, type = "rebuild", __metatable = indexExecuteMeta });
+	-- check if view is created
+	local viewDef = GetViewDefinition(db.DataSource.Name .. ".dbo.IndexHealth", false);
+	if viewDef ~= nil then
+		foreach row in (viewDef.SelectorToken:CreateSelector(db.Connection)) do
+			if row.AvgFrag >= 5.0 and row.AvgFrag < 30.0 then
+				table.insert(r, { db = db, object = row.Schema .. "." .. row.ObjName, index = row.IdxName, frag = row.AvgFrag, type = "reorg", __metatable = indexExecuteMeta });
+			elseif row.AvgFrag >= 30.0 then
+				table.insert(r, { db = db, object = row.Schema .. "." .. row.ObjName, index = row.IdxName, frag = row.AvgFrag, type = "rebuild", __metatable = indexExecuteMeta });
+			end;
 		end;
+	elseif databaseName ~= "master" and databaseName ~= "msdb" then
+		log:WriteLine("dbo.IndexHealth not registered!");
+		log:SetType(1);
 	end;
 
 	return r;
@@ -61,104 +68,151 @@ local function executeBackup(db)
 
 		-- Index rebuild/reorg
 		log:WriteLine("Validate Indices...");
-		for i,v in ipairs(getIndexBatch(db)) do
+		for i,v in ipairs(getIndexBatch(db, databaseName, log)) do
 			v.execute(log);
 		end;
-		db:Commit();
-		
-		local nativeConnection = db.DbConnection;
-		local now : DateTime = DateTime.Now;
-		local isSamstag : bool = now.DayOfWeek == DayOfWeek.Saturday;
 
-		-- check full or differentielle backup
-		if not isSamstag then
-			do (dayCommand = nativeConnection:CreateCommand())
-				dayCommand.CommandText = [[select top 1 datediff(day, backup_finish_date, getdate()) from msdb..backupset where database_name = ']] .. databaseName .. [[' and [type] = 'D' order by backup_set_id desc]];
-
-				do (r = dayCommand:ExecuteReader())
-					if not r:Read() or r:GetInt32() > 8 then
-						isSamstag = true; -- no differentielle backup exists
-					end;
-				end;
-			end;
-		end;
-		
-		-- Execute Backup
-		if isSamstag then
-			log:WriteLine("Starte Backup (Samstag)...");
-		else
-			log:WriteLine("Starte Backup...");
-		end;
-		
-		-- Prüfe die Datenbank
-		if isSamstag then
-			log:WriteLine("Prüfe die Datenbankdatei...");
-			
-			do (checkCommand = nativeConnection:CreateCommand())
-				checkCommand.CommandTimeout = 28800; --8h
-				checkCommand.CommandText = [[dbcc checkdb (']] .. databaseName .. [[') with extended_logical_checks, no_infomsgs]];
-				checkCommand:ExecuteNonQuery();
-			end;
-		end;
-
-		-- todo: prüfe auf vollständige Sicherung!
-		-- todo: ggf. Log vorher sichern?
-
-		if isSamstag then -- Vollständige Sicherung am Samstag
-
-			do (backupCommand = nativeConnection:CreateCommand())
-				backupCommand.CommandTimeout = 28800; --8h
-				backupCommand.CommandText = [==[
-					BACKUP DATABASE []==] .. databaseName ..  [==[] 
-						TO DISK = N']==] .. backupFile .. [==['
-						WITH NOFORMAT, INIT, NAME = N']==] .. "Vollständige Sicherung vom " .. now:ToString("G") .. [==[', SKIP, NOREWIND, NOUNLOAD, STATS = 10, CHECKSUM
-				]==];
-				backupCommand:ExecuteNonQuery();
-
-				backupCommand.CommandText = [==[
-					BACKUP LOG []==] .. databaseName ..  [==[]
-						TO DISK = N']==] .. backupFile .. [==['
-						WITH NOINIT, NAME = N'Datenbank Log Sicherung'
-				]==];
-				backupCommand:ExecuteNonQuery();
-			end;
-
-		else -- Differentielle Sicherung
-
-			do (backupCommand = nativeConnection:CreateCommand())
-				backupCommand.CommandTimeout = 28800; --8h
-				backupCommand.CommandText = [==[
-					BACKUP DATABASE []==] .. databaseName ..  [==[] 
-						TO DISK = N']==] .. backupFile .. [==['
-						WITH DIFFERENTIAL, NOINIT, NAME = N']==] .. "Differentielle Sicherung vom " .. now:ToString("G") .. [==[', SKIP, NOREWIND, NOUNLOAD, STATS = 10, CHECKSUM
-				]==];
-				backupCommand:ExecuteNonQuery();
-			end;
-
-		end;
-
-		r = GetFirstRow(db:ExecuteSingleResult {
+		-- get backup parameter
+		local backupParameter = GetFirstRow(db.ExecuteSingleResult {
 			--__notrans = true,
-			sql = [[select position from msdb..backupset where database_name=N']] .. databaseName .. [[' and backup_set_id = (select max(backup_set_id) from msdb..backupset where database_name = N']] .. databaseName .. [[')]]
+			sql = [==[
+				SELECT TOP 1
+						d.recovery_model_desc AS [DatabaseRecovery]
+						, datediff(day, s.backup_finish_date, getdate()) AS [BackupAge]
+						, s.recovery_model AS [BackupRecovery]
+					FROM sys.databases d
+						LEFT OUTER JOIN (
+							msdb.dbo.backupset s
+								INNER JOIN msdb.dbo.backupmediafamily m on (s.media_set_id = m.media_set_id AND m.device_type in (2, 5))
+						)  ON (d.[name] = s.[database_name] AND s.[type] = 'D')
+					WHERE d.[name] = @NAME
+					ORDER BY backup_set_id DESC]==],
+			{ NAME = databaseName }
 		});
 
-		if r == nil or r.position == nil then
-			log:WriteLine("Sicherungsinformationen für die Datenbank wurden nicht gefunden.");
-			log:SetType(2);
-			return;
-		end;
-
 		db:Commit();
+		
+		do (_logScope = db.LogMessages(log))
 
-		log:WriteLine("Verify Backup...");
+			local nativeConnection = db.DbConnection;
+
+			-- check for saturday night
+			local now : DateTime = DateTime.Now;
+			local doFull : bool = now.DayOfWeek == DayOfWeek.Saturday;
 			
-		do (restoreCommand = nativeConnection:CreateCommand())
-			restoreCommand.CommandTimeout = 28800; --8h
-			restoreCommand.CommandText = [==[
-				RESTORE VERIFYONLY FROM  DISK = N']==] .. backupFile .. [==['
-					WITH  FILE = ]==] .. r.position .. [==[, NOUNLOAD,  NOREWIND
-			]==];
-			restoreCommand:ExecuteNonQuery();
+			-- backup is new, no full backup needed
+			if doFull and backupParameter.BackupAge ~= nil and backupParameter.BackupAge == 0 then
+				doFull = false;
+			end;
+			
+			-- check for recovery model changes
+			if databaseName == "master" then
+				log:WriteLine("Start " .. backupParameter.DatabaseRecovery .. " backup (because it is master)...");
+				doFull = true;
+			elseif backupParameter.BackupRecovery == nil then
+				log:WriteLine("Start " .. backupParameter.DatabaseRecovery .. " backup (because none exist)...");
+				doFull = true;
+			elseif backupParameter.DatabaseRecovery ~= backupParameter.BackupRecovery then
+				log:WriteLine("Start " .. backupParameter.DatabaseRecovery .. " backup (recovery model was changed from " .. backupParameter.BackupRecovery .. ")...");
+				doFull = true;
+			elseif doFull then
+				log:WriteLine("Start " .. backupParameter.DatabaseRecovery .. " backup (because it is saturday)...");
+			else
+				log:WriteLine("Start differential backup (" .. backupParameter.DatabaseRecovery .. ", " .. backupParameter.BackupAge .. " days)...");
+			end;
+
+			local isSimple = backupParameter.DatabaseRecovery == "SIMPLE";
+			
+			-- Check database
+			if doFull then
+				log:WriteLine("Check database...");
+			
+				do (checkCommand = nativeConnection:CreateCommand())
+					checkCommand.CommandTimeout = 28800; --8h
+					checkCommand.CommandText = [[dbcc checkdb (']] .. databaseName .. [[') with extended_logical_checks, no_infomsgs]];
+					checkCommand:ExecuteNonQuery();
+				end;
+			end;
+
+			if doFull then -- Do a complete backup
+
+				do (backupCommand = nativeConnection:CreateCommand())
+
+					nativeConnection:ChangeDatabase("msdb");
+					backupCommand.CommandText = [[exec sp_delete_database_backuphistory ']] .. databaseName .. [[';]];
+					backupCommand:ExecuteNonQuery();
+					nativeConnection:ChangeDatabase(databaseName);
+
+					backupCommand.CommandTimeout = 28800; --8h
+					backupCommand.CommandText = [==[
+						BACKUP DATABASE []==] .. databaseName ..  [==[] 
+							TO DISK = N']==] .. backupFile .. [==['
+							WITH NOFORMAT, INIT, NAME = N']==] .. "Vollständige Sicherung vom " .. now:ToString("G") .. [==[', SKIP, NOREWIND, NOUNLOAD, STATS = 10, CHECKSUM
+					]==];
+					backupCommand:ExecuteNonQuery();
+
+					if not isSimple then
+						backupCommand.CommandText = [==[
+							BACKUP LOG []==] .. databaseName ..  [==[]
+								TO DISK = N']==] .. backupFile .. [==['
+								WITH NOINIT, NAME = N'Datenbank Log Sicherung'
+						]==];
+						backupCommand:ExecuteNonQuery();
+					end;
+				end;
+
+			else -- Differential Sicherung
+
+				do (backupCommand = nativeConnection:CreateCommand())
+					backupCommand.CommandTimeout = 28800; --8h
+					backupCommand.CommandText = [==[
+						BACKUP DATABASE []==] .. databaseName ..  [==[] 
+							TO DISK = N']==] .. backupFile .. [==['
+							WITH DIFFERENTIAL, NOINIT, NAME = N']==] .. "Differential Sicherung vom " .. now:ToString("G") .. [==[', SKIP, NOREWIND, NOUNLOAD, STATS = 10, CHECKSUM
+					]==];
+					backupCommand:ExecuteNonQuery();
+
+					if not isSimple then
+						backupCommand.CommandText = [==[
+							BACKUP LOG []==] .. databaseName ..  [==[]
+								TO DISK = N']==] .. backupFile .. [==['
+								WITH NOINIT, NAME = N'Datenbank Log Sicherung'
+						]==];
+						backupCommand:ExecuteNonQuery();
+					end;
+				end;
+
+			end;
+
+			r = GetFirstRow(db:ExecuteSingleResult {
+				--__notrans = true,
+				sql = [[
+					SELECT TOP 1 position, physical_block_size as [size]
+						FROM msdb.dbo.backupset s
+							INNER JOIN msdb.dbo.backupmediafamily m ON (s.media_set_id = m.media_set_id)
+						WHERE database_name = @NAME
+						ORDER BY backup_set_id DESC]],
+				{ NAME = databaseName }
+			});
+
+			if r == nil or r.position == nil then
+				log:WriteLine("Backup information for the database missing.");
+				log:SetType(2);
+				return;
+			end;
+
+			db:Commit();
+
+			log:WriteLine("Verify backup ({0:N0} KiB)...", r.size);
+			
+			do (restoreCommand = nativeConnection:CreateCommand())
+				restoreCommand.CommandTimeout = 28800; --8h
+				restoreCommand.CommandText = [==[
+					RESTORE VERIFYONLY FROM  DISK = N']==] .. backupFile .. [==['
+						WITH  FILE = ]==] .. r.position .. [==[, NOUNLOAD,  NOREWIND
+				]==];
+				restoreCommand:ExecuteNonQuery();
+			end;
 		end;
 	end(
 		function (e)
