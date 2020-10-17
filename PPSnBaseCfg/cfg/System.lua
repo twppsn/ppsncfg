@@ -70,12 +70,15 @@ local function executeBackup(db)
 		local now : DateTime = DateTime.Now;
 		local isSamstag : bool = now.DayOfWeek == DayOfWeek.Saturday;
 
-		do (dayCommand = nativeConnection:CreateCommand())
-			dayCommand.CommandText = [[select top 1 datediff(day, backup_finish_date, getdate()) from msdb..backupset where database_name = ']] .. databaseName .. [[' and [type] = 'D' order by backup_set_id desc]];
+		-- check full or differentielle backup
+		if not isSamstag then
+			do (dayCommand = nativeConnection:CreateCommand())
+				dayCommand.CommandText = [[select top 1 datediff(day, backup_finish_date, getdate()) from msdb..backupset where database_name = ']] .. databaseName .. [[' and [type] = 'D' order by backup_set_id desc]];
 
-			do (r = dayCommand:ExecuteReader())
-				if not r:Read() or r:GetInt32() > 8 then
-					isSamstag = true; -- no differentielle backup exists
+				do (r = dayCommand:ExecuteReader())
+					if not r:Read() or r:GetInt32() > 8 then
+						isSamstag = true; -- no differentielle backup exists
+					end;
 				end;
 			end;
 		end;
@@ -92,6 +95,7 @@ local function executeBackup(db)
 			log:WriteLine("Prüfe die Datenbankdatei...");
 			
 			do (checkCommand = nativeConnection:CreateCommand())
+				checkCommand.CommandTimeout = 28800; --8h
 				checkCommand.CommandText = [[dbcc checkdb (']] .. databaseName .. [[') with extended_logical_checks, no_infomsgs]];
 				checkCommand:ExecuteNonQuery();
 			end;
@@ -103,6 +107,7 @@ local function executeBackup(db)
 		if isSamstag then -- Vollständige Sicherung am Samstag
 
 			do (backupCommand = nativeConnection:CreateCommand())
+				backupCommand.CommandTimeout = 28800; --8h
 				backupCommand.CommandText = [==[
 					BACKUP DATABASE []==] .. databaseName ..  [==[] 
 						TO DISK = N']==] .. backupFile .. [==['
@@ -112,7 +117,7 @@ local function executeBackup(db)
 
 				backupCommand.CommandText = [==[
 					BACKUP LOG []==] .. databaseName ..  [==[]
-						TO DISK = N']==] .. backupFile .. [==[
+						TO DISK = N']==] .. backupFile .. [==['
 						WITH NOINIT, NAME = N'Datenbank Log Sicherung'
 				]==];
 				backupCommand:ExecuteNonQuery();
@@ -121,6 +126,7 @@ local function executeBackup(db)
 		else -- Differentielle Sicherung
 
 			do (backupCommand = nativeConnection:CreateCommand())
+				backupCommand.CommandTimeout = 28800; --8h
 				backupCommand.CommandText = [==[
 					BACKUP DATABASE []==] .. databaseName ..  [==[] 
 						TO DISK = N']==] .. backupFile .. [==['
@@ -147,6 +153,7 @@ local function executeBackup(db)
 		log:WriteLine("Verify Backup...");
 			
 		do (restoreCommand = nativeConnection:CreateCommand())
+			restoreCommand.CommandTimeout = 28800; --8h
 			restoreCommand.CommandText = [==[
 				RESTORE VERIFYONLY FROM  DISK = N']==] .. backupFile .. [==['
 					WITH  FILE = ]==] .. r.position .. [==[, NOUNLOAD,  NOREWIND
