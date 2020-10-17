@@ -115,6 +115,9 @@ local function executeBackup(db)
 			elseif backupParameter.DatabaseRecovery ~= backupParameter.BackupRecovery then
 				log:WriteLine("Start " .. backupParameter.DatabaseRecovery .. " backup (recovery model was changed from " .. backupParameter.BackupRecovery .. ")...");
 				doFull = true;
+			elseif backupParameter.BackupAge > 7 then
+				log:WriteLine("Start " .. backupParameter.DatabaseRecovery .. " backup (because full backup is " .. backupParameter.BackupAge .. " days old)...");
+				doFull = true;
 			elseif doFull then
 				log:WriteLine("Start " .. backupParameter.DatabaseRecovery .. " backup (because it is saturday)...");
 			else
