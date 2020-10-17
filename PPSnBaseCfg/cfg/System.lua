@@ -187,9 +187,9 @@ local function executeBackup(db)
 			r = GetFirstRow(db:ExecuteSingleResult {
 				--__notrans = true,
 				sql = [[
-					SELECT TOP 1 position, physical_block_size as [size]
+					SELECT TOP 1 position, file_size / 1024 as [size]
 						FROM msdb.dbo.backupset s
-							INNER JOIN msdb.dbo.backupmediafamily m ON (s.media_set_id = m.media_set_id)
+							INNER JOIN msdb.dbo.backupfile f ON (s.backup_set_id = f.backup_set_id)
 						WHERE database_name = @NAME
 						ORDER BY backup_set_id DESC]],
 				{ NAME = databaseName }
