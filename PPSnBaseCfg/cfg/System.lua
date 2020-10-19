@@ -49,7 +49,7 @@ local function getIndexBatch(db, databaseName, log) : table
 	return r;
 end; -- getIndexBatch
 
-local function executeBackup(db)
+local function executeBackup(db, checkDb) : bool
 
 	do (log = Log:CreateScope(stopTime = true))
 	do
@@ -127,12 +127,18 @@ local function executeBackup(db)
 			local isSimple = backupParameter.DatabaseRecovery == "SIMPLE";
 			
 			-- Check database
-			if doFull then
+			if doFull and checkDb then
 				log:WriteLine("Check database...");
+
+				local flags : string = "no_infomsgs";
+
+				if typeof(checkDb) == "string" and checkDb == "logical" then
+					flags = "extended_logical_checks, " .. flags;
+				end;
 			
 				do (checkCommand = nativeConnection:CreateCommand())
 					checkCommand.CommandTimeout = 28800; --8h
-					checkCommand.CommandText = [[dbcc checkdb (']] .. databaseName .. [[') with extended_logical_checks, no_infomsgs]];
+					checkCommand.CommandText = [[DBCC CHECKDB (']] .. databaseName .. [[') with ]] .. flags;
 					checkCommand:ExecuteNonQuery();
 				end;
 			end;
@@ -217,23 +223,38 @@ local function executeBackup(db)
 				restoreCommand:ExecuteNonQuery();
 			end;
 		end;
+
+		return true;
 	end(
 		function (e)
 			log:WriteException(e);
-			rethrow;
+			return false;
 		end
 	)
 	end;
 end; -- executeBackup
 
 System.BackupDatabases = System.BackupDatabases or {};
-System.BackupDatabases["Main"] = true;
+System.BackupDatabases["Main"] = { CheckDb = "logical" };
 
 System.IndexBatch = getIndexBatch;
-System.ExecuteBackup = function ()
-	for k,v in mpairs(System.BackupDatabases) do
-		if v then
-			executeBackup(Db.GetDatabase(k));
+System.ExecuteBackup = function (name : string) : bool
+	if name ~= nil then
+		return executeBackup(Db.GetDatabase(name));
+	else
+		local failed : int = 0;
+		for k,v in mpairs(System.BackupDatabases) do
+			if type(v) == "bool" and v then
+				if not executeBackup(Db.GetDatabase(k), true) then
+					failed = failed + 1;
+				end;
+			elseif type(v) == "table" then
+				if not executeBackup(Db.GetDatabase(k), v.CheckDb or true) then
+					failed = failed + 1;
+				end;
+			end;
+		
 		end;
+		return failed == 0;
 	end;
-end;
+end; -- ExecuteBackup
