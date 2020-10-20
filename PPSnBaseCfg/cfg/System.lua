@@ -132,7 +132,7 @@ local function executeBackup(db, checkDb) : bool
 
 				local flags : string = "no_infomsgs";
 
-				if typeof(checkDb) == "string" and checkDb == "logical" then
+				if type(checkDb) == "string" and checkDb == "logical" then
 					flags = "extended_logical_checks, " .. flags;
 				end;
 			
