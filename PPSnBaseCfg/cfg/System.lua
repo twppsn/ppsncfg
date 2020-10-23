@@ -244,16 +244,22 @@ System.ExecuteBackup = function (name : string) : bool
 	else
 		local failed : int = 0;
 		for k,v in mpairs(System.BackupDatabases) do
-			if type(v) == "bool" and v then
-				if not executeBackup(Db.GetDatabase(k), true) then
-					failed = failed + 1;
+			local args : table = nil;
+			local tn : string = type(v);
+
+			if tn == "boolean" then
+				if v then
+					args = { CheckDb = true };
 				end;
-			elseif type(v) == "table" then
+			elseif tn == "table" then
+				args = v;
+			end;
+
+			if args ~= nil then
 				if not executeBackup(Db.GetDatabase(k), v.CheckDb or true) then
 					failed = failed + 1;
 				end;
 			end;
-		
 		end;
 		return failed == 0;
 	end;
