@@ -28,7 +28,7 @@
 	</luaengine>
 
 	<pps:ppsn name="ppsn" script="pps.system">
-		<files name="appSource" directory="Client\Apps" allowListing="true" base="app/">
+		<files name="appSource" directory="Client\Apps" allowListing="true" base="app/" displayname="Client Application Source">
 			<mimeDef filter="*.msi">application/octet</mimeDef>
 		</files>
 		<pps:sysDataSource name="sys" />
