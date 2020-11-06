@@ -9,7 +9,6 @@
     <Import_RootNamespace>PPSnBaseCfg</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="$(MSBuildThisFileDirectory)cfg\Client\Apps\Info.txt" />
     <Content Include="$(MSBuildThisFileDirectory)cfg\constants\Kgrp.xml" />
     <Content Include="$(MSBuildThisFileDirectory)cfg\constants\Mein.xml" />
     <Content Include="$(MSBuildThisFileDirectory)cfg\constants\Plzd.xml" />
@@ -138,5 +137,8 @@
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)cfg\System.lua" />
     <Content Include="$(MSBuildThisFileDirectory)cfg\system\IndexHealth.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)cfg\Client\Apps\info.extern" />
   </ItemGroup>
 </Project>
