@@ -4,6 +4,8 @@ const DayOfWeek typeof System.DayOfWeek;
 const Path typeof System.IO.Path;
 const Path typeof System.IO.Path;
 
+const backupTimeout : int = 86400; -- 24h
+
 System = System or {};
 
 local indexExecuteMeta = {
@@ -137,7 +139,7 @@ local function executeBackup(db, checkDb) : bool
 				end;
 			
 				do (checkCommand = nativeConnection:CreateCommand())
-					checkCommand.CommandTimeout = 28800; --8h
+					checkCommand.CommandTimeout = backupTimeout;
 					checkCommand.CommandText = [[DBCC CHECKDB (']] .. databaseName .. [[') with ]] .. flags;
 					checkCommand:ExecuteNonQuery();
 				end;
@@ -152,7 +154,7 @@ local function executeBackup(db, checkDb) : bool
 					backupCommand:ExecuteNonQuery();
 					nativeConnection:ChangeDatabase(databaseName);
 
-					backupCommand.CommandTimeout = 28800; --8h
+					backupCommand.CommandTimeout = backupTimeout;
 					backupCommand.CommandText = [==[
 						BACKUP DATABASE []==] .. databaseName ..  [==[] 
 							TO DISK = N']==] .. backupFile .. [==['
@@ -173,7 +175,7 @@ local function executeBackup(db, checkDb) : bool
 			else -- Differential Sicherung
 
 				do (backupCommand = nativeConnection:CreateCommand())
-					backupCommand.CommandTimeout = 28800; --8h
+					backupCommand.CommandTimeout = backupTimeout;
 					backupCommand.CommandText = [==[
 						BACKUP DATABASE []==] .. databaseName ..  [==[] 
 							TO DISK = N']==] .. backupFile .. [==['
@@ -215,7 +217,7 @@ local function executeBackup(db, checkDb) : bool
 			log:WriteLine("Verify backup ({0:N0} KiB)...", r.size);
 			
 			do (restoreCommand = nativeConnection:CreateCommand())
-				restoreCommand.CommandTimeout = 28800; --8h
+				restoreCommand.CommandTimeout = backupTimeout;
 				restoreCommand.CommandText = [==[
 					RESTORE VERIFYONLY FROM  DISK = N']==] .. backupFile .. [==['
 						WITH  FILE = ]==] .. r.position .. [==[, NOUNLOAD,  NOREWIND
