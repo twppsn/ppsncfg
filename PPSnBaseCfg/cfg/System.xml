@@ -91,31 +91,41 @@
 			<pps:field name="sys.Fields.Blob" dataType="blob" />
 			<pps:field name="sys.Fields.DateTime" dataType="datetime" />
 
-			<pps:field name="wpf.clientFiles.Type" inherited="sys.Fields.Text" />
-			<pps:field name="wpf.clientFiles.Name" inherited="sys.Fields.Text" />
-			<pps:field name="wpf.clientFiles.VersionCode" inherited="sys.Fields.Long" />
-			<pps:field name="wpf.clientFiles.Version" inherited="sys.Fields.Text" />
-			<pps:field name="wpf.clientFiles.DisplayName" inherited="sys.Fields.Text" />
-			<pps:field name="wpf.clientFiles.Icon" inherited="sys.Fields.Text" />
-			<pps:field name="wpf.clientFiles.Source" inherited="sys.Fields.Text" />
-			<pps:field name="wpf.clientFiles.LastWriteTime" inherited="sys.Fields.DateTime" />
+			<pps:field name="sys.clientFiles.Type" inherited="sys.Fields.Text" />
+			<pps:field name="sys.clientFiles.Name" inherited="sys.Fields.Text" />
+			<pps:field name="sys.clientFiles.VersionCode" inherited="sys.Fields.Long" />
+			<pps:field name="sys.clientFiles.Version" inherited="sys.Fields.Text" />
+			<pps:field name="sys.clientFiles.DisplayName" inherited="sys.Fields.Text" />
+			<pps:field name="sys.clientFiles.Icon" inherited="sys.Fields.Text" />
+			<pps:field name="sys.clientFiles.Source" inherited="sys.Fields.Text" />
+			<pps:field name="sys.clientFiles.LastWriteTime" inherited="sys.Fields.DateTime" />
 
 			<pps:view name="sys.clientFiles">
 				<pps:source type="view">GetApplicationFilesSelector</pps:source>
 			</pps:view>
 
-			<pps:field name="wpf.clientFiles.ClientId" inherited="sys.Fields.Text" />
-			<pps:field name="wpf.clientFiles.Version" inherited="sys.Fields.Text" />
-			<pps:field name="wpf.clientFiles.LastTimeSeen" inherited="sys.Fields.DateTime" />
-			<pps:field name="wpf.clientFiles.Latitude" inherited="sys.Fields.Double" />
-			<pps:field name="wpf.clientFiles.Longtitude" inherited="sys.Fields.Double" />
-			<pps:field name="wpf.clientFiles.GpsTimeStamp" inherited="sys.Fields.DateTime" />
-			<pps:field name="wpf.clientFiles.Wifi" inherited="sys.Fields.Text" />
-			<pps:field name="wpf.clientFiles.Address" inherited="sys.Fields.Text" />
-			<pps:field name="wpf.clientFiles.Pending" inherited="sys.Fields.Text" />
+			<pps:field name="sys.clients.ClientId" inherited="sys.Fields.Text" />
+			<pps:field name="sys.clients.Version" inherited="sys.Fields.Text" />
+			<pps:field name="sys.clients.LastTimeSeen" inherited="sys.Fields.DateTime" />
+			<pps:field name="sys.clients.Latitude" inherited="sys.Fields.Double" />
+			<pps:field name="sys.clients.Longtitude" inherited="sys.Fields.Double" />
+			<pps:field name="sys.clients.GpsTimeStamp" inherited="sys.Fields.DateTime" />
+			<pps:field name="sys.clients.Wifi" inherited="sys.Fields.Text" />
+			<pps:field name="sys.clients.Address" inherited="sys.Fields.Text" />
+			<pps:field name="sys.clients.Pending" inherited="sys.Fields.Text" />
 			
 			<pps:view name="sys.clients">
 				<pps:source type="view">CreateSeenClientsSelector</pps:source>
+			</pps:view>
+
+			<pps:field name="sys.geometries.Name" inherited="sys.Fields.Text" />
+			<pps:field name="sys.geometries.ViewPort" inherited="sys.Fields.Text" />
+			<pps:field name="sys.geometries.IsDefaultViewPort" inherited="sys.Fields.Bit" />
+			<pps:field name="sys.geometries.RawPath" inherited="sys.Fields.Text" />
+			<pps:field name="sys.geometries.RawPath2" inherited="sys.Fields.Text" />
+
+			<pps:view name="sys.geometries">
+				<pps:source type="view">GetGeometrySelector</pps:source>
 			</pps:view>
 
 			<pps:field name="bi.reports.Type" dataType="string" displayName="Type" />
