@@ -252,7 +252,8 @@ local function executeBackup(db, checkDb, beforeActions, afterActions) : bool
 end; -- executeBackup
 
 System.BackupDatabases = System.BackupDatabases or {};
-System.BackupDatabases["Main"] = { CheckDb = "logical" };
+System.BackupDatabases.Main =  System.BackupDatabases.Main or {};
+System.BackupDatabases.Main.CheckDb = "logical";
 
 System.IndexBatch = getIndexBatch;
 System.ExecuteBackup = function (name : string) : bool
