@@ -72,7 +72,7 @@ local function executeBackup(db, checkDb, beforeActions, afterActions) : bool
 		-- Before trigger
 		if beforeActions ~= nil and type(beforeActions) == "table" then
 			for k,v in mpairs(beforeActions) do
-				v(log, backupPath);
+				v(log, db, backupPath);
 			end;
 		end;
 
@@ -237,7 +237,7 @@ local function executeBackup(db, checkDb, beforeActions, afterActions) : bool
 		-- after trigger
 		if afterActions ~= nil and type(afterActions) == "table" then
 			for k,v in mpairs(afterActions) do
-				v(log, backupPath);
+				v(log, db, backupPath);
 			end;
 		end;
 
