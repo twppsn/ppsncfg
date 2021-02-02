@@ -141,4 +141,7 @@
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)cfg\Client\Apps\info.extern" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)PPSn.cs" />
+  </ItemGroup>
 </Project>
