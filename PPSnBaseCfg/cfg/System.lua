@@ -51,7 +51,7 @@ local function getIndexBatch(db, databaseName, log) : table
 	return r;
 end; -- getIndexBatch
 
-local function executeBackup(db, checkDb) : bool
+local function executeBackup(db, checkDb, beforeActions, afterActions) : bool
 
 	do (log = Log:CreateScope(stopTime = true))
 	do
@@ -61,12 +61,20 @@ local function executeBackup(db, checkDb) : bool
 		});
 		
 		local databaseName = r.name;
-		local backupFile = BackupPath;
+		local backupPath = BackupPath;
+		local backupFile = backupPath;
 
 		log:WriteLine("Backup von {0} nach {1}":Format(databaseName, backupFile));
 
 		assert(backupFile ~= nil, "Backup file missing.");
 		backupFile = Path:Combine(backupFile, databaseName .. ".bak");
+
+		-- Before trigger
+		if beforeActions ~= nil and type(beforeActions) == "table" then
+			for k,v in mpairs(beforeActions) do
+				v(log, db, backupPath);
+			end;
+		end;
 
 		-- Index rebuild/reorg
 		log:WriteLine("Validate Indices...");
@@ -226,6 +234,13 @@ local function executeBackup(db, checkDb) : bool
 			end;
 		end;
 
+		-- after trigger
+		if afterActions ~= nil and type(afterActions) == "table" then
+			for k,v in mpairs(afterActions) do
+				v(log, db, backupPath);
+			end;
+		end;
+
 		return true;
 	end(
 		function (e)
@@ -237,7 +252,8 @@ local function executeBackup(db, checkDb) : bool
 end; -- executeBackup
 
 System.BackupDatabases = System.BackupDatabases or {};
-System.BackupDatabases["Main"] = { CheckDb = "logical" };
+System.BackupDatabases.Main =  System.BackupDatabases.Main or {};
+System.BackupDatabases.Main.CheckDb = "logical";
 
 System.IndexBatch = getIndexBatch;
 System.ExecuteBackup = function (name : string) : bool
@@ -258,7 +274,7 @@ System.ExecuteBackup = function (name : string) : bool
 			end;
 
 			if args ~= nil then
-				if not executeBackup(Db.GetDatabase(k), v.CheckDb or true) then
+				if not executeBackup(Db.GetDatabase(k), v.CheckDb or true, v.BeforeActions, v.AfterActions) then
 					failed = failed + 1;
 				end;
 			end;
