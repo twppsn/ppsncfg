@@ -38,9 +38,9 @@ local function getIndexBatch(db, databaseName, log) : table
 	if viewDef ~= nil then
 		foreach row in (viewDef.SelectorToken:CreateSelector(db.Connection)) do
 			if row.AvgFrag >= 5.0 and row.AvgFrag < 30.0 then
-				table.insert(r, { db = db, object = row.Schema .. "." .. row.ObjName, index = row.IdxName, frag = row.AvgFrag, type = "reorg", __metatable = indexExecuteMeta });
+				table.insert(r, { db = db, object = row.Schema .. ".[" .. row.ObjName .. "]", index = "[" .. row.IdxName .. "]", frag = row.AvgFrag, type = "reorg", __metatable = indexExecuteMeta });
 			elseif row.AvgFrag >= 30.0 then
-				table.insert(r, { db = db, object = row.Schema .. "." .. row.ObjName, index = row.IdxName, frag = row.AvgFrag, type = "rebuild", __metatable = indexExecuteMeta });
+				table.insert(r, { db = db, object = row.Schema .. ".[" .. row.ObjName .. "]", index = "[" .. row.IdxName .. "]", frag = row.AvgFrag, type = "rebuild", __metatable = indexExecuteMeta });
 			end;
 		end;
 	elseif databaseName ~= "master" and databaseName ~= "msdb" then
