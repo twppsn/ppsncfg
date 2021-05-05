@@ -53,7 +53,7 @@ end; -- getIndexBatch
 
 local function executeBackup(db, checkDb, beforeActions, afterActions) : bool
 
-	do (log = Log:CreateScope(stopTime = true))
+	do (log = Log:GetScope(stopTime = true))
 	do
 		local r = GetFirstRow(db:ExecuteSingleResult {
 			--__notrans = true,
