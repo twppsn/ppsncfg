@@ -166,7 +166,7 @@ local function executeBackup(db, checkDb, beforeActions, afterActions) : bool
 					backupCommand.CommandText = [==[
 						BACKUP DATABASE []==] .. databaseName ..  [==[] 
 							TO DISK = N']==] .. backupFile .. [==['
-							WITH NOFORMAT, INIT, NAME = N']==] .. "Vollständige Sicherung vom " .. now:ToString("G") .. [==[', SKIP, NOREWIND, NOUNLOAD, STATS = 10, CHECKSUM
+							WITH NOFORMAT, INIT, NAME = N']==] .. "Vollständige Sicherung vom " .. now:ToString("G") .. [==[', SKIP, NOREWIND, NOUNLOAD, STATS = 10, CHECKSUM, BUFFERCOUNT = 8, MAXTRANSFERSIZE = 4194304, BLOCKSIZE = 4096
 					]==];
 					backupCommand:ExecuteNonQuery();
 
@@ -187,7 +187,7 @@ local function executeBackup(db, checkDb, beforeActions, afterActions) : bool
 					backupCommand.CommandText = [==[
 						BACKUP DATABASE []==] .. databaseName ..  [==[] 
 							TO DISK = N']==] .. backupFile .. [==['
-							WITH DIFFERENTIAL, NOINIT, NAME = N']==] .. "Differential Sicherung vom " .. now:ToString("G") .. [==[', SKIP, NOREWIND, NOUNLOAD, STATS = 10, CHECKSUM
+							WITH DIFFERENTIAL, NOINIT, NAME = N']==] .. "Differential Sicherung vom " .. now:ToString("G") .. [==[', SKIP, NOREWIND, NOUNLOAD, STATS = 10, CHECKSUM, BUFFERCOUNT = 8, MAXTRANSFERSIZE = 4194304, BLOCKSIZE = 4096
 					]==];
 					backupCommand:ExecuteNonQuery();
 
