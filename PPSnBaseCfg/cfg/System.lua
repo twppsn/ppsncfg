@@ -174,7 +174,7 @@ local function executeBackup(db, checkDb, beforeActions, afterActions) : bool
 						backupCommand.CommandText = [==[
 							BACKUP LOG []==] .. databaseName ..  [==[]
 								TO DISK = N']==] .. backupFile .. [==['
-								WITH NOINIT, NAME = N'Datenbank Log Sicherung'
+								WITH NOINIT, NAME = N'Datenbank Log Sicherung', BUFFERCOUNT = 8, MAXTRANSFERSIZE = 4194304, BLOCKSIZE = 4096
 						]==];
 						backupCommand:ExecuteNonQuery();
 					end;
@@ -195,7 +195,7 @@ local function executeBackup(db, checkDb, beforeActions, afterActions) : bool
 						backupCommand.CommandText = [==[
 							BACKUP LOG []==] .. databaseName ..  [==[]
 								TO DISK = N']==] .. backupFile .. [==['
-								WITH NOINIT, NAME = N'Datenbank Log Sicherung'
+								WITH NOINIT, NAME = N'Datenbank Log Sicherung', BUFFERCOUNT = 8, MAXTRANSFERSIZE = 4194304, BLOCKSIZE = 4096
 						]==];
 						backupCommand:ExecuteNonQuery();
 					end;
