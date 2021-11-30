@@ -31,7 +31,7 @@
 		<files name="appSource" directory="Client\Apps" allowListing="true" base="app/" displayname="Client Application Source">
 			<mimeDef filter="*.msi">application/octet</mimeDef>
 		</files>
-		<pps:sysDataSource name="sys" />
+		<pps:sysDataSource name="sys" displayname="Sys-DataSource" />
 
 		<pps:reports system="$(reportSystem)" base="reports" storeSuccessLogs="true" zipLogFiles="false" />
 		
@@ -370,7 +370,7 @@
 			</pps:dataset>
 		</pps:register>
 
-		<pps:attachment name="attachments" nextNumber="ANH-{8}" forceNextNumber="true" displayname="Attachments" />
-		<pps:helpkey name="helpkey" forceNextNumber="false" displayname="Help" />
+		<!--<pps:attachment name="attachments" nextNumber="ANH-{8}" forceNextNumber="true" displayname="Attachments" />
+		<pps:helpkey name="helpkey" forceNextNumber="false" displayname="Help" />-->
 	</pps:ppsn>
 </fragment>
