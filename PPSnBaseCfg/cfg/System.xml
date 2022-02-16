@@ -32,8 +32,6 @@
 			<mimeDef filter="*.msi">application/octet</mimeDef>
 		</files>
 		<pps:sysDataSource name="sys" displayname="Sys-DataSource" />
-
-		<pps:reports system="$(reportSystem)" base="reports" storeSuccessLogs="true" zipLogFiles="false" />
 		
 		<pps:wpf name="wpf">
 			<pps:wpfSource id="core" directory="ClientWpf/Panes" virtualPath="panes" />
