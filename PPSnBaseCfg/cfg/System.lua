@@ -153,54 +153,60 @@ local function executeBackup(db, checkDb, beforeActions, afterActions) : bool
 				end;
 			end;
 
-			if doFull then -- Do a complete backup
+			local isBackupDone : bool = false;
+			repeat
+				if doFull then -- Do a complete backup
 
-				do (backupCommand = nativeConnection:CreateCommand())
+					do (backupCommand = nativeConnection:CreateCommand())
 
-					nativeConnection:ChangeDatabase("msdb");
-					backupCommand.CommandText = [[exec sp_delete_database_backuphistory ']] .. databaseName .. [[';]];
-					backupCommand:ExecuteNonQuery();
-					nativeConnection:ChangeDatabase(databaseName);
+						nativeConnection:ChangeDatabase("msdb");
+						backupCommand.CommandText = [[exec sp_delete_database_backuphistory ']] .. databaseName .. [[';]];
+						backupCommand:ExecuteNonQuery();
+						nativeConnection:ChangeDatabase(databaseName);
 
-					backupCommand.CommandTimeout = backupTimeout;
-					backupCommand.CommandText = [==[
-						BACKUP DATABASE []==] .. databaseName ..  [==[] 
-							TO DISK = N']==] .. backupFile .. [==['
-							WITH NOFORMAT, INIT, NAME = N']==] .. "Vollständige Sicherung vom " .. now:ToString("G") .. [==[', SKIP, NOREWIND, NOUNLOAD, STATS = 10, CHECKSUM
-					]==];
-					backupCommand:ExecuteNonQuery();
-
-					if not isSimple then
+						backupCommand.CommandTimeout = backupTimeout;
 						backupCommand.CommandText = [==[
-							BACKUP LOG []==] .. databaseName ..  [==[]
+							BACKUP DATABASE []==] .. databaseName ..  [==[] 
 								TO DISK = N']==] .. backupFile .. [==['
-								WITH NOINIT, NAME = N'Datenbank Log Sicherung'
+								WITH NOFORMAT, INIT, NAME = N']==] .. "Vollständige Sicherung vom " .. now:ToString("G") .. [==[', SKIP, NOREWIND, NOUNLOAD, STATS = 10, CHECKSUM, BUFFERCOUNT = 8, MAXTRANSFERSIZE = 4194304, BLOCKSIZE = 4096
 						]==];
 						backupCommand:ExecuteNonQuery();
+						isBackupDone = true;
 					end;
-				end;
 
-			else -- Differential Sicherung
+				else -- Differential Sicherung
 
-				do (backupCommand = nativeConnection:CreateCommand())
-					backupCommand.CommandTimeout = backupTimeout;
-					backupCommand.CommandText = [==[
-						BACKUP DATABASE []==] .. databaseName ..  [==[] 
-							TO DISK = N']==] .. backupFile .. [==['
-							WITH DIFFERENTIAL, NOINIT, NAME = N']==] .. "Differential Sicherung vom " .. now:ToString("G") .. [==[', SKIP, NOREWIND, NOUNLOAD, STATS = 10, CHECKSUM
-					]==];
-					backupCommand:ExecuteNonQuery();
-
-					if not isSimple then
+					do (backupCommand = nativeConnection:CreateCommand())
+						backupCommand.CommandTimeout = backupTimeout;
 						backupCommand.CommandText = [==[
-							BACKUP LOG []==] .. databaseName ..  [==[]
+							BACKUP DATABASE []==] .. databaseName ..  [==[] 
 								TO DISK = N']==] .. backupFile .. [==['
-								WITH NOINIT, NAME = N'Datenbank Log Sicherung'
+								WITH DIFFERENTIAL, NOINIT, NAME = N']==] .. "Differential Sicherung vom " .. now:ToString("G") .. [==[', SKIP, NOREWIND, NOUNLOAD, STATS = 10, CHECKSUM, BUFFERCOUNT = 8, MAXTRANSFERSIZE = 4194304, BLOCKSIZE = 4096
 						]==];
-						backupCommand:ExecuteNonQuery();
+
+						do 
+							backupCommand:ExecuteNonQuery();
+							isBackupDone = true;
+						end(function (e : System.Data.SqlClient.SqlException)
+							if e.Number == 3035 then
+								log:WriteLine("Switch to Full-Backup");
+								doFull = true;
+							end;
+						end);
 					end;
 				end;
+			until (isBackupDone);
 
+			-- Log-Backup for Full-Backup
+			if not isSimple then
+				do (backupLogCommand = nativeConnection:CreateCommand())
+					backupLogCommand.CommandText = [==[
+						BACKUP LOG []==] .. databaseName ..  [==[]
+							TO DISK = N']==] .. backupFile .. [==['
+							WITH NOINIT, NAME = N'Datenbank Log Sicherung', BUFFERCOUNT = 8, MAXTRANSFERSIZE = 4194304, BLOCKSIZE = 4096
+					]==];
+					backupLogCommand:ExecuteNonQuery();
+				end;
 			end;
 
 			r = GetFirstRow(db:ExecuteSingleResult {
