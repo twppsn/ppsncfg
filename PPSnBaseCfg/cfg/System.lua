@@ -160,6 +160,7 @@ local function executeBackup(db, checkDb, beforeActions, afterActions) : bool
 					do (backupCommand = nativeConnection:CreateCommand())
 
 						nativeConnection:ChangeDatabase("msdb");
+						backupCommand.CommandTimeout = backupTimeout;
 						backupCommand.CommandText = [[exec sp_delete_database_backuphistory ']] .. databaseName .. [[';]];
 						backupCommand:ExecuteNonQuery();
 						nativeConnection:ChangeDatabase(databaseName);
@@ -200,6 +201,7 @@ local function executeBackup(db, checkDb, beforeActions, afterActions) : bool
 			-- Log-Backup for Full-Backup
 			if not isSimple then
 				do (backupLogCommand = nativeConnection:CreateCommand())
+					backupLogCommand.CommandTimeout = backupTimeout;
 					backupLogCommand.CommandText = [==[
 						BACKUP LOG []==] .. databaseName ..  [==[]
 							TO DISK = N']==] .. backupFile .. [==['
