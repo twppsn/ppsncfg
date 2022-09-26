@@ -26,7 +26,8 @@ local function testFile(fileName : string) : FileInfo
 end; -- testFile
 
 local function findMsBuild() : FileInfo
-	return testFile [[C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\msbuild.exe]]
+	return testFile [[C:\Program Files\Microsoft Visual Studio\2022\Professional\MSBuild\Current\Bin\msbuild.exe]]
+		or testFile [[C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\msbuild.exe]]
 		or testFile [[C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\15.0\Bin\msbuild.exe]];
 end;
 
