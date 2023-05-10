@@ -42,7 +42,7 @@ local function copyConfig()
 		local msbuild = findMsBuild();
 		if msbuild then
 			--print("MSBuild: " .. msbuild.FullName);
-			local cmd = "\"" .. msbuild.FullName .. "\" /target:CopyConfig \"" .. projectFile.FullName .. "\"";
+			local cmd = "\"" .. msbuild.FullName .. "\" /v:n /target:CopyConfig \"" .. projectFile.FullName .. "\"";
 			--print(cmd);
 			do (f = IO.popen(cmd, "r+"))
 				while true do
