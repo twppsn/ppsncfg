@@ -1,5 +1,6 @@
 ﻿const DateTime typeof System.DateTime;
 const DayOfWeek typeof System.DayOfWeek;
+const StringBuilder typeof System.Text.StringBuilder;
 
 const Path typeof System.IO.Path;
 const Path typeof System.IO.Path;
@@ -51,7 +52,34 @@ local function getIndexBatch(db, databaseName, log) : table
 	return r;
 end; -- getIndexBatch
 
-local function executeBackup(db, checkDb, beforeActions, afterActions) : bool
+local function executeBackup(db, checkDb, beforeActions, afterActions, split) : bool
+
+	local function getDiskInfo(backupFileInfo, onlyLast : bool) : string
+
+		local function getSingleDiskInfo(file : string) : string
+			return "DISK = N'" .. file .. "'";
+		end; -- getSingleDiskInfo
+
+		assert(backupFileInfo ~= nil, "Backup file info missing.");
+		
+		if type(backupFileInfo) == "table" then
+
+			if onlyLast then
+				return getSingleDiskInfo(backupFileInfo[#backupFileInfo]);
+			else
+				local sb : StringBuilder = StringBuilder();
+				for i = 1,#backupFileInfo,1 do
+					if #sb > 0 then
+						sb:Append(", ");
+					end;
+					sb:Append(getSingleDiskInfo(backupFileInfo[i]));
+				end;
+				return sb:ToString();
+			end;
+		else
+			return getSingleDiskInfo(backupFileInfo);
+		end;
+	end;-- getDiskInfo
 
 	do (log = Log:GetScope(stopTime = true))
 	do
@@ -60,15 +88,26 @@ local function executeBackup(db, checkDb, beforeActions, afterActions) : bool
 			sql = "select DB_NAME() as name"
 		});
 		
-		local databaseName = r.name;
-		local backupPath = BackupPath;
-		local backupFile = backupPath;
+		local databaseName : string = r.name;
+		local backupPath : string = BackupPath;
+		local backupFile;
 
-		log:WriteLine("Backup von {0} nach {1}":Format(databaseName, backupFile));
+		log:WriteLine("Backup von {0} nach {1}":Format(databaseName, backupPath));
 
-		assert(backupFile ~= nil, "Backup file missing.");
-		backupFile = Path:Combine(backupFile, databaseName .. ".bak");
+		assert(backupPath ~= nil, "Backup path missing.");
+		-- Create a split information
+		if type(split) == "number" and split > 1 then
 
+			backupFile = {};
+			for i = 0,split-1,1 do
+				local suffix : string = "." .. i;
+				table.insert(backupFile, (Path:Combine(backupPath, databaseName .. suffix .. ".bak")));
+			end;
+
+		else
+			backupFile = Path:Combine(backupPath, databaseName .. ".bak");
+		end;
+		
 		-- Before trigger
 		if beforeActions ~= nil and type(beforeActions) == "table" then
 			for k,v in mpairs(beforeActions) do
@@ -168,9 +207,10 @@ local function executeBackup(db, checkDb, beforeActions, afterActions) : bool
 						backupCommand.CommandTimeout = backupTimeout;
 						backupCommand.CommandText = [==[
 							BACKUP DATABASE []==] .. databaseName ..  [==[] 
-								TO DISK = N']==] .. backupFile .. [==['
+								TO ]==] .. getDiskInfo(backupFile, false) .. [==[
 								WITH NOFORMAT, INIT, NAME = N']==] .. "Vollständige Sicherung vom " .. now:ToString("G") .. [==[', SKIP, NOREWIND, NOUNLOAD, STATS = 10, CHECKSUM, BUFFERCOUNT = 8, MAXTRANSFERSIZE = 4194304, BLOCKSIZE = 4096
 						]==];
+						-- Log:Info(backupCommand.CommandText);
 						backupCommand:ExecuteNonQuery();
 						isBackupDone = true;
 					end;
@@ -181,7 +221,7 @@ local function executeBackup(db, checkDb, beforeActions, afterActions) : bool
 						backupCommand.CommandTimeout = backupTimeout;
 						backupCommand.CommandText = [==[
 							BACKUP DATABASE []==] .. databaseName ..  [==[] 
-								TO DISK = N']==] .. backupFile .. [==['
+								TO ]==] .. getDiskInfo(backupFile, true) .. [==[
 								WITH DIFFERENTIAL, NOINIT, NAME = N']==] .. "Differential Sicherung vom " .. now:ToString("G") .. [==[', SKIP, NOREWIND, NOUNLOAD, STATS = 10, CHECKSUM, BUFFERCOUNT = 8, MAXTRANSFERSIZE = 4194304, BLOCKSIZE = 4096
 						]==];
 
@@ -204,7 +244,7 @@ local function executeBackup(db, checkDb, beforeActions, afterActions) : bool
 					backupLogCommand.CommandTimeout = backupTimeout;
 					backupLogCommand.CommandText = [==[
 						BACKUP LOG []==] .. databaseName ..  [==[]
-							TO DISK = N']==] .. backupFile .. [==['
+							TO ]==] .. getDiskInfo(backupFile, true) .. [==[
 							WITH NOINIT, NAME = N'Datenbank Log Sicherung', BUFFERCOUNT = 8, MAXTRANSFERSIZE = 4194304, BLOCKSIZE = 4096
 					]==];
 					backupLogCommand:ExecuteNonQuery();
@@ -235,7 +275,7 @@ local function executeBackup(db, checkDb, beforeActions, afterActions) : bool
 			do (restoreCommand = nativeConnection:CreateCommand())
 				restoreCommand.CommandTimeout = backupTimeout;
 				restoreCommand.CommandText = [==[
-					RESTORE VERIFYONLY FROM  DISK = N']==] .. backupFile .. [==['
+					RESTORE VERIFYONLY FROM ]==] .. getDiskInfo(backupFile, false) .. [==[
 						WITH  FILE = ]==] .. r.position .. [==[, NOUNLOAD,  NOREWIND
 				]==];
 				restoreCommand:ExecuteNonQuery();
@@ -282,7 +322,7 @@ System.ExecuteBackup = function (name : string) : bool
 			end;
 
 			if args ~= nil then
-				if not executeBackup(Db.GetDatabase(k), v.CheckDb or true, v.BeforeActions, v.AfterActions) then
+				if not executeBackup(Db.GetDatabase(k), args.CheckDb or true, args.BeforeActions, args.AfterActions, args.Split) then
 					failed = failed + 1;
 				end;
 			end;
