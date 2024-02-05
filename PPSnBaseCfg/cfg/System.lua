@@ -221,7 +221,7 @@ local function executeBackup(db, checkDb, beforeActions, afterActions, split) : 
 						backupCommand.CommandTimeout = backupTimeout;
 						backupCommand.CommandText = [==[
 							BACKUP DATABASE []==] .. databaseName ..  [==[] 
-								TO ]==] .. getDiskInfo(backupFile, true) .. [==[
+								TO ]==] .. getDiskInfo(backupFile, false) .. [==[
 								WITH DIFFERENTIAL, NOINIT, NAME = N']==] .. "Differential Sicherung vom " .. now:ToString("G") .. [==[', SKIP, NOREWIND, NOUNLOAD, STATS = 10, CHECKSUM, BUFFERCOUNT = 8, MAXTRANSFERSIZE = 4194304, BLOCKSIZE = 4096
 						]==];
 
@@ -232,6 +232,8 @@ local function executeBackup(db, checkDb, beforeActions, afterActions, split) : 
 							if e.Number == 3035 then
 								log:WriteLine("Switch to Full-Backup");
 								doFull = true;
+							else
+								error(e);
 							end;
 						end);
 					end;
