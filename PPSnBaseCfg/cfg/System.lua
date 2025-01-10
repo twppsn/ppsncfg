@@ -3,7 +3,7 @@ const DayOfWeek typeof System.DayOfWeek;
 const StringBuilder typeof System.Text.StringBuilder;
 
 const Path typeof System.IO.Path;
-const Path typeof System.IO.Path;
+const File typeof System.IO.File;
 
 const backupTimeout : int = 86400; -- 24h
 
@@ -52,9 +52,9 @@ local function getIndexBatch(db, databaseName, log) : table
 	return r;
 end; -- getIndexBatch
 
-local function executeBackup(db, checkDb, beforeActions, afterActions, split) : bool
+local function executeBackup(db, checkDb, beforeActions, afterActions, split, noDiff) : bool
 
-	local function getDiskInfo(backupFileInfo, onlyLast : bool) : string
+	local function getDiskInfo(backupFileInfo, diff : bool) : string
 
 		local function getSingleDiskInfo(file : string) : string
 			return "DISK = N'" .. file .. "'";
@@ -64,22 +64,43 @@ local function executeBackup(db, checkDb, beforeActions, afterActions, split) : 
 		
 		if type(backupFileInfo) == "table" then
 
-			if onlyLast then
-				return getSingleDiskInfo(backupFileInfo[#backupFileInfo]);
-			else
-				local sb : StringBuilder = StringBuilder();
-				for i = 1,#backupFileInfo,1 do
-					if #sb > 0 then
-						sb:Append(", ");
-					end;
-					sb:Append(getSingleDiskInfo(backupFileInfo[i]));
+			local backupSet : table = nil;
+
+			if diff then
+				local wd : int = clr.System.DateTime.Now.DayOfWeek;
+				if wd < 1 then
+					wd = 7;
 				end;
-				return sb:ToString();
+				backupSet = backupFileInfo.Differential[wd];
+			else
+				backupSet = backupFileInfo;
 			end;
+
+			-- Create command
+			local sb : StringBuilder = StringBuilder();
+			for i = 1,#backupSet,1 do
+				if #sb > 0 then
+					sb:Append(", ");
+				end;
+				sb:Append(getSingleDiskInfo(backupSet[i]));
+			end;
+			return sb:ToString();
 		else
 			return getSingleDiskInfo(backupFileInfo);
 		end;
 	end;-- getDiskInfo
+
+	local function createBackupSet(suffix : string, split : int) : table
+		local backupSet : table = {};
+		if split < 1 then
+			split = 1;
+		end;
+		for i = 0,split-1,1 do
+			local suffix : string = suffix:Format(i);;
+			table.insert(backupSet, (Path:Combine(backupPath, databaseName .. suffix .. ".bak")));
+		end;
+		return backupSet;
+	end; -- createBackupSet
 
 	do (log = Log:GetScope(stopTime = true))
 	do
@@ -98,10 +119,10 @@ local function executeBackup(db, checkDb, beforeActions, afterActions, split) : 
 		-- Create a split information
 		if type(split) == "number" and split > 1 then
 
-			backupFile = {};
-			for i = 0,split-1,1 do
-				local suffix : string = "." .. i;
-				table.insert(backupFile, (Path:Combine(backupPath, databaseName .. suffix .. ".bak")));
+			backupFile = createBackupSet(".{0}", split);
+			backupFile.Differential = {};
+			for i = 0,6,1 do
+				table.insert(backupFile.Differential, createBackupSet(".D" .. i .. "-{0}", split / 7));
 			end;
 
 		else
@@ -215,13 +236,19 @@ local function executeBackup(db, checkDb, beforeActions, afterActions, split) : 
 						isBackupDone = true;
 					end;
 
+					if type(backupFile) == "table" and type(backupFile.Differential) == "table" then
+						for i,v in ipairs(backupFile.Differential) do
+							File:Delete(v);
+						end;
+					end;
+
 				else -- Differential Sicherung
 
 					do (backupCommand = nativeConnection:CreateCommand())
 						backupCommand.CommandTimeout = backupTimeout;
 						backupCommand.CommandText = [==[
 							BACKUP DATABASE []==] .. databaseName ..  [==[] 
-								TO ]==] .. getDiskInfo(backupFile, false) .. [==[
+								TO ]==] .. getDiskInfo(backupFile, true) .. [==[
 								WITH DIFFERENTIAL, NOINIT, NAME = N']==] .. "Differential Sicherung vom " .. now:ToString("G") .. [==[', SKIP, NOREWIND, NOUNLOAD, STATS = 10, CHECKSUM, BUFFERCOUNT = 8, MAXTRANSFERSIZE = 4194304, BLOCKSIZE = 4096
 						]==];
 
