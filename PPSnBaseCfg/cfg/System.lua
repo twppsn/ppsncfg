@@ -90,7 +90,7 @@ local function executeBackup(db, checkDb, beforeActions, afterActions, split, no
 		end;
 	end;-- getDiskInfo
 
-	local function createBackupSet(suffix : string, split : int) : table
+	local function createBackupSet(backupPath : string, suffix : string, split : int) : table
 		local backupSet : table = {};
 		if split < 1 then
 			split = 1;
@@ -119,10 +119,10 @@ local function executeBackup(db, checkDb, beforeActions, afterActions, split, no
 		-- Create a split information
 		if type(split) == "number" and split > 1 then
 
-			backupFile = createBackupSet(".{0}", split);
+			backupFile = createBackupSet(backupPath, ".{0}", split);
 			backupFile.Differential = {};
 			for i = 0,6,1 do
-				table.insert(backupFile.Differential, createBackupSet(".D" .. i .. "-{0}", split / 7));
+				table.insert(backupFile.Differential, createBackupSet(backupPath, ".D" .. i .. "-{0}", split / 7));
 			end;
 
 		else
