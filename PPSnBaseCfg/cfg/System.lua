@@ -90,14 +90,14 @@ local function executeBackup(db, checkDb, beforeActions, afterActions, split, no
 		end;
 	end;-- getDiskInfo
 
-	local function createBackupSet(backupPath : string, suffix : string, split : int) : table
+	local function createBackupSet(backupPath : string, tmpl : string, split : int) : table
 		local backupSet : table = {};
 		if split < 1 then
 			split = 1;
 		end;
 		for i = 0,split-1,1 do
-			local suffix : string = suffix:Format(i);;
-			table.insert(backupSet, (Path:Combine(backupPath, databaseName .. suffix .. ".bak")));
+			local name : string = tmpl:Format(i);;
+			table.insert(backupSet, (Path:Combine(backupPath, name)));
 		end;
 		return backupSet;
 	end; -- createBackupSet
@@ -119,10 +119,10 @@ local function executeBackup(db, checkDb, beforeActions, afterActions, split, no
 		-- Create a split information
 		if type(split) == "number" and split > 1 then
 
-			backupFile = createBackupSet(backupPath, ".{0}", split);
+			backupFile = createBackupSet(backupPath, databaseName .. ".{0}.bak", split);
 			backupFile.Differential = {};
 			for i = 0,6,1 do
-				table.insert(backupFile.Differential, createBackupSet(backupPath, ".D" .. i .. "-{0}", split / 7));
+				table.insert(backupFile.Differential, createBackupSet(backupPath, databaseName .. ".D" .. i .. "-{0}.bak", split / 7));
 			end;
 
 		else
@@ -238,7 +238,9 @@ local function executeBackup(db, checkDb, beforeActions, afterActions, split, no
 
 					if type(backupFile) == "table" and type(backupFile.Differential) == "table" then
 						for i,v in ipairs(backupFile.Differential) do
-							File:Delete(v);
+							for j,p in ipairs(v) do
+								File:Delete(p);
+							end;
 						end;
 					end;
 
