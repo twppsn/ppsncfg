@@ -275,7 +275,7 @@ local function executeBackup(db, checkDb, beforeActions, afterActions, split, no
 					backupLogCommand.CommandTimeout = backupTimeout;
 					backupLogCommand.CommandText = [==[
 						BACKUP LOG []==] .. databaseName ..  [==[]
-							TO ]==] .. getDiskInfo(backupFile, true) .. [==[
+							TO ]==] .. getDiskInfo(backupFile, false) .. [==[
 							WITH NOINIT, NAME = N'Datenbank Log Sicherung', BUFFERCOUNT = 8, MAXTRANSFERSIZE = 4194304, BLOCKSIZE = 4096
 					]==];
 					backupLogCommand:ExecuteNonQuery();
@@ -306,7 +306,7 @@ local function executeBackup(db, checkDb, beforeActions, afterActions, split, no
 			do (restoreCommand = nativeConnection:CreateCommand())
 				restoreCommand.CommandTimeout = backupTimeout;
 				restoreCommand.CommandText = [==[
-					RESTORE VERIFYONLY FROM ]==] .. getDiskInfo(backupFile, false) .. [==[
+					RESTORE VERIFYONLY FROM ]==] .. getDiskInfo(backupFile, not doFull) .. [==[
 						WITH  FILE = ]==] .. r.position .. [==[, NOUNLOAD,  NOREWIND
 				]==];
 				restoreCommand:ExecuteNonQuery();
