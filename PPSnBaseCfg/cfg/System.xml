@@ -31,9 +31,7 @@
 		<files name="appSource" directory="Client\Apps" allowListing="true" base="app/" displayname="Client Application Source">
 			<mimeDef filter="*.msi">application/octet</mimeDef>
 		</files>
-		<pps:sysDataSource name="sys" />
-
-		<pps:reports system="$(reportSystem)" base="reports" storeSuccessLogs="true" zipLogFiles="false" />
+		<pps:sysDataSource name="sys" displayname="Sys-DataSource" />
 		
 		<pps:wpf name="wpf">
 			<pps:wpfSource id="core" directory="ClientWpf/Panes" virtualPath="panes" />
@@ -83,13 +81,30 @@
 			</pps:field>
 			<pps:field name="sys.Fields.PrimaryKey" dataType="long" />
 			<pps:field name="sys.Fields.Text" dataType="string" />
-			<pps:field name="sys.Fields.Int" dataType="int" />
-			<pps:field name="sys.Fields.Long" dataType="long" />
-			<pps:field name="sys.Fields.Double" dataType="double" />
-			<pps:field name="sys.Fields.Decimal" dataType="decimal" />
+			<pps:field name="sys.Fields.Int" dataType="int">
+				<pps:attribute name="Format">N0</pps:attribute>
+			</pps:field>
+			<pps:field name="sys.Fields.Long" dataType="long">
+				<pps:attribute name="Format">N0</pps:attribute>
+			</pps:field>
+			<pps:field name="sys.Fields.Double" dataType="double">
+				<pps:attribute name="Format">N3</pps:attribute>
+			</pps:field>
+			<pps:field name="sys.Fields.Decimal" dataType="decimal">
+				<pps:attribute name="Format">N2</pps:attribute>
+			</pps:field>
 			<pps:field name="sys.Fields.Bit" dataType="bool" />
 			<pps:field name="sys.Fields.Blob" dataType="blob" />
-			<pps:field name="sys.Fields.DateTime" dataType="datetime" />
+			<pps:field name="sys.Fields.Date" dataType="datetime">
+				<pps:attribute name="format" dataType="string">d</pps:attribute>
+				<pps:attribute name="width" dataType="int">12</pps:attribute>
+				<pps:attribute name="halign" dataType="string">center</pps:attribute>
+			</pps:field>
+			<pps:field name="sys.Fields.DateTime" dataType="datetime">
+				<pps:attribute name="format" dataType="string">G</pps:attribute>
+				<pps:attribute name="width" dataType="int">24</pps:attribute>
+				<pps:attribute name="halign" dataType="string">center</pps:attribute>
+			</pps:field>
 
 			<pps:field name="sys.clients.ClientId" inherited="sys.Fields.Text" />
 			<pps:field name="sys.clients.Version" inherited="sys.Fields.Text" />
@@ -184,8 +199,21 @@
 				<pps:source type="view">dbo.objects</pps:source>
 			</pps:view>
 
+			<!-- IndexHealth -->
+			<pps:field name="dbo.indexHealth.Schema" displayName="Schema" inherited="sys.Fields.Text" />
+			<pps:field name="dbo.indexHealth.ObjName" displayName="ObjectName" inherited="sys.Fields.Text"/>
+			<pps:field name="dbo.indexHealth.ObjType" displayName="ObjectType" inherited="sys.Fields.Text"/>
+			<pps:field name="dbo.indexHealth.IdxName" displayName="IndexName" inherited="sys.Fields.Text"/>
+			<pps:field name="dbo.indexHealth.AvgFrag" inherited="sys.Fields.Double">
+				<pps:attribute name="Format">N2</pps:attribute>
+			</pps:field>
+			<pps:field name="dbo.indexHealth.FragCount" inherited="sys.Fields.Long" />
+			
 			<pps:view name="dbo.indexHealth">
 				<pps:source type="file">system\IndexHealth.sql</pps:source>
+			
+				<pps:attribute name="description">State of the indices.</pps:attribute>
+				<pps:attribute name="bi.visible">false</pps:attribute>
 			</pps:view>
 
 			<pps:dataset name="masterdata">
@@ -370,7 +398,7 @@
 			</pps:dataset>
 		</pps:register>
 
-		<pps:attachment name="attachments" nextNumber="ANH-{8}" forceNextNumber="true" displayname="Attachments" />
-		<pps:helpkey name="helpkey" forceNextNumber="false" displayname="Help" />
+		<!--<pps:attachment name="attachments" nextNumber="ANH-{8}" forceNextNumber="true" displayname="Attachments" />
+		<pps:helpkey name="helpkey" forceNextNumber="false" displayname="Help" />-->
 	</pps:ppsn>
 </fragment>

@@ -3,7 +3,7 @@ AS
 	SELECT
 			o.Id
 			, o.[Guid]
-			, o.[Typ]
+			--, o.[Typ]
 			, o.MimeType
 			, o.Nr
 			, o.IsRev

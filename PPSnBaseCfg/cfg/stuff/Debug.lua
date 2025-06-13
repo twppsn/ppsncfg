@@ -26,8 +26,10 @@ local function testFile(fileName : string) : FileInfo
 end; -- testFile
 
 local function findMsBuild() : FileInfo
-	return testFile [[C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\msbuild.exe]]
-		or testFile [[C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\15.0\Bin\msbuild.exe]];
+	return testFile [[C:\Program Files\Microsoft Visual Studio\2022\Professional\MSBuild\Current\Bin\msbuild.exe]]
+		or testFile [[C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\msbuild.exe]]
+		or testFile [[C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\15.0\Bin\msbuild.exe]]
+		or testFile [[C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\msbuild.exe]];
 end;
 
 local function copyConfig()
@@ -40,7 +42,7 @@ local function copyConfig()
 		local msbuild = findMsBuild();
 		if msbuild then
 			--print("MSBuild: " .. msbuild.FullName);
-			local cmd = "\"" .. msbuild.FullName .. "\" /target:CopyConfig \"" .. projectFile.FullName .. "\"";
+			local cmd = "\"" .. msbuild.FullName .. "\" /v:n /target:CopyConfig \"" .. projectFile.FullName .. "\"";
 			--print(cmd);
 			do (f = IO.popen(cmd, "r+"))
 				while true do
