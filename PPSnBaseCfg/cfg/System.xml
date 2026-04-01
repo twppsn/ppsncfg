@@ -96,11 +96,13 @@
 			<pps:field name="sys.Fields.Bit" dataType="bool" />
 			<pps:field name="sys.Fields.Blob" dataType="blob" />
 			<pps:field name="sys.Fields.Date" dataType="datetime">
+				<pps:attribute name="prompt" dataType="string">Datum</pps:attribute>
 				<pps:attribute name="format" dataType="string">d</pps:attribute>
 				<pps:attribute name="width" dataType="int">12</pps:attribute>
 				<pps:attribute name="halign" dataType="string">center</pps:attribute>
 			</pps:field>
 			<pps:field name="sys.Fields.DateTime" dataType="datetime">
+				<pps:attribute name="prompt" dataType="string">Zeit</pps:attribute>
 				<pps:attribute name="format" dataType="string">G</pps:attribute>
 				<pps:attribute name="width" dataType="int">24</pps:attribute>
 				<pps:attribute name="halign" dataType="string">center</pps:attribute>
