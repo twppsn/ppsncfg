@@ -3,6 +3,12 @@ const Path typeof System.IO.Path;
 const DirectoryInfo typeof System.IO.DirectoryInfo;
 const FileInfo typeof System.IO.FileInfo;
 const DEServerBaseLog typeof TecWare.DE.Server.DEServerBaseLog;
+const MSBuildLocator typeof Microsoft.Build.Locator.MSBuildLocator;
+const VisualStudioInstance typeof Microsoft.Build.Locator.VisualStudioInstance;
+
+const Debug typeof System.Diagnostics.Debug;
+
+-- install-package Microsoft.Build.Locator
 
 local function findProjectFile() : FileInfo
 
@@ -17,21 +23,27 @@ local function findProjectFile() : FileInfo
 	end;
 end; -- findProjectFile
 
-local function testFile(fileName : string) : FileInfo
-
-	local fi = FileInfo(fileName);
-	if fi.Exists then
-		return fi;
-	end;
-end; -- testFile
-
 local function findMsBuild() : FileInfo
-	return testFile [[C:\Program Files\Microsoft Visual Studio\2022\Professional\MSBuild\Current\Bin\msbuild.exe]]
-		or testFile [[C:\Program Files (x86)\Microsoft Visual Studio\18\Enterprise\MSBuild\Current\Bin\msbuild.exe]]
-		or testFile [[C:\Program Files (x86)\Microsoft Visual Studio\18\Professional\MSBuild\Current\Bin\msbuild.exe]]
-		or testFile [[C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\MSBuild\Current\Bin\msbuild.exe]]
-		or testFile [[C:\Program Files (x86)\Microsoft Visual Studio\2017\Professional\MSBuild\15.0\Bin\msbuild.exe]]
-		or testFile [[C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\msbuild.exe]];
+
+	local instances = MSBuildLocator:QueryVisualStudioInstances();
+    local latestInstance = nil;
+    -- Loop through all found instances to find the highest version
+    foreach instance in instances do
+        --print( "Checking - Name: {0}, Version: {1}":Format(instance.Name, instance.Version) );
+        
+        -- If it's the first one, or its version is newer than our recorded latest version
+        if latestInstance == nil or instance.Version > latestInstance.Version then
+            latestInstance = instance;
+        end;
+    end;
+
+    -- If we found at least one instance, construct the path or object to return
+    if latestInstance ~= nil then
+        --print( "Selected Latest - Name: {0}, Version: {1}":Format(latestInstance.Name, latestInstance.Version) );
+		--print(Path:Combine(latestInstance.MSBuildPath, "MSBuild.exe"));
+        return FileInfo(Path:Combine(latestInstance.MSBuildPath, "MSBuild.exe")); 
+    end;
+	return nil;
 end;
 
 local function copyConfig()
@@ -44,7 +56,7 @@ local function copyConfig()
 		local msbuild = findMsBuild();
 		if msbuild then
 			--print("MSBuild: " .. msbuild.FullName);
-			local cmd = "\"" .. msbuild.FullName .. "\" /v:n /target:CopyConfig \"" .. projectFile.FullName .. "\"";
+			local cmd = "\"" .. msbuild.FullName .. "\" /v:n /clp:Summary;ShowTimestamp;ShowEventId /target:CopyConfig \"" .. projectFile.FullName .. "\"";
 			--print(cmd);
 			do (f = IO.popen(cmd, "r+"))
 				while true do
